@@ -3,8 +3,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'product_constants.g.dart';
 
 class ProductConstants {
-  final addPdts = 'Add New Products';
-  final title = 'Products';
+  final txtaddPdtTitle = 'Add New Products';
+  final txtproductTitle = 'Products';
 }
 
 @riverpod
