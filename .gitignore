@@ -2,7 +2,6 @@
 
 **/*.g.dart
 
-
 *.class
 *.log
 *.pyc
