@@ -1,7 +1,8 @@
-# Miscellaneous
-
+##generated code
 **/*.g.dart
+pubspec.lock
 
+# Miscellaneous
 *.class
 *.log
 *.pyc
