@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:resto_admin/core/themes/light_theme.dart';
+import 'package:resto_admin/features/feature_orders/presentation/pages/orderview_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/home_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -13,7 +14,7 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       theme: ref.watch(lightThemeProvider),
-      home: const OrderDetalisPage(),
+      home: const OrderViewPage(),
     );
   }
 }
