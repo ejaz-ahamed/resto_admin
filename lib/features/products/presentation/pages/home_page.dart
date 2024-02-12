@@ -7,6 +7,7 @@ import 'package:resto_admin/core/widgets/listview_separated_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/row_widget.dart';
 
 class HomePage extends ConsumerWidget {
+  static const routePath = '/';
   const HomePage({super.key});
 
   @override
