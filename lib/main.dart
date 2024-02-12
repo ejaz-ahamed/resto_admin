@@ -4,17 +4,18 @@ import 'package:resto_admin/core/themes/light_theme.dart';
 import 'package:resto_admin/features/authentication/presentation/pages/homepage.dart';
 
 void main() {
-  runApp(const ProviderScope(child: const MyApp()));
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       theme: ref.watch(lightThemeProvider),
       title: 'Flutter SAMPLEEEE',
+      debugShowCheckedModeBanner: false,
       home: const HomePage(),
     );
   }
