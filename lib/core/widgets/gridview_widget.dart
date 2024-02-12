@@ -19,8 +19,17 @@ class GridViewWidget extends ConsumerWidget {
           mainAxisExtent: theme.spaces.space_900 * 2.75),
       itemBuilder: (context, index) => Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(theme.spaces.space_100),
-            border: Border.all(width: 0.5, color: theme.colors.textInverse)),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(theme.spaces.space_100),
+          // border: Border.all(width: 0.5, color: theme.colors.textInverse),
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 34,
+              spreadRadius: -10,
+              color: Colors.black.withOpacity(0.1),
+            )
+          ],
+        ),
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: theme.spaces.space_150),
           child: Column(
