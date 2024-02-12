@@ -13,7 +13,7 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       theme: ref.watch(lightThemeProvider),
-      home: const OrderDetalisPage(),
+      home: const HomePage(),
     );
   }
 }
