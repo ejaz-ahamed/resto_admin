@@ -15,6 +15,8 @@ class ProfilePageContstants {
   final txtCurrentPassword = 'Current password';
   final txtNewPassword = 'New password';
   final txtConfirmPassword = 'Confirm password';
+  final txtCamera = 'Camera';
+  final txtGallery = 'Gallery';
 }
 
 @riverpod
