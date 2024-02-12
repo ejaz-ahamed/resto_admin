@@ -70,10 +70,6 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
-
-  # To add assets to your application, add an assets section, like this:
-
-
   fonts:
     - family: Inter
       fonts:
@@ -95,6 +91,12 @@ flutter:
           weight: 800
         - asset: assets/fonts/Inter/Inter-Black.ttf
           weight: 900
+
+  # To add assets to your application, add an assets section, like this:
+  
+
+
+
 
   #
   # For details regarding fonts from package dependencies,

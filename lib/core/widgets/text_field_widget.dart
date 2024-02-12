@@ -3,12 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 
 class TextFieldWidget extends ConsumerWidget {
-  final String textFielTitle;
+  final String textFieldTitle;
   final String hintText;
   final TextEditingController controller;
   const TextFieldWidget(
       {super.key,
-      required this.textFielTitle,
+      required this.textFieldTitle,
       required this.hintText,
       required this.controller});
 
@@ -19,7 +19,7 @@ class TextFieldWidget extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          textFielTitle,
+          textFieldTitle,
           style: apptheme.typography.h400,
         ),
         TextField(
@@ -28,7 +28,7 @@ class TextFieldWidget extends ConsumerWidget {
               contentPadding: const EdgeInsets.all(0),
               hintText: hintText,
               hintStyle: apptheme.typography.h400
-                  .copyWith(color: apptheme.colors.textSubtle),
+                  .copyWith(color: apptheme.colors.textSubtlest),
               border: const OutlineInputBorder(borderSide: BorderSide.none)),
         ),
       ],

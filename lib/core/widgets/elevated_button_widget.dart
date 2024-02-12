@@ -16,7 +16,7 @@ class ElevatedButtonWidget extends ConsumerWidget {
           vertical: appTheme.spaces.space_300,
           horizontal: appTheme.spaces.space_300),
       child: SizedBox(
-        height: appTheme.spaces.space_600,
+        height: MediaQuery.sizeOf(context).height / 18,
         width: MediaQuery.sizeOf(context).width,
         child: ElevatedButton(
             style: ButtonStyle(

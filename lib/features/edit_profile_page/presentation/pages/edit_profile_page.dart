@@ -4,6 +4,7 @@ import 'package:resto_admin/core/constants/edit_profile_page/profile_page_consta
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/add_image_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
+import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -59,12 +60,12 @@ class EditProfilePage extends HookConsumerWidget {
                 ),
                 const SizedBox32Widget(),
                 TextFieldWidget(
-                    textFielTitle: constants.txtOpeningTime,
+                    textFieldTitle: constants.txtOpeningTime,
                     hintText: hintText,
                     controller: openingTimeController),
-                const SizedBox32Widget(),
+                const SizedBox24Widget(),
                 TextFieldWidget(
-                    textFielTitle: constants.txtClosingTime,
+                    textFieldTitle: constants.txtClosingTime,
                     hintText: hintText,
                     controller: closingTimeController),
               ],
