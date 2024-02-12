@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:resto_admin/core/constants/offer_constants/offer_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 
 class OfferBannerWidget extends StatelessWidget {
@@ -9,6 +10,7 @@ class OfferBannerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final OfferPageConstants constants = OfferPageConstants();
     final color = AppTheme.of(context).colors;
     final spaces = AppTheme.of(context).spaces;
     return Column(
@@ -45,7 +47,8 @@ class OfferBannerWidget extends StatelessWidget {
                       offerText,
                       style: TextStyle(
                           fontSize: spaces.space_200,
-                          fontWeight: FontWeight.w400),
+                          fontFamily: constants.interFont,
+                          fontWeight: FontWeight.w500),
                     ),
                   ),
                 ],

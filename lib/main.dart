@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:resto_admin/core/themes/light_theme.dart';
-import 'package:resto_admin/features/offer/presentation/pages/offer_page.dart';
+import 'package:resto_admin/features/offer/presentation/pages/add_offer_page.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -15,7 +15,7 @@ class MyApp extends ConsumerWidget {
       title: 'Flutter SAMPLEEEE',
       debugShowCheckedModeBanner: false,
       theme: ref.watch(lightThemeProvider),
-      home: OfferPage(),
+      home: const AddOfferPage(),
     );
   }
 }

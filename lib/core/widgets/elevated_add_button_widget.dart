@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:resto_admin/core/constants/offer_constants/offer_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 
-class AddOnButtonWidget extends StatelessWidget {
+class ElevatedAddButtonWidget extends StatelessWidget {
   final String buttonText;
 
   final Color textColor;
   final void Function()? onPressed;
   final IconData? icon;
 
-  const AddOnButtonWidget(
+  const ElevatedAddButtonWidget(
       {super.key,
       required this.buttonText,
       required this.textColor,
@@ -17,6 +18,7 @@ class AddOnButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    OfferPageConstants constants = OfferPageConstants();
     return SizedBox(
       width: MediaQuery.sizeOf(context).width,
       height: MediaQuery.sizeOf(context).height / 18,
@@ -42,7 +44,8 @@ class AddOnButtonWidget extends StatelessWidget {
             ),
             Text(
               buttonText,
-              style: TextStyle(color: textColor),
+              style:
+                  TextStyle(color: textColor, fontFamily: constants.interFont),
             ),
           ],
         ),

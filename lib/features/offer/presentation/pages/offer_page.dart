@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:resto_admin/core/constants/offer_constants/offer_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
-import 'package:resto_admin/features/offer/presentation/widgets/elevated_button_widget.dart';
+import 'package:resto_admin/core/widgets/text_button_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/offer_banner_widget.dart';
-import 'package:resto_admin/features/offer/presentation/widgets/text_button_widget.dart';
 
 class OfferPage extends StatelessWidget {
   const OfferPage({super.key});
@@ -18,19 +17,24 @@ class OfferPage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         title: Padding(
-          padding:  EdgeInsets.only(
+          padding: EdgeInsets.only(
             left: spaces.space_100,
           ),
           child: Text(
             constants.appbarTitle,
             style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: spaces.space_250),
+                fontWeight: FontWeight.bold,
+                fontSize: spaces.space_250,
+                fontFamily: constants.interFont),
           ),
         ),
         actions: [
           Padding(
-            padding:  EdgeInsets.only(right: spaces.space_300),
+            padding: EdgeInsets.only(right: spaces.space_300),
             child: TextButtonWidget(
+              onTap: () {
+                
+              },
                 buttonText: constants.addOfferText, color: color.primary),
           ),
         ],
@@ -49,14 +53,6 @@ class OfferPage extends StatelessWidget {
           ],
         ),
       ),
-      floatingActionButton: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: spaces.space_300, vertical: spaces.space_150),
-          child: AddOnButtonWidget(
-              buttonText: 'Add Add-on',
-              textColor: color.primary,
-              onPressed: () {},
-              icon: Icons.add)),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
