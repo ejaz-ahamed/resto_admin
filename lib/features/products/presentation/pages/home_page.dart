@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 
 class HomePage extends ConsumerWidget {
+  static const routePath = '/';
   const HomePage({super.key});
 
   @override
