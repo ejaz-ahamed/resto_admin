@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/features/products/presentation/widgets/gridview_widget.dart';
 import 'package:resto_admin/core/widgets/listview_separated_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/row_widget.dart';
 
@@ -80,42 +81,7 @@ class HomePage extends ConsumerWidget {
                 SizedBox(
                   height: theme.spaces.space_250,
                 ),
-                GridView.builder(
-                  physics: const ClampingScrollPhysics(),
-                  itemCount: 5,
-                  shrinkWrap: true,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: theme.spaces.space_250,
-                      mainAxisSpacing: theme.spaces.space_250,
-                      mainAxisExtent: theme.spaces.space_900 * 2.75),
-                  itemBuilder: (context, index) => Container(
-                    decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.circular(theme.spaces.space_100),
-                        border: Border.all(
-                            width: 0.5, color: theme.colors.textInverse)),
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: theme.spaces.space_150),
-                      child: Column(
-                        children: [
-                          Container(
-                            width: theme.spaces.space_500 * 3.7,
-                            height: theme.spaces.space_500 * 3.7,
-                            decoration: BoxDecoration(
-                              color: theme.colors.textInverse,
-                            ),
-                          ),
-                          SizedBox(
-                            height: theme.spaces.space_50,
-                          ),
-                          const Text("data"),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                const GridViewWidget(),
                 SizedBox(
                   height: theme.spaces.space_250,
                 ),
