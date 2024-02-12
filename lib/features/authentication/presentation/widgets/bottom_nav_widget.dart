@@ -52,7 +52,7 @@ class BottomNaviWidget extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(96),
                     color: selectedIndex == 0
                         ? theme.colors.primary
-                        : Colors.white,
+                        : theme.colors.secondary,
                   ),
                   child: Center(
                     child: SvgPicture.asset(
@@ -60,10 +60,10 @@ class BottomNaviWidget extends ConsumerWidget {
                       height: 24,
                       width: 24,
                       colorFilter: selectedIndex == 0
-                          ? const ColorFilter.mode(
-                              Colors.white, BlendMode.srcATop)
-                          : const ColorFilter.mode(
-                              Colors.red, BlendMode.srcATop),
+                          ? ColorFilter.mode(
+                              theme.colors.secondary, BlendMode.srcATop)
+                          : ColorFilter.mode(
+                              theme.colors.primary, BlendMode.srcATop),
                       // color: selectedIndex == 0 ? Colors.white : Colors.red,
                     ),
                   ),
@@ -77,17 +77,17 @@ class BottomNaviWidget extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(96),
                       color: selectedIndex == 1
                           ? theme.colors.primary
-                          : Colors.white),
+                          : theme.colors.secondary),
                   child: Center(
                     child: SvgPicture.asset(
                       'asset/icons/ic_bowl_icon.svg',
                       height: 24,
                       width: 24,
                       colorFilter: selectedIndex == 1
-                          ? const ColorFilter.mode(
-                              Colors.white, BlendMode.srcATop)
-                          : const ColorFilter.mode(
-                              Colors.red, BlendMode.srcATop),
+                          ? ColorFilter.mode(
+                              theme.colors.secondary, BlendMode.srcATop)
+                          : ColorFilter.mode(
+                              theme.colors.primary, BlendMode.srcATop),
                     ),
                   ),
                 ),
@@ -100,17 +100,17 @@ class BottomNaviWidget extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(96),
                       color: selectedIndex == 2
                           ? theme.colors.primary
-                          : Colors.white),
+                          : theme.colors.secondary),
                   child: Center(
                     child: SvgPicture.asset(
                       'asset/icons/ic_bag_icon.svg',
                       height: 24,
                       width: 24,
                       colorFilter: selectedIndex == 2
-                          ? const ColorFilter.mode(
-                              Colors.white, BlendMode.srcATop)
-                          : const ColorFilter.mode(
-                              Colors.red, BlendMode.srcATop),
+                          ? ColorFilter.mode(
+                              theme.colors.secondary, BlendMode.srcATop)
+                          : ColorFilter.mode(
+                              theme.colors.primary, BlendMode.srcATop),
                     ),
                   ),
                 ),
@@ -123,16 +123,17 @@ class BottomNaviWidget extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(96),
                     color: selectedIndex == 3
                         ? theme.colors.primary
-                        : Colors.white),
+                        : theme.colors.secondary),
                 child: Center(
                   child: SvgPicture.asset(
                     'asset/icons/ic_offer_icon.svg',
                     height: 24,
                     width: 24,
                     colorFilter: selectedIndex == 3
-                        ? const ColorFilter.mode(
-                            Colors.white, BlendMode.srcATop)
-                        : const ColorFilter.mode(Colors.red, BlendMode.srcATop),
+                        ? ColorFilter.mode(
+                            theme.colors.secondary, BlendMode.srcATop)
+                        : ColorFilter.mode(
+                            theme.colors.primary, BlendMode.srcATop),
                   ),
                 ),
               ),
