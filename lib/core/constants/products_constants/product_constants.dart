@@ -15,6 +15,7 @@ class ProductConstants {
   final txtAddBtn = 'Add';
   final txtEditbtn = 'Edit';
   final txtFieldHint = 'Search';
+  final txtEditCategoryTitle = 'Edit Category';
 }
 
 @riverpod
