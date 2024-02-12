@@ -51,17 +51,17 @@ class EditPasswordPage extends HookConsumerWidget {
           child: Column(
             children: [
               TextFieldWidget(
-                  textFieldTitle: constants.txtCurrentPassword,
+                  textFielTitle: constants.txtCurrentPassword,
                   hintText: hintText,
                   controller: currentPasswordController),
               const SizedBox32Widget(),
               TextFieldWidget(
-                  textFieldTitle: constants.txtNewPassword,
+                  textFielTitle: constants.txtNewPassword,
                   hintText: hintText,
                   controller: newPasswordController),
               const SizedBox32Widget(),
               TextFieldWidget(
-                  textFieldTitle: constants.txtConfirmPassword,
+                  textFielTitle: constants.txtConfirmPassword,
                   hintText: hintText,
                   controller: confirmPasswordController),
             ],
