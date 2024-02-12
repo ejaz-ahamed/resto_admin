@@ -283,14 +283,11 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-<<<<<<< HEAD
   flutter_web_plugins:
     dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
-=======
->>>>>>> main
   freezed_annotation:
     dependency: transitive
     description:
@@ -315,7 +312,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.2"
-<<<<<<< HEAD
   go_router:
     dependency: "direct main"
     description:
@@ -324,8 +320,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "13.1.0"
-=======
->>>>>>> main
   graphs:
     dependency: transitive
     description:
@@ -334,7 +328,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.1"
-<<<<<<< HEAD
   hooks_riverpod:
     dependency: "direct main"
     description:
@@ -343,8 +336,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.10"
-=======
->>>>>>> main
   http_multi_server:
     dependency: transitive
     description:
@@ -449,7 +440,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.3"
-<<<<<<< HEAD
   path_parsing:
     dependency: transitive
     description:
@@ -466,8 +456,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.2"
-=======
->>>>>>> main
   pool:
     dependency: transitive
     description:
@@ -493,11 +481,7 @@ packages:
     source: hosted
     version: "1.2.3"
   riverpod:
-<<<<<<< HEAD
     dependency: transitive
-=======
-    dependency: "direct main"
->>>>>>> main
     description:
       name: riverpod
       sha256: "548e2192eb7aeb826eb89387f814edb76594f3363e2c0bb99dd733d795ba3589"
@@ -661,7 +645,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.3.3"
-<<<<<<< HEAD
   vector_graphics:
     dependency: transitive
     description:
@@ -686,8 +669,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.10+1"
-=======
->>>>>>> main
   vector_math:
     dependency: transitive
     description:
@@ -720,7 +701,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.0"
-<<<<<<< HEAD
   xml:
     dependency: transitive
     description:
@@ -729,8 +709,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.5.0"
-=======
->>>>>>> main
   yaml:
     dependency: transitive
     description:
