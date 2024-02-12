@@ -1,0 +1,87 @@
+[33mcommit c0041c1865c9d961131d01f9ecc788f5262e9dd0[m[33m ([m[1;36mHEAD -> [m[1;32mprofile[m[33m)[m
+Merge: 4b46ca0 400abeb
+Author: shamjadk <kshamjad1@gmail.com>
+Date:   Fri Feb 9 15:09:42 2024 +0530
+
+    Merge branch 'main' into profile
+
+[33mcommit 4b46ca0803c6085baa502b2fdf88b2ad35f210a9[m
+Author: shamjadk <kshamjad1@gmail.com>
+Date:   Fri Feb 9 15:00:39 2024 +0530
+
+    created core folder
+    
+    created core folder for edit profile page
+
+[33mcommit 400abebadf6ecb412dc679adc4779b4632f49818[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Merge: 9822e36 11a854b
+Author: Sinan T M <thadathilsinan@gmail.com>
+Date:   Fri Feb 9 14:34:03 2024 +0530
+
+    Merge pull request #2 from ejaz-ahamed/rashi_orders
+    
+    Added core and themes
+
+[33mcommit 11a854bec83f978f0f553a4d057678fb16fce259[m
+Author: rashi8643 <rashimuhammed86@gmail.com>
+Date:   Fri Feb 9 14:33:28 2024 +0530
+
+    changed gitignore
+
+[33mcommit 724fea545405858bd3d0a3633eee42ec879e5aba[m
+Author: rashi8643 <rashimuhammed86@gmail.com>
+Date:   Fri Feb 9 14:18:13 2024 +0530
+
+    added core ande app themes
+
+[33mcommit 1840a76ee1d01d11925377334f7a9dcd5aafa5b2[m
+Author: rashi8643 <rashimuhammed86@gmail.com>
+Date:   Fri Feb 9 12:26:39 2024 +0530
+
+    Build light theme
+    
+    app light theme added
+
+[33mcommit ba4404152ff220d36f3b4f015368b27234ce919f[m
+Author: rashi8643 <rashimuhammed86@gmail.com>
+Date:   Fri Feb 9 12:21:09 2024 +0530
+
+    add riverpod pubspec
+    
+    added riverpod and build runner
+
+[33mcommit 732bd22855f2e822c899ec23ced6a3e3149ed9eb[m
+Author: rashi8643 <rashimuhammed86@gmail.com>
+Date:   Fri Feb 9 12:05:22 2024 +0530
+
+    complited extensions folder in core
+    color,space and typography is ready
+    
+    Added core and theme extension in core
+
+[33mcommit 9822e36971d6d56c670ff6ac02b3eaf045d1b0b0[m
+Merge: fa3d1c5 a887a9c
+Author: EjazAhamed <149225771+ejaz-ahamed@users.noreply.github.com>
+Date:   Fri Feb 9 10:49:11 2024 +0530
+
+    Merge pull request #1 from ejaz-ahamed/pubspec
+    
+    Updated pubspec
+
+[33mcommit a887a9c2217ed985309e1bf0187c596b044a7e8b[m
+Author: thadathilsinan <thadathilsinan@gmail.com>
+Date:   Fri Feb 9 10:43:06 2024 +0530
+
+    Updated pubspec
+
+[33mcommit fa3d1c57cc9e4fe4e25972080cdbe6f58658c6de[m
+Author: ejaz-ahamed <ahamedejaz896@gmail.com>
+Date:   Fri Feb 9 10:29:26 2024 +0530
+
+    hjgjh
+
+[33mcommit 0981e9cf389388401b0fe39ce372603f0a331cd7[m
+Author: ejaz-ahamed <ahamedejaz896@gmail.com>
+Date:   Fri Feb 9 10:23:39 2024 +0530
+
+    initial commit
