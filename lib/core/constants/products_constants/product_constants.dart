@@ -2,11 +2,12 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'product_constants.g.dart';
 
-class ProductConstants{
+class ProductConstants {
   final txtAddPrdtsTitle = 'Add New Products';
+  final txtProductTitle = 'Products';
 }
 
 @riverpod
-ProductConstants productConstants(ProductConstantsRef ref){
+ProductConstants productConstants(ProductConstantsRef ref) {
   return ProductConstants();
 }
