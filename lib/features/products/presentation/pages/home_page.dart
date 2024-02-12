@@ -13,7 +13,7 @@ class HomePage extends ConsumerWidget {
         leadingWidth: 70,
         leading: const CircleAvatar(),
         title: Text(
-          data.txtproductTitle,
+          data.txtProductTitle,
           style: const TextStyle(
             fontFamily: 'Inter',
             fontWeight: FontWeight.w700,
