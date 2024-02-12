@@ -6,6 +6,6 @@ class AppColorPalettes {
   static const grey400 = Color(0xFF626F86);
   static const white500 = Colors.white;
   static const black500 = Colors.black;
-  static const gray300 = Color(0xFFd9d9d9);
+  static const gray300 = Color(0xFFc1c7cf);
   static const gray200 = Color(0xFFd9dce1);
 }

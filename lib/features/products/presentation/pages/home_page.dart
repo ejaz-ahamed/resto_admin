@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 
 class HomePage extends ConsumerWidget {
+  static const routePath = '/';
   const HomePage({super.key});
 
   @override
@@ -13,7 +14,7 @@ class HomePage extends ConsumerWidget {
         leadingWidth: 70,
         leading: const CircleAvatar(),
         title: Text(
-          data.txtAddPrdtsTitle,
+          data.txtProductTitle,
           style: const TextStyle(
             fontFamily: 'Inter',
             fontWeight: FontWeight.w700,
