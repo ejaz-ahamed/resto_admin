@@ -8,7 +8,7 @@ class ProfilePageContstants {
   final txtAddImage = 'Add image';
   final txtOpeningTime = 'Opening time';
   final txtClosingTime = 'Closing time';
-  final txtHintenterHere = 'Enter here';
+  final txtHintenterHere = 'Enter here...';
   final icAddImage = 'assets/icons/ic_add_image.svg';
   final icArrowBackward = 'assets/icons/ic_arrow_backward.svg';
   final txtSave = 'Save';
