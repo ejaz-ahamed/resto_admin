@@ -14,7 +14,7 @@ class ImagePickerWidget extends StatelessWidget {
         width: MediaQuery.sizeOf(context).width,
         decoration: BoxDecoration(
           borderRadius:
-              BorderRadius.circular(AppTheme.of(context).spaces.space_100),
+              BorderRadius.circular(AppTheme.of(context).spaces.space_200),border: Border.all(color: Colors.grey,width: 2)
         ),
         child: Center(
           child: SvgPicture.asset(
