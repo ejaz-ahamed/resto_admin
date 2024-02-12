@@ -29,7 +29,11 @@ class AppTypographyExtension extends ThemeExtension<AppTypographyExtension> {
     required Color defaultFontColor,
     required Color linkColor,
     required Color dimFontColor,
-  })  : ui = TextStyle(color: defaultFontColor, fontSize: 14, letterSpacing: 0),
+  })  : ui = TextStyle(
+          color: defaultFontColor,
+          fontSize: 14,
+          letterSpacing: 0,
+        ),
         uiSemibold = TextStyle(
             color: defaultFontColor,
             fontWeight: FontWeight.w600,
@@ -56,10 +60,17 @@ class AppTypographyExtension extends ThemeExtension<AppTypographyExtension> {
             fontWeight: FontWeight.w600,
             fontSize: 12,
             letterSpacing: 0),
-        pDefault =
-            TextStyle(color: defaultFontColor, fontSize: 14, letterSpacing: 0),
+        pDefault = TextStyle(
+          color: defaultFontColor,
+          fontSize: 14,
+          letterSpacing: 0,
+        ),
         pLink = TextStyle(
-            color: linkColor, fontSize: 14, height: 1.5, letterSpacing: 0),
+          color: linkColor,
+          fontSize: 14,
+          height: 1.5,
+          letterSpacing: 0,
+        ),
         pLinkHover = TextStyle(
           color: linkColor,
           fontSize: 14,
@@ -69,7 +80,11 @@ class AppTypographyExtension extends ThemeExtension<AppTypographyExtension> {
           decorationStyle: TextDecorationStyle.solid,
         ),
         pBlockQuote = TextStyle(
-            color: dimFontColor, fontSize: 14, height: 1.5, letterSpacing: 0),
+          color: dimFontColor,
+          fontSize: 14,
+          height: 1.5,
+          letterSpacing: 0,
+        ),
         h100 = TextStyle(
             color: dimFontColor,
             fontWeight: FontWeight.w700,

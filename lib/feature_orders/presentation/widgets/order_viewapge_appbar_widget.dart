@@ -10,7 +10,10 @@ class OrderViewpageAppbarWidget extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
         child: Row(
-          children: [],
+          children: [
+            Image.asset(''),
+            Text('')
+          ],
         ),
       ),
     );
