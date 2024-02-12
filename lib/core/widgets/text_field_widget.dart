@@ -3,14 +3,25 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 
 class TextFieldWidget extends ConsumerWidget {
+<<<<<<< HEAD
   final String textFielTitle;
+=======
+  final String textFieldTitle;
+>>>>>>> main
   final String hintText;
   final TextEditingController controller;
   const TextFieldWidget(
       {super.key,
+<<<<<<< HEAD
       required this.textFielTitle,
       required this.hintText,
       required this.controller});
+=======
+      required this.textFieldTitle,
+      required this.hintText,
+      required this.controller});
+
+>>>>>>> main
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);
@@ -18,7 +29,11 @@ class TextFieldWidget extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
+<<<<<<< HEAD
           textFielTitle,
+=======
+          textFieldTitle,
+>>>>>>> main
           style: apptheme.typography.h400,
         ),
         TextField(
