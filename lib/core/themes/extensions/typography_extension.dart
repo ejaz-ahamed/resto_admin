@@ -93,7 +93,7 @@ class AppTypographyExtension extends ThemeExtension<AppTypographyExtension> {
             letterSpacing: 0),
         h500 = TextStyle(
             color: defaultFontColor,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w900,
             fontSize: 16,
             letterSpacing: 0),
         h600 = TextStyle(
