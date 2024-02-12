@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:resto_admin/core/constants/offer_page_constants.dart';
+import 'package:resto_admin/core/constants/offer_constants/offer_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/offer_banner_widget.dart';

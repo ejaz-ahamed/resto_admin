@@ -4,7 +4,7 @@ import 'package:resto_admin/core/themes/light_theme.dart';
 import 'package:resto_admin/features/offer/presentation/pages/offer_page.dart';
 
 void main() {
-  runApp(ProviderScope(child: const MyApp()));
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends ConsumerWidget {
