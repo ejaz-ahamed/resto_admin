@@ -1,9 +1,17 @@
-class ProfilepageConstants {
-  static const txtTitle = 'Profile';
-  static const txtEditProfile = 'Edit profile';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+part 'profile_page_constants.g.dart';
 
-  static const txtOpeningTime = 'Opening time';
-  static const txtClosingtime = 'Closing time';
-  static const txtClosingTime = 'Dark theme';
-  static const txtUpdatePassword = 'Update Password';
+class ProfilepageConstants {
+  final txtTitle = 'Profile';
+
+  final txtOpeningTime = 'Opening time';
+  final txtClosingtime = 'Closing time';
+  final txtDarktheme = 'Dark theme';
+  final txtUpdatePassword = 'Update Password';
+  final txtEdit = 'Edit';
+}
+
+@riverpod
+ProfilepageConstants profilePage(ProfilePageRef ref) {
+  return ProfilepageConstants();
 }

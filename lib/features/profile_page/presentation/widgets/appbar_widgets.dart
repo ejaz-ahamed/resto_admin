@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:resto_admin/core/constants/profile_page/profile_page_constants.dart';
+import 'package:resto_admin/core/themes/app_theme.dart';
 
-class Appbar extends StatelessWidget {
+class Appbar extends ConsumerWidget {
   const Appbar({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Row(
       children: [
         SvgPicture.asset(
-          'assets/images/ic_arrow_backward.svg',
-          height: 20,
+          'assets/icons/ic_arrow_backward.svg',
+          height: AppTheme.of(context).spaces.space_200,
         ),
-        SizedBox(
+        const SizedBox(
           width: 15,
         ),
-        const Text(ProfilepageConstants.txtTitle)
+        Text(
+          ref.watch(profilePageProvider).txtTitle,
+          style: AppTheme.of(context).typography.h500,
+        )
       ],
     );
   }
