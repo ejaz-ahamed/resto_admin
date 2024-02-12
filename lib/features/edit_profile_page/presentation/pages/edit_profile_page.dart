@@ -9,7 +9,6 @@ import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:resto_admin/features/edit_profile_page/presentation/pages/edit_password_page.dart';
 
 class EditProfilePage extends HookConsumerWidget {
   static const routePath = '/editprofilepage';
@@ -74,13 +73,7 @@ class EditProfilePage extends HookConsumerWidget {
         ),
         floatingActionButton: ElevatedButtonWidget(
           text: constants.txtSave,
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const EditPasswordPage(),
-                ));
-          },
+          onPressed: () {},
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
