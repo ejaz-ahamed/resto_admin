@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:resto_admin/core/themes/extensions/boxshadow_extension.dart';
 import 'package:resto_admin/core/themes/extensions/color_extension.dart';
 import 'package:resto_admin/core/themes/extensions/space_extension.dart';
 import 'package:resto_admin/core/themes/extensions/typography_extension.dart';
@@ -18,5 +19,9 @@ final class AppTheme {
 
   AppTypographyExtension get typography {
     return Theme.of(context).extension<AppTypographyExtension>()!;
+  }
+
+  AppBoxShadowExtension get boxShadow {
+    return Theme.of(context).extension<AppBoxShadowExtension>()!;
   }
 }
