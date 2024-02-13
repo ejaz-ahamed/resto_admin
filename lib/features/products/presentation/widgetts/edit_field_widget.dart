@@ -7,27 +7,32 @@ class EditFieldWidget extends ConsumerWidget {
   final bool isPrice;
   final TextEditingController controller;
   final bool enabled;
-  const EditFieldWidget({
-    super.key,
-    required this.hintText,
-    required this.controller,
-    this.isPrice = false,
-    this.enabled = false,
-  });
+  final void Function(String)? onChanged;
+  final TextStyle? style;
+  const EditFieldWidget(
+      {super.key,
+      required this.hintText,
+      required this.controller,
+      this.isPrice = false,
+      this.enabled = false,
+      this.onChanged,
+      required this.style});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);
     return TextField(
       controller: controller,
+      onChanged: onChanged,
       enabled: enabled,
-      style: apptheme.typography.h500
-          .copyWith(color: apptheme.colors.textSubtlest),
-      textDirection: isPrice ? TextDirection.rtl : TextDirection.ltr,
+      style: apptheme.typography.h500.copyWith(),
+      textAlign: isPrice ? TextAlign.right : TextAlign.left,
       decoration: InputDecoration(
+        isDense: true,
         contentPadding: const EdgeInsets.all(0),
         hintText: hintText,
         hintStyle: apptheme.typography.h400
             .copyWith(color: apptheme.colors.textSubtle),
+        hintTextDirection: TextDirection.rtl,
         border: InputBorder.none,
       ),
     );
