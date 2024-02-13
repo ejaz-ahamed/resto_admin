@@ -22,4 +22,5 @@ final class AppAssetsConstants {
 AppAssetsConstants appAssetsConstants(AppAssetsConstantsRef ref) {
   return AppAssetsConstants();
 
+
 }
