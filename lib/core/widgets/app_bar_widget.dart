@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:resto_admin/core/constants/profile_page/profile_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 
-class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
+class AppBarWidget extends ConsumerWidget implements PreferredSizeWidget {
   final String title;
   const AppBarWidget({super.key, required this.title});
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final appTheme = AppTheme.of(context);
     return AppBar(
       scrolledUnderElevation: 0,
@@ -15,7 +17,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         children: [
           InkWell(
             child: SvgPicture.asset(
-              'assets/icons/ic_arrow_backward.svg',
+              ref.watch(profilePageProvider).icArrowBackward,
               height: appTheme.spaces.space_200,
             ),
           ),
@@ -32,5 +34,5 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(70);
+  Size get preferredSize => const Size.fromHeight(56);
 }

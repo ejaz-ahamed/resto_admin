@@ -9,6 +9,7 @@ class ProfilepageConstants {
   final txtDarktheme = 'Dark theme';
   final txtUpdatePassword = 'Update Password';
   final txtEdit = 'Edit';
+  final icArrowBackward = 'assets/icons/ic_arrow_backward.svg';
 }
 
 @riverpod

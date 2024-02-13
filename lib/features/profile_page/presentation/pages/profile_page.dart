@@ -7,7 +7,6 @@ import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/features/edit_profile_page/presentation/pages/edit_profile_page.dart';
 import 'package:resto_admin/features/profile_page/presentation/widgets/switch_button_widgets.dart';
-import 'package:resto_admin/features/profile_page/presentation/widgets/timepiker_widgets.dart';
 
 class Profilepage extends ConsumerWidget {
   static const routePath = '/profile';
@@ -16,12 +15,15 @@ class Profilepage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);
+    final constatnts = ref.watch(profilePageProvider);
     return Scaffold(
       appBar: AppBarWidget(
         title: ref.watch(profilePageProvider).txtTitle,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+        padding: EdgeInsets.symmetric(
+            horizontal: apptheme.spaces.space_300,
+            vertical: apptheme.spaces.space_400),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -35,7 +37,7 @@ class Profilepage extends ConsumerWidget {
               height: apptheme.spaces.space_400,
             ),
             Text(
-              ref.watch(profilePageProvider).txtOpeningTime,
+              constatnts.txtOpeningTime,
               style: apptheme.typography.h400,
             ),
             SizedBox(
@@ -46,7 +48,7 @@ class Profilepage extends ConsumerWidget {
               height: apptheme.spaces.space_400,
             ),
             Text(
-              ref.watch(profilePageProvider).txtClosingtime,
+              constatnts.txtClosingtime,
               style: apptheme.typography.h400,
             ),
             SizedBox(
@@ -60,7 +62,7 @@ class Profilepage extends ConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  ref.watch(profilePageProvider).txtDarktheme,
+                  constatnts.txtDarktheme,
                   style: apptheme.typography.h400,
                 ),
                 const SwitchButton()
@@ -70,14 +72,14 @@ class Profilepage extends ConsumerWidget {
               height: apptheme.spaces.space_300,
             ),
             Text(
-              ref.watch(profilePageProvider).txtUpdatePassword,
+              constatnts.txtUpdatePassword,
               style: apptheme.typography.h400,
             ),
           ],
         ),
       ),
       floatingActionButton: ElevatedButtonWidget(
-        text: ref.watch(profilePageProvider).txtEdit,
+        text: constatnts.txtEdit,
         onPressed: () {
           context.push(EditProfilePage.routePath);
         },

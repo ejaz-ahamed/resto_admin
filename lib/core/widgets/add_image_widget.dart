@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:resto_admin/core/constants/edit_profile_page/profile_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/utils/image_picker_utils.dart';
@@ -19,10 +18,10 @@ class AddImageWidget extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          SvgPicture.asset(
-            constants.icAddImage,
-            height: appTheme.spaces.space_500,
-          ),
+          // SvgPicture.asset(
+          //   constants.icAddImage,
+          //   height: appTheme.spaces.space_500,
+          // ),
           const SizedBox8Widget(),
           Text(
             constants.txtAddImage,
