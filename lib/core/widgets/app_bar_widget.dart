@@ -11,6 +11,7 @@ class AppBarWidget extends ConsumerWidget implements PreferredSizeWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final appTheme = AppTheme.of(context);
     return AppBar(
+      automaticallyImplyLeading: false,
       scrolledUnderElevation: 0,
       titleSpacing: appTheme.spaces.space_300,
       title: Row(
