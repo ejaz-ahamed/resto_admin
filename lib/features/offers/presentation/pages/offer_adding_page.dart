@@ -15,7 +15,7 @@ class OfferAddingPage extends ConsumerWidget {
     final apptheme = AppTheme.of(context);
     final titleController = TextEditingController();
     final subtitleController = TextEditingController();
-    final Constants = ref.watch(offersConstantsProvider);
+    final constants = ref.watch(offersConstantsProvider);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: apptheme.colors.secondary,
@@ -26,7 +26,7 @@ class OfferAddingPage extends ConsumerWidget {
               icon: SvgPicture.asset('assets/icons/ic_arrow_backward.svg'),
             ),
             Text(
-              Constants.txtPageTitle,
+              constants.txtPageTitle,
               style: apptheme.typography.h500
                   .copyWith(color: apptheme.colors.text),
             ),
@@ -49,15 +49,15 @@ class OfferAddingPage extends ConsumerWidget {
                   height: apptheme.spaces.space_200,
                 ),
                 TextFieldWidget(
-                    textFielTitle: Constants.txtfeildtitle,
-                    hintText: Constants.txtfeildhindtext,
+                    textFielTitle: constants.txtfeildtitle,
+                    hintText: constants.txtfeildhindtext,
                     controller: titleController),
                 SizedBox(
                   height: apptheme.spaces.space_100,
                 ),
                 TextFieldWidget(
-                    textFielTitle: Constants.txtfeildsubtitle,
-                    hintText: Constants.txtfeildhindtext2,
+                    textFielTitle: constants.txtfeildsubtitle,
+                    hintText: constants.txtfeildhindtext2,
                     controller: subtitleController),
                 SizedBox(
                   height: apptheme.spaces.space_100,
