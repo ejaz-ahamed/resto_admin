@@ -30,7 +30,7 @@ class HomePage extends HookConsumerWidget {
                   radius: 25,
                 ),
                 SizedBox(
-                  width: theme.spaces.space_100,
+                  width: theme.spaces.space_100 * 2.5,
                 ),
                 Text(
                   data.txtProductTitle,
