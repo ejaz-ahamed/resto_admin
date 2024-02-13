@@ -18,7 +18,8 @@ class EditCategoryPage extends ConsumerWidget {
         title: Row(
           children: [
             IconButton(
-                onPressed: () {}, icon: SvgPicture.asset(assets.icArrowBack)),
+                onPressed: () {},
+                icon: SvgPicture.asset(assets.icArrowBackward)),
             Text(
               data.txtEditCategoryTitle,
               style: AppTheme.of(context)

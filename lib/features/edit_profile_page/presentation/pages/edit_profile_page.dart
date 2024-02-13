@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/constants/edit_profile_page/profile_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/add_image_widget.dart';
@@ -20,6 +21,7 @@ class EditProfilePage extends HookConsumerWidget {
     final openingTimeController = useTextEditingController();
     final closingTimeController = useTextEditingController();
     final constants = ref.watch(profilePageContstantsProvider);
+    final assets = ref.watch(appAssetsConstantsProvider);
     final hintText = ref.watch(profilePageContstantsProvider).txtHintenterHere;
     final appTheme = AppTheme.of(context);
     return GestureDetector(
@@ -29,7 +31,7 @@ class EditProfilePage extends HookConsumerWidget {
           title: Row(
             children: [
               SvgPicture.asset(
-                constants.icArrowBackward,
+                assets.icArrowBackward,
                 height: appTheme.spaces.space_200,
               ),
               SizedBox(
