@@ -18,8 +18,13 @@ class Profilepage extends ConsumerWidget {
     final apptheme = AppTheme.of(context);
     final constatnts = ref.watch(profilePageProvider);
     return Scaffold(
-      appBar: AppBarWidget(
-        title: ref.watch(profilePageProvider).txtTitle,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(
+          apptheme.spaces.space_700,
+        ),
+        child: AppBarWidget(
+          title: ref.watch(profilePageProvider).txtTitle,
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(

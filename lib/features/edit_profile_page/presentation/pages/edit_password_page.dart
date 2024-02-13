@@ -24,7 +24,11 @@ class EditPasswordPage extends HookConsumerWidget {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        appBar: AppBarWidget(title: constants.txtEditPassword),
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(
+              appTheme.spaces.space_700,
+            ),
+            child: AppBarWidget(title: constants.txtEditPassword)),
         body: Padding(
           padding: EdgeInsets.symmetric(
               vertical: appTheme.spaces.space_400,
