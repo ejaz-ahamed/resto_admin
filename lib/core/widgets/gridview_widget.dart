@@ -21,7 +21,6 @@ class GridViewWidget extends ConsumerWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(theme.spaces.space_100),
-          // border: Border.all(width: 0.5, color: theme.colors.textInverse),
           boxShadow: [
             BoxShadow(
               blurRadius: 34,

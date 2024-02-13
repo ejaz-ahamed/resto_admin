@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/gridview_widget.dart';
 import 'package:resto_admin/core/widgets/listview_separated_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/row_widget.dart';
+import 'package:resto_admin/features/products/presentation/widgets/textfield_widget.dart';
 
-class HomePage extends ConsumerWidget {
+class HomePage extends HookConsumerWidget {
   static const routePath = '/';
   const HomePage({super.key});
 
@@ -14,19 +16,27 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final data = ref.watch(productConstantsProvider);
     final theme = AppTheme.of(context);
+    final searchController = useTextEditingController();
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
           scrolledUnderElevation: 0,
-          leadingWidth: 70,
-          leading: const CircleAvatar(),
-          title: Text(
-            data.txtProductTitle,
-            style: const TextStyle(
-              fontFamily: 'Inter',
-              fontWeight: FontWeight.w700,
-              fontSize: 20,
+          title: Padding(
+            padding: EdgeInsets.only(left: theme.spaces.space_100),
+            child: Row(
+              children: [
+                const CircleAvatar(
+                  radius: 25,
+                ),
+                SizedBox(
+                  width: theme.spaces.space_100,
+                ),
+                Text(
+                  data.txtProductTitle,
+                  style: theme.typography.h800,
+                ),
+              ],
             ),
           ),
         ),
@@ -39,30 +49,7 @@ class HomePage extends ConsumerWidget {
                 SizedBox(
                   height: theme.spaces.space_400,
                 ),
-                TextField(
-                  cursorColor: theme.colors.text,
-                  decoration: InputDecoration(
-                    hintText: data.txtFieldHint,
-                    hintStyle: const TextStyle(
-                      fontSize: 14,
-                      fontFamily: 'Inter',
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide:
-                          BorderSide(color: theme.colors.textSubtle, width: 1),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide:
-                          BorderSide(color: theme.colors.textSubtle, width: 1),
-                    ),
-                    suffixIcon: Icon(
-                      Icons.search,
-                      color: theme.colors.textSubtlest,
-                    ),
-                  ),
-                ),
+                SearchTextFieldWidget(searchController: searchController),
                 SizedBox(
                   height: theme.spaces.space_300,
                 ),

@@ -15,22 +15,14 @@ class RowWidget extends ConsumerWidget {
       children: [
         Text(
           text,
-          style: const TextStyle(
-            fontFamily: 'Inter',
-            fontWeight: FontWeight.w600,
-            fontSize: 16,
-          ),
+          style: theme.typography.h700.copyWith(fontWeight: FontWeight.w600),
         ),
         InkWell(
           onTap: () {},
           child: Text(
             btnText,
-            style: TextStyle(
-              color: theme.colors.primary,
-              fontFamily: 'Inter',
-              fontWeight: FontWeight.w600,
-              fontSize: 16,
-            ),
+            style: theme.typography.h700.copyWith(
+                color: theme.colors.primary, fontWeight: FontWeight.w600),
           ),
         )
       ],
