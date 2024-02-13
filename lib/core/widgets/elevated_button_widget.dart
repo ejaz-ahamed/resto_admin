@@ -7,6 +7,7 @@ class ElevatedButtonWidget extends ConsumerWidget {
   final void Function() onPressed;
   const ElevatedButtonWidget(
       {super.key, required this.text, required this.onPressed});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appTheme = AppTheme.of(context);
