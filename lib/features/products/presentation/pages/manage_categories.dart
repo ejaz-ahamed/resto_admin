@@ -3,11 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
-import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
-import 'package:resto_admin/features/products/presentation/widgets/view_category_widget.dart';
 
-class ViewCategories extends ConsumerWidget {
-  const ViewCategories({super.key});
+import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
+import 'package:resto_admin/features/products/presentation/widgets/category_Grid_widget.dart';
+
+class ManageCategories extends ConsumerWidget {
+  const ManageCategories({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -34,21 +35,33 @@ class ViewCategories extends ConsumerWidget {
                     .copyWith(color: AppTheme.of(context).colors.text)),
           ],
         ),
+        actions: [
+          Padding(
+            padding: EdgeInsets.only(
+                right: AppTheme.of(context).spaces.space_100 * 2.875),
+            child: TextButton(
+              onPressed: () {},
+              child: Text(data.txtSelectAll,
+                  style: AppTheme.of(context)
+                      .typography
+                      .h500
+                      .copyWith(color: AppTheme.of(context).colors.primary)),
+            ),
+          ),
+        ],
       ),
       body: Column(
         children: [
           SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.all(AppTheme.of(context).spaces.space_300),
-              child: Container(
-                height: 550,
-                width: 380,
-                // color: Colors.blue,
-                child: ViewCategoriesWidget(),
-              ),
+              child: SizedBox(
+                  height: AppTheme.of(context).spaces.space_100 * 68.75,
+                  width: AppTheme.of(context).spaces.space_100 * 47.5,
+                  child: const CategoryGrid()),
             ),
           ),
-          ElevatedButtonWidget(text: data.txtAddCategory, onPressed: () {})
+          ElevatedButtonWidget(text: data.txtDelete, onPressed: () {})
         ],
       ),
     );

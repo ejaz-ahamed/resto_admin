@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:resto_admin/core/themes/light_theme.dart';
 import 'package:resto_admin/features/products/presentation/pages/home_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:resto_admin/features/products/presentation/pages/manage_categories.dart';
 import 'package:resto_admin/features/products/presentation/pages/view_categories_page.dart';
 
 void main() {
