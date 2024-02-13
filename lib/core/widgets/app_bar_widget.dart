@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:go_router/go_router.dart';
 
 class AppBarWidget extends StatelessWidget {
   final String title;
@@ -21,7 +21,7 @@ class AppBarWidget extends StatelessWidget {
           InkWell(
             onTap: () => context.pop(),
             child: SvgPicture.asset(
-              iconConst.icArrowBack,
+              iconConst.icArrowBackward,
               height: appTheme.spaces.space_200,
             ),
           ),
