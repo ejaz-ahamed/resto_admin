@@ -24,6 +24,9 @@ class ButtonWidget extends ConsumerWidget {
     /// Background color to use for the button
     final bgColor = isSelected ? colors.primary : colors.secondary;
 
+    ///Border color to use for the buttom
+    final borderColor = isSelected ? colors.primary : colors.textSubtle;
+
     /// Text color to use for the button
     final textColor = isSelected ? colors.textInverse : colors.text;
 
@@ -32,9 +35,12 @@ class ButtonWidget extends ConsumerWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-            backgroundColor: bgColor,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(space.space_100))),
+          backgroundColor: bgColor,
+          shape: RoundedRectangleBorder(
+            side: BorderSide(color: borderColor),
+            borderRadius: BorderRadius.circular(space.space_100),
+          ),
+        ),
         child: Row(
           children: [
             Text(
@@ -53,7 +59,10 @@ class ButtonWidget extends ConsumerWidget {
                       color: isSelected ? colors.primary : colors.textInverse),
                   borderRadius: BorderRadius.circular(space.space_300),
                   color: colors.secondary),
-              child: Text(foodCount.toString()),
+              child: Text(
+                foodCount.toString(),
+                textAlign: TextAlign.center,
+              ),
             )
           ],
         ),
