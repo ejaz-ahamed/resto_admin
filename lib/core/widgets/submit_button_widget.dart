@@ -30,7 +30,7 @@ class ElevatedButtonWidget extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           buttonText,
-          style: typography.h500,
+          style: typography.h500.copyWith(color: textColor),
         ),
       ),
     );

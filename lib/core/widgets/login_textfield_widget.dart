@@ -1,30 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 
-class TextfieldWidget extends StatelessWidget {
+class LoginTextfieldWidget extends StatelessWidget {
   final String hintText;
-  final Widget? suffixIcon;
   final Widget prefixIcon;
-  const TextfieldWidget(
-      {super.key,
-      required this.hintText,
-      required this.prefixIcon,
-      this.suffixIcon});
+  const LoginTextfieldWidget({
+    super.key,
+    required this.hintText,
+    required this.prefixIcon,
+  });
 
   @override
   Widget build(BuildContext context) {
     final colors = AppTheme.of(context).colors;
     final typography = AppTheme.of(context).typography;
+    final spacer = AppTheme.of(context).spaces;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.symmetric(horizontal: spacer.space_300),
       child: TextField(
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: typography.h400.copyWith(color: colors.textSubtlest),
-          suffixIcon: suffixIcon,
           prefixIcon: prefixIcon,
           enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(7),
+              borderRadius: BorderRadius.circular(10),
               borderSide: BorderSide(color: colors.textSubtlest, width: 1)),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(7),
