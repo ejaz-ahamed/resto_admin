@@ -43,7 +43,6 @@ dependencies:
   image_picker: ^1.0.7
   intl: ^0.19.0
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -69,7 +68,6 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - assets/images/
     - assets/icons/
   fonts:
     - family: Inter
@@ -92,8 +90,3 @@ flutter:
           weight: 800
         - asset: assets/fonts/Inter/Inter-Black.ttf
           weight: 900
-
-  # To add assets to your application, add an assets section, like this:
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
