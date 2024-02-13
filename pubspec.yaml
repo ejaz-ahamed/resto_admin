@@ -38,8 +38,8 @@ dependencies:
   riverpod: ^2.5.0
   riverpod_annotation: ^2.3.4
   flutter_riverpod: ^2.4.10
-  awesome_bottom_bar: ^1.2.4
-  custom_navigation_bar: ^0.8.2
+  hooks_riverpod: ^2.4.10
+  flutter_hooks: ^0.20.5
 
 dev_dependencies:
   flutter_test:

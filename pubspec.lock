@@ -41,14 +41,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
-  awesome_bottom_bar:
-    dependency: "direct main"
-    description:
-      name: awesome_bottom_bar
-      sha256: dd42e6767ae22cf5eb47695991e7a3f964ccba3b403a93837c20eb4f74e4ad0f
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.2.4"
   boolean_selector:
     dependency: transitive
     description:
@@ -217,14 +209,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.0"
-  custom_navigation_bar:
-    dependency: "direct main"
-    description:
-      name: custom_navigation_bar
-      sha256: "2e00e138a1eba71c288aadbcd728f1f8caebf659b95b793aae08a9c0d70ca941"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.8.2"
   dart_style:
     dependency: transitive
     description:
@@ -262,6 +246,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_hooks:
+    dependency: "direct main"
+    description:
+      name: flutter_hooks
+      sha256: cde36b12f7188c85286fba9b38cc5a902e7279f36dd676967106c041dc9dde70
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.20.5"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -323,6 +315,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.1"
+  hooks_riverpod:
+    dependency: "direct main"
+    description:
+      name: hooks_riverpod
+      sha256: "758b07eba336e3cbacbd81dba481f2228a14102083fdde07045e8514e8054c49"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.10"
   http_multi_server:
     dependency: transitive
     description:

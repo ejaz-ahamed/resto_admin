@@ -1,6 +1,7 @@
 # Miscellaneous
 
 **/*.g.dart
+pubsec.lock
 
 *.class
 *.log
