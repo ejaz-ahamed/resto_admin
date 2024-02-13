@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:resto_admin/core/constants/profile_page/profile_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widgets.dart';
 import 'package:resto_admin/features/profile_page/presentation/widgets/appbar_widgets.dart';
-import 'package:resto_admin/features/profile_page/presentation/widgets/swich_button_widgets.dart';
+import 'package:resto_admin/features/profile_page/presentation/widgets/switch_button_widgets.dart';
 import 'package:resto_admin/features/profile_page/presentation/widgets/timepiker_widgets.dart';
 
 class Profilepage extends ConsumerWidget {
@@ -14,8 +15,8 @@ class Profilepage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);
     return Scaffold(
-      appBar: AppBar(
-        title: const Appbar(),
+      appBar: AppBarWidget(
+        title: ref.watch(profilePageProvider).txtTitle,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
@@ -60,7 +61,7 @@ class Profilepage extends ConsumerWidget {
                   ref.watch(profilePageProvider).txtDarktheme,
                   style: apptheme.typography.h400,
                 ),
-                const Swichbutton()
+                const SwitchButton()
               ],
             ),
             SizedBox(
