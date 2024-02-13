@@ -2,11 +2,12 @@ import 'package:go_router/go_router.dart';
 import 'package:resto_admin/features/edit_profile_page/presentation/pages/edit_password_page.dart';
 import 'package:resto_admin/features/edit_profile_page/presentation/pages/edit_profile_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/home_page.dart';
+import 'package:resto_admin/features/profile_page/presentation/pages/profile_page.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'router.g.dart';
 
-final router = GoRouter(initialLocation: HomePage.routePath, routes: [
+final router = GoRouter(initialLocation: Profilepage.routePath, routes: [
   GoRoute(
       path: HomePage.routePath, builder: (context, state) => const HomePage()),
   GoRoute(
@@ -15,6 +16,10 @@ final router = GoRouter(initialLocation: HomePage.routePath, routes: [
   GoRoute(
       path: EditPasswordPage.routePath,
       builder: (context, state) => const EditPasswordPage()),
+  GoRoute(
+    path: Profilepage.routePath,
+    builder: (context, state) => const Profilepage(),
+  )
 ]);
 
 @riverpod

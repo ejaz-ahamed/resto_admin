@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/constants/profile_page/profile_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
-import 'package:resto_admin/core/widgets/elevated_button_widgets.dart';
-import 'package:resto_admin/features/profile_page/presentation/widgets/appbar_widgets.dart';
+import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
+import 'package:resto_admin/features/edit_profile_page/presentation/pages/edit_profile_page.dart';
 import 'package:resto_admin/features/profile_page/presentation/widgets/switch_button_widgets.dart';
 import 'package:resto_admin/features/profile_page/presentation/widgets/timepiker_widgets.dart';
 
 class Profilepage extends ConsumerWidget {
+  static const routePath = '/profile';
   const Profilepage({super.key});
 
   @override
@@ -39,7 +41,7 @@ class Profilepage extends ConsumerWidget {
             SizedBox(
               height: apptheme.spaces.space_100,
             ),
-            const Timepiker(),
+            const Text("9:35 AM"),
             SizedBox(
               height: apptheme.spaces.space_400,
             ),
@@ -50,7 +52,7 @@ class Profilepage extends ConsumerWidget {
             SizedBox(
               height: apptheme.spaces.space_100,
             ),
-            const Timepiker(),
+            const Text("11:30 PM"),
             SizedBox(
               height: apptheme.spaces.space_300,
             ),
@@ -74,7 +76,12 @@ class Profilepage extends ConsumerWidget {
           ],
         ),
       ),
-      floatingActionButton: const ElevatedButtonWidget(),
+      floatingActionButton: ElevatedButtonWidget(
+        text: ref.watch(profilePageProvider).txtEdit,
+        onPressed: () {
+          context.push(EditProfilePage.routePath);
+        },
+      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
