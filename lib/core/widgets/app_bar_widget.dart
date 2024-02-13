@@ -13,6 +13,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
     AppAssetConstants iconConst = AppAssetConstants();
     final appTheme = AppTheme.of(context);
     return AppBar(
+      automaticallyImplyLeading: false,
       scrolledUnderElevation: 0,
       titleSpacing: appTheme.spaces.space_300,
       title: Row(

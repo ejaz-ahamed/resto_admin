@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/constants/offer_constants/offer_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/text_button_widget.dart';
+import 'package:resto_admin/features/offer/presentation/pages/add_offer_page.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/offer_banner_widget.dart';
 
 class OfferPage extends StatelessWidget {
@@ -27,7 +29,9 @@ class OfferPage extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(right: spaces.space_300),
             child: TextButtonWidget(
-                onTap: () {},
+                onTap: () {
+                  context.push(AddOfferPage.routePath);
+                },
                 buttonText: constants.addOfferText,
                 color: color.primary),
           ),

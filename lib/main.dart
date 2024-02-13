@@ -12,11 +12,10 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       theme: ref.watch(lightThemeProvider),
-      home:  AddOfferPage(),
-      // routerConfig: ref.watch(goRouterProvider),
+      routerConfig: ref.watch(goRouterProvider),
     );
   }
 }

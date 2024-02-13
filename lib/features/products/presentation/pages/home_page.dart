@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 import 'package:resto_admin/core/widgets/bottom_navigation/bottom_nav_widget.dart';
+import 'package:resto_admin/features/offer/presentation/pages/add_offer_page.dart';
 
 class HomePage extends ConsumerWidget {
   static const routePath = '/homePage';
