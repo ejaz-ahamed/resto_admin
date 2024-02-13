@@ -18,10 +18,9 @@ class ElevatedAddButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    OfferPageConstants constants = OfferPageConstants();
     return SizedBox(
       width: MediaQuery.sizeOf(context).width,
-      height: MediaQuery.sizeOf(context).height / 18,
+      height: AppTheme.of(context).spaces.space_100 * 6.25,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
             side: BorderSide(color: AppTheme.of(context).colors.primary),
@@ -44,8 +43,9 @@ class ElevatedAddButtonWidget extends StatelessWidget {
             ),
             Text(
               buttonText,
-              style:
-                  TextStyle(color: textColor, fontFamily: constants.interFont),
+              style: TextStyle(
+                color: textColor,
+              ),
             ),
           ],
         ),

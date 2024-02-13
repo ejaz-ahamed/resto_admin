@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 
-class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
+class AppBarWidget extends StatelessWidget {
   final String title;
 
   const AppBarWidget({super.key, required this.title});
@@ -36,7 +36,4 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       ),
     );
   }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(40);
 }

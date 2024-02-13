@@ -18,7 +18,7 @@ class TextFieldOfferWidget extends ConsumerWidget {
           contentPadding: const EdgeInsets.all(0),
           hintText: hintText,
           hintStyle: apptheme.typography.h400.copyWith(
-            color: apptheme.colors.textSubtlest.withOpacity(.60),
+            color: apptheme.colors.textDisabled,
           ),
           border: const OutlineInputBorder(borderSide: BorderSide.none)),
     );

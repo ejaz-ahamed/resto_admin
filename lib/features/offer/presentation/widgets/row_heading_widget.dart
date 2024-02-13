@@ -16,12 +16,12 @@ class RowHeadingWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            constants.product,
+            constants.txtProduct,
             style: AppTheme.of(context).typography.h700,
           ),
           TextButtonWidget(
               onTap: () {},
-              buttonText: constants.add,
+              buttonText: constants.txtAdd,
               color: AppTheme.of(context).colors.primary)
         ],
       ),

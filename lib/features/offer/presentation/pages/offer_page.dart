@@ -22,7 +22,7 @@ class OfferPage extends StatelessWidget {
           padding: EdgeInsets.only(
             left: spaces.space_100,
           ),
-          child: Text(constants.appbarTitle,
+          child: Text(constants.txtAppbarTitle,
               style: AppTheme.of(context).typography.h800),
         ),
         actions: [
@@ -32,7 +32,7 @@ class OfferPage extends StatelessWidget {
                 onTap: () {
                   context.push(AddOfferPage.routePath);
                 },
-                buttonText: constants.addOfferText,
+                buttonText: constants.txtAddOfferText,
                 color: color.primary),
           ),
         ],
@@ -41,7 +41,7 @@ class OfferPage extends StatelessWidget {
         child: OfferBannerWidget(
           offerImage: const NetworkImage(
               'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd1Mqj-pwiNWm1ZptXqtx9eNOt_1CNX4lk0g&usqp=CAU'),
-          offerText: constants.offerText,
+          offerText: constants.txtOfferText,
         ),
       ),
     );

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:resto_admin/core/constants/offer_constants/offer_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 
 class OfferBannerWidget extends StatelessWidget {
@@ -10,7 +9,6 @@ class OfferBannerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final OfferPageConstants constants = OfferPageConstants();
     final color = AppTheme.of(context).colors;
     final spaces = AppTheme.of(context).spaces;
     return ListView.builder(
@@ -26,9 +24,7 @@ class OfferBannerWidget extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(spaces.space_50),
                     color: color.secondary,
-                    boxShadow: [
-                      BoxShadow(blurRadius: 4, color: color.textSubtle)
-                    ]),
+                    boxShadow: [AppTheme.of(context).boxShadow.primary]),
                 child: Padding(
                   padding: EdgeInsets.only(
                       left: spaces.space_200,
@@ -52,10 +48,7 @@ class OfferBannerWidget extends StatelessWidget {
                             bottom: spaces.space_100, top: spaces.space_100),
                         child: Text(
                           offerText,
-                          style: TextStyle(
-                              fontSize: spaces.space_200,
-                              fontFamily: constants.interFont,
-                              fontWeight: FontWeight.w500),
+                          style: AppTheme.of(context).typography.h500,
                         ),
                       ),
                     ],

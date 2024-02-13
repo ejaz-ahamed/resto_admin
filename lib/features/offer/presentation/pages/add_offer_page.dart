@@ -29,8 +29,8 @@ class AddOfferPage extends HookConsumerWidget {
     final selectedIndex = useState<int>(0);
     //Tabs to Show
     final tabsText = useMemoized(() => [
-          constants.percentageText,
-          constants.amountText,
+          constants.txtPercentageText,
+          constants.txtAmountText,
         ]);
     //Handle tapping on the tab items
     void tabOnPressed(int index) {
@@ -38,7 +38,9 @@ class AddOfferPage extends HookConsumerWidget {
     }
 
     return Scaffold(
-      appBar: AppBarWidget(title: constants.appbarTitle),
+      appBar: PreferredSize(
+          preferredSize: Size.fromHeight(spaces.space_700),
+          child: AppBarWidget(title: constants.txtAppbarTitle)),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -51,16 +53,16 @@ class AddOfferPage extends HookConsumerWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
               child: TextFieldWidget(
-                  textFieldTitle: constants.title,
-                  hintText: constants.hintTextTitle,
+                  textFieldTitle: constants.txtTitle,
+                  hintText: constants.txtHintTextTitle,
                   controller: TextEditingController()),
             ),
             const SizedBox16Widget(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
               child: TextFieldWidget(
-                  textFieldTitle: constants.description,
-                  hintText: constants.hintTextdescription,
+                  textFieldTitle: constants.txtDescription,
+                  hintText: constants.txtHintTextdescription,
                   controller: TextEditingController()),
             ),
             const SizedBox16Widget(),
@@ -69,7 +71,7 @@ class AddOfferPage extends HookConsumerWidget {
               child: Row(
                 children: [
                   Text(
-                    constants.offerDetails,
+                    constants.txtOfferDetails,
                     style: typography.h400,
                   ),
                 ],
@@ -94,8 +96,8 @@ class AddOfferPage extends HookConsumerWidget {
               padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
               child: TextFieldOfferWidget(
                   hintText: selectedIndex.value == 0
-                      ? constants.hintTextPercentage
-                      : constants.hintTextAmount,
+                      ? constants.txtHintTextPercentage
+                      : constants.txtHintTextAmount,
                   controller: TextEditingController()),
             ),
             SizedBox(
@@ -108,7 +110,7 @@ class AddOfferPage extends HookConsumerWidget {
         ),
       ),
       bottomNavigationBar: ElevatedButtonWidget(
-        text: constants.save,
+        text: constants.txtSave,
         onPressed: () {},
       ),
     );
