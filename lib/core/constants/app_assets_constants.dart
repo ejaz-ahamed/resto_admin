@@ -1,6 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
 part 'app_assets_constants.g.dart';
+
+
 
 final class AppAssetsConstants {
   /// Prefix used for the app icons
@@ -21,6 +22,6 @@ final class AppAssetsConstants {
 @riverpod
 AppAssetsConstants appAssetsConstants(AppAssetsConstantsRef ref) {
   return AppAssetsConstants();
-
-
 }
+
+
