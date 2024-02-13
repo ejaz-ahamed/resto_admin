@@ -20,7 +20,7 @@ class AddCategory extends ConsumerWidget {
           children: [
             IconButton(
                 onPressed: () {},
-                icon: SvgPicture.asset(asset.icArrowBack)),
+                icon: SvgPicture.asset(asset.icArrowBackward)),
             Text(
               data.txtAddCategoryTitle,
               style: AppTheme.of(context)

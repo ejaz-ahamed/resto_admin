@@ -15,6 +15,7 @@ windows/flutter/generated_plugins.cmake
 # Pubspec.lock file
 pubspec.lock
 
+
 # Miscellaneous
 *.class
 *.log

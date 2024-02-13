@@ -27,7 +27,7 @@ class ImagePickerWidget extends ConsumerWidget {
           children: [
             Center(
               child: SvgPicture.asset(
-                asset.icAddImg,
+                asset.icAddImage,
                 height: AppTheme.of(context).spaces.space_600,
                 width: AppTheme.of(context).spaces.space_600,
               ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/edit_profile_page/profile_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
@@ -24,25 +24,7 @@ class EditPasswordPage extends HookConsumerWidget {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        appBar: AppBar(
-          scrolledUnderElevation: 0,
-          automaticallyImplyLeading: false,
-          title: Row(
-            children: [
-              SvgPicture.asset(
-                constants.icArrowBackward,
-                height: appTheme.spaces.space_200,
-              ),
-              SizedBox(
-                width: appTheme.spaces.space_200,
-              ),
-              Text(
-                constants.txtEditPassword,
-                style: appTheme.typography.h500,
-              ),
-            ],
-          ),
-        ),
+        appBar: AppBarWidget(title: constants.txtEditPassword),
         body: Padding(
           padding: EdgeInsets.symmetric(
               vertical: appTheme.spaces.space_400,

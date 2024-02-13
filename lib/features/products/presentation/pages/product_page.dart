@@ -35,7 +35,7 @@ class ProductPage extends HookConsumerWidget {
           title: Row(
             children: [
               IconButton(
-                  onPressed: () {}, icon: SvgPicture.asset(asset.icArrowBack)),
+                  onPressed: () {}, icon: SvgPicture.asset(asset.icArrowBackward)),
               Text(
                 data.txtAddPrdtsTitle,
                 style: AppTheme.of(context).typography.h600.copyWith(
