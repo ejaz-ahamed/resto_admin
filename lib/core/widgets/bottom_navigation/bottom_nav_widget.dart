@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/under_construction/under_construction_widget.dart';
+import 'package:resto_admin/features/offer/presentation/pages/offer_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/home_page.dart';
 import 'package:resto_admin/features/products/presentation/providers/navbar_selected_page_provider.dart';
 
@@ -47,7 +48,7 @@ class BottomNaviWidget extends HookConsumerWidget {
           UnderConstractionWidget(),
           HomePage(),
           UnderConstractionWidget(),
-          UnderConstractionWidget(),
+          OfferPage(),
         ],
       ),
       bottomNavigationBar: Card(

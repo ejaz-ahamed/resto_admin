@@ -18,6 +18,7 @@ final _lightTheme = ThemeData(
       textInverse: AppColorPalettes.gray200,
       textSubtle: AppColorPalettes.gray300,
       textSubtlest: AppColorPalettes.grey400,
+      textDisabled: AppColorPalettes.grey350,
       backgroundDanger: Colors.red,
     ),
     AppSpaceExtension.fromBaseSpace(8),
