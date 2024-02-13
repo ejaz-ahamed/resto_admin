@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
-import 'package:resto_admin/features/products/presentation/widgetts/edit_field_widget.dart';
+import 'package:resto_admin/features/products/presentation/widgets/edit_field_widget.dart';
 
 class ProductTypeWidget extends StatelessWidget {
   final TextEditingController addOnController;
@@ -25,10 +25,9 @@ class ProductTypeWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(
-                  width: MediaQuery.sizeOf(context).width / 2.5,
+                Expanded(
                   child: EditFieldWidget(
-                    hintText: "Enter Add-ons",
+                    hintText: hint,
                     controller: addOnController,
                     enabled: true,
                     onChanged: null,
@@ -37,8 +36,7 @@ class ProductTypeWidget extends StatelessWidget {
                         fontWeight: FontWeight.w700),
                   ),
                 ),
-                SizedBox(
-                  width: MediaQuery.sizeOf(context).width / 2.5,
+                Expanded(
                   child: EditFieldWidget(
                     hintText: "Enter price",
                     controller: addOnPriceController,

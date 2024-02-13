@@ -25,7 +25,7 @@ class ProductConstants {
   final txtAddCategoryTitle = 'Add New Category';
   final txtAddOnBtnTitle = 'Add Add-Ons';
   final txtSaveBtn = 'Save';
-  final addImgPath = 'assets/icons/ic_add_image.svg';
+  final txtEditCategoryTitle = 'Edit category';
 }
 
 @riverpod

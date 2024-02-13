@@ -12,25 +12,13 @@ class RowWidget extends ConsumerWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          text,
-          style: const TextStyle(
-            fontFamily: 'Inter',
-            fontWeight: FontWeight.w600,
-            fontSize: 16,
-          ),
-        ),
+        Text(text,
+            style: theme.typography.h700.copyWith(fontWeight: FontWeight.w600)),
         InkWell(
           onTap: () {},
-          child: Text(
-            btnText,
-            style: TextStyle(
-              color: theme.colors.primary,
-              fontFamily: 'Inter',
-              fontWeight: FontWeight.w600,
-              fontSize: 16,
-            ),
-          ),
+          child: Text(btnText,
+              style: theme.typography.h700.copyWith(
+                  fontWeight: FontWeight.w600, color: theme.colors.primary)),
         )
       ],
     );
