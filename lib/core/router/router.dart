@@ -23,7 +23,7 @@ final router = GoRouter(initialLocation: BottomNaviWidget.routePath, routes: [
       builder: (context, state) => const EditPasswordPage()),
   GoRoute(
       path: AddOfferPage.routePath,
-      builder: (context, state) =>  AddOfferPage()),
+      builder: (context, state) =>  const AddOfferPage()),
 ]);
 
 @riverpod

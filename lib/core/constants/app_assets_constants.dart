@@ -6,4 +6,6 @@ final class AppAssetsConstants {
   final icBowl = '${_iconsPath}bowl_icon.svg';
   final icBag = '${_iconsPath}bag_icon.svg';
   final icOffers = '${_iconsPath}offers_icon.svg';
+  final icSearch = '${_iconsPath}search_icon.svg';
+  final icArrowBack = '${_iconsPath}arrow_backward_icon.svg';
 }
