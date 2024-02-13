@@ -23,10 +23,10 @@ class LoginTextfieldWidget extends StatelessWidget {
           hintStyle: typography.h400.copyWith(color: colors.textSubtlest),
           prefixIcon: prefixIcon,
           enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(spacer.space_100),
               borderSide: BorderSide(color: colors.textSubtlest, width: 1)),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(7),
+            borderRadius: BorderRadius.circular(spacer.space_100),
             borderSide: BorderSide(color: colors.textSubtlest, width: 1),
           ),
         ),

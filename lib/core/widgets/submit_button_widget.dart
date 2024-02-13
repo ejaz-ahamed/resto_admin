@@ -17,16 +17,17 @@ class ElevatedButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final typography = AppTheme.of(context).typography;
+    final spaces = AppTheme.of(context).spaces;
     return SizedBox(
       width: MediaQuery.sizeOf(context).width,
-      height: MediaQuery.sizeOf(context).height / 17,
+      height: spaces.space_600,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
             side: BorderSide(color: borderColor),
             elevation: 0,
             backgroundColor: filledColor,
             shape: ContinuousRectangleBorder(
-                borderRadius: BorderRadius.circular(20))),
+                borderRadius: BorderRadius.circular(spaces.space_250))),
         onPressed: onPressed,
         child: Text(
           buttonText,

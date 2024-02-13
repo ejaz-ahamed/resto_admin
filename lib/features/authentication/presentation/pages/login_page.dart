@@ -23,7 +23,7 @@ class LoginPage extends ConsumerWidget {
             child: Row(
               children: [
                 Text(
-                  constants.heading,
+                  constants.txtHeading,
                   style: typography.h800,
                 ),
               ],
@@ -49,7 +49,7 @@ class LoginPage extends ConsumerWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: spacer.space_300),
             child: ElevatedButtonWidget(
-                buttonText: constants.buttonText,
+                buttonText: constants.txtLoginBtn,
                 borderColor: colors.primary,
                 filledColor: colors.primary,
                 textColor: colors.secondary,
