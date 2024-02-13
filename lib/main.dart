@@ -12,11 +12,11 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return MaterialApp(
-      theme: ref.watch(lightThemeProvider),
+    return MaterialApp.router(
       title: 'Flutter SAMPLEEEE',
       debugShowCheckedModeBanner: false,
-      home: BottomNaviWidget(),
+      theme: ref.watch(lightThemeProvider),
+      routerConfig: ref.watch(goRouterProvider),
     );
   }
 }
