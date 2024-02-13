@@ -4,8 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
-import 'package:resto_admin/core/widget/under_construction_widget.dart';
-import 'package:resto_admin/features/authentication/presentation/providers/bottom_provider.dart';
+import 'package:resto_admin/core/widgets/under_construction/under_construction_widget.dart';
+import 'package:resto_admin/features/home/presentation/providers/navbar_selected_page_provider.dart';
 
 class BottomNaviWidget extends HookConsumerWidget {
   const BottomNaviWidget({super.key});
@@ -17,7 +17,7 @@ class BottomNaviWidget extends HookConsumerWidget {
     final assets = AppAssetsConstants();
 
     final pageController = usePageController();
-    final selectedIndex = ref.watch(pageProvider);
+    final selectedIndex = ref.watch(navbarSelectedPageProvider);
     final navbarIcons = useMemoized(() => [
           assets.icHome,
           assets.icBowl,
@@ -39,7 +39,7 @@ class BottomNaviWidget extends HookConsumerWidget {
       extendBody: true,
       body: PageView(
         controller: pageController,
-        onPageChanged: (value) => ref.read(pageProvider.notifier).state = value,
+        onPageChanged: (value) => ref.read(navbarSelectedPageProvider.notifier).state = value,
         children: const [
           UnderConstractionWidget(),
           UnderConstractionWidget(),
