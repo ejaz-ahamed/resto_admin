@@ -58,9 +58,8 @@ class HomePage extends HookConsumerWidget {
                   height: theme.spaces.space_250,
                 ),
                 SizedBox(
-                  width: MediaQuery.sizeOf(context).width,
-                  height: MediaQuery.sizeOf(context).height / 13,
-                  child: const ListViewSeparatedWidget(text: 'dio'),
+                  height: theme.spaces.space_800,
+                  child: const ListViewSeparatedWidget(text: 'di'),
                 ),
                 SizedBox(
                   height: theme.spaces.space_300,
