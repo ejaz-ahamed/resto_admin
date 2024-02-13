@@ -26,8 +26,8 @@ class HomePage extends HookConsumerWidget {
             padding: EdgeInsets.only(left: theme.spaces.space_100),
             child: Row(
               children: [
-                const CircleAvatar(
-                  radius: 25,
+                CircleAvatar(
+                  radius: theme.spaces.space_300,
                 ),
                 SizedBox(
                   width: theme.spaces.space_100 * 2.5,
