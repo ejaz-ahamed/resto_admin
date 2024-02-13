@@ -43,7 +43,7 @@ class Profilepage extends ConsumerWidget {
             SizedBox(
               height: apptheme.spaces.space_100,
             ),
-            const Text("9:36 AM"),
+            const Text("9:35 AM"),
             SizedBox(
               height: apptheme.spaces.space_400,
             ),
