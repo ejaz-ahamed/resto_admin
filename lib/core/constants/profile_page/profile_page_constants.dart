@@ -1,7 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'profile_page_constants.g.dart';
 
-class ProfilepageConstants {
+class ProfilePageConstants {
   final txtTitle = 'Profile';
 
   final txtOpeningTime = 'Opening time';
@@ -13,6 +13,6 @@ class ProfilepageConstants {
 }
 
 @riverpod
-ProfilepageConstants profilePage(ProfilePageRef ref) {
-  return ProfilepageConstants();
+ProfilePageConstants profilePage(ProfilePageRef ref) {
+  return ProfilePageConstants();
 }
