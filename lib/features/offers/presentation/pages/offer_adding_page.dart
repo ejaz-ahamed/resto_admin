@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:resto_admin/core/constants/offers_constants/offers_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/image_picker_widget.dart';
 import 'package:resto_admin/core/widgets/text_fleid_widget.dart';
 
@@ -128,6 +129,7 @@ class OfferAddingPage extends ConsumerWidget {
           ),
         ),
       ),
+      bottomNavigationBar: ElevatedButtonWidget(text: "Save", onPressed: () {}),
     );
   }
 }
