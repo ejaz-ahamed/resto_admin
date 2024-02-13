@@ -19,7 +19,6 @@ class RowHeadingWidget extends StatelessWidget {
             constants.product,
             style: AppTheme.of(context).typography.h700,
           ),
-          
           TextButtonWidget(
               onTap: () {},
               buttonText: constants.add,

@@ -24,9 +24,9 @@ class ListViewProductsWidget extends StatelessWidget {
       itemCount: itemCount,
       itemBuilder: (context, index) {
         return Padding(
-          padding: const EdgeInsets.only(left: 8),
+          padding:  EdgeInsets.only(left: theme.spaces.space_100),
           child: SizedBox(
-            height: AppTheme.of(context).spaces.space_500,
+            height: theme.spaces.space_500,
             child: ListTile(
               leading: Text(
                 product,
@@ -41,14 +41,14 @@ class ListViewProductsWidget extends StatelessWidget {
                         .copyWith(decoration: TextDecoration.lineThrough),
                   ),
                   SizedBox(
-                    width: AppTheme.of(context).spaces.space_100,
+                    width: theme.spaces.space_100,
                   ),
                   Text(
                     newPrice,
                     style: theme.typography.h600,
                   ),
                   SizedBox(
-                    width: AppTheme.of(context).spaces.space_100,
+                    width: theme.spaces.space_100,
                   ),
                   SvgPicture.asset(
                     iconConst.icRemove,

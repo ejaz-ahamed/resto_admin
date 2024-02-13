@@ -24,7 +24,7 @@ class OfferBannerWidget extends StatelessWidget {
               child: Container(
                 height: spaces.space_500 * 5,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
+                    borderRadius: BorderRadius.circular(spaces.space_50),
                     color: color.secondary,
                     boxShadow: [
                       BoxShadow(blurRadius: 4, color: color.textSubtle)
@@ -44,7 +44,8 @@ class OfferBannerWidget extends StatelessWidget {
                             image: DecorationImage(
                                 image: offerImage, fit: BoxFit.fill),
                             color: color.textSubtle,
-                            borderRadius: BorderRadius.circular(5)),
+                            borderRadius:
+                                BorderRadius.circular(spaces.space_50)),
                       ),
                       Padding(
                         padding: EdgeInsets.only(
