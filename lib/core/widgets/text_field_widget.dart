@@ -23,11 +23,12 @@ class TextFieldWidget extends ConsumerWidget {
           style: apptheme.typography.h400,
         ),
         TextField(
+          style: apptheme.typography.h300,
           controller: controller,
           decoration: InputDecoration(
               contentPadding: const EdgeInsets.all(0),
               hintText: hintText,
-              hintStyle: apptheme.typography.h400
+              hintStyle: apptheme.typography.h300
                   .copyWith(color: apptheme.colors.textSubtlest),
               border: const OutlineInputBorder(borderSide: BorderSide.none)),
         ),

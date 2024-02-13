@@ -6,7 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'router.g.dart';
 
-final router = GoRouter(initialLocation: HomePage.routePath, routes: [
+final router = GoRouter(initialLocation: EditProfilePage.routePath, routes: [
   GoRoute(
       path: HomePage.routePath, builder: (context, state) => const HomePage()),
   GoRoute(
