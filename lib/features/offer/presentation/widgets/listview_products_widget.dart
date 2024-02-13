@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:resto_admin/core/constants/offer_constants/app_asset_constants.dart';
+import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 
 class ListViewProductsWidget extends StatelessWidget {
@@ -18,7 +18,7 @@ class ListViewProductsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = AppTheme.of(context);
-    AppAssetConstants iconConst = AppAssetConstants();
+    AppAssetsConstants iconConst = AppAssetsConstants();
     return ListView.builder(
       shrinkWrap: true,
       itemCount: itemCount,

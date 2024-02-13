@@ -3,6 +3,8 @@ final class AppAssetsConstants {
   static const _iconsPath = 'assets/icons/ic_';
 
   final icHome = '${_iconsPath}home_icon.svg';
+  final icRemove = '${_iconsPath}remove_icon.svg';
+  final icAddImage = '${_iconsPath}add_image_icon.svg';
   final icBowl = '${_iconsPath}bowl_icon.svg';
   final icBag = '${_iconsPath}bag_icon.svg';
   final icOffers = '${_iconsPath}offers_icon.svg';

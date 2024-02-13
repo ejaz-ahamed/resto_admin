@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:resto_admin/core/constants/offer_constants/app_asset_constants.dart';
+import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
@@ -10,7 +10,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   const AppBarWidget({super.key, required this.title});
   @override
   Widget build(BuildContext context) {
-    AppAssetConstants iconConst = AppAssetConstants();
+    AppAssetsConstants iconConst = AppAssetsConstants();
     final appTheme = AppTheme.of(context);
     return AppBar(
       automaticallyImplyLeading: false,
@@ -21,7 +21,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
           InkWell(
             onTap: () => context.pop(),
             child: SvgPicture.asset(
-              iconConst.icArrowBackward,
+              iconConst.icArrowBack,
               height: appTheme.spaces.space_200,
             ),
           ),
