@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/constants/edit_profile_page/profile_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/add_image_widget.dart';
@@ -57,9 +58,10 @@ class EditProfilePage extends HookConsumerWidget {
         ),
         bottomNavigationBar: ElevatedButtonWidget(
           text: constants.txtSave,
-          onPressed: () {},
+          onPressed: () {
+            context.pop();
+          },
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
     );
   }

@@ -55,7 +55,6 @@ class EditPasswordPage extends HookConsumerWidget {
             context.pop();
           },
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
     );
   }
