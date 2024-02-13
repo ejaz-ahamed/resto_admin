@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/constants/orders_constants/orders_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 
@@ -11,6 +12,7 @@ class OrderviewPageAppBarWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final constants = ref.watch(orderpageConstantsProvider);
     final appTheme = AppTheme.of(context);
+    AppAssetsConstants iconsConstats = AppAssetsConstants();
     return AppBar(
       backgroundColor: appTheme.colors.secondary,
       titleSpacing: appTheme.spaces.space_300,
@@ -24,7 +26,7 @@ class OrderviewPageAppBarWidget extends ConsumerWidget {
               InkWell(
                 onTap: () {},
                 child: SvgPicture.asset(
-                  constants.backArrow,
+                  iconsConstats.icArrowBackward,
                   height: appTheme.spaces.space_200,
                 ),
               ),
@@ -32,7 +34,7 @@ class OrderviewPageAppBarWidget extends ConsumerWidget {
                 width: appTheme.spaces.space_200,
               ),
               Text(
-                constants.orderDetails,
+                constants.txtorderDetails,
                 style: appTheme.typography.h700,
               ),
             ],
@@ -42,7 +44,7 @@ class OrderviewPageAppBarWidget extends ConsumerWidget {
               InkWell(
                 onTap: () {},
                 child: Text(
-                  constants.print,
+                  constants.txtprint,
                   style: appTheme.typography.h300.copyWith(
                     color: appTheme.colors.primary,
                   ),
