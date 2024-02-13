@@ -16,7 +16,7 @@ class EditFieldWidget extends ConsumerWidget {
       this.isPrice = false,
       this.enabled = false,
       this.onChanged,
-      required this.style});
+      required this.style,});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);

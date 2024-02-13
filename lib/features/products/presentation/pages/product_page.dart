@@ -67,6 +67,7 @@ class ProductPage extends HookConsumerWidget {
                 RowWidget(text: data.txtType, btnText: data.txtEditbtn),
                 const SizedBox24Widget(),
                 ProductTypeWidget(
+                    hint: 'Enter Type',
                     addOnController: fullQtyController,
                     addOnPriceController: fullQtyPriceController),
                 const SizedBox24Widget(),
@@ -80,6 +81,7 @@ class ProductPage extends HookConsumerWidget {
                 RowWidget(text: data.txtAddOns, btnText: data.txtEditbtn),
                 const SizedBox24Widget(),
                 ProductTypeWidget(
+                    hint: 'Enter Add-ons',
                     addOnController: addOnItemController,
                     addOnPriceController: addOnPriceController),
                 const SizedBox24Widget(),

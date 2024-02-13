@@ -5,11 +5,13 @@ import 'package:resto_admin/features/products/presentation/widgetts/edit_field_w
 class ProductTypeWidget extends StatelessWidget {
   final TextEditingController addOnController;
   final TextEditingController addOnPriceController;
+  final String hint;
 
   const ProductTypeWidget(
       {super.key,
       required this.addOnController,
-      required this.addOnPriceController});
+      required this.addOnPriceController,
+      required this.hint});
 
   @override
   Widget build(BuildContext context) {
