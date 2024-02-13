@@ -14,6 +14,10 @@ final class OrderpageConstants {
   final String quantity = 'Quantity';
   final String price = 'Price';
   final String total = 'Total';
+  final String reject = 'Reject';
+  final String accept = 'Accept';
+  final String backArrow = 'assets/icons/ic_arrow_backward.svg';
+  final String profileImage = 'assets/icons/ic_user.svg';
 }
 
 @riverpod

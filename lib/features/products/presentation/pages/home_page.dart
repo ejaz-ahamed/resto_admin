@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
+import 'package:resto_admin/features/orders/presentation/pages/orderview_page.dart';
 
 class HomePage extends ConsumerWidget {
   static const routePath = '/';
@@ -21,6 +23,16 @@ class HomePage extends ConsumerWidget {
             fontSize: 20,
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.push(OrderViewPage.routePath);
+            },
+            icon: Icon(
+              Icons.forward,
+            ),
+          ),
+        ],
       ),
     );
   }
