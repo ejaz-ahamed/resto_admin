@@ -9,7 +9,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'router.g.dart';
 
-final router = GoRouter(initialLocation: Profilepage.routePath, routes: [
+final router = GoRouter(initialLocation: BottomNaviWidget.routePath, routes: [
   GoRoute(
     path: BottomNaviWidget.routePath,
     builder: (context, state) => const BottomNaviWidget(),
@@ -24,7 +24,7 @@ final router = GoRouter(initialLocation: Profilepage.routePath, routes: [
       builder: (context, state) => const EditPasswordPage()),
   GoRoute(
       path: AddOfferPage.routePath,
-      builder: (context, state) =>  const AddOfferPage()),
+      builder: (context, state) => const AddOfferPage()),
 ]);
 
 @riverpod
