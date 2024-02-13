@@ -27,15 +27,15 @@ class TotalRowWidget extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextWidget(
-                text: constants.total,
+                text: constants.txttotal,
               ),
               SizedBox(
                 width: appTheme.spaces.space_500 * 3,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TextWidget(text: constants.quantity),
-                    TextWidget(text: constants.price),
+                    TextWidget(text: constants.txtquantity),
+                    TextWidget(text: constants.txtprice),
                   ],
                 ),
               ),

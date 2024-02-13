@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/constants/orders_constants/orders_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
@@ -24,7 +25,9 @@ class OrderviewPageAppBarWidget extends ConsumerWidget {
           Row(
             children: [
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  context.pop();
+                },
                 child: SvgPicture.asset(
                   iconsConstats.icArrowBackward,
                   height: appTheme.spaces.space_200,
