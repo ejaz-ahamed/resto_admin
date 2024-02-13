@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:resto_admin/core/constants/profile_page/profile_page_constants.dart';
+import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 
 class AppBarWidget extends ConsumerWidget implements PreferredSizeWidget {
@@ -17,7 +17,7 @@ class AppBarWidget extends ConsumerWidget implements PreferredSizeWidget {
         children: [
           InkWell(
             child: SvgPicture.asset(
-              ref.watch(profilePageProvider).icArrowBackward,
+              ref.watch(appAssetsConstantsProvider).icArrowBackward,
               height: appTheme.spaces.space_200,
             ),
           ),

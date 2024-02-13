@@ -14,7 +14,8 @@ class SwitchButton extends ConsumerWidget {
       final switchstate = ref.watch(profileProvider);
       return Switch(
           trackOutlineWidth: const MaterialStatePropertyAll(0),
-          activeColor: AppTheme.of(context).colors.primary,
+          activeColor: AppTheme.of(context).colors.text,
+          inactiveThumbColor: AppTheme.of(context).colors.primary,
           value: switchstate,
           onChanged: (value) {
             ref.read(profileProvider.notifier).toggleTheme();
