@@ -44,8 +44,8 @@ class BottomNaviWidget extends HookConsumerWidget {
         onPageChanged: (value) =>
             ref.read(navbarSelectedPageProvider.notifier).state = value,
         children: const [
-          HomePage(),
           UnderConstractionWidget(),
+          HomePage(),
           UnderConstractionWidget(),
           UnderConstractionWidget(),
         ],
