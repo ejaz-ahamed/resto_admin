@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:resto_admin/core/constants/offer_constants/app_asset_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 
 class ImagePickerWidget extends StatelessWidget {
   const ImagePickerWidget({super.key});
   @override
   Widget build(BuildContext context) {
+    AppAssetConstants iconConst = AppAssetConstants();
     return InkWell(
       onTap: () {},
       child: Container(
@@ -21,7 +23,7 @@ class ImagePickerWidget extends StatelessWidget {
           children: [
             Center(
               child: SvgPicture.asset(
-                'assets/icons/ic_add_image.svg',
+                iconConst.icImage,
                 height: AppTheme.of(context).spaces.space_600,
                 width: AppTheme.of(context).spaces.space_600,
               ),

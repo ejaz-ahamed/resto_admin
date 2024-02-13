@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:resto_admin/core/constants/offer_constants/offer_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 
 class TextButtonWidget extends StatelessWidget {
@@ -15,18 +14,13 @@ class TextButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    OfferPageConstants constants = OfferPageConstants();
     return InkWell(
       onTap: onTap,
-      child: Text(
-        buttonText,
-        style: TextStyle(
-          color: color,
-          fontFamily: constants.interFont,
-          fontWeight: FontWeight.w500,
-          fontSize: AppTheme.of(context).spaces.space_25 * 7,
-        ),
-      ),
+      child: Text(buttonText,
+          style: AppTheme.of(context)
+              .typography
+              .h300
+              .copyWith(color: AppTheme.of(context).colors.primary)),
     );
   }
 }

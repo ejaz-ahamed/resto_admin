@@ -1,59 +1,54 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/offer_constants/add_offer_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/image_picker_widget.dart';
+import 'package:resto_admin/core/widgets/sized_box_16_widget.dart';
+import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
+import 'package:resto_admin/core/widgets/sized_box_8_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/listview_products_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/row_heading_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/tab_button_widget.dart.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/textfield_widget.dart';
 
-class AddOfferPage extends StatelessWidget {
+class AddOfferPage extends HookConsumerWidget {
+  static const routePath = '/AddOfferPage';
+
   const AddOfferPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     AddOfferPageConstants constants = AddOfferPageConstants();
+    //Theme data
     final spaces = AppTheme.of(context).spaces;
     final typography = AppTheme.of(context).typography;
-    final color = AppTheme.of(context).colors;
+    //Selected tab
+    final selectedIndex = useState<int>(0);
+    //Tabs to Show
+    final tabsText = useMemoized(() => [
+          constants.percentageText,
+          constants.amountText,
+        ]);
+    //Handle tapping on the tab items
+    void tabOnPressed(int index) {
+      selectedIndex.value = index;
+    }
+
     return Scaffold(
-      appBar: AppBar(
-        title: Padding(
-          padding: EdgeInsets.symmetric(horizontal: spaces.space_100),
-          child: Row(
-            children: [
-              InkWell(
-                  onTap: () {},
-                  child:
-                      SvgPicture.asset('assets/icons/ic_arrow_backward.svg')),
-              SizedBox(
-                width: spaces.space_300,
-              ),
-              Text(
-                constants.appbarTitle,
-                style: typography.h500.copyWith(
-                    color: color.text, fontFamily: constants.interFont),
-              ),
-            ],
-          ),
-        ),
-      ),
+      appBar: AppBarWidget(title: constants.appbarTitle),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              height: spaces.space_200,
-            ),
+            const SizedBox16Widget(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
               child: const ImagePickerWidget(),
             ),
-            SizedBox(
-              height: spaces.space_300,
-            ),
+            const SizedBox24Widget(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
               child: TextFieldWidget(
@@ -61,9 +56,7 @@ class AddOfferPage extends StatelessWidget {
                   hintText: constants.hintTextTitle,
                   controller: TextEditingController()),
             ),
-            SizedBox(
-              height: spaces.space_200,
-            ),
+            const SizedBox16Widget(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
               child: TextFieldWidget(
@@ -71,76 +64,54 @@ class AddOfferPage extends StatelessWidget {
                   hintText: constants.hintTextdescription,
                   controller: TextEditingController()),
             ),
-            SizedBox(
-              height: spaces.space_200,
-            ),
+            const SizedBox16Widget(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
               child: Row(
                 children: [
                   Text(
                     constants.offerDetails,
-                    style: typography.h400
-                        .copyWith(fontFamily: constants.interFont),
+                    style: typography.h400,
                   ),
                 ],
               ),
             ),
-            SizedBox(
-              height: spaces.space_200,
-            ),
+            const SizedBox16Widget(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
               child: Row(
                 children: [
-                  TabButtonWidget(
-                    borderColor: color.primary,
-                    fillColor: color.primary,
-                    buttonText: constants.amountText,
-                    textColor: color.secondary,
-                    onPressed: () {},
-                  ),
-                  SizedBox(
-                    width: spaces.space_200,
-                  ),
-                  TabButtonWidget(
-                      buttonText: constants.percentageText,
-                      textColor: color.textSubtlest,
-                      onPressed: () {},
-                      borderColor: color.textSubtlest,
-                      fillColor: color.secondary),
+                  for (var i = 0; i < tabsText.length; i++)
+                    TabButtonWidget(
+                      buttonText: tabsText[i],
+                      isSelected: selectedIndex.value == i,
+                      onPressed: () => tabOnPressed(i),
+                    ),
                 ],
               ),
             ),
-            SizedBox(
-              height: spaces.space_100,
-            ),
+            const SizedBox8Widget(),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
               child: TextFieldOfferWidget(
-                  hintText: constants.hintTextAmount,
+                  hintText: selectedIndex.value == 0
+                      ? constants.hintTextPercentage
+                      : constants.hintTextAmount,
                   controller: TextEditingController()),
             ),
             SizedBox(
               height: spaces.space_200,
             ),
             const RowHeadingWidget(),
-            SizedBox(
-              height: MediaQuery.sizeOf(context).height / 3,
-              child: ListViewProductsWidget(
-                  itemCount: 1,
-                  product: 'Hot and sour soup',
-                  newPrice: '\$22',
-                  oldPrice: '\$33'),
-            )
+            const SizedBox8Widget(),
+            const SizedBox()
           ],
         ),
       ),
-      floatingActionButton: ElevatedButtonWidget(
+      bottomNavigationBar: ElevatedButtonWidget(
         text: constants.save,
         onPressed: () {},
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }

@@ -7,7 +7,6 @@ class AddOfferPageConstants {
   final String offerDetails = 'Offer Details';
   final String amountText = 'Amount';
   final String percentageText = 'Percentage';
-  final String interFont = 'Inter';
   final String hintTextPercentage = 'Enter Offer Percentage';
   final String hintTextAmount = 'Enter Offer Amount';
   final String product = 'Product';

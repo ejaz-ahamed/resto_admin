@@ -20,40 +20,26 @@ class OfferPage extends StatelessWidget {
           padding: EdgeInsets.only(
             left: spaces.space_100,
           ),
-          child: Text(
-            constants.appbarTitle,
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: spaces.space_250,
-                fontFamily: constants.interFont),
-          ),
+          child: Text(constants.appbarTitle,
+              style: AppTheme.of(context).typography.h800),
         ),
         actions: [
           Padding(
             padding: EdgeInsets.only(right: spaces.space_300),
             child: TextButtonWidget(
-              onTap: () {
-                
-              },
-                buttonText: constants.addOfferText, color: color.primary),
+                onTap: () {},
+                buttonText: constants.addOfferText,
+                color: color.primary),
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: spaces.space_200,
-            ),
-            OfferBannerWidget(
-              offerImage: const NetworkImage(
-                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd1Mqj-pwiNWm1ZptXqtx9eNOt_1CNX4lk0g&usqp=CAU'),
-              offerText: constants.offerText,
-            ),
-          ],
+      body: SizedBox(
+        child: OfferBannerWidget(
+          offerImage: const NetworkImage(
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd1Mqj-pwiNWm1ZptXqtx9eNOt_1CNX4lk0g&usqp=CAU'),
+          offerText: constants.offerText,
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
