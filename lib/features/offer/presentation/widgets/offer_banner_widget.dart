@@ -15,14 +15,14 @@ class OfferBannerWidget extends StatelessWidget {
     final spaces = AppTheme.of(context).spaces;
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: 2,
+      itemCount: 1,
       itemBuilder: (context, index) {
         return Column(
           children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
               child: Container(
-                height: MediaQuery.sizeOf(context).height / 4.7,
+                height: spaces.space_500 * 5,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5),
                     color: color.secondary,
@@ -39,7 +39,7 @@ class OfferBannerWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        height: MediaQuery.sizeOf(context).height / 7,
+                        height: spaces.space_250 * 7,
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 image: offerImage, fit: BoxFit.fill),

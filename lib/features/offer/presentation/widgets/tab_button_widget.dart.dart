@@ -28,8 +28,8 @@ class TabButtonWidget extends HookConsumerWidget {
     return Padding(
       padding: EdgeInsets.only(right: spaces.space_200),
       child: SizedBox(
-        width: MediaQuery.sizeOf(context).width / 4.1,
-        height: MediaQuery.sizeOf(context).height / 22,
+        width: spaces.space_250 * 5,
+        height: spaces.space_250 * 2,
         child: InkWell(
           onTap: onPressed,
           child: Container(

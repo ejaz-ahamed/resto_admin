@@ -24,16 +24,6 @@ class HomePage extends ConsumerWidget {
             fontSize: 20,
           ),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              context.go(AddOfferPage.routePath);
-            },
-            icon: Icon(
-              Icons.forward,
-            ),
-          )
-        ],
       ),
     );
   }
