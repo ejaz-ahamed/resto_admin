@@ -58,11 +58,11 @@ class ProductPage extends HookConsumerWidget {
                   height: AppTheme.of(context).spaces.space_300,
                 ),
                 TextFieldWidget(
-                    textFielTitle: data.txtProductName,
+                    textFieldTitle: data.txtProductName,
                     hintText: data.txtHintProduct,
                     controller: productController),
                 TextFieldWidget(
-                    textFielTitle: data.txtDescription,
+                    textFieldTitle: data.txtDescription,
                     hintText: data.txtHintDescription,
                     controller: descreptionController),
                 RowWidget(text: data.txtType, btnText: data.txtEditbtn),

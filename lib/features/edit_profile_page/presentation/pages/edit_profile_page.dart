@@ -59,12 +59,12 @@ class EditProfilePage extends HookConsumerWidget {
                 ),
                 const SizedBox32Widget(),
                 TextFieldWidget(
-                    textFielTitle: constants.txtOpeningTime,
+                    textFieldTitle: constants.txtOpeningTime,
                     hintText: hintText,
                     controller: openingTimeController),
                 const SizedBox24Widget(),
                 TextFieldWidget(
-                    textFielTitle: constants.txtClosingTime,
+                    textFieldTitle: constants.txtClosingTime,
                     hintText: hintText,
                     controller: closingTimeController),
               ],
