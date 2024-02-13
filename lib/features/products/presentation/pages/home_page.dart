@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
@@ -7,9 +8,10 @@ import 'package:resto_admin/core/widgets/gridview_widget.dart';
 import 'package:resto_admin/core/widgets/listview_separated_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/row_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/textfield_widget.dart';
+import 'package:resto_admin/features/profile_page/presentation/pages/profile_page.dart';
 
 class HomePage extends HookConsumerWidget {
-  static const routePath = '/';
+  static const routePath = '/home';
   const HomePage({super.key});
 
   @override
@@ -26,8 +28,11 @@ class HomePage extends HookConsumerWidget {
             padding: EdgeInsets.only(left: theme.spaces.space_100),
             child: Row(
               children: [
-                CircleAvatar(
-                  radius: theme.spaces.space_300,
+                InkWell(
+                  onTap: () => context.push(Profilepage.routePath),
+                  child: CircleAvatar(
+                    radius: theme.spaces.space_300,
+                  ),
                 ),
                 SizedBox(
                   width: theme.spaces.space_100 * 2.5,

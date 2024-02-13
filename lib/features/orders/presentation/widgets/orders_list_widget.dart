@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 
 class OrderListView extends StatelessWidget {
@@ -9,6 +11,7 @@ class OrderListView extends StatelessWidget {
     final space = AppTheme.of(context).spaces;
     final color = AppTheme.of(context).colors;
     final typography = AppTheme.of(context).typography;
+    AppAssetsConstants iconsConst = AppAssetsConstants();
     return SizedBox(
       height: MediaQuery.sizeOf(context).height * .7,
       width: MediaQuery.sizeOf(context).width,
@@ -42,6 +45,18 @@ class OrderListView extends StatelessWidget {
                         space.space_500,
                       ),
                       border: Border.all(color: color.textSubtle),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: space.space_400,
+                          width: space.space_400,
+                          child: SvgPicture.asset(
+                            iconsConst.icUser,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
