@@ -3,22 +3,23 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'orders_constants.g.dart';
 
 final class OrderpageConstants {
-  final String txtorderDetails = 'Order Details';
-  final String txtprint = 'Print';
-  final String txtorderId = 'Order ID';
-  final String txtcustomerName = 'Customer Name';
-  final String txttime = 'Time';
-  final String txtlocation = 'Location';
-  final String txtitems = 'Items';
-  final String txttype = 'Type';
-  final String txtquantity = 'Quantity';
-  final String txtprice = 'Price';
-  final String txttotal = 'Total';
-  final String txtorders = 'Orders';
-  final String txtpreparing = 'Preparing';
-  final String txtcompleted = 'Completed';
+  final String txtOrderDetails = 'Order Details';
+  final String txtPrint = 'Print';
+  final String txtOrderId = 'Order ID';
+  final String txtCustomerName = 'Customer Name';
+  final String txtTime = 'Time';
+  final String txtLocation = 'Location';
+  final String txtItems = 'Items';
+  final String txtType = 'Type';
+  final String txtQuantity = 'Quantity';
+  final String txtPrice = 'Price';
+  final String txtTotal = 'Total';
+  final String txtOrders = 'Orders';
+  final String txtPreparing = 'Preparing';
+  final String txtCompleted = 'Completed';
   final String txtRejct = 'Reject';
   final String txtAccept = 'Accept';
+  final String txtSearch = 'Search';
 }
 
 @riverpod

@@ -33,20 +33,20 @@ class CustomerDetailsWidget extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  TextWidget(text: constants.txtorderId),
-                  TextWidget(text: constants.txtcustomerName),
-                  TextWidget(text: constants.txttime),
-                  TextWidget(text: constants.txtlocation),
+                  TextWidget(text: constants.txtOrderId),
+                  TextWidget(text: constants.txtCustomerName),
+                  TextWidget(text: constants.txtTime),
+                  TextWidget(text: constants.txtLocation),
                 ],
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  TextRegularWidget(text: constants.txtorderId),
-                  TextRegularWidget(text: constants.txtcustomerName),
-                  TextRegularWidget(text: constants.txttime),
-                  TextRegularWidget(text: constants.txtlocation),
+                  TextRegularWidget(text: constants.txtOrderId),
+                  TextRegularWidget(text: constants.txtCustomerName),
+                  TextRegularWidget(text: constants.txtTime),
+                  TextRegularWidget(text: constants.txtLocation),
                 ],
               )
             ],

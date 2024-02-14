@@ -17,14 +17,15 @@ class RoundedCheckboxWidget extends HookConsumerWidget {
   });
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final appTheme = AppTheme.of(context).spaces;
     final isChecked = useState(this.isChecked);
     return GestureDetector(
       onTap: () {
         isChecked.value = !isChecked.value;
       },
       child: Container(
-        width: 20,
-        height: 20,
+        width: appTheme.space_125 * 2,
+        height: appTheme.space_125 * 2,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: isChecked.value
@@ -36,9 +37,9 @@ class RoundedCheckboxWidget extends HookConsumerWidget {
           ),
         ),
         child: isChecked.value
-            ? const Icon(
+            ? Icon(
                 Icons.check,
-                size: 16,
+                size: appTheme.space_200,
                 color: Colors.white,
               )
             : null,

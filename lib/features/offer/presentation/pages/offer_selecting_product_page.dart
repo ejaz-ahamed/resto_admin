@@ -80,7 +80,8 @@ class OfferSelectingPage extends ConsumerWidget {
               ),
               const SizedBox8Widget(),
               SizedBox(
-                  height: MediaQuery.sizeOf(context).height / 10,
+                  height: MediaQuery.sizeOf(context).height /
+                      apptheme.spaces.space_125,
                   width: MediaQuery.sizeOf(context).width,
                   child: ListViewSeparatedWidget(
                     text: constants.txtListtext,

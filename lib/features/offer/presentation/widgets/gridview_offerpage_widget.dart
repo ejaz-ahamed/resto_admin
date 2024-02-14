@@ -21,13 +21,7 @@ class GridViewOfferPageWidget extends ConsumerWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(theme.spaces.space_100),
-          boxShadow: [
-            BoxShadow(
-              blurRadius: 34,
-              spreadRadius: -10,
-              color: Colors.black.withOpacity(0.1),
-            )
-          ],
+          boxShadow: [theme.boxShadow.primary],
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: theme.spaces.space_150),
