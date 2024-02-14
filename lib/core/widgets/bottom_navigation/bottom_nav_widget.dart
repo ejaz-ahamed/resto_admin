@@ -8,6 +8,7 @@ import 'package:resto_admin/core/widgets/under_construction/under_construction_w
 import 'package:resto_admin/features/offer/presentation/pages/offer_page.dart';
 import 'package:resto_admin/features/orders/presentation/pages/order_page_one.dart';
 import 'package:resto_admin/features/products/presentation/pages/home_page.dart';
+import 'package:resto_admin/features/products/presentation/pages/overview_items_page.dart';
 import 'package:resto_admin/features/products/presentation/providers/navbar_selected_page_provider.dart';
 
 class BottomNaviWidget extends HookConsumerWidget {
@@ -46,7 +47,8 @@ class BottomNaviWidget extends HookConsumerWidget {
         onPageChanged: (value) =>
             ref.read(navbarSelectedPageProvider.notifier).state = value,
         children: const [
-          UnderConstractionWidget(),
+          // UnderConstractionWidget(),
+          OverViewItemsPage(),
           HomePage(),
           OrderScreenOne(),
           OfferPage(),

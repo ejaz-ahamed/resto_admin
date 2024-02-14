@@ -6,11 +6,14 @@ class TextFieldWidget extends ConsumerWidget {
   final String textFieldTitle;
   final String hintText;
   final TextEditingController controller;
-  const TextFieldWidget(
-      {super.key,
-      required this.textFieldTitle,
-      required this.hintText,
-      required this.controller});
+  final int? maxLines;
+  const TextFieldWidget({
+    super.key,
+    required this.textFieldTitle,
+    required this.hintText,
+    required this.controller,
+    this.maxLines = 1,
+  });
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);
@@ -24,6 +27,7 @@ class TextFieldWidget extends ConsumerWidget {
         TextField(
           style: apptheme.typography.h300,
           controller: controller,
+          maxLines: maxLines,
           decoration: InputDecoration(
               contentPadding: const EdgeInsets.all(0),
               hintText: hintText,
