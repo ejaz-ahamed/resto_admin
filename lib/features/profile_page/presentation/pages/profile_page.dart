@@ -7,6 +7,7 @@ import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/features/profile_page/presentation/pages/edit_password_page.dart';
 import 'package:resto_admin/features/profile_page/presentation/pages/edit_profile_page.dart';
+
 import 'package:resto_admin/features/profile_page/presentation/widgets/switch_button_widgets.dart';
 
 class ProfilePage extends ConsumerWidget {
