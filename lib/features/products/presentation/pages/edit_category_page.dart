@@ -22,7 +22,8 @@ class EditCategoryPage extends HookConsumerWidget {
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(theme.spaces.space_700),
-          child: PreferredAppBarWidget(title: data.txtEditCategoryTitle),
+          child: PreferredAppBarWidget(
+              title: data.txtEditCategoryTitle, btnText: data.txtDelete),
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: theme.spaces.space_300),
@@ -38,14 +39,14 @@ class EditCategoryPage extends HookConsumerWidget {
               ),
               const SizedBox16Widget(),
               TextFieldWidget(
-                  textFieldTitle: 'Category name',
-                  hintText: 'Soups',
+                  textFieldTitle: data.txtCategoryName,
+                  hintText: data.txtSoups,
                   controller: controller),
             ],
           ),
         ),
         bottomNavigationBar: ElevatedButtonWidget(
-          text: 'Save',
+          text: data.txtSaveBtn,
           onPressed: () {},
         ),
       ),
