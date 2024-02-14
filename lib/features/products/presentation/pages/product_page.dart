@@ -15,6 +15,7 @@ import 'package:resto_admin/features/products/presentation/widgets/product_type_
 import 'package:resto_admin/features/products/presentation/widgets/row_widget.dart';
 
 class ProductPage extends HookConsumerWidget {
+  static const routePath = '/addNewProducts';
   const ProductPage({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -35,7 +36,8 @@ class ProductPage extends HookConsumerWidget {
           title: Row(
             children: [
               IconButton(
-                  onPressed: () {}, icon: SvgPicture.asset(asset.icArrowBackward)),
+                  onPressed: () {},
+                  icon: SvgPicture.asset(asset.icArrowBackward)),
               Text(
                 data.txtAddPrdtsTitle,
                 style: AppTheme.of(context).typography.h600.copyWith(
@@ -65,7 +67,7 @@ class ProductPage extends HookConsumerWidget {
                     textFieldTitle: data.txtDescription,
                     hintText: data.txtHintDescription,
                     controller: descreptionController),
-                RowWidget(text: data.txtType, btnText: data.txtEditbtn),
+                RowWidget(text: data.txtType, btnText: data.txtEditbtn,onPressed: null,),
                 const SizedBox24Widget(),
                 ProductTypeWidget(
                     hint: 'Enter Type',
@@ -79,7 +81,7 @@ class ProductPage extends HookConsumerWidget {
                   icon: Icons.add,
                 ),
                 const SizedBox32Widget(),
-                RowWidget(text: data.txtAddOns, btnText: data.txtEditbtn),
+                RowWidget(text: data.txtAddOns, btnText: data.txtEditbtn,onPressed: null,),
                 const SizedBox24Widget(),
                 ProductTypeWidget(
                     hint: 'Enter Add-ons',
