@@ -14,7 +14,7 @@ class ImagePickerWidget extends ConsumerWidget {
     return InkWell(
       onTap: () {},
       child: Container(
-        height: AppTheme.of(context).spaces.space_500 * 6.05,
+        height: AppTheme.of(context).spaces.space_500 * 6,
         width: MediaQuery.sizeOf(context).width,
         decoration: BoxDecoration(
             borderRadius:
