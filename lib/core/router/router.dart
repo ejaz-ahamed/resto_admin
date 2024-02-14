@@ -3,6 +3,7 @@ import 'package:resto_admin/core/widgets/bottom_navigation/bottom_nav_widget.dar
 import 'package:resto_admin/features/edit_profile_page/presentation/pages/edit_password_page.dart';
 import 'package:resto_admin/features/edit_profile_page/presentation/pages/edit_profile_page.dart';
 import 'package:resto_admin/features/offer/presentation/pages/add_offer_page.dart';
+import 'package:resto_admin/features/offer/presentation/pages/selecting_product_page.dart';
 import 'package:resto_admin/features/orders/presentation/pages/orderview_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/home_page.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -33,6 +34,10 @@ final router = GoRouter(initialLocation: BottomNaviWidget.routePath, routes: [
   GoRoute(
     path: OrderViewPage.routePath,
     builder: (context, state) => const OrderViewPage(),
+  ),
+  GoRoute(
+    path: OfferSelectingPage.routePath,
+    builder: (context, state) => const OfferSelectingPage(),
   ),
 ]);
 

@@ -1,37 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/constants/offer_constants/selecting_product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
-import 'package:resto_admin/core/widgets/gridview_widget.dart';
-import 'package:resto_admin/core/widgets/listview_seperated_widget.dart';
+import 'package:resto_admin/core/widgets/listview_separated_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_8_widget.dart';
-// import 'package:resto_admin/features/offers/presentation/widgets/rounded_checkbox_widget.dart';
+import 'package:resto_admin/features/offer/presentation/widgets/gridview_offerpage_widget.dart';
 
 class OfferSelectingPage extends ConsumerWidget {
-  // static const routePath = '/select';
-  static const routePath = '/';
+  static const routePath = '/select';
   const OfferSelectingPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);
     final constants = SelectingProductPageConstants();
+    final iconConst = AppAssetsConstants();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: apptheme.colors.secondary,
+        automaticallyImplyLeading: false,
         title: Row(
           children: [
-            IconButton(
-              onPressed: () {},
-              icon: SvgPicture.asset('assets/icons/ic_arrow_backward.svg'),
+            InkWell(
+              onTap: () => context.pop(),
+              child: SvgPicture.asset(
+                iconConst.icArrowBackward,
+                height: apptheme.spaces.space_200,
+              ),
+            ),
+            SizedBox(
+              width: apptheme.spaces.space_200,
             ),
             Text(
               constants.txtAppbarTitle,
-              style: apptheme.typography.h700
-                  .copyWith(color: apptheme.colors.text),
-            ),
+              style: apptheme.typography.h600,
+            )
           ],
         ),
         actions: [
@@ -39,7 +46,12 @@ class OfferSelectingPage extends ConsumerWidget {
               onPressed: () {},
               child: Padding(
                 padding: const EdgeInsets.only(right: 24),
-                child: Text(constants.txtSelectAllText),
+                child: Text(
+                  constants.txtSelectAllText,
+                  style: apptheme.typography.h300.copyWith(
+                    color: apptheme.colors.primary,
+                  ),
+                ),
               ))
         ],
       ),
@@ -50,14 +62,17 @@ class OfferSelectingPage extends ConsumerWidget {
             children: [
               SizedBox(
                 height: apptheme.spaces.space_400,
-                child: Row(
-                  children: [
-                    Text(
-                      constants.txtTitleCategories,
-                      style: apptheme.typography.h500
-                          .copyWith(color: apptheme.colors.text),
-                    ),
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Row(
+                    children: [
+                      Text(
+                        constants.txtTitleCategories,
+                        style: apptheme.typography.h500
+                            .copyWith(color: apptheme.colors.text),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox8Widget(),
@@ -69,7 +84,7 @@ class OfferSelectingPage extends ConsumerWidget {
                   )),
               const SizedBox(
                   child: Stack(children: [
-                GridViewWidget(),
+                GridViewOfferPageWidget(),
               ]))
             ],
           ),

@@ -17,6 +17,8 @@ final class OrderpageConstants {
   final String txtorders = 'Orders';
   final String txtpreparing = 'Preparing';
   final String txtcompleted = 'Completed';
+  final String txtRejct = 'Reject';
+  final String txtAccept = 'Accept';
 }
 
 @riverpod

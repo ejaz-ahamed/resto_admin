@@ -18,7 +18,6 @@ class RoundedCheckboxWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isChecked = useState(this.isChecked);
-    final selectall = ref.watch(isCheckedProvider);
     return GestureDetector(
       onTap: () {
         isChecked.value = !isChecked.value;

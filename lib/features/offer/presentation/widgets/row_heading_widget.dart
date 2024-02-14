@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/constants/offer_constants/add_offer_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/text_button_widget.dart';
+import 'package:resto_admin/features/offer/presentation/pages/selecting_product_page.dart';
 
 class RowHeadingWidget extends StatelessWidget {
   const RowHeadingWidget({super.key});
@@ -20,7 +22,11 @@ class RowHeadingWidget extends StatelessWidget {
             style: AppTheme.of(context).typography.h700,
           ),
           TextButtonWidget(
-              onTap: () {},
+              onTap: () {
+                context.push(
+                  OfferSelectingPage.routePath,
+                );
+              },
               buttonText: constants.txtAdd,
               color: AppTheme.of(context).colors.primary)
         ],
