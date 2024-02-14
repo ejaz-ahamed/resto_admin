@@ -7,6 +7,7 @@ class AppColorExtension extends ThemeExtension<AppColorExtension> {
   final Color textInverse;
   final Color textSubtle;
   final Color textSubtlest;
+  final Color textDisabled;
   final Color backgroundDanger;
 
   AppColorExtension({
@@ -16,6 +17,7 @@ class AppColorExtension extends ThemeExtension<AppColorExtension> {
     required this.textInverse,
     required this.textSubtle,
     required this.textSubtlest,
+    required this.textDisabled,
     required this.backgroundDanger,
   });
 
@@ -27,6 +29,7 @@ class AppColorExtension extends ThemeExtension<AppColorExtension> {
     Color? textInverse,
     Color? textSubtle,
     Color? textSubtlest,
+    Color? textDisabled,
     Color? backgroundDanger,
   }) {
     return AppColorExtension(
@@ -36,6 +39,7 @@ class AppColorExtension extends ThemeExtension<AppColorExtension> {
       textInverse: textInverse ?? this.textInverse,
       textSubtle: textSubtle ?? this.textSubtle,
       textSubtlest: textSubtlest ?? this.textSubtlest,
+      textDisabled: textDisabled ?? this.textDisabled,
       backgroundDanger: backgroundDanger ?? this.backgroundDanger,
     );
   }
@@ -54,6 +58,7 @@ class AppColorExtension extends ThemeExtension<AppColorExtension> {
       textInverse: Color.lerp(textInverse, other.textInverse, t)!,
       textSubtle: Color.lerp(textSubtle, other.textSubtle, t)!,
       textSubtlest: Color.lerp(textSubtlest, other.textSubtlest, t)!,
+      textDisabled: Color.lerp(textDisabled, other.textDisabled, t)!,
       backgroundDanger:
           Color.lerp(backgroundDanger, other.backgroundDanger, t)!,
     );

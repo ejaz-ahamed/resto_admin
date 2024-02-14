@@ -4,9 +4,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/rounded_check_box_widget.dart';
 
-class CategoryGrid extends HookWidget {
+class CategoryGridWidget extends HookWidget {
   final ValueNotifier<Set<int>> selectedItems;
-  const CategoryGrid({
+  const CategoryGridWidget({
     super.key,
     required this.selectedItems,
   });
@@ -18,14 +18,14 @@ class CategoryGrid extends HookWidget {
         physics: const ClampingScrollPhysics(),
         shrinkWrap: true,
         itemCount: 7,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
-            crossAxisSpacing: 10,
-            mainAxisSpacing: 12,
-            mainAxisExtent: 140),
+            crossAxisSpacing: AppTheme.of(context).spaces.space_100 * 1.25,
+            mainAxisSpacing: AppTheme.of(context).spaces.space_100 * 1.5,
+            mainAxisExtent: AppTheme.of(context).spaces.space_100 * 17.5),
         itemBuilder: (context, index) {
           return Padding(
-            padding: const EdgeInsets.all(1.0),
+            padding: EdgeInsets.all(AppTheme.of(context).spaces.space_100 - 7),
             child: Stack(
               children: [
                 Container(
@@ -33,13 +33,14 @@ class CategoryGrid extends HookWidget {
                       EdgeInsets.all(AppTheme.of(context).spaces.space_100),
                   decoration: BoxDecoration(
                     color: AppTheme.of(context).colors.secondary,
-                    borderRadius: BorderRadius.circular(8.0),
+                    borderRadius: BorderRadius.circular(
+                        AppTheme.of(context).spaces.space_100),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.5),
                         spreadRadius: 1,
                         blurRadius: 3,
-                        offset: Offset(1, 1),
+                        offset: const Offset(1, 1),
                       ),
                     ],
                   ),
@@ -49,7 +50,7 @@ class CategoryGrid extends HookWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(
                             AppTheme.of(context).spaces.space_100),
-                        child: Container(
+                        child: SizedBox(
                           width: AppTheme.of(context).spaces.space_100 * 14.5,
                           height: AppTheme.of(context).spaces.space_100 * 10,
                           child: Image.network(
@@ -64,7 +65,10 @@ class CategoryGrid extends HookWidget {
                         style: AppTheme.of(context).typography.h400,
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 0, right: 50),
+                        padding: EdgeInsets.only(
+                            left: 0,
+                            right:
+                                AppTheme.of(context).spaces.space_100 * 6.25),
                         child: Text(
                           'name',
                           style: AppTheme.of(context).typography.h400,
@@ -74,8 +78,8 @@ class CategoryGrid extends HookWidget {
                   ),
                 ),
                 Positioned(
-                  top: 8,
-                  right: 8,
+                  top: AppTheme.of(context).spaces.space_100,
+                  right: AppTheme.of(context).spaces.space_100,
                   child: Container(
                     width: AppTheme.of(context).spaces.space_250,
                     height: AppTheme.of(context).spaces.space_250,

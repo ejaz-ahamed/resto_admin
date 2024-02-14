@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:resto_admin/core/themes/color_palette.dart';
+import 'package:resto_admin/core/themes/extensions/boxshadow_extension.dart';
 import 'package:resto_admin/core/themes/extensions/color_extension.dart';
 import 'package:resto_admin/core/themes/extensions/space_extension.dart';
 import 'package:resto_admin/core/themes/extensions/typography_extension.dart';
@@ -17,6 +18,7 @@ final _lightTheme = ThemeData(
       textInverse: AppColorPalettes.gray200,
       textSubtle: AppColorPalettes.gray300,
       textSubtlest: AppColorPalettes.grey400,
+      textDisabled: AppColorPalettes.grey350,
       backgroundDanger: Colors.red,
     ),
     AppSpaceExtension.fromBaseSpace(8),
@@ -24,6 +26,13 @@ final _lightTheme = ThemeData(
       defaultFontColor: AppColorPalettes.blue900,
       linkColor: Colors.blue,
       dimFontColor: AppColorPalettes.grey400,
+    ),
+    AppBoxShadowExtension(
+      primary: BoxShadow(
+        blurRadius: 34,
+        spreadRadius: -10,
+        color: Colors.black.withOpacity(0.1),
+      ),
     )
   ],
 );

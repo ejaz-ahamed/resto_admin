@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
@@ -12,6 +13,7 @@ class ViewCategories extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final data = ref.watch(productConstantsProvider);
+    final assets = AppAssetsConstants();
 
     return Scaffold(
       backgroundColor: AppTheme.of(context).colors.secondary,
@@ -21,7 +23,7 @@ class ViewCategories extends ConsumerWidget {
           children: [
             IconButton(
               icon: SvgPicture.asset(
-                'assets/icons/backicon.svg',
+                assets.icArrowBackward,
                 width: AppTheme.of(context).spaces.space_100,
                 height: AppTheme.of(context).spaces.space_200,
               ),
@@ -40,11 +42,10 @@ class ViewCategories extends ConsumerWidget {
           SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.all(AppTheme.of(context).spaces.space_300),
-              child: Container(
+              child: SizedBox(
                 height: AppTheme.of(context).spaces.space_100 * 68.75,
                 width: AppTheme.of(context).spaces.space_100 * 47.5,
-                // color: Colors.blue,
-                child: ViewCategoriesWidget(),
+                child: const ViewCategoriesWidget(),
               ),
             ),
           ),

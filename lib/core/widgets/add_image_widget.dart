@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/constants/edit_profile_page/profile_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/utils/image_picker_utils.dart';
@@ -11,6 +12,7 @@ class AddImageWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final assets = ref.watch(appAssetsConstantsProvider);
     final constants = ref.watch(profilePageContstantsProvider);
     final appTheme = AppTheme.of(context);
     return InkWell(
@@ -20,14 +22,14 @@ class AddImageWidget extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           SvgPicture.asset(
-            constants.icAddImage,
+            assets.icAddImage,
             height: appTheme.spaces.space_500,
           ),
           const SizedBox8Widget(),
           Text(
             constants.txtAddImage,
             style: appTheme.typography.uiSemibold
-                .copyWith(color: appTheme.colors.textSubtlest),
+                .copyWith(color: appTheme.colors.textDisabled),
           )
         ],
       ),

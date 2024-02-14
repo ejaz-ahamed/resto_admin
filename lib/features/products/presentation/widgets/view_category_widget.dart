@@ -6,27 +6,25 @@ class ViewCategoriesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = AppTheme.of(context);
     return SingleChildScrollView(
         child: GridView.builder(
       physics: const ClampingScrollPhysics(),
       shrinkWrap: true,
       itemCount: 30,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 12,
-          mainAxisExtent: 140
-          // childAspectRatio: 3 / 6,
-          ),
+          crossAxisSpacing: theme.spaces.space_100 * 1.25,
+          mainAxisSpacing: theme.spaces.space_100 * 1.5,
+          mainAxisExtent: theme.spaces.space_100 * 17.5),
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.all(1.0),
           child: Container(
-            // width: AppTheme.of(context).spaces.space_100 * 14.5,
-            padding: EdgeInsets.all(8),
+            padding: EdgeInsets.all(theme.spaces.space_100),
             decoration: BoxDecoration(
               color: AppTheme.of(context).colors.secondary,
-              borderRadius: BorderRadius.circular(8.0),
+              borderRadius: BorderRadius.circular(theme.spaces.space_100),
               boxShadow: [
                 BoxShadow(
                   color: Colors.grey.withOpacity(0.5),
@@ -57,7 +55,8 @@ class ViewCategoriesWidget extends StatelessWidget {
                   style: AppTheme.of(context).typography.h400,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 0, right: 50),
+                  padding: EdgeInsets.only(
+                      left: 0, right: theme.spaces.space_100 * 6.25),
                   child: Text(
                     'name',
                     style: AppTheme.of(context).typography.h400,
