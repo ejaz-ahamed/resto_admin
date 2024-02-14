@@ -33,6 +33,11 @@ final _darkTheme = ThemeData(
         spreadRadius: 0,
         color: Colors.grey.withOpacity(1),
       ),
+      secondary: BoxShadow(
+        blurRadius: 20,
+        spreadRadius: -10,
+        color: Colors.black.withOpacity(0),
+      ),
     )
   ],
 );
