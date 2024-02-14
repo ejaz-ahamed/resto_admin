@@ -41,8 +41,8 @@ class ViewCategories extends ConsumerWidget {
             child: Padding(
               padding: EdgeInsets.all(AppTheme.of(context).spaces.space_300),
               child: Container(
-                height: 550,
-                width: 380,
+                height: AppTheme.of(context).spaces.space_100 * 68.75,
+                width: AppTheme.of(context).spaces.space_100 * 47.5,
                 // color: Colors.blue,
                 child: ViewCategoriesWidget(),
               ),

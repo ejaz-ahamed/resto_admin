@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/category_Grid_widget.dart';
 
-class ManageCategories extends ConsumerWidget {
-  const ManageCategories({Key? key}) : super(key: key);
+class ManageCategories extends HookConsumerWidget {
+  const ManageCategories({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final data = ref.watch(productConstantsProvider);
+    final selectedItems = useState<Set<int>>({});
 
     return Scaffold(
       backgroundColor: AppTheme.of(context).colors.secondary,
@@ -40,7 +43,9 @@ class ManageCategories extends ConsumerWidget {
             padding: EdgeInsets.only(
                 right: AppTheme.of(context).spaces.space_100 * 2.875),
             child: TextButton(
-              onPressed: () {},
+              onPressed: () {
+                selectedItems.value = Set.from(Iterable.generate(7, (i) => i));
+              },
               child: Text(data.txtSelectAll,
                   style: AppTheme.of(context)
                       .typography
@@ -58,7 +63,7 @@ class ManageCategories extends ConsumerWidget {
               child: SizedBox(
                   height: AppTheme.of(context).spaces.space_100 * 68.75,
                   width: AppTheme.of(context).spaces.space_100 * 47.5,
-                  child: const CategoryGrid()),
+                  child: CategoryGrid(selectedItems: selectedItems)),
             ),
           ),
           ElevatedButtonWidget(text: data.txtDelete, onPressed: () {})

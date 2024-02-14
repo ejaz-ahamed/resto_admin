@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
-class CategoryGrid extends StatelessWidget {
-  const CategoryGrid({Key? key}) : super(key: key);
+import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/core/widgets/rounded_check_box_widget.dart';
+
+class CategoryGrid extends HookWidget {
+  final ValueNotifier<Set<int>> selectedItems;
+  const CategoryGrid({
+    super.key,
+    required this.selectedItems,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +17,7 @@ class CategoryGrid extends StatelessWidget {
       child: GridView.builder(
         physics: const ClampingScrollPhysics(),
         shrinkWrap: true,
-        itemCount: 30,
+        itemCount: 7,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
             crossAxisSpacing: 10,
@@ -22,7 +29,8 @@ class CategoryGrid extends StatelessWidget {
             child: Stack(
               children: [
                 Container(
-                  padding: EdgeInsets.all(8),
+                  padding:
+                      EdgeInsets.all(AppTheme.of(context).spaces.space_100),
                   decoration: BoxDecoration(
                     color: AppTheme.of(context).colors.secondary,
                     borderRadius: BorderRadius.circular(8.0),
@@ -45,7 +53,7 @@ class CategoryGrid extends StatelessWidget {
                           width: AppTheme.of(context).spaces.space_100 * 14.5,
                           height: AppTheme.of(context).spaces.space_100 * 10,
                           child: Image.network(
-                            'https://www.foodiesfeed.com/wp-content/uploads/2023/04/strawberry-milk-splash.jpg',
+                            'https://www.cnet.com/a/img/resize/36e8e8fe542ad9af413eb03f3fbd1d0e2322f0b2/hub/2023/02/03/afedd3ee-671d-4189-bf39-4f312248fb27/gettyimages-1042132904.jpg?auto=webp&fit=crop&height=1200&width=1200',
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -80,12 +88,20 @@ class CategoryGrid extends StatelessWidget {
                       ),
                     ),
                     child: Positioned(
-                      top: 5,
-                      left: 5,
-                      child: RoundedCheckbox(
-                        isChecked: true,
-                        onChanged: (isChecked) {
-                          // Handle checkbox state changes here
+                      top: AppTheme.of(context).spaces.space_100,
+                      left: AppTheme.of(context).spaces.space_100,
+                      child: RoundedCheckboxWidget(
+                        isChecked: selectedItems.value.contains(index),
+                        onTap: () {
+                          if (selectedItems.value.contains(index)) {
+                            selectedItems.value = {...selectedItems.value}
+                              ..remove(index);
+                          } else {
+                            selectedItems.value = {
+                              ...selectedItems.value,
+                              index
+                            };
+                          }
                         },
                       ),
                     ),
@@ -95,65 +111,6 @@ class CategoryGrid extends StatelessWidget {
             ),
           );
         },
-      ),
-    );
-  }
-}
-
-class RoundedCheckbox extends StatefulWidget {
-  final bool isChecked;
-  final ValueChanged<bool>? onChanged;
-
-  const RoundedCheckbox({
-    Key? key,
-    this.isChecked = false,
-    this.onChanged,
-  }) : super(key: key);
-
-  @override
-  _RoundedCheckboxState createState() => _RoundedCheckboxState();
-}
-
-class _RoundedCheckboxState extends State<RoundedCheckbox> {
-  bool _isChecked = false;
-
-  @override
-  void initState() {
-    super.initState();
-    _isChecked = widget.isChecked;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          _isChecked = !_isChecked;
-          if (widget.onChanged != null) {
-            widget.onChanged!(_isChecked);
-          }
-        });
-      },
-      child: Container(
-        width: 20,
-        height: 20,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: _isChecked
-              ? AppTheme.of(context).colors.primary
-              : Colors.transparent,
-          border: Border.all(
-            color: AppTheme.of(context).colors.primary,
-            width: 2,
-          ),
-        ),
-        child: _isChecked
-            ? Icon(
-                Icons.check,
-                size: 16,
-                color: Colors.white,
-              )
-            : null,
       ),
     );
   }
