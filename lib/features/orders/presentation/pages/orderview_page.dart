@@ -20,7 +20,7 @@ class OrderViewPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: appTheme.colors.secondary,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(appTheme.spaces.space_100 * 5),
+        preferredSize: Size.fromHeight(appTheme.spaces.space_700),
         child: const OrderviewPageAppBarWidget(),
       ),
       body: SingleChildScrollView(

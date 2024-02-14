@@ -23,6 +23,7 @@ class HomePage extends HookConsumerWidget {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
+        backgroundColor: theme.colors.secondary,
         appBar: AppBar(
           scrolledUnderElevation: 0,
           title: Padding(
@@ -30,7 +31,7 @@ class HomePage extends HookConsumerWidget {
             child: Row(
               children: [
                 InkWell(
-                  onTap: () => context.push(Profilepage.routePath),
+                  onTap: () => context.push(ProfilePage.routePath),
                   child: CircleAvatar(
                     radius: theme.spaces.space_300,
                   ),

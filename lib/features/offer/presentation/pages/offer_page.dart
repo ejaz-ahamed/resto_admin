@@ -16,6 +16,7 @@ class OfferPage extends StatelessWidget {
     final OfferPageConstants constants = OfferPageConstants();
 
     return Scaffold(
+      backgroundColor: AppTheme.of(context).colors.secondary, 
       appBar: AppBar(
         elevation: 0,
         title: Padding(
