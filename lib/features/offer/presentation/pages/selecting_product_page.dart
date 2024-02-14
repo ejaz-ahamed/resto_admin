@@ -24,7 +24,7 @@ class OfferSelectingPage extends ConsumerWidget {
         backgroundColor: apptheme.colors.secondary,
         automaticallyImplyLeading: false,
         title: Padding(
-          padding: const EdgeInsets.only(left: 24),
+          padding: EdgeInsets.only(left: apptheme.spaces.space_300),
           child: Row(
             children: [
               InkWell(
@@ -48,7 +48,7 @@ class OfferSelectingPage extends ConsumerWidget {
           TextButton(
               onPressed: () {},
               child: Padding(
-                padding: const EdgeInsets.only(right: 24),
+                padding: EdgeInsets.only(right: apptheme.spaces.space_300),
                 child: Text(
                   constants.txtSelectAllText,
                   style: apptheme.typography.h300.copyWith(
