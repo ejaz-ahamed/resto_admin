@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:resto_admin/core/constants/orders_constants.dart';
+import 'package:resto_admin/core/constants/orders_constants/orders_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/button_widget.dart';
 
@@ -20,9 +20,9 @@ class FoodStatus extends HookConsumerWidget {
 
     /// Tabs to show
     final tabsText = useMemoized(() => [
-          constants.orders,
-          constants.preparing,
-          constants.completed,
+          constants.txtorders,
+          constants.txtpreparing,
+          constants.txtcompleted,
         ]);
 
     /// Handle tapping on the tab items
