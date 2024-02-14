@@ -29,7 +29,7 @@ class AddImageWidget extends ConsumerWidget {
           Text(
             constants.txtAddImage,
             style: appTheme.typography.uiSemibold
-                .copyWith(color: appTheme.colors.textSubtlest.withOpacity(.7)),
+                .copyWith(color: appTheme.colors.textDisabled),
           )
         ],
       ),

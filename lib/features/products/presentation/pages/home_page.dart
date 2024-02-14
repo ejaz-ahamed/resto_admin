@@ -11,7 +11,7 @@ import 'package:resto_admin/features/products/presentation/widgets/textfield_wid
 import 'package:resto_admin/features/profile_page/presentation/pages/profile_page.dart';
 
 class HomePage extends HookConsumerWidget {
-  static const routePath = '/';
+  static const routePath = '/home';
   const HomePage({super.key});
 
   @override
@@ -22,6 +22,7 @@ class HomePage extends HookConsumerWidget {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
+        backgroundColor: theme.colors.secondary,
         appBar: AppBar(
           scrolledUnderElevation: 0,
           title: Padding(
@@ -29,7 +30,7 @@ class HomePage extends HookConsumerWidget {
             child: Row(
               children: [
                 InkWell(
-                  onTap: () => context.push(Profilepage.routePath),
+                  onTap: () => context.push(ProfilePage.routePath),
                   child: CircleAvatar(
                     radius: theme.spaces.space_300,
                   ),
