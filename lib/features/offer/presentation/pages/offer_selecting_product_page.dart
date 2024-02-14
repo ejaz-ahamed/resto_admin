@@ -60,13 +60,13 @@ class OfferSelectingPage extends ConsumerWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: EdgeInsets.symmetric(horizontal: apptheme.spaces.space_300),
           child: Column(
             children: [
               SizedBox(
                 height: apptheme.spaces.space_400,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 10),
+                  padding: EdgeInsets.only(left: apptheme.spaces.space_125),
                   child: Row(
                     children: [
                       Text(
