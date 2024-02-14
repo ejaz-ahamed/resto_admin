@@ -11,7 +11,7 @@ import 'package:resto_admin/features/products/presentation/widgets/textfield_wid
 import 'package:resto_admin/features/profile_page/presentation/pages/profile_page.dart';
 
 class HomePage extends HookConsumerWidget {
-  static const routePath = '/';
+  static const routePath = '/home';
   const HomePage({super.key});
 
   @override
