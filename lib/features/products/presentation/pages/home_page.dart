@@ -22,6 +22,7 @@ class HomePage extends HookConsumerWidget {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
+        backgroundColor: theme.colors.secondary,
         appBar: AppBar(
           scrolledUnderElevation: 0,
           title: Padding(

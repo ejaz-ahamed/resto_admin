@@ -12,8 +12,8 @@ class AddImageWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final constants = ref.watch(profilePageContstantsProvider);
     final assets = ref.watch(appAssetsConstantsProvider);
+    final constants = ref.watch(profilePageContstantsProvider);
     final appTheme = AppTheme.of(context);
     return InkWell(
       onTap: () => ImagePickerUtils.showDialogueForImagePicker(context),
@@ -29,7 +29,7 @@ class AddImageWidget extends ConsumerWidget {
           Text(
             constants.txtAddImage,
             style: appTheme.typography.uiSemibold
-                .copyWith(color: appTheme.colors.textSubtlest),
+                .copyWith(color: appTheme.colors.textDisabled),
           )
         ],
       ),

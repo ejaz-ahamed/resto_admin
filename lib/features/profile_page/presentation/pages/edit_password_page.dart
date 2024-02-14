@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/edit_profile_page/profile_page_constants.dart';
@@ -24,6 +25,7 @@ class EditPasswordPage extends HookConsumerWidget {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
+        backgroundColor: appTheme.colors.secondary,
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(
               appTheme.spaces.space_700,
@@ -52,13 +54,12 @@ class EditPasswordPage extends HookConsumerWidget {
             ],
           ),
         ),
-        floatingActionButton: ElevatedButtonWidget(
+        bottomNavigationBar: ElevatedButtonWidget(
           text: constants.txtSave,
           onPressed: () {
             context.pop();
           },
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
     );
   }
