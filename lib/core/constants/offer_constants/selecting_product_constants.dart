@@ -1,6 +1,7 @@
 class SelectingProductPageConstants {
-  final txtOfferText = 'Offer up to 30%';
+  final txtTitleCategories = 'Categories';
   final txtAppbarTitle = 'Selected Product';
   final txtAddOfferText = 'Add';
-  final txtAddOnText = 'Add Add-on';
+  final txtSelectAllText = 'Select All';
+  final txtListtext = 'Hot Soup';
 }

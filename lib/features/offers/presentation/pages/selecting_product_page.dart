@@ -60,16 +60,16 @@ class OfferSelectingPage extends ConsumerWidget {
                   ],
                 ),
               ),
-              SizedBox8Widget(),
+              const SizedBox8Widget(),
               SizedBox(
                   height: MediaQuery.sizeOf(context).height / 10,
                   width: MediaQuery.sizeOf(context).width,
                   child: ListViewSeparatedWidget(
                     text: constants.txtListtext,
                   )),
-              SizedBox(
+              const SizedBox(
                   child: Stack(children: [
-                const GridViewWidget(),
+                GridViewWidget(),
               ]))
             ],
           ),

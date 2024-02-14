@@ -15,14 +15,9 @@ final router = GoRouter(initialLocation: BottomNaviWidget.routePath, routes: [
     builder: (context, state) => const BottomNaviWidget(),
   ),
   GoRoute(
-<<<<<<< HEAD
-      path: OfferSelectingPage.routePath,
-      builder: (context, state) => const OfferSelectingPage()),
-=======
     path: HomePage.routePath,
     builder: (context, state) => const HomePage(),
   ),
->>>>>>> main
   GoRoute(
     path: EditProfilePage.routePath,
     builder: (context, state) => const EditProfilePage(),

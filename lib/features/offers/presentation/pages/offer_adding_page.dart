@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:resto_admin/core/constants/offers_constants/offers_constants.dart';
+import 'package:resto_admin/core/constants/offer_constants/add_offer_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/image_picker_widget.dart';
@@ -15,7 +15,7 @@ class OfferAddingPage extends ConsumerWidget {
     final apptheme = AppTheme.of(context);
     final titleController = TextEditingController();
     final subtitleController = TextEditingController();
-    final constants = ref.watch(offersConstantsProvider);
+    final constants = AddOfferPageConstants();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: apptheme.colors.secondary,
@@ -26,7 +26,7 @@ class OfferAddingPage extends ConsumerWidget {
               icon: SvgPicture.asset('assets/icons/ic_arrow_backward.svg'),
             ),
             Text(
-              constants.txtPageTitle,
+              constants.txtAppbarTitle,
               style: apptheme.typography.h500
                   .copyWith(color: apptheme.colors.text),
             ),
@@ -49,15 +49,15 @@ class OfferAddingPage extends ConsumerWidget {
                   height: apptheme.spaces.space_200,
                 ),
                 TextFieldWidget(
-                    textFielTitle: constants.txtfeildtitle,
-                    hintText: constants.txtfeildhindtext,
+                    textFielTitle: constants.txtTitle,
+                    hintText: constants.txtHintTextTitle,
                     controller: titleController),
                 SizedBox(
                   height: apptheme.spaces.space_100,
                 ),
                 TextFieldWidget(
-                    textFielTitle: constants.txtfeildsubtitle,
-                    hintText: constants.txtfeildhindtext2,
+                    textFielTitle: constants.txtDescription,
+                    hintText: constants.txtHintTextdescription,
                     controller: subtitleController),
                 SizedBox(
                   height: apptheme.spaces.space_100,
