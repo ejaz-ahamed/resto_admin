@@ -5,13 +5,12 @@ import 'package:resto_admin/core/constants/profile_page/profile_page_constants.d
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
-import 'package:resto_admin/features/edit_profile_page/presentation/pages/edit_password_page.dart';
 import 'package:resto_admin/features/edit_profile_page/presentation/pages/edit_profile_page.dart';
 import 'package:resto_admin/features/profile_page/presentation/widgets/switch_button_widgets.dart';
 
-class Profilepage extends ConsumerWidget {
+class ProfilePage extends ConsumerWidget {
   static const routePath = '/profile';
-  const Profilepage({super.key});
+  const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
