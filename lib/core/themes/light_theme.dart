@@ -33,6 +33,12 @@ final _lightTheme = ThemeData(
         spreadRadius: -10,
         color: Colors.black.withOpacity(0.1),
       ),
+      secondary: BoxShadow(
+        color: Colors.grey.withOpacity(0.5),
+        spreadRadius: 1,
+        blurRadius: 3,
+        offset: const Offset(1, 1),
+      ),
     )
   ],
 );

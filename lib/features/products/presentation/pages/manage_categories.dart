@@ -18,17 +18,18 @@ class ManageCategoriesPage extends HookConsumerWidget {
     final data = ref.watch(productConstantsProvider);
     final selectedItems = useState<Set<int>>({});
     final assets = AppAssetsConstants();
+    final theme = AppTheme.of(context);
     return Scaffold(
-      backgroundColor: AppTheme.of(context).colors.secondary,
+      backgroundColor: theme.colors.secondary,
       appBar: AppBar(
-        backgroundColor: AppTheme.of(context).colors.secondary,
+        backgroundColor: theme.colors.secondary,
         title: Row(
           children: [
             IconButton(
               icon: SvgPicture.asset(
                 assets.icArrowBackward,
-                width: AppTheme.of(context).spaces.space_100,
-                height: AppTheme.of(context).spaces.space_200,
+                width: theme.spaces.space_100,
+                height: theme.spaces.space_200,
               ),
               onPressed: () {},
             ),
@@ -41,17 +42,14 @@ class ManageCategoriesPage extends HookConsumerWidget {
         ),
         actions: [
           Padding(
-            padding: EdgeInsets.only(
-                right: AppTheme.of(context).spaces.space_100 * 2.875),
+            padding: EdgeInsets.only(right: theme.spaces.space_100 * 2.875),
             child: TextButton(
               onPressed: () {
                 selectedItems.value = Set.from(Iterable.generate(7, (i) => i));
               },
               child: Text(data.txtSelectAll,
-                  style: AppTheme.of(context)
-                      .typography
-                      .h500
-                      .copyWith(color: AppTheme.of(context).colors.primary)),
+                  style: theme.typography.h500
+                      .copyWith(color: theme.colors.primary)),
             ),
           ),
         ],
@@ -60,10 +58,10 @@ class ManageCategoriesPage extends HookConsumerWidget {
         children: [
           SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.all(AppTheme.of(context).spaces.space_300),
+              padding: EdgeInsets.all(theme.spaces.space_300),
               child: SizedBox(
-                  height: AppTheme.of(context).spaces.space_100 * 68.75,
-                  width: AppTheme.of(context).spaces.space_100 * 47.5,
+                  height: theme.spaces.space_100 * 68.75,
+                  width: theme.spaces.space_100 * 47.5,
                   child: CategoryGridWidget(selectedItems: selectedItems)),
             ),
           ),

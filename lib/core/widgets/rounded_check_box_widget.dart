@@ -14,25 +14,24 @@ class RoundedCheckboxWidget extends HookConsumerWidget {
   });
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = AppTheme.of(context);
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 20,
-        height: 20,
+        width: theme.spaces.space_100 * 2.5,
+        height: theme.spaces.space_100 * 2.5,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: isChecked
-              ? AppTheme.of(context).colors.primary
-              : Colors.transparent,
+          color: isChecked ? theme.colors.primary : Colors.transparent,
           border: Border.all(
-            color: AppTheme.of(context).colors.primary,
-            width: 2,
+            color: theme.colors.primary,
+            width: theme.spaces.space_100 - 6,
           ),
         ),
         child: isChecked
-            ? const Icon(
+            ? Icon(
                 Icons.check,
-                size: 16,
+                size: theme.spaces.space_200,
                 color: Colors.white,
               )
             : null,
