@@ -8,7 +8,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'router.g.dart';
 
-final router = GoRouter(initialLocation: Profilepage.routePath, routes: [
+final router = GoRouter(initialLocation: BottomNaviWidget.routePath, routes: [
   GoRoute(
     path: BottomNaviWidget.routePath,
     builder: (context, state) => const BottomNaviWidget(),
