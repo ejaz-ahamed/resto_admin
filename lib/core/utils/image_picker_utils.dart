@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:resto_admin/core/constants/edit_profile_page/profile_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
@@ -43,6 +44,7 @@ class ImagePickerUtils {
                 TextButton(
                     onPressed: () {
                       ImagePickerUtils.pickImageFromCamera(context);
+                      context.pop();
                     },
                     child: Text(
                       ref.watch(profilePageContstantsProvider).txtCamera,
@@ -51,6 +53,7 @@ class ImagePickerUtils {
                 TextButton(
                     onPressed: () {
                       ImagePickerUtils.pickImageFromGallery(context);
+                      context.pop();
                     },
                     child: Text(
                       ref.watch(profilePageContstantsProvider).txtGallery,
