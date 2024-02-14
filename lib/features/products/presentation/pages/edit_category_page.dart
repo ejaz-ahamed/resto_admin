@@ -12,8 +12,9 @@ class EditCategoryPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final data = ref.watch(productConstantsProvider);
     final theme = AppTheme.of(context);
-    final assets = AppAssetsConstants();
+    final assets = ref.watch(appAssetsConstantsProvider);
     return Scaffold(
+      backgroundColor: theme.colors.secondary,
       appBar: AppBar(
         title: Row(
           children: [
