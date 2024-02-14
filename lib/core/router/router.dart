@@ -5,6 +5,7 @@ import 'package:resto_admin/features/offer/presentation/pages/edit_offer_page.da
 import 'package:resto_admin/features/offer/presentation/pages/offer_selecting_product_page.dart';
 import 'package:resto_admin/features/orders/presentation/pages/orderview_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/edit_category_page.dart';
+import 'package:resto_admin/features/products/presentation/pages/add_category_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/home_page.dart';
 import 'package:resto_admin/features/profile_page/presentation/pages/edit_password_page.dart';
 import 'package:resto_admin/features/profile_page/presentation/pages/edit_profile_page.dart';
@@ -57,9 +58,20 @@ final router = GoRouter(initialLocation: BottomNaviWidget.routePath, routes: [
     builder: (context, state) => const ProductPage(),
   ),
   GoRoute(
+      path: AddOfferPage.routePath,
+      builder: (context, state) => const AddOfferPage()),
+  GoRoute(
+    path: ProductPage.routePath,
+    builder: (context, state) => const ProductPage(),
+  ),
+  GoRoute(
+    path: AddCategoryPage.routePath,
+    builder: (context, state) => const AddCategoryPage(),
+  ),
+  GoRoute(
     path: OfferSelectingPage.routePath,
     builder: (context, state) => const OfferSelectingPage(),
-  ),
+  )
 ]);
 
 @riverpod
