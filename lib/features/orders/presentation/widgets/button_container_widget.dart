@@ -12,7 +12,10 @@ class ButtonContainerWidget extends ConsumerWidget {
     final constants = ref.watch(orderpageConstantsProvider);
     final appTheme = AppTheme.of(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      padding: EdgeInsets.symmetric(
+        horizontal: appTheme.spaces.space_300,
+        vertical: appTheme.spaces.space_200,
+      ),
       child: SizedBox(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
