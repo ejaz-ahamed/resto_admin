@@ -6,6 +6,7 @@ import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_16_widget.dart';
+import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
 
 class OverViewItemsPage extends HookConsumerWidget {
@@ -23,8 +24,8 @@ class OverViewItemsPage extends HookConsumerWidget {
           preferredSize: Size.fromHeight(
             apptheme.spaces.space_700,
           ),
-          child: const AppBarWidget(
-            title: "jjj",
+          child: AppBarWidget(
+            title: data.txtOverviewTitle,
           ),
         ),
         body: SingleChildScrollView(
@@ -39,7 +40,7 @@ class OverViewItemsPage extends HookConsumerWidget {
                 Container(
                   width: MediaQuery.sizeOf(context).width,
                   height: apptheme.spaces.space_500 * 6.4,
-                  color: Colors.amber,
+                  color: apptheme.colors.primary,
                 ),
                 const SizedBox16Widget(),
                 TextFieldWidget(
@@ -48,6 +49,15 @@ class OverViewItemsPage extends HookConsumerWidget {
                   controller: controller,
                   maxLines: 6,
                 ),
+                const SizedBox32Widget(),
+                Padding(
+                  padding: EdgeInsets.only(
+                      right: MediaQuery.sizeOf(context).width / 1.31),
+                  child: Text(
+                    data.txtOverviewtype,
+                    style: apptheme.typography.h600,
+                  ),
+                )
               ],
             ),
           ),
