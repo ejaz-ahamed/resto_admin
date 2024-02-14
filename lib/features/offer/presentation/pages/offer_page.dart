@@ -16,6 +16,7 @@ class OfferPage extends StatelessWidget {
     final OfferPageConstants constants = OfferPageConstants();
 
     return Scaffold(
+      backgroundColor: AppTheme.of(context).colors.secondary,
       appBar: AppBar(
         elevation: 0,
         title: Padding(
@@ -37,11 +38,14 @@ class OfferPage extends StatelessWidget {
           ),
         ],
       ),
-      body: SizedBox(
-        child: OfferBannerWidget(
-          offerImage: const NetworkImage(
-              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd1Mqj-pwiNWm1ZptXqtx9eNOt_1CNX4lk0g&usqp=CAU'),
-          offerText: constants.txtOfferText,
+      body: Padding(
+        padding: EdgeInsets.only(top: spaces.space_400),
+        child: SizedBox(
+          child: OfferBannerWidget(
+            offerImage: const NetworkImage(
+                'https://i.pinimg.com/originals/80/1b/5d/801b5da41f2abd03df3941b5f6ed35bc.jpg'),
+            offerText: constants.txtOfferText,
+          ),
         ),
       ),
     );

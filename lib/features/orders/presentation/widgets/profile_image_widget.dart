@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:resto_admin/core/constants/app_assets_constants.dart';
-import 'package:resto_admin/core/constants/orders_constants/orders_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 
 class ProfileImageWidget extends ConsumerWidget {
@@ -10,7 +9,6 @@ class ProfileImageWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final constants = ref.watch(orderpageConstantsProvider);
     final appTheme = AppTheme.of(context);
     AppAssetsConstants iconsConstats = AppAssetsConstants();
     return Container(

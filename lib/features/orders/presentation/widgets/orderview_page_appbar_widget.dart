@@ -22,25 +22,25 @@ class OrderviewPageAppBarWidget extends ConsumerWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              InkWell(
-                onTap: () {
-                  context.pop();
-                },
-                child: SvgPicture.asset(
+          InkWell(
+            onTap: () {
+              context.pop();
+            },
+            child: Row(
+              children: [
+                SvgPicture.asset(
                   iconsConstats.icArrowBackward,
                   height: appTheme.spaces.space_200,
                 ),
-              ),
-              SizedBox(
-                width: appTheme.spaces.space_200,
-              ),
-              Text(
-                constants.txtorderDetails,
-                style: appTheme.typography.h700,
-              ),
-            ],
+                SizedBox(
+                  width: appTheme.spaces.space_200,
+                ),
+                Text(
+                  constants.txtorderDetails,
+                  style: appTheme.typography.h700,
+                ),
+              ],
+            ),
           ),
           Row(
             children: [
