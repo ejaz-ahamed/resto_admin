@@ -38,6 +38,7 @@ class AddOfferPage extends HookConsumerWidget {
     }
 
     return Scaffold(
+      backgroundColor: AppTheme.of(context).colors.secondary,
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(spaces.space_700),
           child: AppBarWidget(title: constants.txtAppbarTitle)),

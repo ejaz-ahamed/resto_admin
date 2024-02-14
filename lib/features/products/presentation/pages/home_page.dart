@@ -24,6 +24,7 @@ class HomePage extends HookConsumerWidget {
       child: Scaffold(
         backgroundColor: theme.colors.secondary,
         appBar: AppBar(
+          backgroundColor: theme.colors.secondary,
           scrolledUnderElevation: 0,
           title: Padding(
             padding: EdgeInsets.only(left: theme.spaces.space_100),

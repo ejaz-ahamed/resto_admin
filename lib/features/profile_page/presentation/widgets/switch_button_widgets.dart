@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/core/themes/theme_provider.dart';
 import 'package:resto_admin/features/profile_page/presentation/provider/profile_provider.dart';
 
 class SwitchButton extends ConsumerWidget {
@@ -19,6 +20,7 @@ class SwitchButton extends ConsumerWidget {
           value: switchstate,
           onChanged: (value) {
             ref.read(profileProvider.notifier).toggleTheme();
+            ref.read(themeProvider.notifier).switchTheme();
           });
     });
   }
