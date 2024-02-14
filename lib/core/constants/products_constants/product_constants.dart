@@ -26,6 +26,8 @@ class ProductConstants {
   final txtAddOnBtnTitle = 'Add Add-Ons';
   final txtSaveBtn = 'Save';
   final txtEditCategoryTitle = 'Edit category';
+  final txtCategoryName = 'Category Name';
+  
 }
 
 @riverpod
