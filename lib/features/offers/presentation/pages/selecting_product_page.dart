@@ -7,7 +7,7 @@ import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/gridview_widget.dart';
 import 'package:resto_admin/core/widgets/listview_seperated_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_8_widget.dart';
-import 'package:resto_admin/features/offers/presentation/widgets/rounded_checkbox_widget.dart';
+// import 'package:resto_admin/features/offers/presentation/widgets/rounded_checkbox_widget.dart';
 
 class OfferSelectingPage extends ConsumerWidget {
   // static const routePath = '/select';

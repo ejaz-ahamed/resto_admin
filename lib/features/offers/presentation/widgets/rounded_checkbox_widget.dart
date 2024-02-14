@@ -4,7 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 
-final isCheckedProvider = StateProvider<bool>((_) => false);
+// final isCheckedProvider = StateProvider<bool>((_) => false);
+final isCheckedProvider =
+    StateProvider<List<bool>>((_) => List.filled(6, false));
 
 class RoundedCheckboxWidget extends HookConsumerWidget {
   final bool isChecked;
