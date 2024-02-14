@@ -37,11 +37,10 @@ class ImagePickerWidget extends ConsumerWidget {
             ),
             Text(
               data.txtAddImg,
-              style: AppTheme.of(context).typography.h400.copyWith(
-                  color: AppTheme.of(context)
-                      .colors
-                      .textSubtlest
-                      .withOpacity(.60)),
+              style: AppTheme.of(context)
+                  .typography
+                  .h400
+                  .copyWith(color: AppTheme.of(context).colors.textDisabled),
             ),
           ],
         ),

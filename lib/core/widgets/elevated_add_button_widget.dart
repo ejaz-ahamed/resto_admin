@@ -3,15 +3,18 @@ import 'package:resto_admin/core/themes/app_theme.dart';
 
 class ElevatedAddButtonWidget extends StatelessWidget {
   final String buttonText;
+
   final Color textColor;
   final void Function()? onPressed;
   final IconData? icon;
+
   const ElevatedAddButtonWidget(
       {super.key,
       required this.buttonText,
       required this.textColor,
       required this.onPressed,
       required this.icon});
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -39,10 +42,9 @@ class ElevatedAddButtonWidget extends StatelessWidget {
             ),
             Text(
               buttonText,
-              style: AppTheme.of(context)
-                  .typography
-                  .h400
-                  .copyWith(color: AppTheme.of(context).colors.primary),
+              style: TextStyle(
+                color: textColor,
+              ),
             ),
           ],
         ),

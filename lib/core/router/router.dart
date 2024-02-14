@@ -2,13 +2,13 @@ import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/widgets/bottom_navigation/bottom_nav_widget.dart';
 import 'package:resto_admin/features/edit_profile_page/presentation/pages/edit_password_page.dart';
 import 'package:resto_admin/features/edit_profile_page/presentation/pages/edit_profile_page.dart';
+import 'package:resto_admin/features/offer/presentation/pages/add_offer_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/home_page.dart';
-import 'package:resto_admin/features/profile_page/presentation/pages/profile_page.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'router.g.dart';
 
-final router = GoRouter(initialLocation: Profilepage.routePath, routes: [
+final router = GoRouter(initialLocation: BottomNaviWidget.routePath, routes: [
   GoRoute(
     path: BottomNaviWidget.routePath,
     builder: (context, state) => const BottomNaviWidget(),
@@ -22,9 +22,8 @@ final router = GoRouter(initialLocation: Profilepage.routePath, routes: [
       path: EditPasswordPage.routePath,
       builder: (context, state) => const EditPasswordPage()),
   GoRoute(
-    path: Profilepage.routePath,
-    builder: (context, state) => const Profilepage(),
-  )
+      path: AddOfferPage.routePath,
+      builder: (context, state) => const AddOfferPage()),
 ]);
 
 @riverpod

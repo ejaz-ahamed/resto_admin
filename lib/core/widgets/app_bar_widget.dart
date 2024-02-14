@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:go_router/go_router.dart';
 
-class AppBarWidget extends ConsumerWidget implements PreferredSizeWidget {
+class AppBarWidget extends StatelessWidget {
   final String title;
+
   const AppBarWidget({super.key, required this.title});
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
+    AppAssetsConstants iconConst = AppAssetsConstants();
     final appTheme = AppTheme.of(context);
     return AppBar(
       automaticallyImplyLeading: false,
@@ -17,8 +19,9 @@ class AppBarWidget extends ConsumerWidget implements PreferredSizeWidget {
       title: Row(
         children: [
           InkWell(
+            onTap: () => context.pop(),
             child: SvgPicture.asset(
-              ref.watch(appAssetsConstantsProvider).icArrowBackward,
+              iconConst.icArrowBackward,
               height: appTheme.spaces.space_200,
             ),
           ),
@@ -33,7 +36,4 @@ class AppBarWidget extends ConsumerWidget implements PreferredSizeWidget {
       ),
     );
   }
-
-  @override
-  Size get preferredSize => const Size.fromHeight(56);
 }
