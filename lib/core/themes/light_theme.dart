@@ -28,12 +28,16 @@ final _lightTheme = ThemeData(
       dimFontColor: AppColorPalettes.grey400,
     ),
     AppBoxShadowExtension(
-      primary: BoxShadow(
-        blurRadius: 34,
-        spreadRadius: -10,
-        color: Colors.black.withOpacity(0.1),
-      ),
-    )
+        primary: BoxShadow(
+          blurRadius: 34,
+          spreadRadius: -10,
+          color: Colors.black.withOpacity(0.1),
+        ),
+        secondary: BoxShadow(
+          blurRadius: 20,
+          spreadRadius: -10,
+          color: Colors.black.withOpacity(0.2),
+        ))
   ],
 );
 

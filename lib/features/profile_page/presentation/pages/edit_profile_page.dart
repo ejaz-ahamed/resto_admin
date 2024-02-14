@@ -41,6 +41,7 @@ class EditProfilePage extends HookConsumerWidget {
                 Align(
                   alignment: Alignment.center,
                   child: CircleAvatar(
+                    
                     backgroundColor: appTheme.colors.secondary,
                     radius: appTheme.spaces.space_200 * 7,
                     child: const AddImageWidget(),
