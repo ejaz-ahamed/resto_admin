@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/widgets/bottom_navigation/bottom_nav_widget.dart';
 import 'package:resto_admin/features/offer/presentation/pages/add_offer_page.dart';
 import 'package:resto_admin/features/offer/presentation/pages/edit_offer_page.dart';
+import 'package:resto_admin/features/offer/presentation/pages/selecting_product_page.dart';
 import 'package:resto_admin/features/orders/presentation/pages/orderview_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/edit_category_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/home_page.dart';
@@ -54,6 +55,10 @@ final router = GoRouter(initialLocation: BottomNaviWidget.routePath, routes: [
   GoRoute(
     path: ProductPage.routePath,
     builder: (context, state) => const ProductPage(),
+  ),
+  GoRoute(
+    path: OfferSelectingPage.routePath,
+    builder: (context, state) => const OfferSelectingPage(),
   ),
 ]);
 
