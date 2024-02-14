@@ -21,8 +21,8 @@ class ListViewSeparatedWidget extends StatelessWidget {
                 ],
               ),
             ),
-        separatorBuilder: (context, index) => const SizedBox(
-              width: 10,
+        separatorBuilder: (context, index) => SizedBox(
+              width: theme.spaces.space_250 * 4,
             ),
         itemCount: 10);
   }

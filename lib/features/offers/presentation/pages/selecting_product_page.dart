@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:resto_admin/core/constants/offers_constants/offers_constants.dart';
+import 'package:resto_admin/core/constants/offer_constants/selecting_product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/gridview_widget.dart';
@@ -17,7 +17,7 @@ class OfferSelectingPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);
-    final constants = ref.watch(offersConstantsProvider);
+    final constants = SelectingProductPageConstants();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: apptheme.colors.secondary,
@@ -28,7 +28,7 @@ class OfferSelectingPage extends ConsumerWidget {
               icon: SvgPicture.asset('assets/icons/ic_arrow_backward.svg'),
             ),
             Text(
-              constants.txtPageTitle2,
+              constants.txtAppbarTitle,
               style: apptheme.typography.h700
                   .copyWith(color: apptheme.colors.text),
             ),
@@ -39,7 +39,7 @@ class OfferSelectingPage extends ConsumerWidget {
               onPressed: () {},
               child: Padding(
                 padding: const EdgeInsets.only(right: 24),
-                child: const Text("Select All"),
+                child: Text(constants.txtSelectAllText),
               ))
         ],
       ),
@@ -53,8 +53,7 @@ class OfferSelectingPage extends ConsumerWidget {
                 child: Row(
                   children: [
                     Text(
-                      // constants.txtPageTitle,
-                      "Categories",
+                      constants.txtTitleCategories,
                       style: apptheme.typography.h500
                           .copyWith(color: apptheme.colors.text),
                     ),
@@ -65,8 +64,8 @@ class OfferSelectingPage extends ConsumerWidget {
               SizedBox(
                   height: MediaQuery.sizeOf(context).height / 10,
                   width: MediaQuery.sizeOf(context).width,
-                  child: const ListViewSeparatedWidget(
-                    text: "Hot Soup",
+                  child: ListViewSeparatedWidget(
+                    text: constants.txtListtext,
                   )),
               SizedBox(
                   child: Stack(children: [
