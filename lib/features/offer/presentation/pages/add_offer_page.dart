@@ -37,81 +37,85 @@ class AddOfferPage extends HookConsumerWidget {
       selectedIndex.value = index;
     }
 
-    return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: Size.fromHeight(spaces.space_700),
-          child: AppBarWidget(title: constants.txtAppbarTitle)),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox16Widget(),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
-              child: const ImagePickerWidget(),
-            ),
-            const SizedBox24Widget(),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
-              child: TextFieldWidget(
-                  textFieldTitle: constants.txtTitle,
-                  hintText: constants.txtHintTextTitle,
-                  controller: TextEditingController()),
-            ),
-            const SizedBox16Widget(),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
-              child: TextFieldWidget(
-                  textFieldTitle: constants.txtDescription,
-                  hintText: constants.txtHintTextdescription,
-                  controller: TextEditingController()),
-            ),
-            const SizedBox16Widget(),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
-              child: Row(
-                children: [
-                  Text(
-                    constants.txtOfferDetails,
-                    style: typography.h400,
-                  ),
-                ],
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        backgroundColor: AppTheme.of(context).colors.secondary,
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(spaces.space_700),
+            child: AppBarWidget(title: constants.txtAppbarTitle)),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox16Widget(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
+                child: const ImagePickerWidget(),
               ),
-            ),
-            const SizedBox16Widget(),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
-              child: Row(
-                children: [
-                  for (var i = 0; i < tabsText.length; i++)
-                    TabButtonWidget(
-                      buttonText: tabsText[i],
-                      isSelected: selectedIndex.value == i,
-                      onPressed: () => tabOnPressed(i),
+              const SizedBox24Widget(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
+                child: TextFieldWidget(
+                    textFieldTitle: constants.txtTitle,
+                    hintText: constants.txtHintTextTitle,
+                    controller: TextEditingController()),
+              ),
+              const SizedBox16Widget(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
+                child: TextFieldWidget(
+                    textFieldTitle: constants.txtDescription,
+                    hintText: constants.txtHintTextdescription,
+                    controller: TextEditingController()),
+              ),
+              const SizedBox16Widget(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
+                child: Row(
+                  children: [
+                    Text(
+                      constants.txtOfferDetails,
+                      style: typography.h400,
                     ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            const SizedBox8Widget(),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
-              child: TextFieldOfferWidget(
-                  hintText: selectedIndex.value == 0
-                      ? constants.txtHintTextPercentage
-                      : constants.txtHintTextAmount,
-                  controller: TextEditingController()),
-            ),
-            SizedBox(
-              height: spaces.space_200,
-            ),
-            const RowHeadingWidget(),
-            const SizedBox8Widget(),
-            const SizedBox()
-          ],
+              const SizedBox16Widget(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
+                child: Row(
+                  children: [
+                    for (var i = 0; i < tabsText.length; i++)
+                      TabButtonWidget(
+                        buttonText: tabsText[i],
+                        isSelected: selectedIndex.value == i,
+                        onPressed: () => tabOnPressed(i),
+                      ),
+                  ],
+                ),
+              ),
+              const SizedBox8Widget(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
+                child: TextFieldOfferWidget(
+                    hintText: selectedIndex.value == 0
+                        ? constants.txtHintTextPercentage
+                        : constants.txtHintTextAmount,
+                    controller: TextEditingController()),
+              ),
+              SizedBox(
+                height: spaces.space_200,
+              ),
+              const RowHeadingWidget(),
+              const SizedBox8Widget(),
+              const SizedBox()
+            ],
+          ),
         ),
-      ),
-      bottomNavigationBar: ElevatedButtonWidget(
-        text: constants.txtSave,
-        onPressed: () {},
+        bottomNavigationBar: ElevatedButtonWidget(
+          text: constants.txtSave,
+          onPressed: () {},
+        ),
       ),
     );
   }
