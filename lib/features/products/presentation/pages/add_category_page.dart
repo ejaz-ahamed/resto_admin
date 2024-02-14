@@ -10,7 +10,7 @@ import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
 
 class AddCategoryPage extends ConsumerWidget {
-  static const routPath = '/addCategory';
+  static const routePath = '/addCategory';
   const AddCategoryPage({super.key});
 
   @override

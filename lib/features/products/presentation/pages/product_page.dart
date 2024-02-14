@@ -54,7 +54,11 @@ class ProductPage extends HookConsumerWidget {
                     textFieldTitle: data.txtDescription,
                     hintText: data.txtHintDescription,
                     controller: descreptionController),
-                RowWidget(text: data.txtType, btnText: data.txtEditbtn),
+                RowWidget(
+                  text: data.txtType,
+                  btnText: data.txtEditbtn,
+                  onPressed: null,
+                ),
                 const SizedBox24Widget(),
                 ProductTypeWidget(
                     hint: 'Enter Type',
@@ -68,7 +72,11 @@ class ProductPage extends HookConsumerWidget {
                   icon: Icons.add,
                 ),
                 const SizedBox32Widget(),
-                RowWidget(text: data.txtAddOns, btnText: data.txtEditbtn),
+                RowWidget(
+                  text: data.txtAddOns,
+                  btnText: data.txtEditbtn,
+                  onPressed: null,
+                ),
                 const SizedBox24Widget(),
                 ProductTypeWidget(
                     hint: 'Enter Add-ons',

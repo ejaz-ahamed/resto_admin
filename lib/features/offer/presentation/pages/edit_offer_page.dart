@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:resto_admin/core/constants/offer_constants/add_offer_page_constants.dart';
+import 'package:resto_admin/core/constants/offer_constants/edit_offer_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
-import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/image_picker_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_16_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_8_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
+import 'package:resto_admin/features/offer/presentation/widgets/preffered_appbar_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/row_heading_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/tab_button_widget.dart.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/textfield_widget.dart';
 
-class AddOfferPage extends HookConsumerWidget {
-  static const routePath = '/AddOfferPage';
+class EditOfferPage extends HookConsumerWidget {
+  static const routePath = '/EditOfferPage';
 
-  const AddOfferPage({super.key});
+  const EditOfferPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    AddOfferPageConstants constants = AddOfferPageConstants();
+    EditOfferPageConstants constants = EditOfferPageConstants();
     //Theme data
     final spaces = AppTheme.of(context).spaces;
     final typography = AppTheme.of(context).typography;
@@ -43,11 +43,12 @@ class AddOfferPage extends HookConsumerWidget {
         backgroundColor: AppTheme.of(context).colors.secondary,
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(spaces.space_700),
-            child: AppBarWidget(title: constants.txtAppbarTitle)),
+            child: PreferredAppBarWidget(
+                title: constants.txtAppbarTitle, btnText: constants.txtDelete)),
         body: SingleChildScrollView(
           child: Column(
             children: [
-              const SizedBox16Widget(),
+              const SizedBox24Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
                 child: const ImagePickerWidget(),

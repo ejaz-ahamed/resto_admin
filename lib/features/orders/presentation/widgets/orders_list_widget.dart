@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/features/orders/presentation/pages/orderview_page.dart';
 
 class OrderListView extends StatelessWidget {
   const OrderListView({super.key});
@@ -21,7 +23,9 @@ class OrderListView extends StatelessWidget {
           height: space.space_200,
         ),
         itemBuilder: (context, index) => InkWell(
-          onTap: () {},
+          onTap: () {
+            context.push(OrderViewPage.routePath);
+          },
           child: Container(
             height: space.space_100 * 11,
             decoration: BoxDecoration(
