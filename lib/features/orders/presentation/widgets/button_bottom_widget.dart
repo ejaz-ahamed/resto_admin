@@ -22,7 +22,7 @@ class ButtonWidget extends ConsumerWidget {
     return InkWell(
       onTap: onPressed,
       child: Container(
-        width: appTheme.spaces.space_500 * 4.4,
+        width: appTheme.spaces.space_500 * 4.3,
         height: appTheme.spaces.space_500 * 1.25,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(
