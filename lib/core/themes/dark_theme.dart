@@ -14,8 +14,8 @@ final _darkTheme = ThemeData(
     AppColorExtension(
       primary: AppColorPalettes.red400,
       secondary: AppColorPalettes.grey1000,
-      text: AppColorPalettes.blue900,
-      textInverse: AppColorPalettes.gray200,
+      text: AppColorPalettes.white500,
+      textInverse: AppColorPalettes.blue900,
       textSubtle: AppColorPalettes.gray300,
       textSubtlest: AppColorPalettes.grey400,
       textDisabled: AppColorPalettes.grey350,
@@ -34,9 +34,9 @@ final _darkTheme = ThemeData(
         color: Colors.grey.withOpacity(1),
       ),
       secondary: BoxShadow(
-        blurRadius: 20,
-        spreadRadius: -10,
-        color: Colors.black.withOpacity(0),
+        blurRadius: 1,
+        spreadRadius: 0,
+        color: Colors.grey.withOpacity(1),
       ),
     )
   ],

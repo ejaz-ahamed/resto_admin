@@ -31,6 +31,8 @@ class OrderviewPageAppBarWidget extends ConsumerWidget {
                 SvgPicture.asset(
                   iconsConstats.icArrowBackward,
                   height: appTheme.spaces.space_200,
+                  colorFilter:
+                      ColorFilter.mode(appTheme.colors.text, BlendMode.srcATop),
                 ),
                 SizedBox(
                   width: appTheme.spaces.space_200,

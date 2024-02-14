@@ -13,7 +13,6 @@ class AppBarWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final assets = ref.watch(appAssetsConstantsProvider);
-
     final appTheme = AppTheme.of(context);
     return AppBar(
       backgroundColor: appTheme.colors.secondary,
@@ -28,6 +27,8 @@ class AppBarWidget extends ConsumerWidget {
             SvgPicture.asset(
               assets.icArrowBackward,
               height: appTheme.spaces.space_200,
+              colorFilter:
+                  ColorFilter.mode(appTheme.colors.text, BlendMode.srcATop),
             ),
             SizedBox(
               width: appTheme.spaces.space_200,

@@ -29,6 +29,8 @@ class ProfileImageWidget extends ConsumerWidget {
           SvgPicture.asset(
             iconsConstats.icUser,
             height: appTheme.spaces.space_700,
+            colorFilter:
+                ColorFilter.mode(appTheme.colors.text, BlendMode.srcATop),
           ),
         ],
       ),
