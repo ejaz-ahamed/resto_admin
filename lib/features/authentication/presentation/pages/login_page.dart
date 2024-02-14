@@ -30,16 +30,27 @@ class LoginPage extends ConsumerWidget {
             ),
           ),
           Padding(
+            padding: EdgeInsets.only(left: spacer.space_300),
+            child: Row(
+              children: [
+                Text(
+                  constants.txtSubHeading,
+                  style: typography.h500.copyWith(color: colors.textSubtlest),
+                ),
+              ],
+            ),
+          ),
+          Padding(
             padding: EdgeInsets.only(
-                top: spacer.space_250, bottom: spacer.space_200),
+                top: spacer.space_500, bottom: spacer.space_200),
             child: LoginTextfieldWidget(
-                hintText: constants.userName,
+                hintText: constants.txtUserName,
                 prefixIcon: Icon(Icons.person, color: colors.textSubtlest)),
           ),
           Padding(
             padding: EdgeInsets.only(bottom: spacer.space_600),
             child: LoginTextfieldWidget(
-              hintText: constants.password,
+              hintText: constants.txtPassword,
               prefixIcon: Icon(
                 Icons.fingerprint,
                 color: colors.textSubtlest,

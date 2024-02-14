@@ -3,9 +3,10 @@ part 'login_page_constants.g.dart';
 
 class LoginPageConstants {
   final String txtHeading = "WELCOME BACK!";
+  final String txtSubHeading = "Login to your account";
   final String txtLoginBtn = "LOGIN";
-  final String userName = "User Name";
-  final String password = "Password";
+  final String txtUserName = "User Name";
+  final String txtPassword = "Password";
 }
 
 @riverpod
