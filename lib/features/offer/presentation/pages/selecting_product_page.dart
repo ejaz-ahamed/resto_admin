@@ -23,23 +23,26 @@ class OfferSelectingPage extends ConsumerWidget {
       appBar: AppBar(
         backgroundColor: apptheme.colors.secondary,
         automaticallyImplyLeading: false,
-        title: Row(
-          children: [
-            InkWell(
-              onTap: () => context.pop(),
-              child: SvgPicture.asset(
-                iconConst.icArrowBackward,
-                height: apptheme.spaces.space_200,
+        title: Padding(
+          padding: const EdgeInsets.only(left: 24),
+          child: Row(
+            children: [
+              InkWell(
+                onTap: () => context.pop(),
+                child: SvgPicture.asset(
+                  iconConst.icArrowBackward,
+                  height: apptheme.spaces.space_200,
+                ),
               ),
-            ),
-            SizedBox(
-              width: apptheme.spaces.space_200,
-            ),
-            Text(
-              constants.txtAppbarTitle,
-              style: apptheme.typography.h600,
-            )
-          ],
+              SizedBox(
+                width: apptheme.spaces.space_200,
+              ),
+              Text(
+                constants.txtAppbarTitle,
+                style: apptheme.typography.h600,
+              )
+            ],
+          ),
         ),
         actions: [
           TextButton(
