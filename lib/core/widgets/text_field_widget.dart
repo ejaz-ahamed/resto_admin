@@ -11,7 +11,6 @@ class TextFieldWidget extends ConsumerWidget {
       required this.textFieldTitle,
       required this.hintText,
       required this.controller});
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);
