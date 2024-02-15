@@ -8,7 +8,7 @@ class AppColorExtension extends ThemeExtension<AppColorExtension> {
   final Color textSubtle;
   final Color textSubtlest;
   final Color textDisabled;
-  final Color backgroundDanger;
+  final Color bottomNavBorder;
 
   AppColorExtension({
     required this.primary,
@@ -18,7 +18,7 @@ class AppColorExtension extends ThemeExtension<AppColorExtension> {
     required this.textSubtle,
     required this.textSubtlest,
     required this.textDisabled,
-    required this.backgroundDanger,
+    required this.bottomNavBorder,
   });
 
   @override
@@ -30,7 +30,7 @@ class AppColorExtension extends ThemeExtension<AppColorExtension> {
     Color? textSubtle,
     Color? textSubtlest,
     Color? textDisabled,
-    Color? backgroundDanger,
+    Color? bottomNavBorder,
   }) {
     return AppColorExtension(
       primary: primary ?? this.primary,
@@ -40,7 +40,7 @@ class AppColorExtension extends ThemeExtension<AppColorExtension> {
       textSubtle: textSubtle ?? this.textSubtle,
       textSubtlest: textSubtlest ?? this.textSubtlest,
       textDisabled: textDisabled ?? this.textDisabled,
-      backgroundDanger: backgroundDanger ?? this.backgroundDanger,
+      bottomNavBorder: bottomNavBorder ?? this.bottomNavBorder,
     );
   }
 
@@ -59,8 +59,7 @@ class AppColorExtension extends ThemeExtension<AppColorExtension> {
       textSubtle: Color.lerp(textSubtle, other.textSubtle, t)!,
       textSubtlest: Color.lerp(textSubtlest, other.textSubtlest, t)!,
       textDisabled: Color.lerp(textDisabled, other.textDisabled, t)!,
-      backgroundDanger:
-          Color.lerp(backgroundDanger, other.backgroundDanger, t)!,
+      bottomNavBorder: Color.lerp(bottomNavBorder, other.bottomNavBorder, t)!,
     );
   }
 }

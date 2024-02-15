@@ -20,7 +20,7 @@ class GridViewWidget extends ConsumerWidget {
           mainAxisExtent: theme.spaces.space_900 * 2.75),
       itemBuilder: (context, index) => Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: theme.colors.secondary,
           borderRadius: BorderRadius.circular(theme.spaces.space_100),
           boxShadow: [
             theme.boxShadow.primary,
