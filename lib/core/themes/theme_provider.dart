@@ -14,9 +14,9 @@ class Theme extends _$Theme {
 
   void switchTheme() {
     if (state.brightness == Brightness.light) {
-      state = ThemeData.dark();
+      state = ref.watch(darkThemeProvider);
     } else {
-      state = ThemeData.light();
+      state = ref.watch(lightThemeProvider);
     }
   }
 }

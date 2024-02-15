@@ -59,6 +59,7 @@ class BottomNaviWidget extends HookConsumerWidget {
         clipBehavior: Clip.antiAlias,
         elevation: 5,
         child: BottomNavigationBar(
+          
           currentIndex: selectedIndex,
           showSelectedLabels: false,
           showUnselectedLabels: false,

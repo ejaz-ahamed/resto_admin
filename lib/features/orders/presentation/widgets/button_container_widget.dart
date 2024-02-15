@@ -24,7 +24,7 @@ class ButtonContainerWidget extends ConsumerWidget {
               text: constants.txtprice,
               onPressed: () {},
               // color: appTheme.colors.secondary,
-              color: appTheme.colors.textSubtle,
+              color: appTheme.colors.secondary,
               borderColor: appTheme.colors.textSubtle,
               textColor: appTheme.colors.text,
             ),

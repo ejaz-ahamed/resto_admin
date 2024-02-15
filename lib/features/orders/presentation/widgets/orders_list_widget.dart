@@ -45,25 +45,17 @@ class OrderListView extends StatelessWidget {
                   child: Container(
                     width: space.space_700,
                     height: space.space_700,
+                    padding: EdgeInsets.all(appTheme.spaces.space_200),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(
                         space.space_500,
                       ),
                       border: Border.all(color: color.textSubtle),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: space.space_400,
-                          width: space.space_400,
-                          child: SvgPicture.asset(
-                            iconsConst.icUser,
-                            colorFilter: ColorFilter.mode(
-                                appTheme.colors.text, BlendMode.srcATop),
-                          ),
-                        ),
-                      ],
+                    child: SvgPicture.asset(
+                      iconsConst.icUser,
+                      colorFilter: ColorFilter.mode(
+                          appTheme.colors.text, BlendMode.srcATop),
                     ),
                   ),
                 ),
