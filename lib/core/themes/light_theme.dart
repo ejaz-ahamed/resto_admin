@@ -33,7 +33,11 @@ final _lightTheme = ThemeData(
         spreadRadius: -10,
         color: Colors.black.withOpacity(0.1),
       ),
-    )
+        secondary: BoxShadow(
+          blurRadius: 20,
+          spreadRadius: -10,
+          color: Colors.black.withOpacity(0.2),
+        ))
   ],
 );
 

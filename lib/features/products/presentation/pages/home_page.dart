@@ -6,6 +6,9 @@ import 'package:resto_admin/core/constants/products_constants/product_constants.
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/gridview_widget.dart';
 import 'package:resto_admin/core/widgets/listview_separated_widget.dart';
+import 'package:resto_admin/features/products/presentation/pages/edit_category_page.dart';
+import 'package:resto_admin/features/products/presentation/pages/product_page.dart';
+import 'package:resto_admin/features/products/presentation/pages/view_categories_page.dart';
 import 'package:resto_admin/features/products/presentation/widgets/row_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/textfield_widget.dart';
 import 'package:resto_admin/features/profile_page/presentation/pages/profile_page.dart';
@@ -59,7 +62,13 @@ class HomePage extends HookConsumerWidget {
                 SizedBox(
                   height: theme.spaces.space_300,
                 ),
-                RowWidget(btnText: data.txtEditbtn, text: data.txtCategory),
+                RowWidget(
+                  btnText: data.txtEditbtn,
+                  text: data.txtCategory,
+                  onPressed: () => context.push(
+                    ViewCategoriesPage.routePath,
+                  ),
+                ),
                 SizedBox(
                   height: theme.spaces.space_250,
                 ),
@@ -70,7 +79,11 @@ class HomePage extends HookConsumerWidget {
                 SizedBox(
                   height: theme.spaces.space_300,
                 ),
-                RowWidget(text: data.txtItems, btnText: data.txtAddBtn),
+                RowWidget(
+                  text: data.txtItems,
+                  btnText: data.txtAddBtn,
+                  onPressed: () => context.push(ProductPage.routePath),
+                ),
                 SizedBox(
                   height: theme.spaces.space_250,
                 ),

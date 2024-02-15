@@ -26,7 +26,7 @@ class OrderScreenOne extends HookConsumerWidget {
         scrolledUnderElevation: 0,
         automaticallyImplyLeading: false,
         title: Text(
-          constants.txtorders,
+          constants.txtOrders,
           style: typography.h800,
         ),
       ),

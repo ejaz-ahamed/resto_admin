@@ -19,26 +19,24 @@ class ItemsDetailsListviewDetails extends ConsumerWidget {
           return Padding(
             padding:
                 EdgeInsets.symmetric(horizontal: appTheme.spaces.space_300),
-            child: Container(
-              child: Padding(
-                padding: EdgeInsets.all(appTheme.spaces.space_100 * 1.25),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TextRegularWidget(text: constants.txtitems),
-                    SizedBox(
-                      width: appTheme.spaces.space_500 * 4.7,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          TextRegularWidget(text: constants.txttype),
-                          TextRegularWidget(text: constants.txtquantity),
-                          TextRegularWidget(text: constants.txtprice),
-                        ],
-                      ),
+            child: Padding(
+              padding: EdgeInsets.all(appTheme.spaces.space_100 * 1.25),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  TextRegularWidget(text: constants.txtItems),
+                  SizedBox(
+                    width: appTheme.spaces.space_500 * 4.7,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TextRegularWidget(text: constants.txtType),
+                        TextRegularWidget(text: constants.txtQuantity),
+                        TextRegularWidget(text: constants.txtPrice),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           );

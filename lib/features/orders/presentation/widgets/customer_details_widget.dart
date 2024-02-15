@@ -29,33 +29,25 @@ class CustomerDetailsWidget extends ConsumerWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(
-                height: appTheme.spaces.space_100 * 14.5,
-                width: appTheme.spaces.space_500 * 4,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    TextWidget(text: constants.txtorderId),
-                    TextWidget(text: constants.txtcustomerName),
-                    TextWidget(text: constants.txttime),
-                    TextWidget(text: constants.txtlocation),
-                  ],
-                ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  TextWidget(text: constants.txtOrderId),
+                  TextWidget(text: constants.txtCustomerName),
+                  TextWidget(text: constants.txtTime),
+                  TextWidget(text: constants.txtLocation),
+                ],
               ),
-              SizedBox(
-                height: appTheme.spaces.space_100 * 14.5,
-                width: appTheme.spaces.space_500 * 4,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    TextRegularWidget(text: constants.txtorderId),
-                    TextRegularWidget(text: constants.txtcustomerName),
-                    TextRegularWidget(text: constants.txttime),
-                    TextRegularWidget(text: constants.txtlocation),
-                  ],
-                ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  TextRegularWidget(text: constants.txtOrderId),
+                  TextRegularWidget(text: constants.txtCustomerName),
+                  TextRegularWidget(text: constants.txtTime),
+                  TextRegularWidget(text: constants.txtLocation),
+                ],
               )
             ],
           ),
