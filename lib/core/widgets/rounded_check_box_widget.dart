@@ -25,7 +25,7 @@ class RoundedCheckboxWidget extends HookConsumerWidget {
           color: isChecked ? theme.colors.primary : Colors.transparent,
           border: Border.all(
             color: theme.colors.primary,
-            width: theme.spaces.space_100 - 6,
+            width: 2,
           ),
         ),
         child: isChecked
