@@ -7,39 +7,32 @@ final isCheckedProvider = StateProvider<bool>((_) => false);
 
 class RoundedCheckboxWidget extends HookConsumerWidget {
   final bool isChecked;
-  final ValueChanged<bool>? onChanged;
-  final bool? isSelectAll;
+  final VoidCallback? onTap;
   const RoundedCheckboxWidget({
     super.key,
     this.isChecked = false,
-    this.onChanged,
-    this.isSelectAll = false,
+    this.onTap,
   });
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final appTheme = AppTheme.of(context).spaces;
-    final isChecked = useState(this.isChecked);
+    final theme = AppTheme.of(context);
     return GestureDetector(
-      onTap: () {
-        isChecked.value = !isChecked.value;
-      },
+      onTap: onTap,
       child: Container(
-        width: appTheme.space_125 * 2,
-        height: appTheme.space_125 * 2,
+        width: theme.spaces.space_100 * 2.5,
+        height: theme.spaces.space_100 * 2.5,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: isChecked.value
-              ? AppTheme.of(context).colors.primary
-              : Colors.transparent,
+          color: isChecked ? theme.colors.primary : Colors.transparent,
           border: Border.all(
-            color: AppTheme.of(context).colors.primary,
+            color: theme.colors.primary,
             width: 2,
           ),
         ),
-        child: isChecked.value
+        child: isChecked
             ? Icon(
                 Icons.check,
-                size: appTheme.space_200,
+                size: theme.spaces.space_200,
                 color: Colors.white,
               )
             : null,
