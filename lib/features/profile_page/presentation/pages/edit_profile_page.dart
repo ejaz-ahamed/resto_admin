@@ -39,14 +39,17 @@ class EditProfilePage extends HookConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Align(
-                  alignment: Alignment.center,
-                  child: CircleAvatar(
-                    
-                    backgroundColor: appTheme.colors.secondary,
-                    radius: appTheme.spaces.space_200 * 7,
-                    child: const AddImageWidget(),
-                  ),
-                ),
+                    alignment: Alignment.center,
+                    child: Container(
+                      height: appTheme.spaces.space_400 * 7,
+                      width: appTheme.spaces.space_400 * 7,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                              color: appTheme.colors.textDisabled,
+                              width: appTheme.spaces.space_25)),
+                      child: const AddImageWidget(),
+                    )),
                 const SizedBox32Widget(),
                 TextFieldWidget(
                     textFieldTitle: constants.txtOpeningTime,

@@ -6,16 +6,16 @@ import 'package:resto_admin/core/themes/extensions/space_extension.dart';
 import 'package:resto_admin/core/themes/extensions/typography_extension.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'light_theme.g.dart';
+part 'dark_theme.g.dart';
 
-final _lightTheme = ThemeData(
-  brightness: Brightness.light,
+final _darkTheme = ThemeData(
+  brightness: Brightness.dark,
   extensions: [
     AppColorExtension(
       primary: AppColorPalettes.red400,
-      secondary: AppColorPalettes.white500,
-      text: AppColorPalettes.blue900,
-      textInverse: AppColorPalettes.gray200,
+      secondary: AppColorPalettes.grey1000,
+      text: AppColorPalettes.white500,
+      textInverse: AppColorPalettes.blue900,
       textSubtle: AppColorPalettes.gray300,
       textSubtlest: AppColorPalettes.grey400,
       textDisabled: AppColorPalettes.grey350,
@@ -23,25 +23,26 @@ final _lightTheme = ThemeData(
     ),
     AppSpaceExtension.fromBaseSpace(8),
     AppTypographyExtension.fromColors(
-      defaultFontColor: AppColorPalettes.blue900,
+      defaultFontColor: AppColorPalettes.white500,
       linkColor: Colors.blue,
       dimFontColor: AppColorPalettes.grey400,
     ),
     AppBoxShadowExtension(
-        primary: BoxShadow(
-          blurRadius: 34,
-          spreadRadius: -10,
-          color: Colors.black.withOpacity(0.1),
-        ),
-        secondary: BoxShadow(
-          blurRadius: 20,
-          spreadRadius: -10,
-          color: Colors.black.withOpacity(0.2),
-        ))
+      primary: BoxShadow(
+        blurRadius: 1,
+        spreadRadius: 0,
+        color: Colors.grey.withOpacity(1),
+      ),
+      secondary: BoxShadow(
+        blurRadius: 1,
+        spreadRadius: 0,
+        color: Colors.grey.withOpacity(1),
+      ),
+    )
   ],
 );
 
 @riverpod
-ThemeData lightTheme(LightThemeRef ref) {
-  return _lightTheme;
+ThemeData darkTheme(DarkThemeRef ref) {
+  return _darkTheme;
 }

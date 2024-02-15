@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:resto_admin/core/router/router.dart';
 import 'package:resto_admin/core/themes/light_theme.dart';
 import 'package:resto_admin/firebase_options.dart';
+import 'package:resto_admin/core/themes/theme_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +24,7 @@ class MyApp extends ConsumerWidget {
     return MaterialApp.router(
       scaffoldMessengerKey: MyApp.scaffoldMessengerKey,
       debugShowCheckedModeBanner: false,
-      theme: ref.watch(lightThemeProvider),
+      theme: ref.watch(themeProvider),
       routerConfig: ref.watch(goRouterProvider),
     );
   }
