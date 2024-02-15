@@ -1,4 +1,4 @@
-abstract class AuthenticationDataSourse{
- Future<void>loginAuth(String email,String password);
- Future<void>logout();
+abstract class AuthenticationDataSourse {
+  Future<void> firebaseAuth(String email, String password);
+  Future<void> logout();
 }

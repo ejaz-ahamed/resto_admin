@@ -9,8 +9,10 @@ class LogOutUsecase {
   Future<void> call() async {
     try {
       await repositery.logout();
-    } on BaseException {
-      throw AuthenticationFailException("cannot log out please try again");
+    } on BaseException catch (e) {
+      throw AuthenticationFailException(e.message);
+    } on Exception {
+      throw AuthenticationFailException('Login Failed');
     }
   }
 }

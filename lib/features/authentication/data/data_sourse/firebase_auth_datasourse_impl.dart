@@ -9,7 +9,7 @@ class AuthenticationDataSourseImpl implements AuthenticationDataSourse {
 
   AuthenticationDataSourseImpl(this._auth);
   @override
-  Future<void> loginAuth(String email, String password) async {
+  Future<void> firebaseAuth(String email, String password) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
