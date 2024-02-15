@@ -37,6 +37,7 @@ class AddOfferPage extends HookConsumerWidget {
       selectedIndex.value = index;
     }
 
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
