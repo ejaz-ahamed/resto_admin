@@ -41,8 +41,7 @@ class GridViewOfferPageWidget extends ConsumerWidget {
                       right: theme.spaces.space_100,
                       child: RoundedCheckboxWidget(
                         isChecked: false,
-                        isSelectAll: false,
-                        onChanged: (value) {},
+                        onTap: () {},
                       ))
                 ],
               ),
