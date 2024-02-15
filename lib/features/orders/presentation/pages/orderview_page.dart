@@ -3,7 +3,7 @@ import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/button_container_widget.dart';
-import 'package:resto_admin/features/orders/presentation/widgets/customer_Details_widget.dart';
+import 'package:resto_admin/features/orders/presentation/widgets/customer_details_widget.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/item_details_listview_widget.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/item_details_widget.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/orderview_page_appbar_widget.dart';

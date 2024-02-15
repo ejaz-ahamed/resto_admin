@@ -21,15 +21,14 @@ class ButtonContainerWidget extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             ButtonWidget(
-              text: constants.txtprice,
+              text: constants.txtRejct,
               onPressed: () {},
-              // color: appTheme.colors.secondary,
-              color: Colors.white,
+              color: appTheme.colors.secondary,
               borderColor: appTheme.colors.textSubtle,
               textColor: appTheme.colors.text,
             ),
             ButtonWidget(
-              text: constants.txtitems,
+              text: constants.txtAccept,
               onPressed: () {},
               color: appTheme.colors.primary,
               borderColor: appTheme.colors.primary,
