@@ -4,8 +4,8 @@ import 'package:resto_admin/core/widgets/bottom_navigation/bottom_nav_widget.dar
 import 'package:resto_admin/features/authentication/presentation/pages/login_page.dart';
 
 class AuthSwitcher extends StatelessWidget {
-  const AuthSwitcher({super.key});
   static const routePath = '/';
+  const AuthSwitcher({super.key});
 
   @override
   Widget build(BuildContext context) {

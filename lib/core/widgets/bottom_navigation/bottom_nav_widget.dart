@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/core/widgets/under_construction/under_construction_widget.dart';
 
 import 'package:resto_admin/features/authentication/presentation/pages/login_page.dart';
 import 'package:resto_admin/features/offer/presentation/pages/offer_page.dart';
@@ -12,7 +13,7 @@ import 'package:resto_admin/features/products/presentation/pages/home_page.dart'
 import 'package:resto_admin/features/products/presentation/providers/navbar_selected_page_provider.dart';
 
 class BottomNaviWidget extends HookConsumerWidget {
-  static const routePath = '/';
+  static const routePath = '/bottomNav';
   const BottomNaviWidget({super.key});
 
   @override
@@ -47,7 +48,7 @@ class BottomNaviWidget extends HookConsumerWidget {
         onPageChanged: (value) =>
             ref.read(navbarSelectedPageProvider.notifier).state = value,
         children: const [
-          LoginPage(),
+          UnderConstractionWidget(),
           HomePage(),
           OrderScreenOne(),
           OfferPage(),

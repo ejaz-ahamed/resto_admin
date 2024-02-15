@@ -4,10 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/login_page_constants/login_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/core/widgets/bottom_navigation/bottom_nav_widget.dart';
 import 'package:resto_admin/core/widgets/submit_button_widget.dart';
 import 'package:resto_admin/core/widgets/login_textfield_widget.dart';
-import 'package:resto_admin/features/authentication/presentation/pages/provider/authentication_provider.dart';
-import 'package:resto_admin/features/products/presentation/pages/home_page.dart';
+import 'package:resto_admin/features/authentication/presentation/provider/authentication_provider.dart';
 
 class LoginPage extends HookConsumerWidget {
   static const routePath = "/loginPage";
@@ -79,7 +79,6 @@ class LoginPage extends HookConsumerWidget {
                   ref
                       .read(authenticationProvider.notifier)
                       .loginAuth(emailController.text, passwordController.text);
-                  context.push(HomePage.routePath);
                 }),
           ),
         ],

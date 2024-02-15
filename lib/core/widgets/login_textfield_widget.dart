@@ -20,6 +20,7 @@ class LoginTextfieldWidget extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: spacer.space_300),
       child: TextField(
+        controller: controller,
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: typography.h400.copyWith(color: colors.textSubtlest),
