@@ -17,67 +17,70 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'router.g.dart';
 
-final router = GoRouter(initialLocation: BottomNaviWidget.routePath, routes: [
-  GoRoute(
-    path: BottomNaviWidget.routePath,
-    builder: (context, state) => const BottomNaviWidget(),
-  ),
-  GoRoute(
-    path: HomePage.routePath,
-    builder: (context, state) => const HomePage(),
-  ),
-  GoRoute(
-    path: ProfilePage.routePath,
-    builder: (context, state) => const ProfilePage(),
-  ),
-  GoRoute(
-    path: EditProfilePage.routePath,
-    builder: (context, state) => const EditProfilePage(),
-  ),
-  GoRoute(
-    path: EditPasswordPage.routePath,
-    builder: (context, state) => const EditPasswordPage(),
-  ),
-  GoRoute(
-    path: AddOfferPage.routePath,
-    builder: (context, state) => const AddOfferPage(),
-  ),
-  GoRoute(
-    path: EditOfferPage.routePath,
-    builder: (context, state) => const EditOfferPage(),
-  ),
-  GoRoute(
-    path: OrderViewPage.routePath,
-    builder: (context, state) => const OrderViewPage(),
-  ),
-  GoRoute(
-    path: EditCategoryPage.routePath,
-    builder: (context, state) => const EditCategoryPage(),
-  ),
-  GoRoute(
-    path: ProductPage.routePath,
-    builder: (context, state) => const ProductPage(),
-  ),
-  GoRoute(
+final router = GoRouter(
+  initialLocation: BottomNaviWidget.routePath,
+  routes: [
+    GoRoute(
+      path: BottomNaviWidget.routePath,
+      builder: (context, state) => const BottomNaviWidget(),
+    ),
+    GoRoute(
+      path: HomePage.routePath,
+      builder: (context, state) => const HomePage(),
+    ),
+    GoRoute(
+      path: ProfilePage.routePath,
+      builder: (context, state) => const ProfilePage(),
+    ),
+    GoRoute(
+      path: EditProfilePage.routePath,
+      builder: (context, state) => const EditProfilePage(),
+    ),
+    GoRoute(
+      path: EditPasswordPage.routePath,
+      builder: (context, state) => const EditPasswordPage(),
+    ),
+    GoRoute(
       path: AddOfferPage.routePath,
-      builder: (context, state) => const AddOfferPage()),
-  GoRoute(
-    path: ProductPage.routePath,
-    builder: (context, state) => const ProductPage(),
-  ),
-  GoRoute(
-    path: AddCategoryPage.routePath,
-    builder: (context, state) => const AddCategoryPage(),
-  ),
-  GoRoute(
-    path: OfferSelectingPage.routePath,
-    builder: (context, state) => const OfferSelectingPage(),
-  ),
-  GoRoute(
-    path: OverViewItemsPage.routePath,
-    builder: (context, state) => const OverViewItemsPage(),
-  )
-]);
+      builder: (context, state) => const AddOfferPage(),
+    ),
+    GoRoute(
+      path: EditOfferPage.routePath,
+      builder: (context, state) => const EditOfferPage(),
+    ),
+    GoRoute(
+      path: OrderViewPage.routePath,
+      builder: (context, state) => const OrderViewPage(),
+    ),
+    GoRoute(
+      path: EditCategoryPage.routePath,
+      builder: (context, state) => const EditCategoryPage(),
+    ),
+    GoRoute(
+      path: ProductPage.routePath,
+      builder: (context, state) => const ProductPage(),
+    ),
+    GoRoute(
+        path: AddOfferPage.routePath,
+        builder: (context, state) => const AddOfferPage()),
+    GoRoute(
+      path: ProductPage.routePath,
+      builder: (context, state) => const ProductPage(),
+    ),
+    GoRoute(
+      path: AddCategoryPage.routePath,
+      builder: (context, state) => const AddCategoryPage(),
+    ),
+    GoRoute(
+      path: OfferSelectingPage.routePath,
+      builder: (context, state) => const OfferSelectingPage(),
+    ),
+    GoRoute(
+      path: OverViewItemsPage.routePath,
+      builder: (context, state) => const OverViewItemsPage(),
+    )
+  ],
+);
 
 @riverpod
 GoRouter goRouter(GoRouterRef ref) {
