@@ -10,7 +10,8 @@ class PreferredAppBarWidget extends ConsumerWidget {
   final String title;
   final String btnText;
 
-  const PreferredAppBarWidget({super.key, required this.title,required this.btnText});
+  const PreferredAppBarWidget(
+      {super.key, required this.title, required this.btnText});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     AppAssetsConstants iconConst = AppAssetsConstants();
