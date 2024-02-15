@@ -26,10 +26,16 @@ class ProductConstants {
   final txtAddOnBtnTitle = 'Add Add-Ons';
   final txtSaveBtn = 'Save';
   final txtEditCategoryTitle = 'Edit category';
+  final txtManageCategories = ' Manage Categories';
+  final txtAddCategory = 'Add Category';
+  final txtDelete = 'Delete';
+  final txtSelectAll = 'Select All';
   final txtDelete = 'Delete';
   final txtCategoryName = 'Category Name';
   final txtSoups = 'Soups';
-  
+  final txtDescriptionfull =
+      "Lorem ipsum dolor sit amet consectetur. Imperdiet mi tellus quam lacinia porttitor sed at proin molestie. Ipsum sit leo nisi felis. Volutpat ut tempus suspendisse lacinia tincidunt euismod at elit volutpat. Tristique felis scelerisque sed hendrerit ante. Diam donec nunc massa dolor sed neque commodo nec.";
+  final txtOverviewTitle = "Hot and Sour";
 }
 
 @riverpod
