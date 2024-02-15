@@ -12,8 +12,8 @@ class LoginUsecase {
       await repositery.loginAuth(email, password);
     } on BaseException catch (e) {
       throw AuthenticationFailException(e.message);
-    } on Exception {
-      throw AuthenticationFailException('Logout Failed');
+    } catch (e) {
+      throw BaseException('Login Failed');
     }
   }
 }

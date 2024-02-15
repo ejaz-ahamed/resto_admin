@@ -11,8 +11,8 @@ class LogOutUsecase {
       await repositery.logout();
     } on BaseException catch (e) {
       throw AuthenticationFailException(e.message);
-    } on Exception {
-      throw AuthenticationFailException('Login Failed');
+    } catch (e) {
+      throw BaseException('Logout Failed');
     }
   }
 }
