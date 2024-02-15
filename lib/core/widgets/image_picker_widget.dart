@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/core/widgets/add_image_widget.dart';
 
 class ImagePickerWidget extends ConsumerWidget {
   const ImagePickerWidget({super.key});
@@ -26,21 +27,10 @@ class ImagePickerWidget extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Center(
-              child: SvgPicture.asset(
-                asset.icAddImage,
-                height: AppTheme.of(context).spaces.space_600,
-                width: AppTheme.of(context).spaces.space_600,
-              ),
+              child: AddImageWidget(),
             ),
             SizedBox(
               height: AppTheme.of(context).spaces.space_100,
-            ),
-            Text(
-              data.txtAddImg,
-              style: AppTheme.of(context)
-                  .typography
-                  .h400
-                  .copyWith(color: AppTheme.of(context).colors.textDisabled),
             ),
           ],
         ),
