@@ -26,15 +26,15 @@ class ItemDetailsWidget extends ConsumerWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TextWidget(text: constants.txtitems),
+              TextWidget(text: constants.txtItems),
               SizedBox(
                 width: appTheme.spaces.space_500 * 4.7,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TextWidget(text: constants.txttype),
-                    TextWidget(text: constants.txtquantity),
-                    TextWidget(text: constants.txtprice),
+                    TextWidget(text: constants.txtType),
+                    TextWidget(text: constants.txtQuantity),
+                    TextWidget(text: constants.txtPrice),
                   ],
                 ),
               ),

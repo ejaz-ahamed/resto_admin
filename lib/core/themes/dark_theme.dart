@@ -19,7 +19,7 @@ final _darkTheme = ThemeData(
       textSubtle: AppColorPalettes.gray300,
       textSubtlest: AppColorPalettes.grey400,
       textDisabled: AppColorPalettes.grey350,
-      backgroundDanger: Colors.red,
+      bottomNavBorder: AppColorPalettes.grey350.withOpacity(0.2),
     ),
     AppSpaceExtension.fromBaseSpace(8),
     AppTypographyExtension.fromColors(

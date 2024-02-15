@@ -38,7 +38,7 @@ class OrderviewPageAppBarWidget extends ConsumerWidget {
                   width: appTheme.spaces.space_200,
                 ),
                 Text(
-                  constants.txtorderDetails,
+                  constants.txtOrderDetails,
                   style: appTheme.typography.h700,
                 ),
               ],
@@ -49,7 +49,7 @@ class OrderviewPageAppBarWidget extends ConsumerWidget {
               InkWell(
                 onTap: () {},
                 child: Text(
-                  constants.txtprint,
+                  constants.txtPrint,
                   style: appTheme.typography.h300.copyWith(
                     color: appTheme.colors.primary,
                   ),

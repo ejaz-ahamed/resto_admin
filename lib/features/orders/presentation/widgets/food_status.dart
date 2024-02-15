@@ -20,9 +20,9 @@ class FoodStatus extends HookConsumerWidget {
 
     /// Tabs to show
     final tabsText = useMemoized(() => [
-          constants.txtorders,
-          constants.txtpreparing,
-          constants.txtcompleted,
+          constants.txtOrders,
+          constants.txtPreparing,
+          constants.txtCompleted,
         ]);
 
     /// Handle tapping on the tab items
@@ -35,17 +35,13 @@ class FoodStatus extends HookConsumerWidget {
       child: ListView(
         scrollDirection: Axis.horizontal,
         children: [
-          Row(
-            children: [
-              for (var i = 0; i < tabsText.length; i++)
-                ButtonWidget(
-                  onPressed: () => tabOnPressed(i),
-                  text: tabsText[i],
-                  isSelected: selectedIndex.value == i,
-                  foodCount: 12,
-                ),
-            ],
-          )
+          for (var i = 0; i < tabsText.length; i++)
+            ButtonWidget(
+              onPressed: () => tabOnPressed(i),
+              text: tabsText[i],
+              isSelected: selectedIndex.value == i,
+              foodCount: 12,
+            )
         ],
       ),
     );

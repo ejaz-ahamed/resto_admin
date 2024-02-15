@@ -7,8 +7,10 @@ import 'package:resto_admin/core/themes/app_theme.dart';
 
 class AppBarWidget extends ConsumerWidget {
   final String title;
-
-  const AppBarWidget({super.key, required this.title});
+  final String? actionButtonName;
+  final void Function()? onPressed;
+  const AppBarWidget(
+      {super.key, required this.title, this.actionButtonName, this.onPressed});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -40,6 +42,19 @@ class AppBarWidget extends ConsumerWidget {
           ],
         ),
       ),
+      actions: [
+        Padding(
+            padding: EdgeInsets.only(right: appTheme.spaces.space_300),
+            child: InkWell(
+              onTap: onPressed,
+              child: Text(
+                actionButtonName ?? '',
+                style: appTheme.typography.h300.copyWith(
+                  color: appTheme.colors.primary,
+                ),
+              ),
+            ))
+      ],
     );
   }
 }
