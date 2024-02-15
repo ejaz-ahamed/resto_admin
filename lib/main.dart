@@ -8,16 +8,16 @@ void main() {
 }
 
 class MyApp extends ConsumerWidget {
+  static final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp.router(
+      scaffoldMessengerKey: MyApp.scaffoldMessengerKey,
       debugShowCheckedModeBanner: false,
       theme: ref.watch(lightThemeProvider),
       routerConfig: ref.watch(goRouterProvider),
     );
   }
 }
-
-
