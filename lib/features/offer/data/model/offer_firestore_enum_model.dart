@@ -1,0 +1,4 @@
+enum OfferTypeEnumModel {
+  amount,
+  percentage,
+}
