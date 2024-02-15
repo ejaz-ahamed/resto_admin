@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
-import 'package:resto_admin/features/products/presentation/pages/overview_items_page.dart';
+import 'package:resto_admin/core/widgets/rounded_check_box_widget.dart';
 
-class GridViewWidget extends ConsumerWidget {
-  const GridViewWidget({super.key});
+class GridViewOfferPageWidget extends ConsumerWidget {
+  const GridViewOfferPageWidget({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = AppTheme.of(context);
@@ -22,25 +21,29 @@ class GridViewWidget extends ConsumerWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(theme.spaces.space_100),
-          boxShadow: [
-            theme.boxShadow.primary,
-          ],
+          boxShadow: [theme.boxShadow.primary],
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: theme.spaces.space_150),
           child: Column(
             children: [
-              InkWell(
-                onTap: () {
-                  context.push(OverViewItemsPage.routePath);
-                },
-                child: Container(
-                  width: theme.spaces.space_500 * 3.7,
-                  height: theme.spaces.space_500 * 3.7,
-                  decoration: BoxDecoration(
-                    color: theme.colors.textInverse,
+              Stack(
+                children: [
+                  Container(
+                    width: theme.spaces.space_500 * 3.7,
+                    height: theme.spaces.space_500 * 3.7,
+                    decoration: BoxDecoration(
+                      color: theme.colors.textInverse,
+                    ),
                   ),
-                ),
+                  Positioned(
+                      top: theme.spaces.space_100,
+                      right: theme.spaces.space_100,
+                      child: RoundedCheckboxWidget(
+                        isChecked: false,
+                        onTap: () {},
+                      ))
+                ],
               ),
               SizedBox(
                 height: theme.spaces.space_50,

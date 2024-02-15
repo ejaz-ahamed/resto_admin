@@ -22,8 +22,7 @@ class AppBoxShadowExtension extends ThemeExtension<AppBoxShadowExtension> {
     }
 
     return AppBoxShadowExtension(
-      primary: BoxShadow.lerp(primary, other.primary, t)!,
-      secondary: BoxShadow.lerp(primary, other.primary, t)!,
-    );
+        primary: BoxShadow.lerp(primary, other.primary, t)!,
+        secondary: BoxShadow.lerp(secondary, other.secondary, t)!);
   }
 }

@@ -20,9 +20,9 @@ class FoodStatus extends HookConsumerWidget {
 
     /// Tabs to show
     final tabsText = useMemoized(() => [
-          constants.txtorders,
-          constants.txtpreparing,
-          constants.txtcompleted,
+          constants.txtOrders,
+          constants.txtPreparing,
+          constants.txtCompleted,
         ]);
 
     /// Handle tapping on the tab items
