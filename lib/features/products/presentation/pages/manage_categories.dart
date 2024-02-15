@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
-import 'package:resto_admin/features/products/presentation/widgets/category_Grid_widget.dart';
+import 'package:resto_admin/features/products/presentation/widgets/category_grid_widget.dart';
 
 class ManageCategoriesPage extends HookConsumerWidget {
+  static const routePath = '/manageCotegory';
   const ManageCategoriesPage({super.key});
 
   @override
@@ -23,36 +25,47 @@ class ManageCategoriesPage extends HookConsumerWidget {
       backgroundColor: theme.colors.secondary,
       appBar: AppBar(
         backgroundColor: theme.colors.secondary,
+        titleSpacing: theme.spaces.space_300,
+        scrolledUnderElevation: 0,
+        automaticallyImplyLeading: false,
         title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            IconButton(
-              icon: SvgPicture.asset(
-                assets.icArrowBackward,
-                width: theme.spaces.space_100,
-                height: theme.spaces.space_200,
+            InkWell(
+              onTap: () {
+                context.pop();
+              },
+              child: Row(
+                children: [
+                  SvgPicture.asset(
+                    assets.icArrowBackward,
+                    height: theme.spaces.space_200,
+                  ),
+                  SizedBox(
+                    width: theme.spaces.space_200,
+                  ),
+                  Text(
+                    data.txtManageCategories,
+                    style: theme.typography.h700,
+                  ),
+                ],
               ),
-              onPressed: () {},
             ),
-            Text(data.txtManageCategories,
-                style: AppTheme.of(context)
-                    .typography
-                    .h500
-                    .copyWith(color: AppTheme.of(context).colors.text)),
+            Row(
+              children: [
+                InkWell(
+                  onTap: () {},
+                  child: Text(
+                    data.txtSelectAll,
+                    style: theme.typography.h300.copyWith(
+                      color: theme.colors.primary,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: theme.spaces.space_100 * 2.875),
-            child: TextButton(
-              onPressed: () {
-                selectedItems.value = Set.from(Iterable.generate(7, (i) => i));
-              },
-              child: Text(data.txtSelectAll,
-                  style: theme.typography.h500
-                      .copyWith(color: theme.colors.primary)),
-            ),
-          ),
-        ],
       ),
       body: Column(
         children: [
@@ -60,13 +73,15 @@ class ManageCategoriesPage extends HookConsumerWidget {
             child: Padding(
               padding: EdgeInsets.all(theme.spaces.space_300),
               child: SizedBox(
-                  height: theme.spaces.space_100 * 68.75,
                   width: theme.spaces.space_100 * 47.5,
                   child: CategoryGridWidget(selectedItems: selectedItems)),
             ),
           ),
-          ElevatedButtonWidget(text: data.txtDelete, onPressed: () {})
         ],
+      ),
+      bottomNavigationBar: ElevatedButtonWidget(
+        text: data.txtDelete,
+        onPressed: () {},
       ),
     );
   }
