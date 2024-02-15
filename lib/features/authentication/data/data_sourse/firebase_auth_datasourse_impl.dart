@@ -4,10 +4,10 @@ import 'package:resto_admin/features/authentication/data/data_sourse/firebase_au
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'firebase_auth_datasourse_impl.g.dart';
 
-class AuthenticationDataSourseImpl implements AuthenticationDataSourse {
+class FirebaseAuthDataSourseImpl implements FirebaseAuthDataSourse {
   final FirebaseAuth _auth;
 
-  AuthenticationDataSourseImpl(this._auth);
+  FirebaseAuthDataSourseImpl(this._auth);
   @override
   Future<void> firebaseAuth(String email, String password) async {
     try {
@@ -30,7 +30,6 @@ class AuthenticationDataSourseImpl implements AuthenticationDataSourse {
 }
 
 @riverpod
-AuthenticationDataSourse authenticationDataSourse(
-    AuthenticationDataSourseRef ref) {
-  return AuthenticationDataSourseImpl(FirebaseAuth.instance);
+FirebaseAuthDataSourse firebaseAuthDataSourse(FirebaseAuthDataSourseRef ref) {
+  return FirebaseAuthDataSourseImpl(FirebaseAuth.instance);
 }

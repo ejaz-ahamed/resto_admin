@@ -5,7 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'auth_repositery_impl.g.dart';
 
 class AuthRepositeryImpl implements AuthRepositery {
-  final AuthenticationDataSourse dataSourse;
+  final FirebaseAuthDataSourse dataSourse;
 
   AuthRepositeryImpl({required this.dataSourse});
   @override
@@ -22,5 +22,5 @@ class AuthRepositeryImpl implements AuthRepositery {
 @riverpod
 AuthRepositery authRepositery(AuthRepositeryRef ref) {
   return AuthRepositeryImpl(
-      dataSourse: ref.watch(authenticationDataSourseProvider));
+      dataSourse: ref.watch(firebaseAuthDataSourseProvider));
 }
