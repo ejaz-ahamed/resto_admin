@@ -27,7 +27,7 @@ class AddCategoryPage extends ConsumerWidget {
         child: Column(
           children: [
             const SizedBox32Widget(),
-            const ImagePickerWidget(),
+             ImagePickerWidget(),
             const SizedBox24Widget(),
             TextFieldWidget(
                 textFieldTitle: data.txtCategory,

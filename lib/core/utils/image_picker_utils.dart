@@ -33,8 +33,9 @@ class ImagePickerUtils {
     }
   }
 
-  static void showDialogueForImagePicker(BuildContext context) {
-    showDialog(
+  static Future<XFile?> showDialogueForImagePicker(BuildContext context) async {
+    late Future<XFile?> image;
+    await showDialog(
       context: context,
       builder: (context) => AlertDialog(
           backgroundColor: AppTheme.of(context).colors.secondary,
@@ -43,7 +44,7 @@ class ImagePickerUtils {
               children: [
                 TextButton(
                     onPressed: () {
-                      ImagePickerUtils.pickImageFromCamera(context);
+                      image = ImagePickerUtils.pickImageFromCamera(context);
                       context.pop();
                     },
                     child: Text(
@@ -52,7 +53,7 @@ class ImagePickerUtils {
                     )),
                 TextButton(
                     onPressed: () {
-                      ImagePickerUtils.pickImageFromGallery(context);
+                      image = ImagePickerUtils.pickImageFromGallery(context);
                       context.pop();
                     },
                     child: Text(
@@ -63,5 +64,7 @@ class ImagePickerUtils {
             ),
           )),
     );
+    // print((await image)?.path);
+    return image;
   }
 }

@@ -11,7 +11,9 @@ import 'package:resto_admin/core/widgets/image_picker_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
+import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
 import 'package:resto_admin/features/products/presentation/pages/home_page.dart';
+import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
 import 'package:resto_admin/features/products/presentation/widgets/product_type_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/row_widget.dart';
 
@@ -22,6 +24,7 @@ class ProductPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);
     final data = ref.watch(productConstantsProvider);
+    final List<ProductEntity> entity;
     final productController = useTextEditingController();
     final descreptionController = useTextEditingController();
     final fullQtyController = useTextEditingController(text: "Full");
@@ -96,6 +99,13 @@ class ProductPage extends HookConsumerWidget {
         bottomNavigationBar: ElevatedButtonWidget(
             text: data.txtSaveBtn,
             onPressed: () {
+              ref.read(productProvider.notifier).addProduct(
+                    ProductEntity(
+                      name: productController.text,
+                      image_path: ref.read(imageProvider)!.path,
+                      description: descreptionController.text,
+                    ),
+                  );
               context.go(HomePage.routePath);
             }),
       ),
