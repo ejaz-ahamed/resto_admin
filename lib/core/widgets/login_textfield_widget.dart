@@ -4,10 +4,12 @@ import 'package:resto_admin/core/themes/app_theme.dart';
 class LoginTextfieldWidget extends StatelessWidget {
   final String hintText;
   final Widget prefixIcon;
+  final TextEditingController controller;
   const LoginTextfieldWidget({
     super.key,
     required this.hintText,
     required this.prefixIcon,
+    required this.controller,
   });
 
   @override
