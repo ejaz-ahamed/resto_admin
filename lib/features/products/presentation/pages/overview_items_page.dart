@@ -8,13 +8,19 @@ import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_16_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
+import 'package:resto_admin/features/products/presentation/widgets/product_type_widget.dart';
+import 'package:resto_admin/features/products/presentation/widgets/row_widget.dart';
 
 class OverViewItemsPage extends HookConsumerWidget {
+  static const routePath = '/overview';
   const OverViewItemsPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final TextEditingController controller = useTextEditingController();
+    final TextEditingController typeController = useTextEditingController();
+    final TextEditingController priCecontroller = useTextEditingController();
+
     final apptheme = AppTheme.of(context);
     final data = ref.watch(productConstantsProvider);
     return GestureDetector(
@@ -44,20 +50,33 @@ class OverViewItemsPage extends HookConsumerWidget {
                 ),
                 const SizedBox16Widget(),
                 TextFieldWidget(
-                  textFieldTitle: data.txtDescriptionTitle,
+                  textFieldTitle: data.txtDescription,
                   hintText: data.txtDescriptionfull,
                   controller: controller,
                   maxLines: 6,
                 ),
                 const SizedBox32Widget(),
-                Padding(
-                  padding: EdgeInsets.only(
-                      right: MediaQuery.sizeOf(context).width / 1.31),
-                  child: Text(
-                    data.txtOverviewtype,
-                    style: apptheme.typography.h600,
-                  ),
-                )
+                RowWidget(
+                  text: data.txtType,
+                  btnText: '',
+                  onPressed: () {},
+                ),
+                ProductTypeWidget(
+                  addOnController: typeController,
+                  addOnPriceController: priCecontroller,
+                  hint: data.txtFullQty,
+                ),
+                SizedBox32Widget(),
+                RowWidget(
+                  text: data.txtAddOns,
+                  btnText: '',
+                  onPressed: () {},
+                ),
+                ProductTypeWidget(
+                  addOnController: typeController,
+                  addOnPriceController: priCecontroller,
+                  hint: data.txtAddOnBtnTitle,
+                ),
               ],
             ),
           ),

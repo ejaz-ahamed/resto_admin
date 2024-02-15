@@ -4,4 +4,5 @@ class SelectingProductPageConstants {
   final txtAddOfferText = 'Add';
   final txtSelectAllText = 'Select All';
   final txtListtext = 'Hot Soup';
+  final txtSave = 'Save';
 }

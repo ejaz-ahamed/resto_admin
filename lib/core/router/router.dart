@@ -7,6 +7,7 @@ import 'package:resto_admin/features/orders/presentation/pages/orderview_page.da
 import 'package:resto_admin/features/products/presentation/pages/edit_category_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/add_category_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/home_page.dart';
+import 'package:resto_admin/features/products/presentation/pages/overview_items_page.dart';
 import 'package:resto_admin/features/profile_page/presentation/pages/edit_password_page.dart';
 import 'package:resto_admin/features/profile_page/presentation/pages/edit_profile_page.dart';
 import 'package:resto_admin/features/profile_page/presentation/pages/profile_page.dart';
@@ -71,6 +72,10 @@ final router = GoRouter(initialLocation: BottomNaviWidget.routePath, routes: [
   GoRoute(
     path: OfferSelectingPage.routePath,
     builder: (context, state) => const OfferSelectingPage(),
+  ),
+  GoRoute(
+    path: OverViewItemsPage.routePath,
+    builder: (context, state) => const OverViewItemsPage(),
   )
 ]);
 

@@ -94,7 +94,10 @@ class OfferSelectingPage extends ConsumerWidget {
           ),
         ),
       ),
-      bottomNavigationBar: ElevatedButtonWidget(text: "Save", onPressed: () {}),
+      bottomNavigationBar: ElevatedButtonWidget(
+        text: constants.txtSave,
+        onPressed: () {},
+      ),
     );
   }
 }
