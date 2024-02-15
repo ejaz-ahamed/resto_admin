@@ -23,11 +23,7 @@ class GridViewWidget extends ConsumerWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(theme.spaces.space_100),
           boxShadow: [
-            BoxShadow(
-              blurRadius: 34,
-              spreadRadius: -10,
-              color: Colors.black.withOpacity(0.1),
-            )
+            theme.boxShadow.primary,
           ],
         ),
         child: Padding(
