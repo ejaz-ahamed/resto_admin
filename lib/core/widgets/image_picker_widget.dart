@@ -4,6 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/core/utils/image_picker_utils.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ImagePickerWidget extends ConsumerWidget {
   const ImagePickerWidget({super.key});
@@ -12,7 +14,9 @@ class ImagePickerWidget extends ConsumerWidget {
     final data = ref.watch(productConstantsProvider);
     final asset = AppAssetsConstants();
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        ImagePickerUtils.showDialogueForImagePicker(context);
+      },
       child: Container(
         height: AppTheme.of(context).spaces.space_500 * 6,
         width: MediaQuery.sizeOf(context).width,
