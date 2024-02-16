@@ -12,7 +12,7 @@ class OfferFirestoreDatasourceImpl implements OfferFirestoreDatasource {
           fromFirestore: OfferFirestoreModel.fromFirestore,
           toFirestore: (model, _) => model.toFirestore());
   @override
-  Future<void> addtofirestore(OfferFirestoreModel model) async {
+  Future<void> addtoFirestore(OfferFirestoreModel model) async {
     await collection.doc(model.name).set(model);
   }
 }

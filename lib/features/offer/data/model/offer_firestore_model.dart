@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:resto_admin/features/offer/data/model/offer_firestore_enum_model.dart';
+import 'package:resto_admin/features/offer/data/model/offer_type_model.dart';
 
 part 'offer_firestore_model.freezed.dart';
 part 'offer_firestore_model.g.dart';
@@ -13,7 +13,7 @@ class OfferFirestoreModel with _$OfferFirestoreModel {
     required String imagepath,
     required String name,
     required String description,
-    required OfferTypeEnumModel offerType,
+    required OfferTypeModel offerType,
     required List<String> product,
   }) = _OfferFirestoreModel;
 

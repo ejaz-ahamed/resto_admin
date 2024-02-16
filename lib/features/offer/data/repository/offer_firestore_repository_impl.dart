@@ -11,14 +11,14 @@ class OfferFirestoreRepositoryImpl implements OfferFirestoreRepository {
   final OfferFirestoreDatasource datasource;
   OfferFirestoreRepositoryImpl({required this.datasource});
   @override
-  Future<void> addtofirestore(OfferFirestoreEntity entity) async {
+  Future<void> addOffer(OfferFirestoreEntity entity) async {
     final offeradd = OfferFirestoreModel(
         imagepath: entity.imagepath,
         name: entity.name,
         description: entity.description,
         offerType: entity.offerType,
         product: entity.product);
-    await datasource.addtofirestore(offeradd);
+    await datasource.addtoFirestore(offeradd);
   }
 }
 
