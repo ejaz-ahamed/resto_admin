@@ -18,7 +18,7 @@ class OfferRepositoryImpl implements OfferRepository {
         description: entity.description,
         offerType: entity.offerType,
         product: entity.product);
-    await datasource.addtoFirestore(offeradd);
+    await datasource.add(offeradd);
   }
 }
 
