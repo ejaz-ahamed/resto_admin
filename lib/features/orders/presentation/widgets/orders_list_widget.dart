@@ -13,6 +13,7 @@ class OrderListView extends StatelessWidget {
     final space = AppTheme.of(context).spaces;
     final color = AppTheme.of(context).colors;
     final typography = AppTheme.of(context).typography;
+    final appTheme = AppTheme.of(context);
     AppAssetsConstants iconsConst = AppAssetsConstants();
     return SizedBox(
       height: MediaQuery.sizeOf(context).height * .7,
@@ -44,23 +45,17 @@ class OrderListView extends StatelessWidget {
                   child: Container(
                     width: space.space_700,
                     height: space.space_700,
+                    padding: EdgeInsets.all(appTheme.spaces.space_200),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(
                         space.space_500,
                       ),
                       border: Border.all(color: color.textSubtle),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: space.space_400,
-                          width: space.space_400,
-                          child: SvgPicture.asset(
-                            iconsConst.icUser,
-                          ),
-                        ),
-                      ],
+                    child: SvgPicture.asset(
+                      iconsConst.icUser,
+                      colorFilter: ColorFilter.mode(
+                          appTheme.colors.text, BlendMode.srcATop),
                     ),
                   ),
                 ),

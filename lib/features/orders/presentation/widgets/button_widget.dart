@@ -53,15 +53,19 @@ class ButtonWidget extends ConsumerWidget {
             Container(
               height: space.space_300,
               width: space.space_300,
+              padding: EdgeInsets.all(space.space_25),
               decoration: BoxDecoration(
                   border: Border.all(
                       width: space.space_25,
                       color: isSelected ? colors.primary : colors.textInverse),
-                  borderRadius: BorderRadius.circular(space.space_300),
+                  shape: BoxShape.circle,
                   color: colors.secondary),
-              child: Text(
-                foodCount.toString(),
-                textAlign: TextAlign.center,
+              child: Center(
+                child: Text(
+                  foodCount.toString(),
+                  style: typography.h100
+                      .copyWith(fontSize: space.space_125, color: colors.text),
+                ),
               ),
             )
           ],

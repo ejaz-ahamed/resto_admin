@@ -15,12 +15,10 @@ class ProfileImageWidget extends ConsumerWidget {
       width: appTheme.spaces.space_500 * 2.7,
       height: appTheme.spaces.space_500 * 2.7,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(
-          appTheme.spaces.space_900,
-        ),
+        shape: BoxShape.circle,
         border: Border.all(
           color: appTheme.colors.textSubtlest,
-          width: 0.5,
+          width: appTheme.spaces.space_25,
         ),
       ),
       child: Column(
@@ -28,7 +26,9 @@ class ProfileImageWidget extends ConsumerWidget {
         children: [
           SvgPicture.asset(
             iconsConstats.icUser,
-            height: appTheme.spaces.space_700,
+            height: appTheme.spaces.space_600,
+            colorFilter:
+                ColorFilter.mode(appTheme.colors.text, BlendMode.srcATop),
           ),
         ],
       ),
