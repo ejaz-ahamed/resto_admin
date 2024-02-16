@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:resto_admin/core/constants/app_assets_constants.dart';
-import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/add_image_widget.dart';
 
@@ -10,8 +7,7 @@ class ImagePickerWidget extends ConsumerWidget {
   const ImagePickerWidget({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final data = ref.watch(productConstantsProvider);
-    final asset = AppAssetsConstants();
+   
     return InkWell(
       onTap: () {},
       child: Container(
