@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "62127943109",
+    "project_id": "restoapp-c64f5",
+    "storage_bucket": "restoapp-c64f5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:62127943109:android:15c6152a9ca281955eafac",
+        "android_client_info": {
+          "package_name": "com.example.resto_admin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUfzrRvvS7n_RraBH5yqGzloa1CPWdeLk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,11 +5,15 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/under_construction/under_construction_widget.dart';
+
+import 'package:resto_admin/features/authentication/presentation/pages/login_page.dart';
+import 'package:resto_admin/features/offer/presentation/pages/offer_page.dart';
+import 'package:resto_admin/features/orders/presentation/pages/order_page_one.dart';
 import 'package:resto_admin/features/products/presentation/pages/home_page.dart';
 import 'package:resto_admin/features/products/presentation/providers/navbar_selected_page_provider.dart';
 
 class BottomNaviWidget extends HookConsumerWidget {
-  static const routePath = '/';
+  static const routePath = '/bottomNav';
   const BottomNaviWidget({super.key});
 
   @override
@@ -44,16 +48,17 @@ class BottomNaviWidget extends HookConsumerWidget {
         onPageChanged: (value) =>
             ref.read(navbarSelectedPageProvider.notifier).state = value,
         children: const [
+          UnderConstractionWidget(),
           HomePage(),
-          UnderConstractionWidget(),
-          UnderConstractionWidget(),
-          UnderConstractionWidget(),
+          OrderScreenOne(),
+          OfferPage(),
         ],
       ),
       bottomNavigationBar: Card(
-        margin: EdgeInsets.symmetric(
-            vertical: space.space_300, horizontal: space.space_400),
-        shape: const StadiumBorder(),
+        margin: EdgeInsets.all(space.space_300),
+        shape: RoundedRectangleBorder(
+            side: BorderSide(color: theme.colors.bottomNavBorder),
+            borderRadius: BorderRadius.circular(200)),
         clipBehavior: Clip.antiAlias,
         elevation: 5,
         child: BottomNavigationBar(
@@ -66,13 +71,13 @@ class BottomNaviWidget extends HookConsumerWidget {
           items: [
             for (var i = 0; i < navbarIcons.length; i++)
               BottomNavigationBarItem(
+                  backgroundColor: theme.colors.secondary,
                   icon: Center(
                     child: Container(
                       width: space.space_600,
                       height: space.space_600,
                       decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.circular(space.space_400 * 3),
+                        shape: BoxShape.circle,
                         color: selectedIndex == i
                             ? theme.colors.primary
                             : theme.colors.secondary,

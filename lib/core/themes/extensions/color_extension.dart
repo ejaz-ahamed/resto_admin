@@ -7,7 +7,8 @@ class AppColorExtension extends ThemeExtension<AppColorExtension> {
   final Color textInverse;
   final Color textSubtle;
   final Color textSubtlest;
-  final Color backgroundDanger;
+  final Color textDisabled;
+  final Color bottomNavBorder;
 
   AppColorExtension({
     required this.primary,
@@ -16,7 +17,8 @@ class AppColorExtension extends ThemeExtension<AppColorExtension> {
     required this.textInverse,
     required this.textSubtle,
     required this.textSubtlest,
-    required this.backgroundDanger,
+    required this.textDisabled,
+    required this.bottomNavBorder,
   });
 
   @override
@@ -27,7 +29,8 @@ class AppColorExtension extends ThemeExtension<AppColorExtension> {
     Color? textInverse,
     Color? textSubtle,
     Color? textSubtlest,
-    Color? backgroundDanger,
+    Color? textDisabled,
+    Color? bottomNavBorder,
   }) {
     return AppColorExtension(
       primary: primary ?? this.primary,
@@ -36,7 +39,8 @@ class AppColorExtension extends ThemeExtension<AppColorExtension> {
       textInverse: textInverse ?? this.textInverse,
       textSubtle: textSubtle ?? this.textSubtle,
       textSubtlest: textSubtlest ?? this.textSubtlest,
-      backgroundDanger: backgroundDanger ?? this.backgroundDanger,
+      textDisabled: textDisabled ?? this.textDisabled,
+      bottomNavBorder: bottomNavBorder ?? this.bottomNavBorder,
     );
   }
 
@@ -54,8 +58,8 @@ class AppColorExtension extends ThemeExtension<AppColorExtension> {
       textInverse: Color.lerp(textInverse, other.textInverse, t)!,
       textSubtle: Color.lerp(textSubtle, other.textSubtle, t)!,
       textSubtlest: Color.lerp(textSubtlest, other.textSubtlest, t)!,
-      backgroundDanger:
-          Color.lerp(backgroundDanger, other.backgroundDanger, t)!,
+      textDisabled: Color.lerp(textDisabled, other.textDisabled, t)!,
+      bottomNavBorder: Color.lerp(bottomNavBorder, other.bottomNavBorder, t)!,
     );
   }
 }

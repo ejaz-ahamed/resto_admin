@@ -10,7 +10,13 @@ import 'package:resto_admin/core/widgets/sized_box_16_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_8_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
+<<<<<<< HEAD
 
+=======
+import 'package:resto_admin/features/offer/presentation/widgets/row_heading_widget.dart';
+import 'package:resto_admin/features/offer/presentation/widgets/tab_button_widget.dart.dart';
+import 'package:resto_admin/features/offer/presentation/widgets/textfield_widget.dart';
+>>>>>>> eb9f63fb34d00c2fd3c440c48e617edc0621b2c7
 
 class AddOfferPage extends HookConsumerWidget {
   static const routePath = '/AddOfferPage';

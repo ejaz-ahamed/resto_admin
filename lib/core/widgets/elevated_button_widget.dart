@@ -7,7 +7,6 @@ class ElevatedButtonWidget extends ConsumerWidget {
   final void Function() onPressed;
   const ElevatedButtonWidget(
       {super.key, required this.text, required this.onPressed});
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appTheme = AppTheme.of(context);
@@ -16,7 +15,7 @@ class ElevatedButtonWidget extends ConsumerWidget {
           vertical: appTheme.spaces.space_300,
           horizontal: appTheme.spaces.space_300),
       child: SizedBox(
-        height: MediaQuery.sizeOf(context).height / 18,
+        height: appTheme.spaces.space_600,
         width: MediaQuery.sizeOf(context).width,
         child: ElevatedButton(
             style: ButtonStyle(
