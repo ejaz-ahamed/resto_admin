@@ -1,7 +1,7 @@
 import 'package:resto_admin/features/offer/data/datasource/offer_firestore_datasource.dart';
 import 'package:resto_admin/features/offer/data/datasource/offer_firestore_datasource_impl.dart';
-import 'package:resto_admin/features/offer/data/model/offer_firestore_model.dart';
-import 'package:resto_admin/features/offer/domain/entity/offer_firestore_entity.dart';
+import 'package:resto_admin/features/offer/data/model/offer_model.dart';
+import 'package:resto_admin/features/offer/domain/entity/offer_entity.dart';
 import 'package:resto_admin/features/offer/domain/repository/offer_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -11,8 +11,8 @@ class OfferRepositoryImpl implements OfferRepository {
   final OfferFirestoreDatasource datasource;
   OfferRepositoryImpl({required this.datasource});
   @override
-  Future<void> addOffer(OfferFirestoreEntity entity) async {
-    final offeradd = OfferFirestoreModel(
+  Future<void> addOffer(OfferEntity entity) async {
+    final offeradd = OfferModel(
         imagepath: entity.imagepath,
         name: entity.name,
         description: entity.description,
