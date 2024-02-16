@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/features/products/presentation/pages/edit_category_page.dart';
+import 'package:resto_admin/features/products/presentation/pages/manage_categories_page.dart';
 
 class ViewCategoriesWidget extends StatelessWidget {
   const ViewCategoriesWidget({super.key});
@@ -38,12 +41,18 @@ class ViewCategoriesWidget extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(
                     AppTheme.of(context).spaces.space_100),
-                child: SizedBox(
-                  width: theme.spaces.space_100 * 14.5,
-                  height: theme.spaces.space_100 * 10,
-                  child: Image.network(
-                    'https://www.foodiesfeed.com/wp-content/uploads/2023/04/strawberry-milk-splash.jpg',
-                    fit: BoxFit.cover,
+                child: InkWell(
+                  onTap: () => context.push(EditCategoryPage.routePath),
+                  onLongPress: () => context.push(
+                    ManageCategoriesPage.routePath,
+                  ),
+                  child: SizedBox(
+                    width: theme.spaces.space_100 * 14.5,
+                    height: theme.spaces.space_100 * 10,
+                    child: Image.network(
+                      'https://www.foodiesfeed.com/wp-content/uploads/2023/04/strawberry-milk-splash.jpg',
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),
@@ -51,14 +60,6 @@ class ViewCategoriesWidget extends StatelessWidget {
                 'Long category',
                 overflow: TextOverflow.ellipsis,
                 style: theme.typography.h400,
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                    left: 0, right: theme.spaces.space_100 * 6.25),
-                child: Text(
-                  'name',
-                  style: theme.typography.h400,
-                ),
               ),
             ],
           ),

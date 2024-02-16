@@ -3,7 +3,6 @@ part 'profile_page_constants.g.dart';
 
 class ProfilePageConstants {
   final txtTitle = 'Profile';
-
   final txtOpeningTime = 'Opening time';
   final txtClosingtime = 'Closing time';
   final txtDarktheme = 'Dark theme';

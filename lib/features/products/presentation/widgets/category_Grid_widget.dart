@@ -62,14 +62,6 @@ class CategoryGridWidget extends HookConsumerWidget {
                       overflow: TextOverflow.ellipsis,
                       style: theme.typography.h400,
                     ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: 0, right: theme.spaces.space_100 * 6.25),
-                      child: Text(
-                        'name',
-                        style: theme.typography.h400,
-                      ),
-                    ),
                   ],
                 ),
               ),
@@ -81,7 +73,7 @@ class CategoryGridWidget extends HookConsumerWidget {
                   height: theme.spaces.space_250,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.white,
+                    color: theme.colors.secondary,
                     border: Border.all(
                       color: theme.colors.primary,
                       width: 0,

@@ -1,94 +1,64 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:go_router/go_router.dart';
-import 'package:resto_admin/core/constants/app_assets_constants.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/offer_constants/selecting_product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/listview_separated_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_8_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/gridview_offerpage_widget.dart';
 
-class OfferSelectingPage extends ConsumerWidget {
+class OfferSelectingPage extends HookConsumerWidget {
   static const routePath = '/select';
   const OfferSelectingPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final apptheme = AppTheme.of(context);
+    final theme = AppTheme.of(context);
     final constants = SelectingProductPageConstants();
-    final iconConst = AppAssetsConstants();
+    final selectedItems = useState<Set<int>>({});
+
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: apptheme.colors.secondary,
-        automaticallyImplyLeading: false,
-        title: Padding(
-          padding: EdgeInsets.only(left: apptheme.spaces.space_300),
-          child: Row(
-            children: [
-              InkWell(
-                onTap: () => context.pop(),
-                child: SvgPicture.asset(
-                  iconConst.icArrowBackward,
-                  height: apptheme.spaces.space_200,
-                ),
-              ),
-              SizedBox(
-                width: apptheme.spaces.space_200,
-              ),
-              Text(
-                constants.txtAppbarTitle,
-                style: apptheme.typography.h600,
-              )
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(
-              onPressed: () {},
-              child: Padding(
-                padding: EdgeInsets.only(right: apptheme.spaces.space_300),
-                child: Text(
-                  constants.txtSelectAllText,
-                  style: apptheme.typography.h300.copyWith(
-                    color: apptheme.colors.primary,
-                  ),
-                ),
-              ))
-        ],
-      ),
+      backgroundColor: theme.colors.secondary,
+      appBar: PreferredSize(
+          preferredSize: Size.fromHeight(theme.spaces.space_700),
+          child: AppBarWidget(
+            title: constants.txtAppbarTitle,
+            actionButtonName: constants.txtSelectAllText,
+            onPressed: () {
+              selectedItems.value = Set.from(Iterable.generate(7, (i) => i));
+            },
+          )),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: apptheme.spaces.space_300),
+          padding: EdgeInsets.symmetric(horizontal: theme.spaces.space_300),
           child: Column(
             children: [
               SizedBox(
-                height: apptheme.spaces.space_400,
-                child: Padding(
-                  padding: EdgeInsets.only(left: apptheme.spaces.space_125),
-                  child: Row(
-                    children: [
-                      Text(
-                        constants.txtTitleCategories,
-                        style: apptheme.typography.h500
-                            .copyWith(color: apptheme.colors.text),
-                      ),
-                    ],
-                  ),
+                height: theme.spaces.space_400,
+                child: Row(
+                  children: [
+                    Text(
+                      constants.txtTitleCategories,
+                      style: theme.typography.h500
+                          .copyWith(color: theme.colors.text),
+                    ),
+                  ],
                 ),
               ),
               const SizedBox8Widget(),
               SizedBox(
                   height: MediaQuery.sizeOf(context).height /
-                      apptheme.spaces.space_125,
+                      theme.spaces.space_125,
                   width: MediaQuery.sizeOf(context).width,
                   child: ListViewSeparatedWidget(
                     text: constants.txtListtext,
                   )),
-              const SizedBox(
+              SizedBox(
                   child: Stack(children: [
-                GridViewOfferPageWidget(),
+                GridViewOfferPageWidget(selectedItems: selectedItems),
               ]))
             ],
           ),

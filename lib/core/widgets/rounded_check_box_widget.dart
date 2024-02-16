@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
-
-final isCheckedProvider = StateProvider<bool>((_) => false);
 
 class RoundedCheckboxWidget extends HookConsumerWidget {
   final bool isChecked;
@@ -33,7 +30,7 @@ class RoundedCheckboxWidget extends HookConsumerWidget {
             ? Icon(
                 Icons.check,
                 size: theme.spaces.space_200,
-                color: Colors.white,
+                color: theme.colors.secondary,
               )
             : null,
       ),
