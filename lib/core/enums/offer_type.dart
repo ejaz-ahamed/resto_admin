@@ -1,4 +1,7 @@
 enum OfferType {
-  amount,
-  percentage,
+  amount('AMOUNT'),
+  percentage('PERCENTAGE');
+
+  final String offerType;
+  const OfferType(this.offerType);
 }
