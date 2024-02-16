@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:resto_admin/main.dart';
 
 class SnackBarUtils {
-  static void showMessage(BuildContext context, String content) {
-    ScaffoldMessenger.of(context)
+  static void showMessage(String content) {
+    MyApp.scaffoldMessengerKey.currentState!
         .showSnackBar(SnackBar(content: Text(content)));
   }
 }
