@@ -7,7 +7,7 @@ part 'offer_firestore_datasource_impl.g.dart';
 
 class OfferFirestoreDatasourceImpl implements OfferFirestoreDatasource {
   final collection = FirebaseFirestore.instance
-      .collection("offer_data")
+      .collection("offers")
       .withConverter(
           fromFirestore: OfferFirestoreModel.fromFirestore,
           toFirestore: (model, _) => model.toFirestore());
