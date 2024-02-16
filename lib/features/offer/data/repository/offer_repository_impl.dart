@@ -2,14 +2,14 @@ import 'package:resto_admin/features/offer/data/datasource/offer_firestore_datas
 import 'package:resto_admin/features/offer/data/datasource/offer_firestore_datasource_impl.dart';
 import 'package:resto_admin/features/offer/data/model/offer_firestore_model.dart';
 import 'package:resto_admin/features/offer/domain/entity/offer_firestore_entity.dart';
-import 'package:resto_admin/features/offer/domain/repository/offer_firestore_repository.dart';
+import 'package:resto_admin/features/offer/domain/repository/offer_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'offer_firestore_repository_impl.g.dart';
+part 'offer_repository_impl.g.dart';
 
-class OfferFirestoreRepositoryImpl implements OfferFirestoreRepository {
+class OfferRepositoryImpl implements OfferRepository {
   final OfferFirestoreDatasource datasource;
-  OfferFirestoreRepositoryImpl({required this.datasource});
+  OfferRepositoryImpl({required this.datasource});
   @override
   Future<void> addOffer(OfferFirestoreEntity entity) async {
     final offeradd = OfferFirestoreModel(
@@ -23,8 +23,7 @@ class OfferFirestoreRepositoryImpl implements OfferFirestoreRepository {
 }
 
 @riverpod
-OfferFirestoreRepository offerFirestoreRepository(
-    OfferFirestoreRepositoryRef ref) {
-  return OfferFirestoreRepositoryImpl(
+OfferRepository offerRepository(OfferRepositoryRef ref) {
+  return OfferRepositoryImpl(
       datasource: ref.read(offerFirestoreDatasourceProvider));
 }
