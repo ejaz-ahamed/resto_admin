@@ -15,7 +15,6 @@ class SwitchButton extends ConsumerWidget {
     return Consumer(builder: (context, watch, _) {
       final switchstate = ref.watch(profileProvider);
       return Switch(
-        
           thumbIcon: MaterialStatePropertyAll(Icon(
             Icons.circle,
             color: colors.primary,
