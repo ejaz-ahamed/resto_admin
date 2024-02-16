@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -6,6 +8,7 @@ import 'package:resto_admin/core/constants/edit_profile_page/profile_page_consta
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/utils/image_picker_utils.dart';
 import 'package:resto_admin/core/widgets/sized_box_8_widget.dart';
+import 'package:resto_admin/features/profile_page/presentation/pages/edit_profile_page.dart';
 
 class AddImageWidget extends ConsumerWidget {
   const AddImageWidget({super.key});
@@ -16,7 +19,11 @@ class AddImageWidget extends ConsumerWidget {
     final constants = ref.watch(profilePageContstantsProvider);
     final appTheme = AppTheme.of(context);
     return InkWell(
-      onTap: () => ImagePickerUtils.showDialogueForImagePicker(context),
+      onTap: () async {
+        ref.read(editImageProvider.notifier).state =
+            await ImagePickerUtils.showDialogueForImagePicker(context);
+        log("${ref.watch(editImageProvider)?.path}");
+      },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,

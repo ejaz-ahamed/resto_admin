@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -39,6 +41,9 @@ class ProfilePage extends ConsumerWidget {
               alignment: Alignment.center,
               child: CircleAvatar(
                 radius: apptheme.spaces.space_200 * 7,
+                backgroundImage: ref.watch(editImageProvider) == null
+                    ? null
+                    : FileImage(File(ref.watch(editImageProvider)!.path)),
               ),
             ),
             SizedBox(
