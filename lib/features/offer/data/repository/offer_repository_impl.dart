@@ -13,12 +13,18 @@ class OfferRepositoryImpl implements OfferRepository {
   @override
   Future<void> addOffer(OfferEntity entity) async {
     final offeradd = OfferModel(
-        imagepath: entity.imagepath,
+        id: entity.id,
+        imagePath: entity.imagePath,
         name: entity.name,
         description: entity.description,
         offerType: entity.offerType,
         product: entity.product);
     await datasource.add(offeradd);
+  }
+
+  @override
+  Future<void> deleteOffer(String offerId) async {
+    await datasource.delete(offerId);
   }
 }
 
