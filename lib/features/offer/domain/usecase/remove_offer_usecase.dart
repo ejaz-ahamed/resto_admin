@@ -7,7 +7,7 @@ final class RemoveOffer {
 
   Future<void> call(String offerId) async {
     try {
-      await repository.delete(offerId);
+      await repository.deleteOffer(offerId);
     } catch (e) {
       throw BaseException(e.toString());
     }
