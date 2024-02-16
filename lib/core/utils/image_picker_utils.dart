@@ -14,7 +14,7 @@ class ImagePickerUtils {
       return pickedImage;
     } else {
       Future.sync(
-        () => SnackBarUtils.showMessage(context, "No Image picked"),
+        () => SnackBarUtils.showMessage("No Image picked"),
       );
       return null;
     }
@@ -27,7 +27,7 @@ class ImagePickerUtils {
       return pickedImage;
     } else {
       Future.sync(
-        () => SnackBarUtils.showMessage(context, "No Image picked"),
+        () => SnackBarUtils.showMessage("No Image picked"),
       );
       return null;
     }

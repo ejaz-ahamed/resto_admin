@@ -6,7 +6,6 @@ import 'package:resto_admin/core/constants/products_constants/product_constants.
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/gridview_widget.dart';
 import 'package:resto_admin/core/widgets/listview_separated_widget.dart';
-import 'package:resto_admin/features/products/presentation/pages/edit_category_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/product_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/view_categories_page.dart';
 import 'package:resto_admin/features/products/presentation/widgets/row_widget.dart';
@@ -27,6 +26,7 @@ class HomePage extends HookConsumerWidget {
       child: Scaffold(
         backgroundColor: theme.colors.secondary,
         appBar: AppBar(
+          backgroundColor: theme.colors.secondary,
           scrolledUnderElevation: 0,
           title: Padding(
             padding: EdgeInsets.only(left: theme.spaces.space_100),
