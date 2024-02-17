@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/rounded_check_box_widget.dart';
+import 'package:resto_admin/features/offer/presentation/pages/offer_selecting_product_page.dart';
 
 class GridViewOfferPageWidget extends HookConsumerWidget {
   final ValueNotifier<Set<int>> selectedItems;
@@ -14,7 +15,7 @@ class GridViewOfferPageWidget extends HookConsumerWidget {
     final theme = AppTheme.of(context);
     return GridView.builder(
       physics: const ClampingScrollPhysics(),
-      itemCount: 5,
+      itemCount: ref.watch(itemCountProvider),
       shrinkWrap: true,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
@@ -62,7 +63,7 @@ class GridViewOfferPageWidget extends HookConsumerWidget {
               SizedBox(
                 height: theme.spaces.space_50,
               ),
-              const Text("data"),
+              Text('hlow'),
             ],
           ),
         ),

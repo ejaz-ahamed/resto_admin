@@ -16,6 +16,7 @@ import 'package:resto_admin/features/offer/presentation/widgets/textfield_widget
 
 class EditOfferPage extends HookConsumerWidget {
   static const routePath = '/EditOfferPage';
+  // final Set<int>? selectedItems;
 
   const EditOfferPage({super.key});
 
