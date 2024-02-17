@@ -21,11 +21,11 @@ class OfferFirestoreDatasourceImpl implements OfferFirestoreDatasource {
     await collection.doc(offerId).delete();
   }
 
-  // @override
-  // Stream<List<OfferModel>> getAllOffer() {}
-
   @override
   Future<void> update(OfferModel model) async {}
+
+  @override
+  Stream<List<OfferModel>> getAllOffer(OfferModel model) async* {}
 }
 
 @riverpod

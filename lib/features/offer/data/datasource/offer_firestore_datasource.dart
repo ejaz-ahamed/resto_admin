@@ -4,5 +4,5 @@ abstract class OfferFirestoreDatasource {
   Future<void> add(OfferModel model);
   Future<void> delete(String offerId);
   Future<void> update(OfferModel model);
-  // Stream<List<OfferModel>> getAllOffer();
+  Stream<List<OfferModel>> getAllOffer(OfferModel model);
 }
