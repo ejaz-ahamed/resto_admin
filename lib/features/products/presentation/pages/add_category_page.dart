@@ -8,6 +8,7 @@ import 'package:resto_admin/core/widgets/image_picker_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
+import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
 
 class AddCategoryPage extends ConsumerWidget {
   static const routePath = '/addCategory';
@@ -18,26 +19,33 @@ class AddCategoryPage extends ConsumerWidget {
     final apptheme = AppTheme.of(context);
     final data = ref.watch(productConstantsProvider);
     final categoryContoller = TextEditingController();
-    return Scaffold(
-      appBar: PreferredSize(
-          preferredSize: Size.fromHeight(apptheme.spaces.space_700),
-          child: AppBarWidget(title: data.txtAddCategoryTitle)),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: apptheme.spaces.space_300),
-        child: Column(
-          children: [
-            const SizedBox32Widget(),
-            const ImagePickerWidget(),
-            const SizedBox24Widget(),
-            TextFieldWidget(
-                textFieldTitle: data.txtCategory,
-                hintText: data.txtHintProduct,
-                controller: categoryContoller)
-          ],
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(apptheme.spaces.space_700),
+            child: AppBarWidget(title: data.txtAddCategoryTitle)),
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: apptheme.spaces.space_300),
+          child: Column(
+            children: [
+              const SizedBox32Widget(),
+              const ImagePickerWidget(),
+              const SizedBox24Widget(),
+              TextFieldWidget(
+                  textFieldTitle: data.txtCategory,
+                  hintText: data.txtHintProduct,
+                  controller: categoryContoller)
+            ],
+          ),
         ),
+        bottomNavigationBar: ElevatedButtonWidget(
+            text: data.txtSaveBtn,
+            onPressed: () {
+              ref.read(categoryProvider.notifier).add(
+                  id: '', imagePath: imagePath, name: categoryContoller.text);
+            }),
       ),
-      bottomNavigationBar:
-          ElevatedButtonWidget(text: data.txtSaveBtn, onPressed: () {}),
     );
   }
 }
