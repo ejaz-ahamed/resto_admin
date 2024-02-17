@@ -14,8 +14,8 @@ class AuthRepositeryImpl implements AuthRepositery {
 
   AuthRepositeryImpl({required this.userDataSourse, required this.dataSourse});
   @override
-  Future<void> loginAuth(String email, String password) async {
-    await dataSourse.firebaseAuth(email, password);
+  Future<void> login(String email, String password) async {
+    await dataSourse.login(email, password);
   }
 
   @override

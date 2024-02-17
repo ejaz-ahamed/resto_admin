@@ -10,7 +10,7 @@ class GetUserDetailsUsecases {
     try {
       return repositery.getUserDetails(uid);
     } catch (e) {
-      throw BaseException("error");
+      throw BaseException("somthing went wrong");
     }
   }
 }

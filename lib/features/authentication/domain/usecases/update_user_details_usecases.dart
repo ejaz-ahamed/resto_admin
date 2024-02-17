@@ -10,7 +10,7 @@ class UpdateuserDetailsUsecases {
     try {
       await repositery.updateUserDetails(userEntity);
     } catch (e) {
-      throw BaseException("error");
+      throw BaseException("somthing went wrong");
     }
   }
 }

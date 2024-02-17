@@ -18,7 +18,7 @@ class Authentication extends _$Authentication {
   @override
   void build() {}
 
-  Future<void> loginAuth(String email, String password) async {
+  Future<void> login(String email, String password) async {
     try {
       await LoginUsecase(repositery: ref.watch(authRepositeryProvider))(
           email, password);
