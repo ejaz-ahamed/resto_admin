@@ -76,7 +76,7 @@ class LoginPage extends HookConsumerWidget {
                 onPressed: () {
                   ref
                       .read(authenticationProvider.notifier)
-                      .loginAuth(emailController.text, passwordController.text);
+                      .login(emailController.text, passwordController.text);
                 }),
           ),
         ],
