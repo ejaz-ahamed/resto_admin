@@ -66,7 +66,7 @@ class OverViewItemsPage extends HookConsumerWidget {
                   addOnPriceController: priCecontroller,
                   hint: data.txtFullQty,
                 ),
-                SizedBox32Widget(),
+                const SizedBox32Widget(),
                 RowWidget(
                   text: data.txtAddOns,
                   btnText: '',
