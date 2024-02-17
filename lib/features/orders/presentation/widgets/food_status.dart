@@ -5,6 +5,7 @@ import 'package:resto_admin/core/constants/orders_constants/orders_constants.dar
 import 'package:resto_admin/core/enums/order_type.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/features/orders/domain/entity/order_entity.dart';
+import 'package:resto_admin/features/orders/presentation/providers/order_provider.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/button_widget.dart';
 
 class FoodStatus extends HookConsumerWidget {
@@ -17,9 +18,6 @@ class FoodStatus extends HookConsumerWidget {
 
     /// Theme data
     final spaces = AppTheme.of(context).spaces;
-
-    /// Selected tab
-    final selectedIndex = useState<OrderType>(OrderType.order);
 
     /// Tabs to show
     final tabsText = useMemoized(() => [
@@ -43,7 +41,9 @@ class FoodStatus extends HookConsumerWidget {
 
     /// Handle tapping on the tab items
     void tabOnPressed(int index) {
-      selectedIndex.value = tabsText[index]['type'] as OrderType;
+      ref
+          .read(orderProviderProvider.notifier)
+          .changeTab(tabsText[index]['type'] as OrderType);
     }
 
     return SizedBox(
@@ -55,7 +55,9 @@ class FoodStatus extends HookConsumerWidget {
             ButtonWidget(
               onPressed: () => tabOnPressed(i),
               text: tabsText[i]['text'] as String,
-              isSelected: selectedIndex.value == tabsText[i]['type'],
+              isSelected: ref.watch(orderProviderProvider
+                      .select((value) => value.orderType)) ==
+                  tabsText[i]['type'],
               foodCount: count.length,
             )
         ],

@@ -9,7 +9,7 @@ class LoginUsecase {
 
   Future<void> call(String email, String password) async {
     try {
-      await repositery.loginAuth(email, password);
+      await repositery.login(email, password);
     } on BaseException catch (e) {
       throw AuthenticationFailException(e.message);
     } catch (e) {

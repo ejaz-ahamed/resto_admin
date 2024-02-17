@@ -12,7 +12,7 @@ class OrderFirestoreDataSourceImpl implements OrderFirestoreDataSource {
 
   @override
   Stream<List<OrderModel>> getAll(OrderType orderType) async* {
-    final orderStream = db.snapshots();
+    final orderStream = db.where('type', isEqualTo: orderType.name).snapshots();
 
     await for (final orders in orderStream) {
       yield [for (final order in orders.docs) order.data()];
