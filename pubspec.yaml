@@ -1,19 +1,17 @@
 name: resto_admin
 description: "A new Flutter project."
 
-publish_to: "none" 
-
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
   sdk: ">=3.2.6 <4.0.0"
 
-
 dependencies:
   flutter:
     sdk: flutter
-    
+
   cupertino_icons: ^1.0.6
   flutter_riverpod: ^2.4.10
   riverpod_annotation: ^2.3.4
@@ -23,16 +21,17 @@ dependencies:
   flutter_svg: ^2.0.9
   image_picker: ^1.0.7
   intl: ^0.19.0
-  freezed_annotation: ^2.4.1
-  cloud_firestore: ^4.15.4
   firebase_auth: ^4.17.4
   firebase_core: ^2.25.4
+  freezed_annotation: ^2.4.1
+  cloud_firestore: ^4.15.4
+  json_annotation: ^4.8.1
+  firebase_storage: ^11.6.5
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
- 
   flutter_lints: ^3.0.0
   riverpod_generator: ^2.3.11
   build_runner: ^2.4.8
@@ -41,10 +40,7 @@ dev_dependencies:
   freezed: ^2.4.7
   json_serializable: ^6.7.1
 
-
-
 flutter:
- 
   uses-material-design: true
   assets:
     - assets/icons/
@@ -69,5 +65,3 @@ flutter:
           weight: 800
         - asset: assets/fonts/Inter/Inter-Black.ttf
           weight: 900
-
- 

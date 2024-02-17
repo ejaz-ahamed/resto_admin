@@ -37,7 +37,6 @@ class AddOfferPage extends HookConsumerWidget {
       selectedIndex.value = index;
     }
 
-
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -51,7 +50,7 @@ class AddOfferPage extends HookConsumerWidget {
               const SizedBox16Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
-                child: const ImagePickerWidget(),
+                child: ImagePickerWidget(imgProvider: imageProvider),
               ),
               const SizedBox24Widget(),
               Padding(
