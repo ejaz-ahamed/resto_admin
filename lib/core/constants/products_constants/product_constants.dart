@@ -35,6 +35,7 @@ class ProductConstants {
   final txtDescriptionfull =
       "Lorem ipsum dolor sit amet consectetur. Imperdiet mi tellus quam lacinia porttitor sed at proin molestie. Ipsum sit leo nisi felis. Volutpat ut tempus suspendisse lacinia tincidunt euismod at elit volutpat. Tristique felis scelerisque sed hendrerit ante. Diam donec nunc massa dolor sed neque commodo nec.";
   final txtOverviewTitle = "Hot and Sour";
+  final txtSnackbarMsg = "Image pick failed";
 }
 
 @riverpod
