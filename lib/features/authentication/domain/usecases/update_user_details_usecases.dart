@@ -2,10 +2,10 @@ import 'package:resto_admin/core/exceptions/base_exception/base_exception.dart';
 import 'package:resto_admin/features/authentication/domain/entity/user_entity.dart';
 import 'package:resto_admin/features/authentication/domain/repositery/auth_repositery.dart';
 
-class UpdateuserDetails {
+class UpdateuserDetailsUsecases {
   final AuthRepositery repositery;
 
-  UpdateuserDetails({required this.repositery});
+  UpdateuserDetailsUsecases({required this.repositery});
   Future<void> call(UserEntity userEntity) async {
     try {
       await repositery.updateUserDetails(userEntity);
