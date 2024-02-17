@@ -16,6 +16,7 @@ class OfferModel with _$OfferModel {
     required String description,
     required OfferType offerType,
     required List<String> product,
+    required double amount,
   }) = _OfferModel;
 
   factory OfferModel.fromJson(Map<String, dynamic> json) =>

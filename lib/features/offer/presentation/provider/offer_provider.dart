@@ -19,6 +19,7 @@ class OfferProvider extends _$OfferProvider {
     required String description,
     required OfferType offerType,
     required List<String> product,
+    required double amount,
   }) {
     final repository = ref.watch(offerRepositoryProvider);
     return AddOfferUseCase(repository: repository)(
@@ -27,6 +28,7 @@ class OfferProvider extends _$OfferProvider {
         name: name,
         description: description,
         offerType: offerType,
+        amount: amount,
         product: product);
   }
 

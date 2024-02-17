@@ -18,6 +18,7 @@ class OfferRepositoryImpl implements OfferRepository {
         name: entity.name,
         description: entity.description,
         offerType: entity.offerType,
+        amount: entity.amount,
         product: entity.product);
     await datasource.add(offeradd);
   }

@@ -12,5 +12,6 @@ class OfferEntity with _$OfferEntity {
     required String description,
     required OfferType offerType,
     required List<String> product,
+    required double amount,
   }) = _OfferEntity;
 }

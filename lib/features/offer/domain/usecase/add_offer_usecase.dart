@@ -13,6 +13,7 @@ final class AddOfferUseCase {
     required String description,
     required OfferType offerType,
     required List<String> product,
+    required double amount,
   }) async {
     try {
       return await repository.addOffer(OfferEntity(
@@ -21,6 +22,7 @@ final class AddOfferUseCase {
           name: name,
           description: description,
           offerType: offerType,
+          amount: amount,
           product: product));
     } catch (e) {
       throw BaseException(e.toString());
