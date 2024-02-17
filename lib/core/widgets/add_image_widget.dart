@@ -24,6 +24,8 @@ class AddImageWidget extends ConsumerWidget {
           SvgPicture.asset(
             assets.icAddImage,
             height: appTheme.spaces.space_500,
+            colorFilter: ColorFilter.mode(
+                appTheme.colors.textDisabled, BlendMode.srcATop),
           ),
           const SizedBox8Widget(),
           Text(

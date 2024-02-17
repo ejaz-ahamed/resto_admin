@@ -1,4 +1,4 @@
-enum OrderEnum {
+enum OrderType {
   order,
   preparing,
   completed,

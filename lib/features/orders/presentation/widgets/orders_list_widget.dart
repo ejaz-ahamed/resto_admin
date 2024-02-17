@@ -1,24 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/features/orders/domain/entity/order_entity.dart';
 import 'package:resto_admin/features/orders/presentation/pages/orderview_page.dart';
 
-class OrderListView extends StatelessWidget {
-  const OrderListView({super.key});
+class OrderListView extends ConsumerWidget {
+  final List<OrderEntity> entity;
+  const OrderListView({super.key, required this.entity});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final space = AppTheme.of(context).spaces;
     final color = AppTheme.of(context).colors;
     final typography = AppTheme.of(context).typography;
+    final appTheme = AppTheme.of(context);
+
     AppAssetsConstants iconsConst = AppAssetsConstants();
     return SizedBox(
       height: MediaQuery.sizeOf(context).height * .7,
       width: MediaQuery.sizeOf(context).width,
       child: ListView.separated(
-        itemCount: 5,
+        itemCount: entity.length,
         separatorBuilder: (context, index) => SizedBox(
           height: space.space_200,
         ),
@@ -44,23 +49,17 @@ class OrderListView extends StatelessWidget {
                   child: Container(
                     width: space.space_700,
                     height: space.space_700,
+                    padding: EdgeInsets.all(appTheme.spaces.space_200),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(
                         space.space_500,
                       ),
                       border: Border.all(color: color.textSubtle),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          height: space.space_400,
-                          width: space.space_400,
-                          child: SvgPicture.asset(
-                            iconsConst.icUser,
-                          ),
-                        ),
-                      ],
+                    child: SvgPicture.asset(
+                      iconsConst.icUser,
+                      colorFilter: ColorFilter.mode(
+                          appTheme.colors.text, BlendMode.srcATop),
                     ),
                   ),
                 ),
@@ -69,11 +68,11 @@ class OrderListView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      '#12345',
+                      entity[index].orderId,
                       style: typography.h500,
                     ),
                     Text(
-                      'Palazhi,1111',
+                      entity[index].location,
                       style: typography.h100,
                     ),
                   ],

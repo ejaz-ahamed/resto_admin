@@ -5,10 +5,11 @@ part 'order_item_model.g.dart';
 
 @freezed
 class OrderItemModel with _$OrderItemModel {
-  const factory OrderItemModel({
+  const OrderItemModel._();
+  factory OrderItemModel({
     required String productId,
     required String type,
-    required String quality,
+    required String quantity,
   }) = _OrderItemModel;
   factory OrderItemModel.fromJson(Map<String, dynamic> json) =>
       _$OrderItemModelFromJson(json);
