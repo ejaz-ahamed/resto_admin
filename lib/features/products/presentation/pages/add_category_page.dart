@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
@@ -27,7 +29,7 @@ class AddCategoryPage extends ConsumerWidget {
         child: Column(
           children: [
             const SizedBox32Widget(),
-             ImagePickerWidget(),
+            ImagePickerWidget(),
             const SizedBox24Widget(),
             TextFieldWidget(
                 textFieldTitle: data.txtCategory,

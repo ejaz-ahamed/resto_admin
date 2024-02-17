@@ -1,52 +1,45 @@
-import 'dart:developer';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
-import 'package:resto_admin/core/utils/image_picker_utils.dart';
-import 'package:resto_admin/core/widgets/add_image_widget.dart';
 
-final imageProvider = StateProvider<XFile?>((ref) {
-  return null;
-});
-
-class ImagePickerWidget extends ConsumerWidget {
+class ImagePickerWidget extends StatelessWidget {
   const ImagePickerWidget({super.key});
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return InkWell(
-      onTap: () async {
-        ref.read(imageProvider.notifier).state =
-            await ImagePickerUtils.showDialogueForImagePicker(context);
-        // log("${ref.watch(imageProvider)?.path}");
-      },
+      onTap: () {},
       child: Container(
-        height: AppTheme.of(context).spaces.space_500 * 6,
+        height: MediaQuery.sizeOf(context).height / 3.55,
         width: MediaQuery.sizeOf(context).width,
         decoration: BoxDecoration(
             borderRadius:
                 BorderRadius.circular(AppTheme.of(context).spaces.space_100),
             border: Border.all(
-                color: AppTheme.of(context).colors.textSubtle,
-                width: AppTheme.of(context).spaces.space_25)),
-        child: ref.watch(imageProvider) != null
-            ? Image.file(
-                File(ref.watch(imageProvider)!.path),
-                fit: BoxFit.cover,
-              )
-            : Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Center(
-                    child: const AddImageWidget(),
-                  ),
-                  SizedBox(
-                    height: AppTheme.of(context).spaces.space_100,
-                  ),
-                ],
+                color: AppTheme.of(context).colors.textSubtle, width: 2)),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: SvgPicture.asset(
+                AppAssetsConstants().icAddImage,
+                height: AppTheme.of(context).spaces.space_600,
+                width: AppTheme.of(context).spaces.space_600,
               ),
+            ),
+            SizedBox(
+              height: AppTheme.of(context).spaces.space_100,
+            ),
+            Text(
+              'Add Image',
+              style: AppTheme.of(context).typography.h400.copyWith(
+                  color: AppTheme.of(context)
+                      .colors
+                      .textSubtlest
+                      .withOpacity(.60)),
+            ),
+          ],
+        ),
       ),
     );
   }

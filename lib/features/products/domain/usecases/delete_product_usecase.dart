@@ -6,7 +6,7 @@ final class DeleteProductUsecase {
   DeleteProductUsecase({required this.repository});
   Future<void> call(String id) async {
     try {
-      return await repository.deleteProductFromFirestore(id);
+      return await repository.deleteProduct(id);
     } catch (e) {
       throw BaseException('Cannot delete product');
     }

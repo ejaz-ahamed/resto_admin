@@ -15,7 +15,6 @@ class ViewCategoriesPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final data = ref.watch(productConstantsProvider);
-    // final assets = AppAssetsConstants();
     final theme = AppTheme.of(context);
 
     return Scaffold(

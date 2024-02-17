@@ -9,7 +9,7 @@ class ProductTypeModel with _$ProductTypeModel {
   const ProductTypeModel._();
   factory ProductTypeModel({
     required String name,
-    required double price,
+    required String price,
     required String id,
   }) = _ProductTypeModel;
 

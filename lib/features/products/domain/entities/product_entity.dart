@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:resto_admin/features/products/data/models/product_addon_model.dart';
-import 'package:resto_admin/features/products/data/models/product_type_model.dart';
+import 'package:resto_admin/features/products/domain/entities/product_addon_entity.dart';
+import 'package:resto_admin/features/products/domain/entities/product_type_entity.dart';
 
 part 'product_entity.freezed.dart';
 
@@ -8,9 +8,10 @@ part 'product_entity.freezed.dart';
 class ProductEntity with _$ProductEntity {
   factory ProductEntity({
     required String name,
-    required String image_path,
+    required String imagePath,
     required String description,
-    // required List<ProductTypeModel>? types,
-    // required List<ProductAddonModel>? addOns,
+    required String id,
+    required List<ProductTypeEntity> types,
+    required List<ProductAddOnEntity> addOns,
   }) = _ProductEntity;
 }

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -14,7 +15,7 @@ class ImagePickerUtils {
       return pickedImage;
     } else {
       Future.sync(
-        () => SnackBarUtils.showMessage(context, "No Image picked"),
+        () => SnackBarUtils.showMessage("No Image picked"),
       );
       return null;
     }
@@ -27,14 +28,14 @@ class ImagePickerUtils {
       return pickedImage;
     } else {
       Future.sync(
-        () => SnackBarUtils.showMessage(context, "No Image picked"),
+        () => SnackBarUtils.showMessage("No Image picked"),
       );
       return null;
     }
   }
 
   static Future<XFile?> showDialogueForImagePicker(BuildContext context) async {
-    late Future<XFile?> image;
+    final imageCompleter = Completer<XFile?>();
     await showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -43,18 +44,21 @@ class ImagePickerUtils {
             builder: (context, ref, child) => Column(
               children: [
                 TextButton(
-                    onPressed: () {
-                      image = ImagePickerUtils.pickImageFromCamera(context);
-                      context.pop();
+                    onPressed: () async {
+                      imageCompleter.complete(
+                          await ImagePickerUtils.pickImageFromCamera(context));
+                      Future.sync(() => context.pop());
                     },
                     child: Text(
                       ref.watch(profilePageContstantsProvider).txtCamera,
                       style: AppTheme.of(context).typography.h500,
                     )),
                 TextButton(
-                    onPressed: () {
-                      image = ImagePickerUtils.pickImageFromGallery(context);
-                      context.pop();
+                    onPressed: () async {
+                      imageCompleter.complete(
+                        await ImagePickerUtils.pickImageFromGallery(context),
+                      );
+                      Future.sync(() => context.pop());
                     },
                     child: Text(
                       ref.watch(profilePageContstantsProvider).txtGallery,
@@ -64,7 +68,7 @@ class ImagePickerUtils {
             ),
           )),
     );
-    // print((await image)?.path);
-    return image;
+    final imageSelected = await (imageCompleter.future);
+    return imageSelected;
   }
 }

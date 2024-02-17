@@ -10,7 +10,7 @@ class ProductAddonModel with _$ProductAddonModel {
   factory ProductAddonModel({
     required String name,
     required String id,
-    required double price,
+    required String price,
   }) = _ProductAddonModel;
 
   factory ProductAddonModel.fromJson(Map<String, dynamic> json) =>

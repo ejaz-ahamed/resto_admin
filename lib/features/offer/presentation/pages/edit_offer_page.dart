@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -51,7 +53,7 @@ class EditOfferPage extends HookConsumerWidget {
               const SizedBox24Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
-                child:  ImagePickerWidget(),
+                child: const ImagePickerWidget(),
               ),
               const SizedBox24Widget(),
               Padding(
