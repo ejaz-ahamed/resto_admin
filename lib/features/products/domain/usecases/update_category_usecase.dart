@@ -11,6 +11,8 @@ final class UpdateCategoryUseCase {
       required String imagePath,
       required String name}) async {
     try {
+      /// TODO: Delete the image here
+
       await repository.update(CategoryEntity(
         id: id,
         imagePath: imagePath,

@@ -1,4 +1,5 @@
 import 'package:resto_admin/features/products/data/repository/category_repository_impl.dart';
+import 'package:resto_admin/features/products/domain/entities/category_entity.dart';
 import 'package:resto_admin/features/products/domain/repository/category_repository.dart';
 import 'package:resto_admin/features/products/domain/usecases/add_category_usecase.dart';
 import 'package:resto_admin/features/products/domain/usecases/delete_category_usecase.dart';
@@ -39,5 +40,9 @@ class Category extends _$Category {
       imagePath: imagePath,
       name: name,
     );
+  }
+
+  Stream<List<CategoryEntity>> getAll() {
+    return repository.getAll();
   }
 }
