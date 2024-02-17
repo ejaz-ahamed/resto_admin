@@ -25,7 +25,7 @@ class OfferFirestoreDatasourceImpl implements OfferFirestoreDatasource {
   Future<void> update(OfferModel model) async {}
 
   @override
-  Stream<List<OfferModel>> getAllOffer(OfferModel model) async* {}
+  Stream<List<OfferModel>> getAllOffer() async* {}
 }
 
 @riverpod
