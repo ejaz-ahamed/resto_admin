@@ -26,15 +26,15 @@ final class UpdateOfferUseCase {
         imagePath = await repository.upload(File(imagePath), name);
       }
       await repository.update(
-        OfferEntity(
-            id: id,
-            imagePath: imagePath,
-            name: name,
-            description: description,
-            amount: amount,
-            offerType: offerType,
-            products: products),
-      );
+          OfferEntity(
+              id: id,
+              imagePath: imagePath,
+              name: name,
+              description: description,
+              amount: amount,
+              offerType: offerType,
+              products: products),
+          id);
     } catch (e) {
       throw BaseException(e.toString());
     }

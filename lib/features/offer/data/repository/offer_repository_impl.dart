@@ -35,16 +35,18 @@ class OfferRepositoryImpl implements OfferRepository {
   }
 
   @override
-  Future<void> update(OfferEntity offerEntity) async {
-    await datasource.update(OfferModel(
-      id: offerEntity.id,
-      imagePath: offerEntity.imagePath,
-      name: offerEntity.name,
-      description: offerEntity.description,
-      offerType: offerEntity.offerType,
-      products: offerEntity.products,
-      amount: offerEntity.amount,
-    ));
+  Future<void> update(OfferEntity offerEntity, String id) async {
+    await datasource.update(
+        OfferModel(
+          id: offerEntity.id,
+          imagePath: offerEntity.imagePath,
+          name: offerEntity.name,
+          description: offerEntity.description,
+          offerType: offerEntity.offerType,
+          products: offerEntity.products,
+          amount: offerEntity.amount,
+        ),
+        id);
   }
 
   @override
