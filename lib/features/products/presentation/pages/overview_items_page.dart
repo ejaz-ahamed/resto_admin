@@ -8,12 +8,17 @@ import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_16_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
+import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
 import 'package:resto_admin/features/products/presentation/widgets/product_type_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/row_widget.dart';
 
 class OverViewItemsPage extends HookConsumerWidget {
   static const routePath = '/overview';
-  const OverViewItemsPage({super.key});
+  final ProductEntity entity;
+  const OverViewItemsPage({
+    super.key,
+    required this.entity,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -31,7 +36,7 @@ class OverViewItemsPage extends HookConsumerWidget {
             apptheme.spaces.space_700,
           ),
           child: AppBarWidget(
-            title: data.txtOverviewTitle,
+            title: entity.name,
           ),
         ),
         body: SingleChildScrollView(
@@ -46,12 +51,18 @@ class OverViewItemsPage extends HookConsumerWidget {
                 Container(
                   width: MediaQuery.sizeOf(context).width,
                   height: apptheme.spaces.space_500 * 6.4,
-                  color: apptheme.colors.primary,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                    image: NetworkImage(
+                      entity.imagePath,
+                    ),
+                    fit: BoxFit.cover,
+                  )),
                 ),
                 const SizedBox16Widget(),
                 TextFieldWidget(
                   textFieldTitle: data.txtDescription,
-                  hintText: data.txtDescriptionfull,
+                  hintText: entity.description,
                   controller: controller,
                   maxLines: 6,
                 ),

@@ -74,7 +74,7 @@ class HomePage extends HookConsumerWidget {
                   height: theme.spaces.space_250,
                 ),
                 SizedBox(
-                  height: theme.spaces.space_800,
+                  height: theme.spaces.space_100 * 10,
                   child: StreamBuilder(
                     stream: ref.read(categoryProvider.notifier).getAll(),
                     builder: (context, snapshot) {
