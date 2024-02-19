@@ -11,7 +11,7 @@ part 'offer_provider.g.dart';
 @riverpod
 class OfferProvider extends _$OfferProvider {
   late OfferRepository repository;
-  @override
+  @override 
   void build() {}
   Future<void> addOffer(OfferEntity offerEntity) {
     return AddOfferUseCase(repository: repository)(offerEntity);
