@@ -16,7 +16,7 @@ class AddImageWidget extends ConsumerWidget {
     final constants = ref.watch(profilePageContstantsProvider);
     final appTheme = AppTheme.of(context);
     return InkWell(
-      onTap: () => ImagePickerUtils.showDialogueForImagePicker(context),
+      onTap: () {},
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,

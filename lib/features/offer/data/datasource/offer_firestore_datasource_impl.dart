@@ -13,10 +13,20 @@ class OfferFirestoreDatasourceImpl implements OfferFirestoreDatasource {
           toFirestore: (model, _) => model.toFirestore());
   @override
   Future<void> add(OfferModel model) async {
-    await collection.doc(model.name).set(model);
+    await collection.doc().set(model);
+  }
+
+  @override
+ Stream<List<OfferModel>> getAllOffer() async* {
+    final categorySteame = collection.snapshots();
+    await for (final categorys in categorySteame) {
+      yield [
+        for (final category in categorys.docs) category.data(),
+      ];
+    }
   }
 }
-
+  
 @riverpod
 OfferFirestoreDatasource offerFirestoreDatasource(
     OfferFirestoreDatasourceRef ref) {

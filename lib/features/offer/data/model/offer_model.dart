@@ -10,9 +10,11 @@ class OfferModel with _$OfferModel {
   const OfferModel._();
 
   factory OfferModel({
+    required String id,
     required String imagepath,
     required String name,
     required String description,
+    required double amount,
     required OfferType offerType,
     required List<String> product,
   }) = _OfferModel;
@@ -25,9 +27,10 @@ class OfferModel with _$OfferModel {
     SnapshotOptions? options,
   ) {
     final data = snapshot.data()!;
+    data['id'] = snapshot.id;
     return OfferModel.fromJson(data);
   }
   Map<String, dynamic> toFirestore() {
-    return toJson();
+    return toJson()..remove('id');
   }
 }

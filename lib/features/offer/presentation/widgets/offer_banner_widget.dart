@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/features/offer/domain/entity/offer_entity.dart';
 import 'package:resto_admin/features/offer/presentation/pages/edit_offer_page.dart';
 
 class OfferBannerWidget extends StatelessWidget {
-  final String offerText;
-  final ImageProvider offerImage;
-  const OfferBannerWidget(
-      {super.key, required this.offerText, required this.offerImage});
+  final List<OfferEntity> entity;
+  const OfferBannerWidget({super.key, required this.entity});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +14,7 @@ class OfferBannerWidget extends StatelessWidget {
     final spaces = AppTheme.of(context).spaces;
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: 2,
+      itemCount: entity.length,
       itemBuilder: (context, index) {
         return Column(
           children: [
@@ -42,7 +41,7 @@ class OfferBannerWidget extends StatelessWidget {
                           height: spaces.space_500 * 6,
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: offerImage, fit: BoxFit.fill),
+                                  image: NetworkImage(entity[index].imagepath), fit: BoxFit.fill),
                               color: color.textSubtle,
                               borderRadius:
                                   BorderRadius.circular(spaces.space_100)),
@@ -51,7 +50,7 @@ class OfferBannerWidget extends StatelessWidget {
                           padding: EdgeInsets.only(
                               bottom: spaces.space_100, top: spaces.space_100),
                           child: Text(
-                            offerText,
+                            entity[index].name,
                             style: AppTheme.of(context).typography.h500,
                           ),
                         ),
