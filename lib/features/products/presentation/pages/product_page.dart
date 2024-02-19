@@ -54,7 +54,9 @@ class ProductPage extends HookConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox32Widget(),
+
                 ImagePickerProductWidget(imgProvider: imageProvider),
+
                 SizedBox(
                   height: AppTheme.of(context).spaces.space_300,
                 ),

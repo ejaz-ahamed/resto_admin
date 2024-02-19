@@ -69,7 +69,7 @@ class OverViewItemsPage extends HookConsumerWidget {
                   hint: data.txtFullQty,
                   enabled: true,
                 ),
-                SizedBox32Widget(),
+                const SizedBox32Widget(),
                 RowWidget(
                   text: data.txtAddOns,
                   btnText: '',
