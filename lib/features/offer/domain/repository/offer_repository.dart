@@ -8,4 +8,5 @@ abstract class OfferRepository {
   Future<void> update(OfferEntity updatedEntity);
   Future<String> upload(File fileToUpload, String filePath);
   Stream<List<OfferEntity>> getAll();
+  Future<OfferEntity> getById(String id);
 }

@@ -70,6 +70,19 @@ class OfferRepositoryImpl implements OfferRepository {
   Future<String> upload(File fileToUpload, String filePath) {
     return offerStorageDataSource.add(fileToUpload, filePath);
   }
+
+  @override
+  Future<OfferEntity> getById(String id) async {
+    final data = await datasource.getById(id);
+    return OfferEntity(
+        id: data.id,
+        imagePath: data.imagePath,
+        name: data.name,
+        description: data.description,
+        offerType: data.offerType,
+        products: data.products,
+        amount: data.amount);
+  }
 }
 
 @riverpod

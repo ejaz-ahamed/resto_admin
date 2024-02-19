@@ -4,7 +4,7 @@ import 'package:resto_admin/core/constants/offer_constants/selecting_product_con
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
-import 'package:resto_admin/core/widgets/listview_separated_widget.dart';
+// import 'package:resto_admin/core/widgets/listview_separated_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_8_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/gridview_offerpage_widget.dart';
 

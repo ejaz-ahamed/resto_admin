@@ -17,7 +17,9 @@ class OfferStorageDataSourceImpl implements OfferStorageDataSource {
   }
 
   @override
-  Future<void> delete(String filePath) async {}
+  Future<void> delete(String filePath) async {
+    await storageRef.child(filePath).delete();
+  }
 }
 
 @riverpod

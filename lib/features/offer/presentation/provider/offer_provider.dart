@@ -4,7 +4,7 @@ import 'package:resto_admin/features/offer/domain/entity/offer_entity.dart';
 import 'package:resto_admin/features/offer/domain/repository/offer_repository.dart';
 import 'package:resto_admin/features/offer/domain/usecase/add_offer_usecase.dart';
 import 'package:resto_admin/features/offer/domain/usecase/get_offer_usecase.dart';
-import 'package:resto_admin/features/offer/domain/usecase/remove_offer_usecase.dart';
+// import 'package:resto_admin/features/offer/domain/usecase/remove_offer_usecase.dart';
 import 'package:resto_admin/features/offer/domain/usecase/update_offer_usecase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'offer_provider.g.dart';
@@ -14,7 +14,7 @@ class Offer extends _$Offer {
   late OfferRepository repository;
   @override
   List<OfferEntity>? build() {
-    return null;
+    return <OfferEntity>[];
   }
 
   Future<void> addOffer({
@@ -46,8 +46,8 @@ class Offer extends _$Offer {
     return UpdateOfferUseCase(repository: repository)(offerEntity);
   }
 
-  Future<void> deleteOffer(String id) async {
-    final repository = ref.watch(offerRepositoryProvider);
-    await RemoveOfferUsecase(repository: repository)(id);
-  }
+  // Future<void> deleteOffer(String id) async {
+  //   final repository = ref.watch(offerRepositoryProvider);
+  //   await RemoveOfferUsecase(repository: repository)(id);
+  // }
 }
