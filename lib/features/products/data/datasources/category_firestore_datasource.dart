@@ -5,5 +5,5 @@ abstract class CategoryFirestoreDataSource {
   Future<void> add(CategoryModel model);
   Future<void> remove(String id);
   Future<void> update(CategoryModel updatedModel);
-  Stream<QuerySnapshot<CategoryModel>> getAll();
+  Stream<List<CategoryModel>> getAll();
 }

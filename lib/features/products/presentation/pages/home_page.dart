@@ -8,6 +8,7 @@ import 'package:resto_admin/core/widgets/gridview_widget.dart';
 import 'package:resto_admin/core/widgets/listview_separated_widget.dart';
 import 'package:resto_admin/features/products/presentation/pages/product_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/view_categories_page.dart';
+import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
 import 'package:resto_admin/features/products/presentation/widgets/row_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/textfield_widget.dart';
 import 'package:resto_admin/features/profile_page/presentation/pages/profile_page.dart';
@@ -73,8 +74,21 @@ class HomePage extends HookConsumerWidget {
                   height: theme.spaces.space_250,
                 ),
                 SizedBox(
-                  height: theme.spaces.space_800,
-                  child: const ListViewSeparatedWidget(text: 'di'),
+                  height: theme.spaces.space_100 * 10,
+                  child: StreamBuilder(
+                    stream: ref.read(categoryProvider.notifier).getAll(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return ListViewSeparatedWidget(
+                          entity: snapshot.data!,
+                        );
+                      } else {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    },
+                  ),
                 ),
                 SizedBox(
                   height: theme.spaces.space_300,
