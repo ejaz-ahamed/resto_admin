@@ -3,6 +3,7 @@ import 'package:resto_admin/features/offer/data/repository/offer_repository_impl
 import 'package:resto_admin/features/offer/domain/entity/offer_entity.dart';
 import 'package:resto_admin/features/offer/domain/usecase/add_offer_usecase.dart';
 import 'package:resto_admin/features/offer/domain/usecase/get_offer_usecase.dart';
+import 'package:resto_admin/features/offer/domain/usecase/remove_offer_usecase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'offer_provider.g.dart';
 
@@ -36,6 +37,11 @@ class Offer extends _$Offer {
   Stream<List<OfferEntity>> getAll() {
     final repository = ref.watch(offerRepositoryProvider);
     return GetOfferUseCase(repository: repository)();
+  }
+
+  Future<void> deleteOffer(String id) async {
+    final repository = ref.watch(offerRepositoryProvider);
+    await RemoveOfferUsecase(repository: repository)(id);
   }
 }
 

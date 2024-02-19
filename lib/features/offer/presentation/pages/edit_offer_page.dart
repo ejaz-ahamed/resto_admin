@@ -14,7 +14,6 @@ import 'package:resto_admin/features/offer/presentation/widgets/preffered_appbar
 import 'package:resto_admin/features/offer/presentation/widgets/row_heading_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/tab_button_widget.dart.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/textfield_widget.dart';
-
 class EditOfferPage extends HookConsumerWidget {
   static const routePath = '/EditOfferPage';
   final OfferEntity entity;
@@ -36,7 +35,6 @@ class EditOfferPage extends HookConsumerWidget {
     void tabOnPressed(int index) {
       selectedIndex.value = index;
     }
-
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
