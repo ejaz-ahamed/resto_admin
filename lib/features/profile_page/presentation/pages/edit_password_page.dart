@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/edit_profile_page/profile_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/core/utils/snack_bar_utils.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
+import 'package:resto_admin/features/authentication/presentation/pages/login_page.dart';
+import 'package:resto_admin/features/authentication/presentation/provider/authentication_provider.dart';
 
 class EditPasswordPage extends HookConsumerWidget {
   static const routePath = '/editpasswordpage';
@@ -16,7 +18,6 @@ class EditPasswordPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentPasswordController = useTextEditingController();
     final newPasswordController = useTextEditingController();
     final confirmPasswordController = useTextEditingController();
     final constants = ref.watch(profilePageContstantsProvider);
@@ -37,10 +38,6 @@ class EditPasswordPage extends HookConsumerWidget {
               horizontal: appTheme.spaces.space_300),
           child: Column(
             children: [
-              TextFieldWidget(
-                  textFieldTitle: constants.txtCurrentPassword,
-                  hintText: hintText,
-                  controller: currentPasswordController),
               const SizedBox32Widget(),
               TextFieldWidget(
                   textFieldTitle: constants.txtNewPassword,
@@ -57,7 +54,18 @@ class EditPasswordPage extends HookConsumerWidget {
         bottomNavigationBar: ElevatedButtonWidget(
           text: constants.txtSave,
           onPressed: () {
-            context.pop();
+            if (newPasswordController.text == confirmPasswordController.text) {
+              ref
+                  .read(authenticationProvider.notifier)
+                  .updatePassword(newPasswordController.text);
+              context.go(LoginPage.routePath);
+              newPasswordController.clear();
+              confirmPasswordController.clear();
+            } else {
+              SnackBarUtils.showMessage('incorrect password');
+              newPasswordController.clear();
+              confirmPasswordController.clear();
+            }
           },
         ),
       ),

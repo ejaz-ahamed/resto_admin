@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:resto_admin/core/constants/edit_profile_page/profile_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/core/utils/image_picker_utils.dart';
 import 'package:resto_admin/core/widgets/add_image_widget.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
@@ -12,6 +13,7 @@ import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:resto_admin/features/profile_page/presentation/providers/profile_provider.dart';
 
 final editImageProvider = StateProvider<XFile?>((ref) => null);
 
@@ -44,17 +46,25 @@ class EditProfilePage extends HookConsumerWidget {
               children: [
                 Align(
                     alignment: Alignment.center,
-                    child: Container(
-                      height: appTheme.spaces.space_400 * 7,
-                      width: appTheme.spaces.space_400 * 7,
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                              color: appTheme.colors.textDisabled,
-                              width: appTheme.spaces.space_25)),
-                      child:  ref.watch(editImageProvider) == null
-                        ? const AddImageWidget()
-                        : Image.file(File(ref.watch(editImageProvider)!.path)),
+                    child: InkWell(
+                      onTap: () =>
+                          ImagePickerUtils.showDialogueForImagePicker(context),
+                      child: Container(
+                        height: appTheme.spaces.space_400 * 7,
+                        width: appTheme.spaces.space_400 * 7,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                                color: appTheme.colors.textDisabled,
+                                width: appTheme.spaces.space_25)),
+                        child: ref.watch(editImageProvider) == null
+                            ? const AddImageWidget()
+                            : ClipRRect(
+                                borderRadius: BorderRadius.circular(
+                                    appTheme.spaces.space_900 * 100),
+                                child: Image.file(
+                                    File(ref.watch(editImageProvider)!.path))),
+                      ),
                     )),
                 const SizedBox32Widget(),
                 TextFieldWidget(
@@ -73,6 +83,9 @@ class EditProfilePage extends HookConsumerWidget {
         bottomNavigationBar: ElevatedButtonWidget(
           text: constants.txtSave,
           onPressed: () {
+            ref
+                .read(profileProvider.notifier)
+                .upload(ref.watch(editImageProvider)!.path);
             context.pop();
           },
         ),

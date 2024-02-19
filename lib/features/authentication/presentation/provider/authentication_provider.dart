@@ -5,6 +5,7 @@ import 'package:resto_admin/core/widgets/bottom_navigation/bottom_nav_widget.dar
 import 'package:resto_admin/features/authentication/data/repositery/auth_repositery_impl.dart';
 import 'package:resto_admin/features/authentication/domain/usecases/login_usecases.dart';
 import 'package:resto_admin/features/authentication/domain/usecases/logout_usecase.dart';
+import 'package:resto_admin/features/authentication/domain/usecases/update_password_usecase.dart';
 import 'package:resto_admin/main.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'authentication_provider.g.dart';
@@ -30,5 +31,10 @@ class Authentication extends _$Authentication {
     } on BaseException catch (e) {
       SnackBarUtils.showMessage(e.message);
     }
+  }
+
+  Future<void> updatePassword(String newPassword) async {
+    await UpdatePasswordUsecase(repositery: ref.watch(authRepositeryProvider))(
+        newPassword);
   }
 }

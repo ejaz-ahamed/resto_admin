@@ -1,5 +1,9 @@
-import 'package:resto_admin/features/profile_page/data/datasource/profile_firestore_datasource.dart';
-import 'package:resto_admin/features/profile_page/data/datasource/profile_firestore_datasource_impl.dart';
+import 'dart:io';
+
+import 'package:resto_admin/features/profile_page/data/data_source/profile_firestore_data_source.dart';
+import 'package:resto_admin/features/profile_page/data/data_source/profile_firestore_data_source_impl.dart';
+import 'package:resto_admin/features/profile_page/data/data_source/profile_storage_datasource.dart';
+import 'package:resto_admin/features/profile_page/data/data_source/profile_storage_datasource_impl.dart';
 import 'package:resto_admin/features/profile_page/data/model/profile_model.dart';
 import 'package:resto_admin/features/profile_page/domain/entity/profile_entity.dart';
 import 'package:resto_admin/features/profile_page/domain/repository/profile_repository.dart';
@@ -7,18 +11,36 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'profile_repository_impl.g.dart';
 
 class ProfileRepositoryImpl implements ProfileRepository {
-  final ProfileFirestoreDataSource dataSource;
-  ProfileRepositoryImpl({required this.dataSource});
+  final ProfileFirestoreDataSource profileFirestoreDataSource;
+  final ProfileStorageDataSource storageDataSource;
+  ProfileRepositoryImpl(
+      {required this.profileFirestoreDataSource,
+      required this.storageDataSource});
   @override
-  Future<void> addOpeningTime(ProfileEntity entity) async {
+  Future<void> addOpeningTime(ProfileEntity profileEntity) async {
     final model = ProfileModel(
-        openingTime: entity.openingTime, closingTime: entity.closingTime);
-    await dataSource.addOpeningTime(model);
+        openingTime: profileEntity.openingTime,
+        closingTime: profileEntity.closingTime);
+    await profileFirestoreDataSource.setOpeningTime(model);
+  }
+
+  @override
+  Future<void> addClosingTime(ProfileEntity profileEntity) async {
+    final model = ProfileModel(
+        openingTime: profileEntity.openingTime,
+        closingTime: profileEntity.closingTime);
+    await profileFirestoreDataSource.setClosingTime(model);
+  }
+
+  @override
+  Future<String> upload(File fileToUpload) async {
+    return storageDataSource.addImage(fileToUpload);
   }
 }
 
 @riverpod
 ProfileRepository profileRepository(ProfileRepositoryRef ref) {
   return ProfileRepositoryImpl(
-      dataSource: ref.watch(profileFirestoreDataSourceProvider));
+      profileFirestoreDataSource: ref.watch(profileFirestoreDataSourceProvider),
+      storageDataSource: ref.watch(profileStorageDataSourceProvider));
 }

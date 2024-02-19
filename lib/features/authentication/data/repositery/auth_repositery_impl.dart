@@ -17,6 +17,11 @@ class AuthRepositeryImpl implements AuthRepositery {
   Future<void> logout() async {
     await dataSourse.logout();
   }
+  
+  @override
+  Future<void> updatePassword(String newPassword) async{
+    dataSourse.updatePassword(newPassword);
+  }
 }
 
 @riverpod
