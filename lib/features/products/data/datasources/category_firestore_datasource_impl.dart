@@ -28,8 +28,13 @@ class CategoryFirestoreDataSourceImpl implements CategoryFirestoreDataSource {
   }
 
   @override
-  Stream<QuerySnapshot<CategoryModel>> getAll() {
-    return collection.snapshots();
+  Stream<List<CategoryModel>> getAll() async* {
+    final categorySteame = collection.snapshots();
+    await for (final categorys in categorySteame) {
+      yield [
+        for (final category in categorys.docs) category.data(),
+      ];
+    }
   }
 }
 
