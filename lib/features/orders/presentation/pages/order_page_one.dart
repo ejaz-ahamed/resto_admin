@@ -45,8 +45,8 @@ class OrderScreenOne extends HookConsumerWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: space.space_300),
               child: StreamBuilder(
-                stream: ref.watch(
-                    orderProviderProvider.select((value) => value.orders)),
+                stream:
+                    ref.watch(orderProvider.select((value) => value.orders)),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return Column(

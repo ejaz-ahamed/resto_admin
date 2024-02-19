@@ -9,8 +9,8 @@ part 'order_repository_impl.g.dart';
 
 class OrderRepositoryImpl implements OrderRepository {
   final OrderFirestoreDataSource dataSource;
-
   OrderRepositoryImpl({required this.dataSource});
+
   @override
   Stream<List<OrderEntity>> getOrderByType(OrderType orderType) async* {
     final orders = dataSource.getAll(orderType);
@@ -33,6 +33,11 @@ class OrderRepositoryImpl implements OrderRepository {
           ),
       ];
     }
+  }
+
+  @override
+  Future<void> updateOrderType(String orderId, OrderType newType) async {
+    await dataSource.updateType(orderId, newType);
   }
 }
 

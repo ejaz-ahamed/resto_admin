@@ -6,6 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'order_datasource_impl.g.dart';
 
 class OrderFirestoreDataSourceImpl implements OrderFirestoreDataSource {
+  final instance = FirebaseFirestore.instance;
   final db = FirebaseFirestore.instance.collection("orders").withConverter(
       fromFirestore: OrderModel.fromFirestore,
       toFirestore: (model, _) => model.toFirestore());
@@ -20,9 +21,11 @@ class OrderFirestoreDataSourceImpl implements OrderFirestoreDataSource {
   }
 
   @override
-  Future<OrderModel> update(String orderId, OrderType orderType) {
-    // TODO: implement update
-    throw UnimplementedError();
+  Future<void> updateType(String orderId, OrderType newType) async {
+    await instance
+        .collection("orders")
+        .doc(orderId)
+        .update({'type': newType.name});
   }
 }
 

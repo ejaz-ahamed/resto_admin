@@ -42,7 +42,7 @@ class FoodStatus extends HookConsumerWidget {
     /// Handle tapping on the tab items
     void tabOnPressed(int index) {
       ref
-          .read(orderProviderProvider.notifier)
+          .read(orderProvider.notifier)
           .changeTab(tabsText[index]['type'] as OrderType);
     }
 
@@ -55,9 +55,9 @@ class FoodStatus extends HookConsumerWidget {
             ButtonWidget(
               onPressed: () => tabOnPressed(i),
               text: tabsText[i]['text'] as String,
-              isSelected: ref.watch(orderProviderProvider
-                      .select((value) => value.orderType)) ==
-                  tabsText[i]['type'],
+              isSelected:
+                  ref.watch(orderProvider.select((value) => value.orderType)) ==
+                      tabsText[i]['type'],
               foodCount: count.length,
             )
         ],
