@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/features/products/domain/entities/category_entity.dart';
 
 class ListViewSeparatedWidget extends StatelessWidget {
-  const ListViewSeparatedWidget({super.key, required this.text});
-  final String text;
+  final List<CategoryEntity> entity;
+  const ListViewSeparatedWidget({super.key, required this.entity});
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +18,15 @@ class ListViewSeparatedWidget extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: theme.spaces.space_250,
+                    backgroundImage: NetworkImage(entity[index].imagePath),
                   ),
-                  Text(text)
+                  Text(entity[index].name)
                 ],
               ),
             ),
         separatorBuilder: (context, index) => SizedBox(
               width: theme.spaces.space_500,
             ),
-        itemCount: 10);
+        itemCount: entity.length);
   }
 }
