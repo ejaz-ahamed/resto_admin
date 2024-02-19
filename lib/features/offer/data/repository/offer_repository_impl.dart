@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:resto_admin/features/offer/data/datasource/offer_firestore_datasource.dart';
 import 'package:resto_admin/features/offer/data/datasource/offer_firestore_datasource_impl.dart';
+import 'package:resto_admin/features/offer/data/datasource/offer_storage_datasource.dart';
+import 'package:resto_admin/features/offer/data/datasource/offer_storage_datasource_impl.dart';
 import 'package:resto_admin/features/offer/data/model/offer_model.dart';
 import 'package:resto_admin/features/offer/domain/entity/offer_entity.dart';
 import 'package:resto_admin/features/offer/domain/repository/offer_repository.dart';
@@ -9,7 +13,9 @@ part 'offer_repository_impl.g.dart';
 
 class OfferRepositoryImpl implements OfferRepository {
   final OfferFirestoreDatasource datasource;
-  OfferRepositoryImpl({required this.datasource});
+  final OfferStorageDataSource offerStorageDataSource;
+  OfferRepositoryImpl(
+      {required this.datasource, required this.offerStorageDataSource});
   @override
   Future<void> addOffer(OfferEntity entity) async {
     final offeradd = OfferModel(
@@ -27,10 +33,29 @@ class OfferRepositoryImpl implements OfferRepository {
   Future<void> deleteOffer(String offerId) async {
     await datasource.delete(offerId);
   }
+
+  @override
+  Future<void> update(OfferEntity offerEntity) async {
+    await datasource.update(OfferModel(
+      id: offerEntity.id,
+      imagePath: offerEntity.imagePath,
+      name: offerEntity.name,
+      description: offerEntity.description,
+      offerType: offerEntity.offerType,
+      product: offerEntity.product,
+      amount: offerEntity.amount,
+    ));
+  }
+
+  @override
+  Future<String> upload(File fileToUpload, String filePath) {
+    return offerStorageDataSource.add(fileToUpload, filePath);
+  }
 }
 
 @riverpod
 OfferRepository offerRepository(OfferRepositoryRef ref) {
   return OfferRepositoryImpl(
-      datasource: ref.read(offerFirestoreDatasourceProvider));
+      datasource: ref.read(offerFirestoreDatasourceProvider),
+      offerStorageDataSource: ref.read(offerStorageDataSourceProvider));
 }
