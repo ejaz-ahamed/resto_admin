@@ -5,7 +5,6 @@ import 'package:resto_admin/features/offer/domain/repository/offer_repository.da
 import 'package:resto_admin/features/offer/domain/usecase/add_offer_usecase.dart';
 import 'package:resto_admin/features/offer/domain/usecase/get_offer_usecase.dart';
 import 'package:resto_admin/features/offer/domain/usecase/remove_offer_usecase.dart';
-// import 'package:resto_admin/features/offer/domain/usecase/update_offer_usecase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'offer_provider.g.dart';
 

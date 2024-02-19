@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -67,10 +65,6 @@ class AddOfferPage extends HookConsumerWidget {
                 child: ImagePickerWidget(
                   imgProvider: imageProvider,
                 ),
-
-
-              
-
               ),
               const SizedBox24Widget(),
               Padding(
