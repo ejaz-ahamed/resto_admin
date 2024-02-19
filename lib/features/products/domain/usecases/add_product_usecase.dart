@@ -18,9 +18,8 @@ final class AddProductUsecase {
       required List<ProductTypeEntity> types,
       required List<ProductAddOnEntity> addOns}) async {
     try {
-      final uploadedPath = await repository.uploadImage(File(imagePath), name);
+      final uploadedPath = await repository.upload(File(imagePath), name);
       await repository.addProduct(ProductEntity(
-          categoryId: categoryId,
           types: types,
           addOns: addOns,
           id: id,

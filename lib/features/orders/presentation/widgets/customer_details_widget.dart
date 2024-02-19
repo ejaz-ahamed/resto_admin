@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:resto_admin/core/constants/orders_constants/orders_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/features/orders/domain/entity/order_entity.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/text_regular_widget.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/text_widget.dart';
 
 class CustomerDetailsWidget extends ConsumerWidget {
-  const CustomerDetailsWidget({super.key});
+  final OrderEntity entity;
+  const CustomerDetailsWidget({super.key, required this.entity});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -43,10 +45,10 @@ class CustomerDetailsWidget extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  TextRegularWidget(text: constants.txtOrderId),
-                  TextRegularWidget(text: constants.txtCustomerName),
-                  TextRegularWidget(text: constants.txtTime),
-                  TextRegularWidget(text: constants.txtLocation),
+                  TextRegularWidget(text: entity.orderId),
+                  TextRegularWidget(text: entity.name),
+                  TextRegularWidget(text: entity.time),
+                  TextRegularWidget(text: entity.location),
                 ],
               )
             ],
