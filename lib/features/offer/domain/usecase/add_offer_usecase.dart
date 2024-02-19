@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:resto_admin/core/enums/offer_type.dart';
 import 'package:resto_admin/core/exceptions/base_exception/base_exception.dart';
 import 'package:resto_admin/features/offer/domain/entity/offer_entity.dart';
 import 'package:resto_admin/features/offer/domain/repository/offer_repository.dart';
@@ -5,9 +8,25 @@ import 'package:resto_admin/features/offer/domain/repository/offer_repository.da
 final class AddOfferUseCase {
   final OfferRepository repository;
   AddOfferUseCase({required this.repository});
-  Future<void> call(OfferEntity offerEntity) async {
+  Future<void> call({
+    required String imagepath,
+    required String id,
+    required String name,
+    required String description,
+    required double amount,
+    required OfferType offerType,
+    required List<String> product,
+  }) async {
     try {
-      repository.addOffer(offerEntity);
+      final uploadPath = await repository.upload(File(imagepath), name);
+      return await repository.addOffer(OfferEntity(
+          imagePath: uploadPath,
+          name: name,
+          description: description,
+          offerType: offerType,
+          product: product,
+          amount: amount,
+          id: id));
     } catch (e) {
       throw BaseException(e.toString());
     }

@@ -9,6 +9,7 @@ import 'package:resto_admin/core/widgets/sized_box_16_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_8_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
+import 'package:resto_admin/features/offer/domain/entity/offer_entity.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/preffered_appbar_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/row_heading_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/tab_button_widget.dart.dart';
@@ -16,9 +17,8 @@ import 'package:resto_admin/features/offer/presentation/widgets/textfield_widget
 
 class EditOfferPage extends HookConsumerWidget {
   static const routePath = '/EditOfferPage';
-
-  const EditOfferPage({super.key});
-
+  final OfferEntity entity;
+  const EditOfferPage({super.key, required this.entity});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     EditOfferPageConstants constants = EditOfferPageConstants();

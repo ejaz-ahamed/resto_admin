@@ -27,7 +27,14 @@ class OfferFirestoreDatasourceImpl implements OfferFirestoreDatasource {
   }
 
   @override
-  Stream<List<OfferModel>> getAllOffer() async* {}
+  Stream<List<OfferModel>> getAllOffer() async* {
+    final categorySteame = collection.snapshots();
+    await for (final categorys in categorySteame) {
+      yield [
+        for (final category in categorys.docs) category.data(),
+      ];
+    }
+  }
 }
 
 @riverpod

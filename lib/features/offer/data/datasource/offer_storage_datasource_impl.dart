@@ -11,7 +11,7 @@ class OfferStorageDataSourceImpl implements OfferStorageDataSource {
 
   @override
   Future<String> add(File image, String fileName) async {
-    await storageRef.child('offers/$fileName').putFile(image);
+    await storageRef.child('offer/$fileName').putFile(image);
     final filePath = storageRef.child('offer/$fileName').fullPath;
     return filePath;
   }

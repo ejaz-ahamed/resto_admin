@@ -7,4 +7,5 @@ abstract class OfferRepository {
   Future<void> deleteOffer(String offerId);
   Future<void> update(OfferEntity updatedEntity);
   Future<String> upload(File fileToUpload, String filePath);
+  Stream<List<OfferEntity>> getAll();
 }

@@ -48,6 +48,25 @@ class OfferRepositoryImpl implements OfferRepository {
   }
 
   @override
+  Stream<List<OfferEntity>> getAll() async* {
+    final data = datasource.getAllOffer();
+    await for (final snapshot in data) {
+      final docs = snapshot;
+      yield [
+        for (final offer in docs)
+          OfferEntity(
+              imagePath: offer.imagePath,
+              name: offer.name,
+              description: offer.description,
+              amount: offer.amount,
+              offerType: offer.offerType,
+              product: offer.product,
+              id: offer.id)
+      ];
+    }
+  }
+
+  @override
   Future<String> upload(File fileToUpload, String filePath) {
     return offerStorageDataSource.add(fileToUpload, filePath);
   }
