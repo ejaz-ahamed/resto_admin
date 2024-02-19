@@ -21,7 +21,7 @@ class Offer extends _$Offer {
     required String description,
     required double amount,
     required OfferType offerType,
-    required List<String>? product,
+    required List<String>? products,
   }) {
     final repository = ref.watch(offerRepositoryProvider);
     return AddOfferUseCase(repository: repository)(
@@ -31,7 +31,7 @@ class Offer extends _$Offer {
         description: description,
         amount: amount,
         offerType: offerType,
-        product: product = []);
+        products: products = []);
   }
 
   Stream<List<OfferEntity>> getAll() {

@@ -15,7 +15,7 @@ class OfferModel with _$OfferModel {
     required String name,
     required String description,
     required OfferType offerType,
-    required List<String> product,
+    required List<String> products,
     required double amount,
   }) = _OfferModel;
 

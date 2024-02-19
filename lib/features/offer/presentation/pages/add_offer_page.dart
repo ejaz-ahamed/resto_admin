@@ -137,7 +137,7 @@ class AddOfferPage extends HookConsumerWidget {
                   description: descriptionController.text,
                   amount: amount,
                   offerType: selectedOfferType.value,
-                  product: [],
+                  products: [],
                   id: '',
                 );
             nameController.clear();

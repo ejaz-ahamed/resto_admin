@@ -20,7 +20,7 @@ final class GetOfferUseCase {
                 description: offer.description,
                 amount: offer.amount,
                 offerType: offer.offerType,
-                product: offer.product)
+                products: offer.products)
         ];
       }
     } catch (e) {

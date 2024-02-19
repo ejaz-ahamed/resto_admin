@@ -25,7 +25,7 @@ class OfferRepositoryImpl implements OfferRepository {
         description: entity.description,
         offerType: entity.offerType,
         amount: entity.amount,
-        product: entity.product);
+        products: entity.products);
     await datasource.add(offeradd);
   }
 
@@ -42,7 +42,7 @@ class OfferRepositoryImpl implements OfferRepository {
       name: offerEntity.name,
       description: offerEntity.description,
       offerType: offerEntity.offerType,
-      product: offerEntity.product,
+      products: offerEntity.products,
       amount: offerEntity.amount,
     ));
   }
@@ -60,7 +60,7 @@ class OfferRepositoryImpl implements OfferRepository {
               description: offer.description,
               amount: offer.amount,
               offerType: offer.offerType,
-              product: offer.product,
+              products: offer.products,
               id: offer.id)
       ];
     }

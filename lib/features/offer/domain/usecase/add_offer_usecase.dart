@@ -15,7 +15,7 @@ final class AddOfferUseCase {
     required String description,
     required double amount,
     required OfferType offerType,
-    required List<String> product,
+    required List<String> products,
   }) async {
     try {
       final uploadPath = await repository.upload(File(imagepath), name);
@@ -24,7 +24,7 @@ final class AddOfferUseCase {
           name: name,
           description: description,
           offerType: offerType,
-          product: product,
+          products: products,
           amount: amount,
           id: id));
     } catch (e) {
