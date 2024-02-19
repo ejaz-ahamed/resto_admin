@@ -14,31 +14,25 @@ import 'package:resto_admin/core/widgets/text_field_widget.dart';
 import 'package:resto_admin/features/products/domain/entities/product_addon_entity.dart';
 import 'package:resto_admin/features/products/domain/entities/product_type_entity.dart';
 import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
+import 'package:resto_admin/features/products/presentation/widgets/heading_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/image_picker_product_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/product_type_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/row_widget.dart';
 
 class ProductPage extends HookConsumerWidget {
   static const routePath = '/addNewProducts';
+
   const ProductPage({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);
     final data = ref.watch(productConstantsProvider);
     final constants = ref.watch(productConstantsProvider);
-    // final List<ProductEntity> entity;
+
     final productController = useTextEditingController();
     final descreptionController = useTextEditingController();
-    final fullQtyController = useTextEditingController();
-    final fullQtyPriceController = useTextEditingController();
-    final addOnItemController = useTextEditingController();
-    final addOnPriceController = useTextEditingController();
-
-    final isEnabled = useState<bool>(false);
-
-    void onPress(bool changed) {
-      isEnabled.value = changed;
-    }
+    final productTypeControllers = useState<List<ProductTypeControllers>>([]);
+    final productAddonControllers = useState<List<ProductTypeControllers>>([]);
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
@@ -66,52 +60,29 @@ class ProductPage extends HookConsumerWidget {
                     textFieldTitle: data.txtDescription,
                     hintText: data.txtHintDescription,
                     controller: descreptionController),
-                RowWidget(
+                HeadingWidget(
                   text: data.txtType,
-                  btnText: data.txtEditbtn,
-                  onPressed: () {
-                    onPress(true);
-                  },
                 ),
                 const SizedBox24Widget(),
                 ProductTypeWidget(
-                    cursor: isEnabled.value,
-                    style: apptheme.typography.h400
-                        .copyWith(color: apptheme.colors.textDisabled),
-                    enabled: isEnabled.value,
-                    hint: constants.txtType,
-                    addOnController: fullQtyController,
-                    addOnPriceController: fullQtyPriceController),
-                const SizedBox24Widget(),
-                ElevatedAddButtonWidget(
-                  buttonText: data.elevatedBtnTxt,
-                  textColor: apptheme.colors.primary,
-                  onPressed: () {},
-                  icon: Icons.add,
+                  btntxt: data.txtType,
+                  style: apptheme.typography.h400
+                      .copyWith(color: apptheme.colors.textDisabled),
+                  hint: constants.txtType,
+                  productTypes: productTypeControllers,
                 ),
                 const SizedBox32Widget(),
-                RowWidget(
+                HeadingWidget(
                   text: data.txtAddOns,
-                  btnText: data.txtEditbtn,
-                  onPressed: () {
-                    onPress(true);
-                  },
                 ),
                 const SizedBox24Widget(),
                 ProductTypeWidget(
-                    cursor: isEnabled.value,
-                    style: apptheme.typography.h400
-                        .copyWith(color: apptheme.colors.textDisabled),
-                    enabled: isEnabled.value,
-                    hint: constants.txtAddOns,
-                    addOnController: addOnItemController,
-                    addOnPriceController: addOnPriceController),
-                const SizedBox24Widget(),
-                ElevatedAddButtonWidget(
-                    buttonText: data.txtAddOnBtnTitle,
-                    textColor: apptheme.colors.primary,
-                    onPressed: () {},
-                    icon: Icons.add),
+                  btntxt: data.txtAddOns,
+                  productTypes: productAddonControllers,
+                  style: apptheme.typography.h400
+                      .copyWith(color: apptheme.colors.textDisabled),
+                  hint: constants.txtAddOns,
+                ),
                 const SizedBox24Widget(),
               ],
             ),
@@ -122,25 +93,28 @@ class ProductPage extends HookConsumerWidget {
             onPressed: () {
               ref.read(productProvider.notifier).addProduct(
                 addOns: [
-                  ProductAddOnEntity(
-                    name: fullQtyController.text,
-                    id: '',
-                    price: fullQtyPriceController.text,
-                  )
+                  for (final addOnController in productAddonControllers.value)
+                    ProductAddOnEntity(
+                      name: addOnController.nameController.text,
+                      id: '',
+                      price: addOnController.priceController.text,
+                    )
                 ],
                 types: [
-                  ProductTypeEntity(
-                    name: addOnItemController.text,
-                    price: addOnPriceController.text,
-                    id: '',
-                  )
+                  for (final typeController in productTypeControllers.value)
+                    ProductTypeEntity(
+                      name: typeController.nameController.text,
+                      price: typeController.priceController.text,
+                      id: '',
+                    )
                 ],
                 id: '',
                 name: productController.text,
                 description: descreptionController.text,
                 imagePath: ref.watch(imageProvider)!.path,
+                categoryId: '',
               );
-              context.go(BottomNaviWidget.routePath);
+              context.pop();
             }),
       ),
     );

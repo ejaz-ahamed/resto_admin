@@ -14,11 +14,13 @@ final class AddProductUsecase {
       required String description,
       required String imagePath,
       required String id,
+      required String categoryId,
       required List<ProductTypeEntity> types,
       required List<ProductAddOnEntity> addOns}) async {
     try {
       final uploadedPath = await repository.uploadImage(File(imagePath), name);
       await repository.addProduct(ProductEntity(
+          categoryId: categoryId,
           types: types,
           addOns: addOns,
           id: id,

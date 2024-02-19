@@ -15,26 +15,23 @@ class AddImageWidget extends ConsumerWidget {
     final assets = ref.watch(appAssetsConstantsProvider);
     final constants = ref.watch(profilePageContstantsProvider);
     final appTheme = AppTheme.of(context);
-    return InkWell(
-      onTap: () => ImagePickerUtils.showDialogueForImagePicker(context),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SvgPicture.asset(
-            assets.icAddImage,
-            height: appTheme.spaces.space_500,
-            colorFilter: ColorFilter.mode(
-                appTheme.colors.textDisabled, BlendMode.srcATop),
-          ),
-          const SizedBox8Widget(),
-          Text(
-            constants.txtAddImage,
-            style: appTheme.typography.uiSemibold
-                .copyWith(color: appTheme.colors.textDisabled),
-          )
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        SvgPicture.asset(
+          assets.icAddImage,
+          height: appTheme.spaces.space_500,
+          colorFilter:
+              ColorFilter.mode(appTheme.colors.textDisabled, BlendMode.srcATop),
+        ),
+        const SizedBox8Widget(),
+        Text(
+          constants.txtAddImage,
+          style: appTheme.typography.uiSemibold
+              .copyWith(color: appTheme.colors.textDisabled),
+        )
+      ],
     );
   }
 }

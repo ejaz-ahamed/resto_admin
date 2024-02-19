@@ -12,6 +12,7 @@ class ProductModel with _$ProductModel {
   @JsonSerializable(explicitToJson: true)
   factory ProductModel({
     required String id,
+    required String categoryId,
     required String imagePath,
     required String name,
     required String description,

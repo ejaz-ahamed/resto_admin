@@ -8,6 +8,7 @@ import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_16_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
+import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
 import 'package:resto_admin/features/products/presentation/widgets/product_type_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/row_widget.dart';
 
@@ -32,6 +33,8 @@ class OverViewItemsPage extends HookConsumerWidget {
           ),
           child: AppBarWidget(
             title: data.txtOverviewTitle,
+            actionButtonName: data.txtDelete,
+            onPressed: () {},
           ),
         ),
         body: SingleChildScrollView(
@@ -61,30 +64,30 @@ class OverViewItemsPage extends HookConsumerWidget {
                   btnText: '',
                   onPressed: () {},
                 ),
-                ProductTypeWidget(
-                  cursor: true,
-                  style: AppTheme.of(context).typography.h400.copyWith(
-                      color: AppTheme.of(context).colors.textSubtlest),
-                  addOnController: typeController,
-                  addOnPriceController: priCecontroller,
-                  hint: data.txtFullQty,
-                  enabled: true,
-                ),
+                // ProductTypeWidget(
+                //   cursor: true,
+                //   style: AppTheme.of(context).typography.h400.copyWith(
+                //       color: AppTheme.of(context).colors.textSubtlest),
+                //   addOnController: typeController,
+                //   addOnPriceController: priCecontroller,
+                //   hint: data.txtFullQty,
+                //   enabled: true,
+                // ),
                 const SizedBox32Widget(),
                 RowWidget(
                   text: data.txtAddOns,
                   btnText: '',
                   onPressed: () {},
                 ),
-                ProductTypeWidget(
-                  cursor: true,
-                  style: AppTheme.of(context).typography.h400.copyWith(
-                      color: AppTheme.of(context).colors.textSubtlest),
-                  addOnController: typeController,
-                  addOnPriceController: priCecontroller,
-                  hint: data.txtAddOnBtnTitle,
-                  enabled: true,
-                ),
+                // ProductTypeWidget(
+                //   cursor: true,
+                //   style: AppTheme.of(context).typography.h400.copyWith(
+                //       color: AppTheme.of(context).colors.textSubtlest),
+                //   addOnController: typeController,
+                //   addOnPriceController: priCecontroller,
+                //   hint: data.txtAddOnBtnTitle,
+                //   enabled: true,
+                // ),
               ],
             ),
           ),

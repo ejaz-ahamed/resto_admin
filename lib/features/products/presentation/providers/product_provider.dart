@@ -21,16 +21,18 @@ class Product extends _$Product {
       required String description,
       required String imagePath,
       required String id,
+      required String categoryId,
       required List<ProductTypeEntity> types,
       required List<ProductAddOnEntity> addOns}) {
     repository = ref.watch(productRepositoryProvider);
     return AddProductUsecase(repository: repository)(
+        categoryId: categoryId,
         addOns: addOns,
         types: types,
         id: id,
         name: name,
         description: description,
-        imagePath: imagePath);  
+        imagePath: imagePath);
   }
 
   Future<void> deleteProduct(String id) {

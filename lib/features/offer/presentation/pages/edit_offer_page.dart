@@ -53,7 +53,7 @@ class EditOfferPage extends HookConsumerWidget {
               const SizedBox24Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
-                child: const ImagePickerWidget(),
+                child: ImagePickerWidget(imgProvider: imageProvider),
               ),
               const SizedBox24Widget(),
               Padding(

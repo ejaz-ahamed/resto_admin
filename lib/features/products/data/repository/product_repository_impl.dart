@@ -29,6 +29,7 @@ class ProductRepositoryImpl implements ProductRepository {
         ProductAddonModel(id: addOn.id, name: addOn.name, price: addOn.price)
     ];
     await datasource.add(ProductModel(
+        categoryId: entity.categoryId,
         id: entity.id,
         imagePath: entity.imagePath,
         name: entity.name,
