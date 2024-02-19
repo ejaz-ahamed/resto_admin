@@ -33,27 +33,27 @@ class ProductRepositoryImpl implements ProductRepository {
         ProductAddonModel(id: addOn.id, name: addOn.name, price: addOn.price)
     ];
     await dataSource.add(ProductModel(
-        id: entity.id,
-        imagePath: entity.imagePath,
-        name: entity.name,
-        description: entity.description,
-        types: [
-          for (final d in typeEntity)
-            ProductTypeModel(
-              name: d.name,
-              price: d.price,
-              id: d.id,
-            )
-        ],
-        addOns: [
-          for (final c in addOnEntity)
-            ProductAddonModel(
-              name: c.name,
-              id: c.id,
-              price: c.price,
-            )
-        ],
-        ));
+      id: entity.id,
+      imagePath: entity.imagePath,
+      name: entity.name,
+      description: entity.description,
+      types: [
+        for (final d in typeEntity)
+          ProductTypeModel(
+            name: d.name,
+            price: d.price,
+            id: d.id,
+          )
+      ],
+      addOns: [
+        for (final c in addOnEntity)
+          ProductAddonModel(
+            name: c.name,
+            id: c.id,
+            price: c.price,
+          )
+      ],
+    ));
   }
 
   @override
@@ -97,6 +97,23 @@ class ProductRepositoryImpl implements ProductRepository {
           )
       ];
     }
+  }
+
+  @override
+  Future<void> deleteStorage(String fileName) async {
+    await storageDataSource.delete(fileName);
+  }
+
+  @override
+  Future<ProductEntity> getById(String id) async {
+    final doc = await dataSource.getById(id);
+    return ProductEntity(
+        name: doc.name,
+        imagePath: doc.id,
+        description: doc.description,
+        id: id,
+        types: [],
+        addOns: []);
   }
 }
 

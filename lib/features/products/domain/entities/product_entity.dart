@@ -11,7 +11,6 @@ class ProductEntity with _$ProductEntity {
     required String imagePath,
     required String description,
     required String id,
-   
     required List<ProductTypeEntity> types,
     required List<ProductAddOnEntity> addOns,
   }) = _ProductEntity;

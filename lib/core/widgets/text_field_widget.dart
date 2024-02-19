@@ -7,12 +7,15 @@ class TextFieldWidget extends ConsumerWidget {
   final String hintText;
   final TextEditingController controller;
   final int? maxLines;
+  final bool enabled;
+
   const TextFieldWidget({
     super.key,
+    required this.enabled,
     required this.textFieldTitle,
     required this.hintText,
     required this.controller,
-    this.maxLines = 1,
+    this.maxLines,
   });
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,6 +28,7 @@ class TextFieldWidget extends ConsumerWidget {
           style: apptheme.typography.h400,
         ),
         TextField(
+          enabled: enabled,
           style: apptheme.typography.h300,
           controller: controller,
           maxLines: maxLines,

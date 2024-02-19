@@ -14,6 +14,7 @@ class ProductConstants {
   final txtItems = 'Items';
   final txtAddBtn = 'Add';
   final txtEditbtn = 'Edit';
+  final txtEditProductAppbar = 'Edit Product';
   final txtFieldHint = 'Search';
   final txtType = 'Types';
   final txtFullQty = 'Full';

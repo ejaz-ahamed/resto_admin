@@ -32,6 +32,12 @@ class ProductFirestoreDataSourceImpl implements ProductFireStoreDataSource {
       ];
     }
   }
+
+  @override
+  Future<ProductModel> getById(String id) async {
+    final data = await collection.doc(id).get();
+    return data.data()!;
+  }
 }
 
 @riverpod

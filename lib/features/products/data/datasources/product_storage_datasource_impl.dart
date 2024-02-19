@@ -16,7 +16,7 @@ class ProductStorageDataSourceImpl implements ProductStorageDataSource {
 
   @override
   Future<void> delete(String fileName) async {
-    await storageRef.child(fileName).delete();
+    await storageRef.child('product/$fileName').delete();
   }
 }
 

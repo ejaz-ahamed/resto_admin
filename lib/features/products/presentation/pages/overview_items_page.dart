@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
@@ -9,7 +10,8 @@ import 'package:resto_admin/core/widgets/sized_box_16_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
 import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
-import 'package:resto_admin/features/products/presentation/widgets/product_type_widget.dart';
+import 'package:resto_admin/features/products/presentation/pages/edit_product_page.dart';
+import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
 import 'package:resto_admin/features/products/presentation/widgets/row_widget.dart';
 
 class OverViewItemsPage extends HookConsumerWidget {
@@ -37,6 +39,11 @@ class OverViewItemsPage extends HookConsumerWidget {
           ),
           child: AppBarWidget(
             title: entity.name,
+            actionButtonName: data.txtDelete,
+            onPressed: () {
+              ref.read(productProvider.notifier).deleteProduct(entity.id);
+              context.pop();
+            },
           ),
         ),
         body: SingleChildScrollView(
@@ -61,48 +68,33 @@ class OverViewItemsPage extends HookConsumerWidget {
                 ),
                 const SizedBox16Widget(),
                 TextFieldWidget(
+                  enabled: false,
                   textFieldTitle: data.txtDescription,
                   hintText: entity.description,
                   controller: controller,
-                  maxLines: 6,
+                  maxLines: 1,
                 ),
-                const SizedBox32Widget(),
+                const SizedBox16Widget(),
                 RowWidget(
                   text: data.txtType,
                   btnText: '',
                   onPressed: () {},
                 ),
-                // ProductTypeWidget(
-                //   cursor: true,
-                //   style: AppTheme.of(context).typography.h400.copyWith(
-                //       color: AppTheme.of(context).colors.textSubtlest),
-                //   addOnController: typeController,
-                //   addOnPriceController: priCecontroller,
-                //   hint: data.txtFullQty,
-                //   enabled: true,
-                // ),
                 const SizedBox32Widget(),
                 RowWidget(
                   text: data.txtAddOns,
                   btnText: '',
                   onPressed: () {},
                 ),
-                // ProductTypeWidget(
-                //   cursor: true,
-                //   style: AppTheme.of(context).typography.h400.copyWith(
-                //       color: AppTheme.of(context).colors.textSubtlest),
-                //   addOnController: typeController,
-                //   addOnPriceController: priCecontroller,
-                //   hint: data.txtAddOnBtnTitle,
-                //   enabled: true,
-                // ),
               ],
             ),
           ),
         ),
         bottomNavigationBar: ElevatedButtonWidget(
-          text: data.txtSaveBtn,
-          onPressed: () {},
+          text: data.txtEditbtn,
+          onPressed: () {
+            context.push(EditProductPage.routePath, extra: entity);
+          },
         ),
       ),
     );

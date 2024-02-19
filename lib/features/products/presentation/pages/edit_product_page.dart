@@ -10,16 +10,18 @@ import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
 import 'package:resto_admin/features/products/domain/entities/product_addon_entity.dart';
+import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
 import 'package:resto_admin/features/products/domain/entities/product_type_entity.dart';
 import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
 import 'package:resto_admin/features/products/presentation/widgets/heading_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/image_picker_product_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/product_type_widget.dart';
 
-class ProductPage extends HookConsumerWidget {
-  static const routePath = '/addNewProducts';
+class EditProductPage extends HookConsumerWidget {
+  static const routePath = '/editProducts';
+  final ProductEntity entity;
 
-  const ProductPage({super.key});
+  const EditProductPage({super.key, required this.entity});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);
@@ -36,7 +38,10 @@ class ProductPage extends HookConsumerWidget {
       child: Scaffold(
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(apptheme.spaces.space_700),
-            child: AppBarWidget(title: data.txtAddPrdtsTitle)),
+            child: AppBarWidget(
+              title: data.txtEditProductAppbar,
+              actionButtonName: data.txtEditbtn,
+            )),
         body: SingleChildScrollView(
           child: Padding(
             padding:
@@ -51,8 +56,8 @@ class ProductPage extends HookConsumerWidget {
                 ),
                 TextFieldWidget(
                     enabled: true,
-                    textFieldTitle: data.txtProductName,
-                    hintText: data.txtHintProduct,
+                    textFieldTitle: entity.name,
+                    hintText: entity.description,
                     controller: productController),
                 TextFieldWidget(
                     enabled: true,
