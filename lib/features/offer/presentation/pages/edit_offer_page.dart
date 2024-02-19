@@ -14,6 +14,8 @@ import 'package:resto_admin/features/offer/presentation/widgets/row_heading_widg
 import 'package:resto_admin/features/offer/presentation/widgets/tab_button_widget.dart.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/textfield_widget.dart';
 
+final currentStateProvider = StateProvider<double>((_) => 100);
+
 class EditOfferPage extends HookConsumerWidget {
   static const routePath = '/EditOfferPage';
   // final Set<int>? selectedItems;
@@ -37,6 +39,9 @@ class EditOfferPage extends HookConsumerWidget {
     void tabOnPressed(int index) {
       selectedIndex.value = index;
     }
+
+    final currentTextController = TextEditingController();
+    // final currentDollarValue = ref.watch(currentStateProvider);
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
@@ -98,13 +103,12 @@ class EditOfferPage extends HookConsumerWidget {
               ),
               const SizedBox8Widget(),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
-                child: TextFieldOfferWidget(
-                    hintText: selectedIndex.value == 0
-                        ? constants.txtHintTextPercentage
-                        : constants.txtHintTextAmount,
-                    controller: TextEditingController()),
-              ),
+                  padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
+                  child: TextFieldOfferWidget(
+                      hintText: selectedIndex.value == 0
+                          ? constants.txtHintTextPercentage
+                          : constants.txtHintTextAmount,
+                      controller: currentTextController)),
               SizedBox(
                 height: spaces.space_200,
               ),

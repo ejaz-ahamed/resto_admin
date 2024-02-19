@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/features/offer/presentation/pages/edit_offer_page.dart';
 
-class ListViewProductsWidget extends StatelessWidget {
+class ListViewProductsWidget extends ConsumerWidget {
   final int itemCount;
   final String product;
   final String oldPrice;
@@ -16,7 +18,8 @@ class ListViewProductsWidget extends StatelessWidget {
       required this.oldPrice});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentDollarValue = ref.watch(currentStateProvider);
     final theme = AppTheme.of(context);
     AppAssetsConstants iconConst = AppAssetsConstants();
     return ListView.builder(
@@ -24,7 +27,7 @@ class ListViewProductsWidget extends StatelessWidget {
       itemCount: itemCount,
       itemBuilder: (context, index) {
         return Padding(
-          padding:  EdgeInsets.only(left: theme.spaces.space_100),
+          padding: EdgeInsets.only(left: theme.spaces.space_100),
           child: SizedBox(
             height: theme.spaces.space_500,
             child: ListTile(
@@ -44,7 +47,7 @@ class ListViewProductsWidget extends StatelessWidget {
                     width: theme.spaces.space_100,
                   ),
                   Text(
-                    newPrice,
+                    '$currentDollarValue',
                     style: theme.typography.h600,
                   ),
                   SizedBox(

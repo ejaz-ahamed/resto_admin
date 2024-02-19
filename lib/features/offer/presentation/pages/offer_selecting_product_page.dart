@@ -96,7 +96,7 @@ class OfferSelectingPage extends HookConsumerWidget {
           ref
               .read(selectedItemsProvider.notifier)
               .updateSelectedItems(selectedItems.value);
-          context.push(
+          context.pop(
             EditOfferPage.routePath,
           );
         },
