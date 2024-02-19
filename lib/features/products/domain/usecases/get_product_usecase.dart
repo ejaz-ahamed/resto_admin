@@ -11,9 +11,9 @@ final class GetAllProductsUseCase {
   final ProductRepository repository;
   GetAllProductsUseCase({required this.repository});
 
-  Stream<List<ProductEntity>> call() async* {
+  Stream<List<ProductEntity>> call(String categoryId) async* {
     try {
-      final productStream = repository.getAll();
+      final productStream = repository.getAll(categoryId);
 
       await for (final products in productStream) {
         yield [
@@ -24,6 +24,7 @@ final class GetAllProductsUseCase {
                   await FirebaseStorageUtils.getDownloadUrl(product.imagePath),
               description: product.description,
               id: product.id,
+              categoryId: categoryId,
               types: [
                 for (final type in product.types)
                   ProductTypeEntity(
