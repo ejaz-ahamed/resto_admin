@@ -1,19 +1,17 @@
 name: resto_admin
 description: "A new Flutter project."
 
-publish_to: "none" 
-
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
   sdk: ">=3.2.6 <4.0.0"
 
-
 dependencies:
   flutter:
     sdk: flutter
-    
+
   cupertino_icons: ^1.0.6
   flutter_riverpod: ^2.4.10
   riverpod_annotation: ^2.3.4
@@ -42,10 +40,7 @@ dev_dependencies:
   freezed: ^2.4.7
   json_serializable: ^6.7.1
 
-
-
 flutter:
- 
   uses-material-design: true
   assets:
     - assets/icons/
@@ -70,5 +65,3 @@ flutter:
           weight: 800
         - asset: assets/fonts/Inter/Inter-Black.ttf
           weight: 900
-
- 

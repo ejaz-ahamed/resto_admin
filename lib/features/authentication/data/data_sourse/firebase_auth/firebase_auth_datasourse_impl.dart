@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:resto_admin/core/exceptions/authentication/authentication_exception.dart';
-import 'package:resto_admin/features/authentication/data/data_sourse/firebase_auth_datasourse.dart';
+import 'package:resto_admin/features/authentication/data/data_sourse/firebase_auth/firebase_auth_datasourse.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'firebase_auth_datasourse_impl.g.dart';
 
@@ -9,7 +9,7 @@ class FirebaseAuthDataSourseImpl implements FirebaseAuthDataSourse {
 
   FirebaseAuthDataSourseImpl(this._auth);
   @override
-  Future<void> firebaseAuth(String email, String password) async {
+  Future<void> login(String email, String password) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
@@ -25,7 +25,7 @@ class FirebaseAuthDataSourseImpl implements FirebaseAuthDataSourse {
 
   @override
   Future<void> logout() async {
-    await _auth.signOut();
+    await FirebaseAuth.instance.signOut();
   }
   
   @override
