@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 
 import 'package:resto_admin/features/products/data/datasources/product_firestore_datasource.dart';
 import 'package:resto_admin/features/products/data/datasources/product_firestore_datasource_impl.dart';
@@ -30,7 +29,7 @@ class ProductRepositoryImpl implements ProductRepository {
         ProductTypeModel(name: type.name, price: type.price, id: type.id)
     ];
     List<ProductAddonModel> addOnEntity = [
-      for (final addOn in entity.addOns!)
+      for (final addOn in entity.addOns)
         ProductAddonModel(id: addOn.id, name: addOn.name, price: addOn.price)
     ];
     await dataSource.add(ProductModel(

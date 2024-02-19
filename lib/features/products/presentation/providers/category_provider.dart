@@ -4,7 +4,6 @@ import 'package:resto_admin/features/products/domain/repository/category_reposit
 import 'package:resto_admin/features/products/domain/usecases/add_category_usecase.dart';
 import 'package:resto_admin/features/products/domain/usecases/delete_category_usecase.dart';
 import 'package:resto_admin/features/products/domain/usecases/get_categories_usecase.dart';
-import 'package:resto_admin/features/products/domain/usecases/update_category_usecase.dart';
 import 'package:resto_admin/features/products/presentation/providers/category_provider_state.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

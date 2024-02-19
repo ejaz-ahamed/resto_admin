@@ -22,7 +22,7 @@ class ListViewSeparatedWidget extends StatelessWidget {
                 width: theme.spaces.space_100 * 9,
                 // height: theme.spaces.space_100*9,
                 child: InkWell(
-                  onTap: onTap,
+                  onTap: () {},
                   child: Column(
                     children: [
                       CircleAvatar(
