@@ -10,6 +10,7 @@ class ProductEntity with _$ProductEntity {
     required String name,
     required String imagePath,
     required String description,
+    required String categoryId,
     required String id,
     required List<ProductTypeEntity> types,
     required List<ProductAddOnEntity> addOns,
