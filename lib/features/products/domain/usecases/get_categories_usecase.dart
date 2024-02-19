@@ -23,7 +23,7 @@ final class GetAllCategoryUseCase {
         ];
       }
     } catch (e) {
-      throw BaseException(e.toString());
+      throw BaseException('Data not found');
     }
   }
 }

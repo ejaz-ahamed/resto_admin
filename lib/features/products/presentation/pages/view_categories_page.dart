@@ -6,6 +6,7 @@ import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/features/products/presentation/pages/add_category_page.dart';
+import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
 import 'package:resto_admin/features/products/presentation/widgets/view_category_widget.dart';
 
 class ViewCategoriesPage extends ConsumerWidget {
@@ -25,18 +26,29 @@ class ViewCategoriesPage extends ConsumerWidget {
           title: data.txtManageCategories,
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(theme.spaces.space_300),
-              child: SizedBox(
-                width: theme.spaces.space_100 * 47.5,
-                child: const ViewCategoriesWidget(),
+      body: StreamBuilder(
+        stream: ref.read(categoryProvider.notifier).getAll(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(theme.spaces.space_300),
+                    child: SizedBox(
+                      width: theme.spaces.space_100 * 47.5,
+                      child: ViewCategoriesWidget(entity: snapshot.data!),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
+            );
+          } else {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+        },
       ),
       bottomNavigationBar: ElevatedButtonWidget(
         text: data.txtAddCategory,
