@@ -22,8 +22,8 @@ class OfferFirestoreDatasourceImpl implements OfferFirestoreDatasource {
   }
 
   @override
-  Future<void> update(OfferModel updateModel) async {
-    await collection.doc().set(updateModel);
+  Future<void> update(OfferModel updateModel, String id) async {
+    await collection.doc(id).set(updateModel);
   }
 
   @override
