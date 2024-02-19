@@ -17,10 +17,12 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'product_repository_impl.g.dart';
 
 class ProductRepositoryImpl implements ProductRepository {
-  final ProductFireStoreDataSource datasource;
+  final ProductFireStoreDataSource dataSource;
   final ProductStorageDataSource storageDataSource;
-  ProductRepositoryImpl(
-      {required this.datasource, required this.storageDataSource});
+  ProductRepositoryImpl({
+    required this.dataSource,
+    required this.storageDataSource,
+  });
   @override
   Future<void> addProduct(ProductEntity entity) async {
     List<ProductTypeModel> typeEntity = [
@@ -31,7 +33,7 @@ class ProductRepositoryImpl implements ProductRepository {
       for (final addOn in entity.addOns!)
         ProductAddonModel(id: addOn.id, name: addOn.name, price: addOn.price)
     ];
-    await datasource.add(ProductModel(
+    await dataSource.add(ProductModel(
         id: entity.id,
         imagePath: entity.imagePath,
         name: entity.name,
@@ -56,18 +58,52 @@ class ProductRepositoryImpl implements ProductRepository {
 
   @override
   Future<void> deleteProduct(String id) async {
-    return datasource.remove(id);
+    return dataSource.remove(id);
   }
 
   @override
   Future<String> upload(File fileUpload, String filePath) {
     return storageDataSource.add(fileUpload, filePath);
   }
+
+  @override
+  Stream<List<ProductEntity>> getAll() async* {
+    final data = dataSource.getAll();
+    await for (final snapshot in data) {
+      final docs = snapshot;
+      yield [
+        for (final product in docs)
+          ProductEntity(
+            name: product.name,
+            imagePath: product.imagePath,
+            description: product.description,
+            id: product.id,
+            types: [
+              for (final type in product.types)
+                ProductTypeEntity(
+                  name: type.name,
+                  price: type.price,
+                  id: type.id,
+                )
+            ],
+            addOns: [
+              for (final add in product.addOns)
+                ProductAddOnEntity(
+                  name: add.name,
+                  id: add.id,
+                  price: add.price,
+                )
+            ],
+          )
+      ];
+    }
+  }
 }
 
 @riverpod
 ProductRepository productRepository(ProductRepositoryRef ref) {
   return ProductRepositoryImpl(
-      storageDataSource: ref.watch(productStorageDataSourceProvider),
-      datasource: ref.watch(productFireStoreDataSourceProvider));
+    storageDataSource: ref.watch(productStorageDataSourceProvider),
+    dataSource: ref.watch(productFireStoreDataSourceProvider),
+  );
 }

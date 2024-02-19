@@ -5,6 +5,7 @@ import 'package:resto_admin/features/products/domain/entities/product_type_entit
 import 'package:resto_admin/features/products/domain/repository/product_repository.dart';
 import 'package:resto_admin/features/products/domain/usecases/add_product_usecase.dart';
 import 'package:resto_admin/features/products/domain/usecases/delete_product_usecase.dart';
+import 'package:resto_admin/features/products/domain/usecases/get_product_usecase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'product_provider.g.dart';
@@ -14,7 +15,9 @@ class Product extends _$Product {
   late ProductRepository repository;
 
   @override
-  void build() {}
+  void build() {
+    repository = ref.watch(productRepositoryProvider);
+  }
 
   Future<void> addProduct(
       {required String name,
@@ -30,11 +33,15 @@ class Product extends _$Product {
         id: id,
         name: name,
         description: description,
-        imagePath: imagePath);  
+        imagePath: imagePath);
   }
 
   Future<void> deleteProduct(String id) {
     final repository = ref.watch(productRepositoryProvider);
     return DeleteProductUsecase(repository: repository)(id);
+  }
+
+  Stream<List<ProductEntity>> getAll() {
+    return GetAllProductsUseCase(repository: repository)();
   }
 }
