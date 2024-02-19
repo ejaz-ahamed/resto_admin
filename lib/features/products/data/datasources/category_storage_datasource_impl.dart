@@ -15,6 +15,11 @@ class CategoryStorageDataSourceImpl implements CategoryStorageDataSource {
     final filePath = storageRef.child('category/$fileName').fullPath;
     return filePath;
   }
+
+  @override
+  Future<void> delete(String fileName) async {
+    await storageRef.child(fileName).delete();
+  }
 }
 
 @riverpod

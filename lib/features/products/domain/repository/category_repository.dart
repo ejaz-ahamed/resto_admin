@@ -8,4 +8,5 @@ abstract class CategoryRepository {
   Future<void> update(CategoryEntity updatedEntity);
   Stream<List<CategoryEntity>> getAll();
   Future<String> upload(File fileToUpload, String filePath);
+  Future<void> deleteStorage(String fileName);
 }

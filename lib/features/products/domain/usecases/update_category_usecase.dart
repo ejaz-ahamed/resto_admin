@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:resto_admin/core/exceptions/base_exception/base_exception.dart';
 import 'package:resto_admin/features/products/domain/entities/category_entity.dart';
 import 'package:resto_admin/features/products/domain/repository/category_repository.dart';
@@ -11,11 +13,13 @@ final class UpdateCategoryUseCase {
       required String imagePath,
       required String name}) async {
     try {
-      /// TODO: Delete the image here
+      await repository.deleteStorage(imagePath);
+
+      final upaloadedPath = await repository.upload(File(imagePath), name);
 
       await repository.update(CategoryEntity(
         id: id,
-        imagePath: imagePath,
+        imagePath: upaloadedPath,
         name: name,
       ));
     } catch (e) {

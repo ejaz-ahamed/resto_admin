@@ -60,6 +60,11 @@ class CategoryRepositoryImpl implements CategoryRepository {
   Future<String> upload(File fileToUpload, String filePath) {
     return storageDataSource.add(fileToUpload, filePath);
   }
+
+  @override
+  Future<void> deleteStorage(String fileName) async {
+    await storageDataSource.delete(fileName);
+  }
 }
 
 @riverpod
