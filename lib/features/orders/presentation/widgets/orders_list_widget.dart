@@ -29,7 +29,7 @@ class OrderListView extends ConsumerWidget {
         ),
         itemBuilder: (context, index) => InkWell(
           onTap: () {
-            context.push(OrderViewPage.routePath);
+            context.push(OrderViewPage.routePath, extra: entity[index]);
           },
           child: Container(
             height: space.space_100 * 11,

@@ -20,7 +20,7 @@ class OrderRepositoryImpl implements OrderRepository {
           OrderEntity(
             orderId: data.uid,
             location: data.location,
-            // time: data.time,
+            time: data.time,
             ordersItem: [
               for (final orderItem in data.items!)
                 OrderItemEntity(
@@ -29,6 +29,7 @@ class OrderRepositoryImpl implements OrderRepository {
                     quantity: orderItem.quantity),
             ],
             orderType: orderType,
+            name: data.name,
           ),
       ];
     }

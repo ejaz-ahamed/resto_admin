@@ -8,7 +8,8 @@ class OrderEntity with _$OrderEntity {
   const factory OrderEntity({
     required String orderId,
     required String location,
-    // required DateTime time,
+    required String time,
+    required String name,
     required List<OrderItemEntity>? ordersItem,
     required OrderType orderType,
   }) = _OrderEntity;

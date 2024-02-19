@@ -18,6 +18,12 @@ class OrderFirestoreDataSourceImpl implements OrderFirestoreDataSource {
       yield [for (final order in orders.docs) order.data()];
     }
   }
+
+  @override
+  Future<OrderModel> update(String orderId, OrderType orderType) {
+    // TODO: implement update
+    throw UnimplementedError();
+  }
 }
 
 @riverpod

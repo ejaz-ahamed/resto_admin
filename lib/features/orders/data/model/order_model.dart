@@ -11,7 +11,8 @@ class OrderModel with _$OrderModel {
   factory OrderModel({
     required String uid,
     required String location,
-    // required DateTime time,
+    required String name,
+    required String time,
     required List<OrderItemModel>? items,
     required OrderType type,
   }) = _OrderModel;

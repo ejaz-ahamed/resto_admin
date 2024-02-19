@@ -59,7 +59,7 @@ class OrderScreenOne extends HookConsumerWidget {
                       ],
                     );
                   } else {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   }
