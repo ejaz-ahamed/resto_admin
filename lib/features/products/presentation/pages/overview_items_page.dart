@@ -62,6 +62,7 @@ class OverViewItemsPage extends HookConsumerWidget {
                   onPressed: () {},
                 ),
                 ProductTypeWidget(
+                  cursor: true,
                   style: AppTheme.of(context).typography.h400.copyWith(
                       color: AppTheme.of(context).colors.textSubtlest),
                   addOnController: typeController,
@@ -69,13 +70,14 @@ class OverViewItemsPage extends HookConsumerWidget {
                   hint: data.txtFullQty,
                   enabled: true,
                 ),
-                SizedBox32Widget(),
+                const SizedBox32Widget(),
                 RowWidget(
                   text: data.txtAddOns,
                   btnText: '',
                   onPressed: () {},
                 ),
                 ProductTypeWidget(
+                  cursor: true,
                   style: AppTheme.of(context).typography.h400.copyWith(
                       color: AppTheme.of(context).colors.textSubtlest),
                   addOnController: typeController,

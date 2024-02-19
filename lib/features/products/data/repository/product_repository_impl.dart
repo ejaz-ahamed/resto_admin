@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 
 import 'package:resto_admin/features/products/data/datasources/product_firestore_datasource.dart';
 import 'package:resto_admin/features/products/data/datasources/product_firestore_datasource_impl.dart';
@@ -8,9 +7,7 @@ import 'package:resto_admin/features/products/data/datasources/product_storage_d
 import 'package:resto_admin/features/products/data/models/product_addon_model.dart';
 import 'package:resto_admin/features/products/data/models/product_model.dart';
 import 'package:resto_admin/features/products/data/models/product_type_model.dart';
-import 'package:resto_admin/features/products/domain/entities/product_addon_entity.dart';
 import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
-import 'package:resto_admin/features/products/domain/entities/product_type_entity.dart';
 import 'package:resto_admin/features/products/domain/repository/product_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -60,8 +57,13 @@ class ProductRepositoryImpl implements ProductRepository {
   }
 
   @override
-  Future<String> upload(File fileUpload, String filePath) {
+  Future<String> uploadImage(File fileUpload, String filePath) {
     return storageDataSource.add(fileUpload, filePath);
+  }
+
+  @override
+  Future<void> deleteImage(String filePath) {
+    return storageDataSource.delete(filePath);
   }
 }
 

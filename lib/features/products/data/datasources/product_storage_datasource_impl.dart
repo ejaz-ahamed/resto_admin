@@ -13,6 +13,11 @@ class ProductStorageDataSourceImpl implements ProductStorageDataSource {
     final filePath = storageRef.child('product/$fileName').fullPath;
     return filePath;
   }
+
+  @override
+  Future<void> delete(String fileName) async {
+    await storageRef.child(fileName).delete();
+  }
 }
 
 @riverpod

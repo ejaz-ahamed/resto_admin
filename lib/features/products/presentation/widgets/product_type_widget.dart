@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/features/products/presentation/widgets/edit_field_widget.dart';
 
@@ -9,6 +10,7 @@ class ProductTypeWidget extends HookConsumerWidget {
   final TextEditingController addOnPriceController;
   final String hint;
   final bool enabled;
+  final bool cursor;
   final TextStyle? style;
   const ProductTypeWidget(
       {super.key,
@@ -16,6 +18,7 @@ class ProductTypeWidget extends HookConsumerWidget {
       required this.addOnPriceController,
       required this.hint,
       required this.enabled,
+      required this.cursor,
       required this.style});
 
   @override
@@ -38,6 +41,7 @@ class ProductTypeWidget extends HookConsumerWidget {
               children: [
                 Expanded(
                   child: EditFieldWidget(
+                    cursor: cursor,
                     hintText: hint,
                     controller: addOnController,
                     enabled: enabled,
@@ -47,7 +51,7 @@ class ProductTypeWidget extends HookConsumerWidget {
                 ),
                 Expanded(
                   child: EditFieldWidget(
-                    hintText: "Enter price",
+                    hintText: ref.watch(productConstantsProvider).txtPrice,
                     controller: addOnPriceController,
                     isPrice: true,
                     enabled: enabled,

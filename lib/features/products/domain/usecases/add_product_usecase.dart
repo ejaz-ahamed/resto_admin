@@ -17,7 +17,7 @@ final class AddProductUsecase {
       required List<ProductTypeEntity> types,
       required List<ProductAddOnEntity> addOns}) async {
     try {
-      final uploadedPath = await repository.upload(File(imagePath), name);
+      final uploadedPath = await repository.uploadImage(File(imagePath), name);
       await repository.addProduct(ProductEntity(
           types: types,
           addOns: addOns,
@@ -26,7 +26,7 @@ final class AddProductUsecase {
           imagePath: uploadedPath,
           description: description));
     } catch (e) {
-      throw BaseException('Cannot add product');
+      throw BaseException('Cannot add product Details');
     }
   }
 }

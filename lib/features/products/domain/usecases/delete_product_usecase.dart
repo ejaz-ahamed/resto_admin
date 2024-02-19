@@ -8,7 +8,7 @@ final class DeleteProductUsecase {
     try {
       return await repository.deleteProduct(id);
     } catch (e) {
-      throw BaseException('Cannot delete product');
+      throw BaseException('Cannot Delete product');
     }
   }
 }

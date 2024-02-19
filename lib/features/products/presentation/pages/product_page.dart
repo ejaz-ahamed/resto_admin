@@ -12,7 +12,6 @@ import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
 import 'package:resto_admin/features/products/domain/entities/product_addon_entity.dart';
-import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
 import 'package:resto_admin/features/products/domain/entities/product_type_entity.dart';
 import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
 import 'package:resto_admin/features/products/presentation/widgets/image_picker_product_widget.dart';
@@ -26,13 +25,14 @@ class ProductPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);
     final data = ref.watch(productConstantsProvider);
-    final List<ProductEntity> entity;
+    final constants = ref.watch(productConstantsProvider);
+    // final List<ProductEntity> entity;
     final productController = useTextEditingController();
     final descreptionController = useTextEditingController();
-    final fullQtyController = useTextEditingController(text: "Full");
-    final fullQtyPriceController = useTextEditingController(text: "\$25.00");
-    final addOnItemController = useTextEditingController(text: 'Pepsi');
-    final addOnPriceController = useTextEditingController(text: '\$2.00');
+    final fullQtyController = useTextEditingController();
+    final fullQtyPriceController = useTextEditingController();
+    final addOnItemController = useTextEditingController();
+    final addOnPriceController = useTextEditingController();
 
     final isEnabled = useState<bool>(false);
 
@@ -75,10 +75,11 @@ class ProductPage extends HookConsumerWidget {
                 ),
                 const SizedBox24Widget(),
                 ProductTypeWidget(
+                    cursor: isEnabled.value,
                     style: apptheme.typography.h400
                         .copyWith(color: apptheme.colors.textDisabled),
-                    enabled: true,
-                    hint: 'Enter Type',
+                    enabled: isEnabled.value,
+                    hint: constants.txtType,
                     addOnController: fullQtyController,
                     addOnPriceController: fullQtyPriceController),
                 const SizedBox24Widget(),
@@ -98,10 +99,11 @@ class ProductPage extends HookConsumerWidget {
                 ),
                 const SizedBox24Widget(),
                 ProductTypeWidget(
+                    cursor: isEnabled.value,
                     style: apptheme.typography.h400
                         .copyWith(color: apptheme.colors.textDisabled),
-                    enabled: true,
-                    hint: 'Enter Add-ons',
+                    enabled: isEnabled.value,
+                    hint: constants.txtAddOns,
                     addOnController: addOnItemController,
                     addOnPriceController: addOnPriceController),
                 const SizedBox24Widget(),

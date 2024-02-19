@@ -15,7 +15,6 @@ class ProductFirestoreDataSourceImpl implements ProductFireStoreDataSource {
           toFirestore: (model, _) => model.toFirestore());
   @override
   Future<void> add(ProductModel model) async {
-    print(jsonEncode(model.toJson()));
     await collection.doc(model.name).set(model);
   }
 
