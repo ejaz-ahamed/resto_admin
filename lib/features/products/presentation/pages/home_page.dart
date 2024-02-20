@@ -83,6 +83,7 @@ class HomePage extends HookConsumerWidget {
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         return ListViewSeparatedWidget(
+                          clearController: searchController,
                           entity: snapshot.data!,
                         );
                       } else {
@@ -100,12 +101,12 @@ class HomePage extends HookConsumerWidget {
                   text: data.txtItems,
                   btnText: data.txtAddBtn,
                   onPressed: () => context.push(ProductPage.routePath,
-                      extra: ref.watch(categoryProvider).selectedCategory),
+                      extra: ref.read(categoryProvider).selectedCategory),
                 ),
                 SizedBox(
                   height: theme.spaces.space_250,
                 ),
-                GridViewWidget(),
+                const GridViewWidget(),
                 SizedBox(
                   height: theme.spaces.space_250,
                 ),

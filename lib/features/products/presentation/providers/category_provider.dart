@@ -9,12 +9,12 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'category_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class Category extends _$Category {
   late CategoryRepository repository;
   @override
   CategoryProviderState build() {
-    repository = ref.watch(categoryRepositoryProvider);
+    repository = ref.read(categoryRepositoryProvider);
 
     return CategoryProviderState(
       categories: GetAllCategoryUseCase(repository: repository)(),
@@ -40,17 +40,6 @@ class Category extends _$Category {
   void selectCategory(String id) {
     state = state.copyWith(selectedCategory: id);
   }
-
-  // Future<void> update(
-  //     {required String id,
-  //     required String imagePath,
-  //     required String name}) async {
-  //   await UpdateCategoryUseCase(repository: repository)(
-  //     id: id,
-  //     imagePath: imagePath,
-  //     name: name,
-  //   );
-  // }
 
   Stream<List<CategoryEntity>> getAll() async* {
     final stream = GetAllCategoryUseCase(repository: repository)();

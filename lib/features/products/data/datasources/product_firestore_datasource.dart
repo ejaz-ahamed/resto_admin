@@ -4,4 +4,5 @@ abstract class ProductFireStoreDataSource {
   Future<void> add(ProductModel model);
   Future<void> remove(String id);
   Stream<List<ProductModel>> getAll(String categoryId);
+  Future<List<ProductModel>> search(String categoryId);
 }
