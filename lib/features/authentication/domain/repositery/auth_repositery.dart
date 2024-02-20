@@ -6,4 +6,5 @@ abstract class AuthRepositery {
   Future<void> logout();
   Future<void> setProfileImage(UserEntity userEntity);
   Stream<UserEntity> getProfileImage();
+  Future<void> removeImage();
 }

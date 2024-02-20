@@ -14,23 +14,19 @@ class ImagePickerWidget extends ConsumerWidget {
   final StateProvider<XFile?> imgProvider;
   const ImagePickerWidget({super.key, required this.imgProvider});
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return InkWell(
       onTap: () async {
         ref.read(imageProvider.notifier).state =
             await ImagePickerUtils.showDialogueForImagePicker(context);
-
       },
       child: Container(
-
         height: AppTheme.of(context).spaces.space_500 * 6,
-
         width: MediaQuery.sizeOf(context).width,
         decoration: BoxDecoration(
             borderRadius:
                 BorderRadius.circular(AppTheme.of(context).spaces.space_100),
             border: Border.all(
-
                 color: AppTheme.of(context).colors.textSubtle,
                 width: AppTheme.of(context).spaces.space_25)),
         child: ref.watch(imgProvider) != null

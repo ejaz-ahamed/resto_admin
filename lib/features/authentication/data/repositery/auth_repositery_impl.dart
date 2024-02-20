@@ -26,7 +26,6 @@ class AuthRepositeryImpl implements AuthRepositery {
   @override
   Future<void> updatePassword(String newPassword) async {
     dataSourse.updatePassword(newPassword);
-
   }
 
   @override
@@ -41,6 +40,11 @@ class AuthRepositeryImpl implements AuthRepositery {
   Future<void> setProfileImage(UserEntity userEntity) async {
     final model = UserModel(imgPath: userEntity.imgPath);
     await userDataSourse.setProfileImage(model);
+  }
+  
+  @override
+  Future<void> removeImage() async{
+   await userDataSourse.removeImage();
   }
 }
 

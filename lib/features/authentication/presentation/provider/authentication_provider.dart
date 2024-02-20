@@ -7,9 +7,11 @@ import 'package:resto_admin/features/authentication/domain/entity/user_entity.da
 import 'package:resto_admin/features/authentication/domain/usecases/get_user_details_usecases.dart';
 import 'package:resto_admin/features/authentication/domain/usecases/login_usecases.dart';
 import 'package:resto_admin/features/authentication/domain/usecases/logout_usecase.dart';
+import 'package:resto_admin/features/authentication/domain/usecases/remove_Image_usecase.dart';
 import 'package:resto_admin/features/authentication/domain/usecases/update_password_usecase.dart';
 import 'package:resto_admin/features/authentication/domain/usecases/update_user_details_usecases.dart';
 import 'package:resto_admin/features/authentication/presentation/pages/login_page.dart';
+import 'package:resto_admin/features/profile_page/data/repository/profile_repository_impl.dart';
 import 'package:resto_admin/main.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'authentication_provider.g.dart';
@@ -23,7 +25,8 @@ class Authentication extends _$Authentication {
     try {
       await LoginUsecase(repositery: ref.watch(authRepositeryProvider))(
           email, password);
-      MyApp.navigatorKey.currentContext!.go(BottomNaviWidget.routePath);
+      Future.sync(() =>
+          MyApp.navigatorKey.currentContext!.go(BottomNaviWidget.routePath));
     } on BaseException catch (e) {
       SnackBarUtils.showMessage(e.message);
     }
@@ -32,32 +35,35 @@ class Authentication extends _$Authentication {
   Future<void> logout() async {
     try {
       await LogOutUsecase(repositery: ref.watch(authRepositeryProvider))();
-      MyApp.navigatorKey.currentContext!.go(LoginPage.routePath);
+      Future.sync(
+          () => MyApp.navigatorKey.currentContext!.go(LoginPage.routePath));
     } on BaseException catch (e) {
       SnackBarUtils.showMessage(e.message);
     }
   }
 
-  Stream<UserEntity> getUserDetails(String uid) async* {
+  Stream<UserEntity> getProfileImage() async* {
     try {
       yield* GetUserDetailsUsecases(
-          repositery: ref.watch(authRepositeryProvider))(uid);
+          repositery: ref.watch(authRepositeryProvider))();
     } on BaseException catch (e) {
       SnackBarUtils.showMessage(e.message);
     }
   }
 
-  Future<void> updateUserDetails(UserEntity userEntity) async {
-    try {
-      await UpdateuserDetailsUsecases(
-          repositery: ref.watch(authRepositeryProvider))(userEntity);
-    } on BaseException catch (e) {
-      SnackBarUtils.showMessage(e.message);
-    }
+  Future<void> setProfileImage({required String imagePath}) async {
+    await UpdateuserDetailsUsecases(
+            repositery: ref.watch(authRepositeryProvider),
+            profileRepository: ref.watch(profileRepositoryProvider))(
+        imagePath: imagePath);
   }
 
   Future<void> updatePassword(String newPassword) async {
     await UpdatePasswordUsecase(repositery: ref.watch(authRepositeryProvider))(
         newPassword);
+  }
+
+  Future<void> removeImage() async {
+    await RemoveImageUsecase(repositery: ref.watch(authRepositeryProvider))();
   }
 }

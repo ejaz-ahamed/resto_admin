@@ -15,9 +15,8 @@ class ProfileStorageDataSourceImpl implements ProfileStorageDataSource{
   }
   
   @override
-  Stream<void> getImage(String image) {
-    // TODO: implement getImage
-    throw UnimplementedError();
+  Future<void> deleteImage()async {
+    await storageRef.child('profile/profile_image').delete();
   }
 }
 @riverpod

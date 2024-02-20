@@ -13,6 +13,7 @@ import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:resto_admin/features/authentication/presentation/provider/authentication_provider.dart';
 import 'package:resto_admin/features/profile_page/presentation/providers/profile_provider.dart';
 
 final editImageProvider = StateProvider<XFile?>((ref) => null);
@@ -47,8 +48,13 @@ class EditProfilePage extends HookConsumerWidget {
                 Align(
                     alignment: Alignment.center,
                     child: InkWell(
-                      onTap: () =>
-                          ImagePickerUtils.showDialogueForImagePicker(context),
+                      onTap: () async {
+                        final imageSelected =
+                            await ImagePickerUtils.showDialogueForImagePicker(
+                                context);
+                        ref.read(editImageProvider.notifier).state =
+                            imageSelected;
+                      },
                       child: Container(
                         height: appTheme.spaces.space_400 * 7,
                         width: appTheme.spaces.space_400 * 7,
@@ -57,13 +63,36 @@ class EditProfilePage extends HookConsumerWidget {
                             border: Border.all(
                                 color: appTheme.colors.textDisabled,
                                 width: appTheme.spaces.space_25)),
-                        child: ref.watch(editImageProvider) == null
-                            ? const AddImageWidget()
-                            : ClipRRect(
-                                borderRadius: BorderRadius.circular(
-                                    appTheme.spaces.space_900 * 100),
-                                child: Image.file(
-                                    File(ref.watch(editImageProvider)!.path))),
+                        child: StreamBuilder(
+                          stream: ref
+                              .watch(authenticationProvider.notifier)
+                              .getProfileImage(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return ClipRRect(
+                                  borderRadius: BorderRadius.circular(
+                                      appTheme.spaces.space_900 * 100),
+                                  child: Image.network(snapshot.data!.imgPath));
+                            } else if (snapshot.hasError) {
+                              return const Center(
+                                child: Text('Error'),
+                              );
+                            } else if (snapshot.data == null) {
+                              return const AddImageWidget();
+                            } else {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                          },
+                        ),
+                        // child: ref.watch(editImageProvider) == null
+                        //     ? const AddImageWidget()
+                        //     : ClipRRect(
+                        //         borderRadius: BorderRadius.circular(
+                        //             appTheme.spaces.space_900 * 100),
+                        //         child: Image.file(
+                        //             File(ref.watch(editImageProvider)!.path))),
                       ),
                     )),
                 const SizedBox32Widget(),
@@ -86,6 +115,10 @@ class EditProfilePage extends HookConsumerWidget {
             ref
                 .read(profileProvider.notifier)
                 .upload(ref.watch(editImageProvider)!.path);
+            ref
+                .read(authenticationProvider.notifier)
+                .setProfileImage(imagePath: ref.watch(editImageProvider)!.path);
+
             context.pop();
           },
         ),

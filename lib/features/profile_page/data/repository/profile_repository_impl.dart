@@ -36,6 +36,11 @@ class ProfileRepositoryImpl implements ProfileRepository {
   Future<String> upload(File fileToUpload) async {
     return storageDataSource.addImage(fileToUpload);
   }
+  
+  @override
+  Future<void> deleteImage()async {
+    await storageDataSource.deleteImage();
+  }
 }
 
 @riverpod

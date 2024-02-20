@@ -7,4 +7,5 @@ abstract class ProfileRepository{
   Future<void>addOpeningTime(ProfileEntity profileEntity);
   Future<void>addClosingTime(ProfileEntity profileEntity);
   Future<String>upload(File fileToUpload);
+  Future<void>deleteImage();
 }
