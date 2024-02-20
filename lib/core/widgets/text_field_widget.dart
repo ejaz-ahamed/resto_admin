@@ -46,6 +46,9 @@ class TextFieldWidget extends ConsumerWidget {
                   .copyWith(color: apptheme.colors.textSubtlest),
               border: const OutlineInputBorder(borderSide: BorderSide.none)),
         ),
+        SizedBox(
+          height: AppTheme.of(context).spaces.space_200,
+        ),
       ],
     );
   }

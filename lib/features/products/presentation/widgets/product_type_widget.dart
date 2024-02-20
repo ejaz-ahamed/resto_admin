@@ -32,7 +32,6 @@ class ProductTypeWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);
-    final data = ref.watch(productConstantsProvider);
 
     void addNewTypeEntry() {
       productTypes.value = [

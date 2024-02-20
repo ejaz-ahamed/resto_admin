@@ -70,7 +70,8 @@ class OverViewItemsPage extends HookConsumerWidget {
                 Text(
                   entity.description,
                   style: apptheme.typography.h300
-                      .copyWith(color: apptheme.colors.textSubtlest),
+                      .copyWith(color: apptheme.colors.text),
+                  textAlign: TextAlign.justify,
                 ),
                 const SizedBox16Widget(),
                 HeadingWidget(text: data.txtType),

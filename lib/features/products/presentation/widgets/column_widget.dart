@@ -16,11 +16,17 @@ class ColumnWidget extends StatelessWidget {
           children: [
             Text(
               name,
-              style: AppTheme.of(context).typography.h300,
+              style: AppTheme.of(context)
+                  .typography
+                  .h300
+                  .copyWith(color: AppTheme.of(context).colors.text),
             ),
             Text(
               price,
-              style: AppTheme.of(context).typography.h300,
+              style: AppTheme.of(context)
+                  .typography
+                  .h300
+                  .copyWith(color: AppTheme.of(context).colors.text),
             )
           ],
         ),

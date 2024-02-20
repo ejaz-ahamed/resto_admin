@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
+import 'package:resto_admin/core/widgets/bottom_navigation/bottom_nav_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
@@ -21,14 +22,12 @@ import 'package:resto_admin/features/products/presentation/widgets/product_type_
 class EditProductPage extends HookConsumerWidget {
   static const routePath = '/editProducts';
   final ProductEntity entity;
-
   const EditProductPage({super.key, required this.entity});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);
     final data = ref.watch(productConstantsProvider);
     final constants = ref.watch(productConstantsProvider);
-
     final productController = useTextEditingController();
     final descreptionController = useTextEditingController();
     final productTypeControllers = useState<List<ProductTypeControllers>>([]);
@@ -48,7 +47,6 @@ class EditProductPage extends HookConsumerWidget {
             final priceController = TextEditingController();
             nameController.text = addon.name;
             priceController.text = addon.price;
-
             productAddonControllers.value = [
               ...productAddonControllers.value,
               ProductTypeControllers(
@@ -61,7 +59,6 @@ class EditProductPage extends HookConsumerWidget {
             final priceController = TextEditingController();
             nameController.text = types.name;
             priceController.text = types.price;
-
             productTypeControllers.value = [
               ...productTypeControllers.value,
               ProductTypeControllers(
@@ -71,8 +68,20 @@ class EditProductPage extends HookConsumerWidget {
           }
         },
       );
+      return () {
+        productController.dispose();
+        descreptionController.dispose();
+        for (final controller in productAddonControllers.value) {
+          controller.nameController.dispose();
+          controller.priceController.dispose();
+        }
+        for (final controller in productTypeControllers.value) {
+          controller.nameController.dispose();
+          controller.priceController.dispose();
+        }
+      };
 
-      return null;
+      // return null;
     }, []);
 
     return GestureDetector(
@@ -120,6 +129,7 @@ class EditProductPage extends HookConsumerWidget {
                 ),
                 const SizedBox32Widget(),
                 HeadingWidget(
+                  
                   text: data.txtAddOns,
                 ),
                 const SizedBox24Widget(),
@@ -143,7 +153,7 @@ class EditProductPage extends HookConsumerWidget {
                   for (final addOnController in productAddonControllers.value)
                     ProductAddOnEntity(
                       name: addOnController.nameController.text,
-                      id: '',
+                      id: addOnController.nameController.text,
                       price: addOnController.priceController.text,
                     )
                 ],
@@ -152,7 +162,7 @@ class EditProductPage extends HookConsumerWidget {
                     ProductTypeEntity(
                       name: typeController.nameController.text,
                       price: typeController.priceController.text,
-                      id: '',
+                      id: typeController.nameController.text,
                     )
                 ],
                 id: entity.id,
@@ -161,7 +171,8 @@ class EditProductPage extends HookConsumerWidget {
                 imagePath: ref.watch(imageProvider)!.path,
                 categoryId: entity.categoryId,
               );
-              context.pop();
+
+              context.go(BottomNaviWidget.routePath);
             }),
       ),
     );

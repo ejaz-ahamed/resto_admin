@@ -11,7 +11,6 @@ import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
 import 'package:resto_admin/features/products/domain/entities/product_addon_entity.dart';
 import 'package:resto_admin/features/products/domain/entities/product_type_entity.dart';
-import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
 import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
 import 'package:resto_admin/features/products/presentation/widgets/heading_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/image_picker_product_widget.dart';
