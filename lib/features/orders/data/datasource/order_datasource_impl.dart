@@ -22,12 +22,13 @@ class OrderFirestoreDataSourceImpl implements OrderFirestoreDataSource {
   }
 
   @override
-  Future<void> updateType(String orderId, OrderStatus newStatus) async {
+  Future<void> updateType(String orderId, OrderStatus newStatus)async {
     await instance
         .collection("orders")
         .doc(orderId)
         .update({'orderStatus': newStatus.name});
   }
+ 
 }
 
 @riverpod
@@ -35,3 +36,4 @@ OrderFirestoreDataSource orderFirestoreDataSource(
     OrderFirestoreDataSourceRef ref) {
   return OrderFirestoreDataSourceImpl();
 }
+

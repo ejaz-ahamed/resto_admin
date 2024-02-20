@@ -19,7 +19,7 @@ class ItemsDetailsListviewDetails extends ConsumerWidget {
       child: ListView.builder(
         itemCount: entity.length,
         itemBuilder: (context, index) {
-          final data = entity[index].items![index];
+          final data = entity[index].items[index];
           return Padding(
             padding:
                 EdgeInsets.symmetric(horizontal: appTheme.spaces.space_300),

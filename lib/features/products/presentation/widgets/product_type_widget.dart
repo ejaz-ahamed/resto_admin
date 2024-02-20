@@ -22,7 +22,6 @@ class ProductTypeWidget extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);
     final selectedIndex = useState<int>(0);
-    final types = useMemoized(() => []);
     void tabOnPressed(int index) {
       selectedIndex.value++;
     }

@@ -20,12 +20,16 @@ import 'package:resto_admin/features/products/presentation/widgets/row_widget.da
 
 class ProductPage extends HookConsumerWidget {
   static const routePath = '/addNewProducts';
-  const ProductPage({super.key});
+  final String id;
+  const ProductPage({
+    super.key,
+    required this.id,
+  });
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);
     final data = ref.watch(productConstantsProvider);
-    // final List<ProductEntity> entity;
+
     final productController = useTextEditingController();
     final descreptionController = useTextEditingController();
     final fullQtyController = useTextEditingController(text: "Full");
@@ -53,9 +57,7 @@ class ProductPage extends HookConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox32Widget(),
-
                 ImagePickerProductWidget(imgProvider: imageProvider),
-
                 SizedBox(
                   height: AppTheme.of(context).spaces.space_300,
                 ),
@@ -136,6 +138,7 @@ class ProductPage extends HookConsumerWidget {
                 ],
                 id: '',
                 name: productController.text,
+                categoryId: id,
                 description: descreptionController.text,
                 imagePath: ref.watch(imageProvider)!.path,
               );

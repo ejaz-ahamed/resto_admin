@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 
 import 'package:resto_admin/features/products/data/datasources/product_firestore_datasource.dart';
 import 'package:resto_admin/features/products/data/datasources/product_firestore_datasource_impl.dart';
@@ -17,25 +16,28 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'product_repository_impl.g.dart';
 
 class ProductRepositoryImpl implements ProductRepository {
-  final ProductFireStoreDataSource datasource;
+  final ProductFireStoreDataSource dataSource;
   final ProductStorageDataSource storageDataSource;
-  ProductRepositoryImpl(
-      {required this.datasource, required this.storageDataSource});
+  ProductRepositoryImpl({
+    required this.dataSource,
+    required this.storageDataSource,
+  });
   @override
-  Future<void> addProduct(ProductEntity entity) async {
+  Future<void> addProduct(ProductEntity entity, String id) async {
     List<ProductTypeModel> typeEntity = [
       for (final type in entity.types)
         ProductTypeModel(name: type.name, price: type.price, id: type.id)
     ];
     List<ProductAddonModel> addOnEntity = [
-      for (final addOn in entity.addOns!)
+      for (final addOn in entity.addOns)
         ProductAddonModel(id: addOn.id, name: addOn.name, price: addOn.price)
     ];
-    await datasource.add(ProductModel(
+    await dataSource.add(ProductModel(
         id: entity.id,
         imagePath: entity.imagePath,
         name: entity.name,
         description: entity.description,
+        categoryId: id,
         types: [
           for (final d in typeEntity)
             ProductTypeModel(
@@ -56,18 +58,53 @@ class ProductRepositoryImpl implements ProductRepository {
 
   @override
   Future<void> deleteProduct(String id) async {
-    return datasource.remove(id);
+    return dataSource.remove(id);
   }
 
   @override
   Future<String> upload(File fileUpload, String filePath) {
     return storageDataSource.add(fileUpload, filePath);
   }
+
+  @override
+  Stream<List<ProductEntity>> getAll(String categoryId) async* {
+    final data = dataSource.getAll(categoryId);
+    await for (final snapshot in data) {
+      final docs = snapshot;
+      yield [
+        for (final product in docs)
+          ProductEntity(
+            name: product.name,
+            imagePath: product.imagePath,
+            description: product.description,
+            id: product.id,
+            types: [
+              for (final type in product.types)
+                ProductTypeEntity(
+                  name: type.name,
+                  price: type.price,
+                  id: type.id,
+                )
+            ],
+            addOns: [
+              for (final add in product.addOns)
+                ProductAddOnEntity(
+                  name: add.name,
+                  id: add.id,
+                  price: add.price,
+                )
+            ],
+            categoryId: categoryId,
+          )
+      ];
+    }
+  }
 }
 
 @riverpod
 ProductRepository productRepository(ProductRepositoryRef ref) {
   return ProductRepositoryImpl(
-      storageDataSource: ref.watch(productStorageDataSourceProvider),
-      datasource: ref.watch(productFireStoreDataSourceProvider));
+    storageDataSource: ref.watch(productStorageDataSourceProvider),
+    dataSource: ref.watch(productFireStoreDataSourceProvider),
+  );
 }

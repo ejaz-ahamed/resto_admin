@@ -22,7 +22,7 @@ class OrderRepositoryImpl implements OrderRepository {
             location: data.location,
             time: data.time,
             items: [
-              for (final orderItem in data.items!)
+              for (final orderItem in data.items)
                 OrderItemEntity(
                   productId: orderItem.productId,
                   type: orderItem.type,

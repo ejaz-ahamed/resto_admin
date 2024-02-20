@@ -1,4 +1,7 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:resto_admin/features/products/data/models/product_addon_model.dart';
 import 'package:resto_admin/features/products/data/models/product_type_model.dart';
@@ -15,6 +18,7 @@ class ProductModel with _$ProductModel {
     required String imagePath,
     required String name,
     required String description,
+    required String categoryId,
     required List<ProductTypeModel> types,
     required List<ProductAddonModel> addOns,
   }) = _ProductModel;
