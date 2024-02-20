@@ -4,13 +4,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/rounded_check_box_widget.dart';
+import 'package:resto_admin/features/products/domain/entities/category_entity.dart';
 
 class CategoryGridWidget extends HookConsumerWidget {
-  final ValueNotifier<Set<int>> selectedItems;
-  const CategoryGridWidget({
-    super.key,
-    required this.selectedItems,
-  });
+  final ValueNotifier<Set<String>> selectedItems;
+  final List<CategoryEntity> entity;
+  const CategoryGridWidget(
+      {super.key, required this.selectedItems, required this.entity});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,7 +19,7 @@ class CategoryGridWidget extends HookConsumerWidget {
       child: GridView.builder(
         physics: const ClampingScrollPhysics(),
         shrinkWrap: true,
-        itemCount: 7,
+        itemCount: entity.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
             crossAxisSpacing: theme.spaces.space_100 * 1.25,
@@ -28,49 +28,55 @@ class CategoryGridWidget extends HookConsumerWidget {
         itemBuilder: (context, index) {
           return Stack(
             children: [
-              Container(
-                padding: EdgeInsets.all(theme.spaces.space_100),
-                decoration: BoxDecoration(
-                  color: AppTheme.of(context).colors.secondary,
-                  borderRadius: BorderRadius.circular(theme.spaces.space_100),
-                  boxShadow: [
-                    BoxShadow(
-                      color: theme.boxShadow.secondary.color,
-                      spreadRadius: theme.boxShadow.secondary.spreadRadius,
-                      blurRadius: theme.boxShadow.secondary.blurRadius,
-                      offset: theme.boxShadow.secondary.offset,
-                    ),
-                  ],
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ClipRRect(
-                      borderRadius:
-                          BorderRadius.circular(theme.spaces.space_100),
-                      child: SizedBox(
-                        width: theme.spaces.space_100 * 14.5,
-                        height: theme.spaces.space_100 * 10,
-                        child: Image.network(
-                          'https://www.cnet.com/a/img/resize/36e8e8fe542ad9af413eb03f3fbd1d0e2322f0b2/hub/2023/02/03/afedd3ee-671d-4189-bf39-4f312248fb27/gettyimages-1042132904.jpg?auto=webp&fit=crop&height=1200&width=1200',
-                          fit: BoxFit.cover,
+              InkWell(
+                onTap: () {
+                  if (selectedItems.value.contains(entity[index].id)) {
+                    selectedItems.value = {...selectedItems.value}
+                      ..remove(entity[index].id);
+                  } else {
+                    selectedItems.value = {
+                      ...selectedItems.value,
+                      entity[index].id
+                    };
+                  }
+                },
+                child: Container(
+                  padding: EdgeInsets.all(theme.spaces.space_100),
+                  decoration: BoxDecoration(
+                    color: AppTheme.of(context).colors.secondary,
+                    borderRadius: BorderRadius.circular(theme.spaces.space_100),
+                    boxShadow: [
+                      BoxShadow(
+                        color: theme.boxShadow.secondary.color,
+                        spreadRadius: theme.boxShadow.secondary.spreadRadius,
+                        blurRadius: theme.boxShadow.secondary.blurRadius,
+                        offset: theme.boxShadow.secondary.offset,
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ClipRRect(
+                        borderRadius:
+                            BorderRadius.circular(theme.spaces.space_100),
+                        child: SizedBox(
+                          width: theme.spaces.space_100 * 14.5,
+                          height: theme.spaces.space_100 * 12,
+                          child: Image.network(
+                            entity[index].imagePath,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                    ),
-                    Text(
-                      'Long category',
-                      overflow: TextOverflow.ellipsis,
-                      style: theme.typography.h400,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                          left: 0, right: theme.spaces.space_100 * 6.25),
-                      child: Text(
-                        'name',
+                      Text(
+                        entity[index].name,
+                        overflow: TextOverflow.ellipsis,
                         style: theme.typography.h400,
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               Positioned(
@@ -91,13 +97,16 @@ class CategoryGridWidget extends HookConsumerWidget {
                     top: theme.spaces.space_100,
                     left: theme.spaces.space_100,
                     child: RoundedCheckboxWidget(
-                      isChecked: selectedItems.value.contains(index),
+                      isChecked: selectedItems.value.contains(entity[index].id),
                       onTap: () {
-                        if (selectedItems.value.contains(index)) {
+                        if (selectedItems.value.contains(entity[index].id)) {
                           selectedItems.value = {...selectedItems.value}
-                            ..remove(index);
+                            ..remove(entity[index].id);
                         } else {
-                          selectedItems.value = {...selectedItems.value, index};
+                          selectedItems.value = {
+                            ...selectedItems.value,
+                            entity[index].id
+                          };
                         }
                       },
                     ),

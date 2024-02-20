@@ -72,9 +72,14 @@ class CategoryRepositoryImpl implements CategoryRepository {
     final doc = await firestoreDataSource.getbyId(id);
     return CategoryEntity(
       id: doc.id,
-      imagePath: doc.id,
+      imagePath: doc.imagePath,
       name: doc.name,
     );
+  }
+
+  @override
+  Future<void> deleteMany(List<String> docIdsToDelete) async {
+    await firestoreDataSource.deleteMany(docIdsToDelete);
   }
 }
 

@@ -38,7 +38,7 @@ final router = GoRouter(
     ),
     GoRoute(
       path: HomePage.routePath,
-      builder: (context, state) => HomePage(),
+      builder: (context, state) => const HomePage(),
     ),
     GoRoute(
       path: ProfilePage.routePath,
@@ -97,7 +97,8 @@ final router = GoRouter(
     ),
     GoRoute(
       path: ManageCategoriesPage.routePath,
-      builder: (context, state) => const ManageCategoriesPage(),
+      builder: (context, state) =>
+          ManageCategoriesPage(entity: state.extra as List<CategoryEntity>),
     ),
   ],
 );

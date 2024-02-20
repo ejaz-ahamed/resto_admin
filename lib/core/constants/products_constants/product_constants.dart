@@ -30,7 +30,7 @@ class ProductConstants {
   final txtAddCategory = 'Add Category';
   final txtDelete = 'Delete';
   final txtSelectAll = 'Select All';
-
+  final txtUnSelectAll = 'Deselect All';
   final txtCategoryName = 'Category Name';
   final txtSoups = 'Enter Category name';
   final txtDescriptionfull =

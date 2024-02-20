@@ -5,7 +5,7 @@ part 'category_provider_state.freezed.dart';
 @freezed
 class CategoryProviderState with _$CategoryProviderState {
   factory CategoryProviderState({
-    required Stream<List<CategoryEntity>> categories,
+    required List<CategoryEntity> categories,
     required String selectedCategory,
   }) = _CategoryProviderState;
 }

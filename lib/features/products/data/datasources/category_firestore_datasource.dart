@@ -6,4 +6,5 @@ abstract class CategoryFirestoreDataSource {
   Future<void> update(CategoryModel updatedModel);
   Stream<List<CategoryModel>> getAll();
   Future<CategoryModel> getbyId(String id);
+  Future<void> deleteMany(List<String> docIdsToDelete);
 }

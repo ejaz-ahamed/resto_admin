@@ -10,4 +10,5 @@ abstract class CategoryRepository {
   Future<String> upload(File fileToUpload, String filePath);
   Future<void> deleteStorage(String fileName);
   Future<CategoryEntity> getById(String id);
+  Future<void> deleteMany(List<String> docIdsToDelete);
 }

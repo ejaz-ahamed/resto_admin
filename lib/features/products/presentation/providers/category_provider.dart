@@ -3,6 +3,7 @@ import 'package:resto_admin/features/products/domain/entities/category_entity.da
 import 'package:resto_admin/features/products/domain/repository/category_repository.dart';
 import 'package:resto_admin/features/products/domain/usecases/add_category_usecase.dart';
 import 'package:resto_admin/features/products/domain/usecases/delete_category_usecase.dart';
+import 'package:resto_admin/features/products/domain/usecases/deletemany_category_usecase.dart';
 import 'package:resto_admin/features/products/domain/usecases/get_categories_usecase.dart';
 import 'package:resto_admin/features/products/domain/usecases/update_category_usecase.dart';
 import 'package:resto_admin/features/products/presentation/providers/category_provider_state.dart';
@@ -18,7 +19,7 @@ class Category extends _$Category {
     repository = ref.watch(categoryRepositoryProvider);
 
     return CategoryProviderState(
-      categories: GetAllCategoryUseCase(repository: repository)(),
+      categories: [],
       selectedCategory: '',
     );
   }
@@ -54,8 +55,13 @@ class Category extends _$Category {
   Stream<List<CategoryEntity>> getAll() async* {
     final stream = GetAllCategoryUseCase(repository: repository)();
     await for (final categories in stream) {
-      state = state.copyWith(categories: stream);
+      state = state.copyWith(categories: categories);
       yield categories;
     }
+  }
+
+  Future<void> deleteMany({required List<String> docIdsToDelete}) async {
+    await DeleteManyCategoryUseCase(repository: repository)(
+        docIdsToDelete: docIdsToDelete);
   }
 }
