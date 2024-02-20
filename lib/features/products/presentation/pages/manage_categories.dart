@@ -45,20 +45,15 @@ class ManageCategoriesPage extends HookConsumerWidget {
                 : data.txtUnSelectAll,
             onPressed: selectAll,
           )),
-      body: Column(
-        children: [
-          SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.all(theme.spaces.space_300),
-              child: SizedBox(
-                  width: theme.spaces.space_100 * 47.5,
-                  child: CategoryGridWidget(
-                    selectedItems: selectedItems,
-                    entity: entity,
-                  )),
-            ),
+      body: Padding(
+        padding: EdgeInsets.all(theme.spaces.space_300),
+        child: SizedBox(
+          width: theme.spaces.space_100 * 47.5,
+          child: CategoryGridWidget(
+            selectedItems: selectedItems,
+            entity: entity,
           ),
-        ],
+        ),
       ),
       bottomNavigationBar: ElevatedButtonWidget(
         text: data.txtDelete,

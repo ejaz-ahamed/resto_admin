@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
@@ -12,8 +14,8 @@ class ViewCategoriesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = AppTheme.of(context);
-    return SingleChildScrollView(
-        child: GridView.builder(
+
+    return GridView.builder(
       physics: const ClampingScrollPhysics(),
       shrinkWrap: true,
       itemCount: entity.length,
@@ -23,6 +25,8 @@ class ViewCategoriesWidget extends StatelessWidget {
           mainAxisSpacing: theme.spaces.space_100 * 1.5,
           mainAxisExtent: theme.spaces.space_100 * 17.5),
       itemBuilder: (context, index) {
+        log(entity[index].imagePath);
+
         return Ink(
           decoration: BoxDecoration(
             color: theme.colors.secondary,
@@ -71,6 +75,6 @@ class ViewCategoriesWidget extends StatelessWidget {
           ),
         );
       },
-    ));
+    );
   }
 }
