@@ -23,6 +23,10 @@ if (flutterVersionName == null) {
 }
 
 android {
+    defaultConfig {
+        // Enable multidex support
+        multiDexEnabled true
+    }
     namespace "com.example.resto_admin"
     compileSdk flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
