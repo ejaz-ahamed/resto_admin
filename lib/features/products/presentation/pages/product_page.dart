@@ -27,8 +27,6 @@ class ProductPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);
     final data = ref.watch(productConstantsProvider);
-    final constants = ref.watch(productConstantsProvider);
-
     final productController = useTextEditingController();
     final descreptionController = useTextEditingController();
     final productTypeControllers = useState<List<ProductTypeControllers>>([]);
