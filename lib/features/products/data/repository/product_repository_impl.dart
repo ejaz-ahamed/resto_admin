@@ -23,7 +23,7 @@ class ProductRepositoryImpl implements ProductRepository {
     required this.storageDataSource,
   });
   @override
-  Future<void> addProduct(ProductEntity entity) async {
+  Future<void> addProduct(ProductEntity entity, String id) async {
     List<ProductTypeModel> typeEntity = [
       for (final type in entity.types)
         ProductTypeModel(name: type.name, price: type.price, id: type.id)
@@ -37,6 +37,7 @@ class ProductRepositoryImpl implements ProductRepository {
         imagePath: entity.imagePath,
         name: entity.name,
         description: entity.description,
+        categoryId: id,
         types: [
           for (final d in typeEntity)
             ProductTypeModel(
@@ -66,8 +67,8 @@ class ProductRepositoryImpl implements ProductRepository {
   }
 
   @override
-  Stream<List<ProductEntity>> getAll() async* {
-    final data = dataSource.getAll();
+  Stream<List<ProductEntity>> getAll(String categoryId) async* {
+    final data = dataSource.getAll(categoryId);
     await for (final snapshot in data) {
       final docs = snapshot;
       yield [
@@ -93,6 +94,7 @@ class ProductRepositoryImpl implements ProductRepository {
                   price: add.price,
                 )
             ],
+            categoryId: categoryId,
           )
       ];
     }
