@@ -13,7 +13,7 @@ class OfferFirestoreDatasourceImpl implements OfferFirestoreDatasource {
           toFirestore: (model, _) => model.toFirestore());
   @override
   Future<void> add(OfferModel model) async {
-    await collection.doc().set(model);
+    await collection.doc(model.name).set(model);
   }
 
   @override
@@ -28,11 +28,9 @@ class OfferFirestoreDatasourceImpl implements OfferFirestoreDatasource {
 
   @override
   Stream<List<OfferModel>> getAllOffer() async* {
-    final offerSteame = collection.snapshots();
-    await for (final offers in offerSteame) {
-      yield [
-        for (final offer in offers.docs) offer.data(),
-      ];
+    final offerStream = collection.snapshots();
+    await for (final offers in offerStream) {
+      yield [for (final offer in offers.docs) offer.data()];
     }
   }
 
