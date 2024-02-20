@@ -11,7 +11,6 @@ class OfferModel with _$OfferModel {
 
   factory OfferModel({
     required String? id,
-
     // ignore: invalid_annotation_target
     @JsonKey(name: "imagepath") required String? imagePath,
     required String? name,
