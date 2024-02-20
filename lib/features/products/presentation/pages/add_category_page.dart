@@ -36,6 +36,7 @@ class AddCategoryPage extends HookConsumerWidget {
               ImagePickerWidget(imgProvider: imageProvider),
               const SizedBox24Widget(),
               TextFieldWidget(
+                enabled: true,
                   textFieldTitle: data.txtCategory,
                   hintText: data.txtHintProduct,
                   controller: categoryContoller)

@@ -57,6 +57,7 @@ class EditCategoryPage extends HookConsumerWidget {
               ImagePickerWidget(imgProvider: imageProvider),
               const SizedBox16Widget(),
               TextFieldWidget(
+                enabled: true,
                   textFieldTitle: data.txtCategoryName,
                   hintText: data.txtSoups,
                   controller: controller),

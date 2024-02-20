@@ -6,9 +6,9 @@ import 'package:resto_admin/features/products/domain/entities/product_entity.dar
 import 'package:resto_admin/features/products/domain/entities/product_type_entity.dart';
 import 'package:resto_admin/features/products/domain/repository/product_repository.dart';
 
-final class AddProductUsecase {
+final class UpdatedProductUseCase {
   final ProductRepository repository;
-  AddProductUsecase({required this.repository});
+  UpdatedProductUseCase({required this.repository});
   Future<void> call({
     required String name,
     required String description,
@@ -19,20 +19,27 @@ final class AddProductUsecase {
     required String categoryId,
   }) async {
     try {
-      final uploadedPath = await repository.upload(File(imagePath), name);
-      await repository.addProduct(
-          ProductEntity(
-            types: types,
-            addOns: addOns,
-            id: id,
-            categoryId: categoryId,
-            name: name,
-            imagePath: uploadedPath,
-            description: description,
-          ),
-          categoryId);
+      if (imagePath.startsWith('http')) {
+        final data = await repository.getById(id);
+        imagePath = data.imagePath;
+      } else {
+        final data = await repository.getById(id);
+        await repository.deleteStorage(data.name);
+        imagePath = await repository.upload(File(imagePath), name);
+      }
+      await repository.update(
+        ProductEntity(
+          types: types,
+          addOns: addOns,
+          id: id,
+          categoryId: categoryId,
+          name: name,
+          imagePath: imagePath,
+          description: description,
+        ),
+      );
     } catch (e) {
-      throw BaseException('Cannot add product Details');
+      throw BaseException('Cannot update product Details');
     }
   }
 }
