@@ -57,13 +57,13 @@ class OfferRepositoryImpl implements OfferRepository {
       yield [
         for (final offer in docs)
           OfferEntity(
-              imagePath: offer.imagePath,
-              name: offer.name,
-              description: offer.description,
-              amount: offer.amount,
+              imagePath: offer.imagePath ?? "",
+              name: offer.name ?? "",
+              description: offer.description ?? "",
+              amount: offer.amount ?? 0,
               offerType: offer.offerType,
-              products: offer.products,
-              id: offer.id)
+              products: offer.products ?? [],
+              id: offer.id ?? "")
       ];
     }
   }
@@ -77,13 +77,13 @@ class OfferRepositoryImpl implements OfferRepository {
   Future<OfferEntity> getById(String id) async {
     final data = await datasource.getById(id);
     return OfferEntity(
-        id: data.id,
-        imagePath: data.imagePath,
-        name: data.name,
-        description: data.description,
+        id: data.id ?? "",
+        imagePath: data.imagePath ?? "",
+        name: data.name ?? "",
+        description: data.description ?? "",
         offerType: data.offerType,
-        products: data.products,
-        amount: data.amount);
+        products: data.products ?? [],
+        amount: data.amount ?? 0);
   }
 }
 

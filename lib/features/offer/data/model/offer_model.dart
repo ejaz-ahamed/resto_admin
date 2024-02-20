@@ -10,13 +10,13 @@ class OfferModel with _$OfferModel {
   const OfferModel._();
 
   factory OfferModel({
-    required String id,
-    required String imagePath,
-    required String name,
-    required String description,
+    required String? id,
+    required String? imagePath,
+    required String? name,
+    required String? description,
     required OfferType offerType,
-    required List<String> products,
-    required double amount,
+    required List<String>? products,
+    required double? amount,
   }) = _OfferModel;
 
   factory OfferModel.fromJson(Map<String, dynamic> json) =>
