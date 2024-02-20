@@ -62,20 +62,26 @@ class OverViewItemsPage extends HookConsumerWidget {
                   onPressed: () {},
                 ),
                 ProductTypeWidget(
+                  style: AppTheme.of(context).typography.h400.copyWith(
+                      color: AppTheme.of(context).colors.textSubtlest),
                   addOnController: typeController,
                   addOnPriceController: priCecontroller,
                   hint: data.txtFullQty,
+                  enabled: true,
                 ),
-                SizedBox32Widget(),
+                const SizedBox32Widget(),
                 RowWidget(
                   text: data.txtAddOns,
                   btnText: '',
                   onPressed: () {},
                 ),
                 ProductTypeWidget(
+                  style: AppTheme.of(context).typography.h400.copyWith(
+                      color: AppTheme.of(context).colors.textSubtlest),
                   addOnController: typeController,
                   addOnPriceController: priCecontroller,
                   hint: data.txtAddOnBtnTitle,
+                  enabled: true,
                 ),
               ],
             ),

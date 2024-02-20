@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -37,7 +36,6 @@ class ImagePickerUtils {
 
   static Future<XFile?> showDialogueForImagePicker(BuildContext context) async {
     final imageCompleter = Completer<XFile?>();
-
     await showDialog(
       context: context,
       builder: (context) => AlertDialog(

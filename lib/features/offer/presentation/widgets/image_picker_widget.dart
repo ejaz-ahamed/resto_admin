@@ -10,18 +10,31 @@ final imageProvider = StateProvider<XFile?>((ref) {
   return null;
 });
 
-class ImagePickerWidget extends ConsumerWidget {
+class ImagePickerOfferWidget extends ConsumerWidget {
   final StateProvider<XFile?> imgProvider;
-  const ImagePickerWidget({super.key, required this.imgProvider});
+  const ImagePickerOfferWidget({super.key, required this.imgProvider});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final imagePathPicked = ref.watch(imageProvider)?.path;
+
+    /// Image to show if the image is already picked
+    Widget? imageToShow;
+    if (imagePathPicked != null && imagePathPicked.startsWith('http')) {
+      imageToShow = Image.network(
+        imagePathPicked,
+        fit: BoxFit.cover,
+      );
+    } else if (imagePathPicked != null) {
+      imageToShow = Image.file(
+        File(imagePathPicked),
+        fit: BoxFit.fill,
+      );
+    }
     return InkWell(
       onTap: () async {
         final imageSelected =
             await ImagePickerUtils.showDialogueForImagePicker(context);
         ref.read(imageProvider.notifier).state = imageSelected;
-
-        print(ref.read(imageProvider.notifier).state);
       },
       child: Container(
         height: AppTheme.of(context).spaces.space_500 * 6,
@@ -32,22 +45,18 @@ class ImagePickerWidget extends ConsumerWidget {
             border: Border.all(
                 color: AppTheme.of(context).colors.textSubtle,
                 width: AppTheme.of(context).spaces.space_25)),
-        child: ref.watch(imgProvider) != null
-            ? Image.file(
-                File(ref.watch(imageProvider)!.path),
-                fit: BoxFit.cover,
-              )
-            : Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Center(
-                    child: AddImageWidget(),
-                  ),
-                  SizedBox(
-                    height: AppTheme.of(context).spaces.space_100,
-                  ),
-                ],
-              ),
+        child: imageToShow ??
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Center(
+                  child: AddImageWidget(),
+                ),
+                SizedBox(
+                  height: AppTheme.of(context).spaces.space_100,
+                ),
+              ],
+            ),
       ),
     );
   }

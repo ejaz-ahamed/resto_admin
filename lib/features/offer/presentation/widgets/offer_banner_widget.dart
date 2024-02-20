@@ -21,7 +21,8 @@ class OfferBannerWidget extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
               child: InkWell(
-                onTap: () => context.push(EditOfferPage.routePath),
+                onTap: () =>
+                    context.push(EditOfferPage.routePath, extra: entity[index]),
                 child: Container(
                   height: AppTheme.of(context).spaces.space_500 * 8,
                   decoration: BoxDecoration(
@@ -41,7 +42,8 @@ class OfferBannerWidget extends StatelessWidget {
                           height: spaces.space_500 * 6,
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image: NetworkImage(entity[index].imagepath), fit: BoxFit.fill),
+                                  image: NetworkImage(entity[index].imagePath),
+                                  fit: BoxFit.fill),
                               color: color.textSubtle,
                               borderRadius:
                                   BorderRadius.circular(spaces.space_100)),

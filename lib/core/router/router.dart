@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/widgets/bottom_navigation/bottom_nav_widget.dart';
 import 'package:resto_admin/features/authentication/presentation/pages/auth_switcher.dart';
+import 'package:resto_admin/features/offer/domain/entity/offer_entity.dart';
 import 'package:resto_admin/features/offer/presentation/pages/add_offer_page.dart';
 import 'package:resto_admin/features/offer/presentation/pages/edit_offer_page.dart';
 import 'package:resto_admin/features/offer/presentation/pages/offer_selecting_product_page.dart';
@@ -55,7 +56,8 @@ final router = GoRouter(
     ),
     GoRoute(
       path: EditOfferPage.routePath,
-      builder: (context, state) => const EditOfferPage(),
+      builder: (context, state) =>
+          EditOfferPage(entity: state.extra as OfferEntity),
     ),
     GoRoute(
       path: OrderViewPage.routePath,

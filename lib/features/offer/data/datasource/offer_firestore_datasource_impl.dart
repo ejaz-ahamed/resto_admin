@@ -17,16 +17,30 @@ class OfferFirestoreDatasourceImpl implements OfferFirestoreDatasource {
   }
 
   @override
- Stream<List<OfferModel>> getAllOffer() async* {
-    final categorySteame = collection.snapshots();
-    await for (final categorys in categorySteame) {
-      yield [
-        for (final category in categorys.docs) category.data(),
-      ];
+  Stream<List<OfferModel>> getAllOffer() async* {
+    final offerStream = collection.snapshots();
+    await for (final offers in offerStream) {
+      yield [for (final offer in offers.docs) offer.data()];
     }
   }
+
+  @override
+  Future<void> update(OfferModel updatedModel, String id) async {
+    await collection.doc(id).set(updatedModel);
+  }
+
+  @override
+  Future<void> delete(String offerId) async {
+    await collection.doc(offerId).delete();
+  }
+
+  @override
+  Future<OfferModel> getById(String id) async {
+    final data = await collection.doc(id).get();
+    return data.data()!;
+  }
 }
-  
+
 @riverpod
 OfferFirestoreDatasource offerFirestoreDatasource(
     OfferFirestoreDatasourceRef ref) {

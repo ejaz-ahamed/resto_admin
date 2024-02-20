@@ -11,6 +11,13 @@ class OfferStorageDataSourceImpl implements OfferStorageDataSource {
     final filePath = storageRef.child('offer/$fileName').fullPath;
     return filePath;
   }
+  
+  @override
+  Future<void> deleteStorage(String fileNmae) async{
+    await storageRef.child('offer/$fileNmae').delete();
+  }
+  
+ 
 }
 @riverpod
 OfferStorageDataSource offerStorageDataSource(OfferStorageDataSourceRef ref) =>

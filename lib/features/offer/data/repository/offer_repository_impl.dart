@@ -20,11 +20,11 @@ class OfferRepositoryImpl implements OfferRepository {
   Future<void> addOffer(OfferEntity entity) async {
     final offeradd = OfferModel(
         id: '',
-        imagepath: entity.imagepath,
+        imagePath: entity.imagePath,
         name: entity.name,
         description: entity.description,
         offerType: entity.offerType,
-        product: entity.product,
+        products: entity.products,
         amount: entity.amount);
     await datasource.add(offeradd);
   }
@@ -37,13 +37,13 @@ class OfferRepositoryImpl implements OfferRepository {
       yield [
         for (final offer in docs)
           OfferEntity(
-              imagepath: offer.imagepath,
-              name: offer.name,
-              description: offer.description,
-              amount: offer.amount,
+              imagePath: offer.imagePath ?? '',
+              name: offer.name ?? '',
+              description: offer.description ?? '',
+              amount: offer.amount ?? 0,
               offerType: offer.offerType,
-              product: offer.product,
-              id: offer.id)
+              products: offer.products,
+              id: offer.id ?? '')
       ];
     }
   }
@@ -51,6 +51,43 @@ class OfferRepositoryImpl implements OfferRepository {
   @override
   Future<String> upload(File fileToUpload, String filePath) {
     return offerStorageDataSource.add(fileToUpload, filePath);
+  }
+
+  @override
+  Future<void> delete(String offerId) async {
+    await datasource.delete(offerId);
+  }
+
+  @override
+  Future<void> updateOffer(OfferEntity updatedEntity, String offerId) async {
+    await datasource.update(
+        OfferModel(
+            id: updatedEntity.id,
+            imagePath: updatedEntity.imagePath,
+            name: updatedEntity.name,
+            description: updatedEntity.description,
+            amount: updatedEntity.amount,
+            offerType: updatedEntity.offerType,
+            products: updatedEntity.products),
+        offerId);
+  }
+
+  @override
+  Future<OfferEntity> getById(String id) async {
+    final data = await datasource.getById(id);
+    return OfferEntity(
+        id: data.id ?? '',
+        imagePath: data.imagePath ?? '',
+        name: data.name ?? '',
+        description: data.description ?? '',
+        amount: data.amount ?? 0,
+        offerType: data.offerType,
+        products: data.products);
+  }
+
+  @override
+  Future<void> deleteStorage(String fileName) async {
+    await offerStorageDataSource.deleteStorage(fileName);
   }
 }
 

@@ -7,11 +7,11 @@ part 'offer_entity.freezed.dart';
 class OfferEntity with _$OfferEntity {
   const factory OfferEntity({
     required String id,
-    required String imagepath,
+    required String imagePath,
     required String name,
     required String description,
     required double amount,
     required OfferType offerType,
-    required List<String> product,
+    required List<String> products,
   }) = _OfferEntity;
 }

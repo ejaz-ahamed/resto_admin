@@ -19,10 +19,7 @@ class ImagePickerWidget extends ConsumerWidget {
       onTap: () async {
         final imageSelected =
             await ImagePickerUtils.showDialogueForImagePicker(context);
-
         ref.read(imageProvider.notifier).state = imageSelected;
-
-        print(ref.read(imageProvider.notifier).state);
       },
       child: Container(
         height: AppTheme.of(context).spaces.space_500 * 6,
