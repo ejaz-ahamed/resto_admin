@@ -1,4 +1,4 @@
-enum OrderType {
+enum OrderStatus {
   order,
   preparing,
   completed,

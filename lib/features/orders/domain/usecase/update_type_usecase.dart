@@ -5,9 +5,9 @@ import 'package:resto_admin/features/orders/domain/repository/order_repository.d
 class UpdateTypeUsecase {
   final OrderRepository repository;
   UpdateTypeUsecase({required this.repository});
-  Future<void> call(String orderId, OrderType newType) {
+  Future<void> call(String orderId, OrderStatus newStatus) {
     try {
-      return repository.updateOrderType(orderId, newType);
+      return repository.updateOrderType(orderId, newStatus);
     } catch (e) {
       throw BaseException("cannot get");
     }

@@ -13,8 +13,8 @@ class OrderModel with _$OrderModel {
     required String location,
     required String name,
     required String time,
-    required List<OrderItemModel>? items,
-    required OrderType type,
+    required List<OrderItemModel> items,
+    required OrderStatus orderStatus,
   }) = _OrderModel;
   factory OrderModel.fromJson(Map<String, dynamic> json) =>
       _$OrderModelFromJson(json);

@@ -23,19 +23,19 @@ class FoodStatus extends HookConsumerWidget {
     final tabsText = useMemoized(() => [
           {
             'text': constants.txtOrders,
-            'type': OrderType.order,
+            'type': OrderStatus.order,
           },
           {
             'text': constants.txtPreparing,
-            'type': OrderType.preparing,
+            'type': OrderStatus.preparing,
           },
           {
             'text': constants.txtCompleted,
-            'type': OrderType.completed,
+            'type': OrderStatus.completed,
           },
           {
             'text': constants.txtRejct,
-            'type': OrderType.rejected,
+            'type': OrderStatus.rejected,
           }
         ]);
 
@@ -43,7 +43,7 @@ class FoodStatus extends HookConsumerWidget {
     void tabOnPressed(int index) {
       ref
           .read(orderProvider.notifier)
-          .changeTab(tabsText[index]['type'] as OrderType);
+          .changeTab(tabsText[index]['type'] as OrderStatus);
     }
 
     return SizedBox(
@@ -55,9 +55,9 @@ class FoodStatus extends HookConsumerWidget {
             ButtonWidget(
               onPressed: () => tabOnPressed(i),
               text: tabsText[i]['text'] as String,
-              isSelected:
-                  ref.watch(orderProvider.select((value) => value.orderType)) ==
-                      tabsText[i]['type'],
+              isSelected: ref.watch(
+                      orderProvider.select((value) => value.orderStatus)) ==
+                  tabsText[i]['type'],
               foodCount: count.length,
             )
         ],

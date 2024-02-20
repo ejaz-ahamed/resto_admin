@@ -58,6 +58,14 @@ class OrderScreenOne extends HookConsumerWidget {
                         OrderListView(entity: snapshot.data!),
                       ],
                     );
+                  }
+                  if (snapshot.data == null || snapshot.data!.isEmpty) {
+                    return Center(
+                      child: Text(
+                        constants.txtNoOrders,
+                        style: typography.h500,
+                      ),
+                    );
                   } else {
                     return const Center(
                       child: CircularProgressIndicator(),

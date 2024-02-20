@@ -12,8 +12,9 @@ class OrderFirestoreDataSourceImpl implements OrderFirestoreDataSource {
       toFirestore: (model, _) => model.toFirestore());
 
   @override
-  Stream<List<OrderModel>> getAll(OrderType orderType) async* {
-    final orderStream = db.where('type', isEqualTo: orderType.name).snapshots();
+  Stream<List<OrderModel>> getAll(OrderStatus orderStatus) async* {
+    final orderStream =
+        db.where('orderStatus', isEqualTo: orderStatus.name).snapshots();
 
     await for (final orders in orderStream) {
       yield [for (final order in orders.docs) order.data()];
@@ -21,11 +22,11 @@ class OrderFirestoreDataSourceImpl implements OrderFirestoreDataSource {
   }
 
   @override
-  Future<void> updateType(String orderId, OrderType newType) async {
+  Future<void> updateType(String orderId, OrderStatus newStatus) async {
     await instance
         .collection("orders")
         .doc(orderId)
-        .update({'type': newType.name});
+        .update({'orderStatus': newStatus.name});
   }
 }
 

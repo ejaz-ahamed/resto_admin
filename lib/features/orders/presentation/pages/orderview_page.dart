@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/orders_constants/orders_constants.dart';
 import 'package:resto_admin/core/enums/order_type.dart';
@@ -18,7 +19,12 @@ import 'package:resto_admin/features/orders/presentation/widgets/total_row_widge
 class OrderViewPage extends ConsumerWidget {
   static const routePath = '/orderviewpage';
   final OrderEntity entity;
-  const OrderViewPage({super.key, required this.entity});
+  // final String buttonName;
+  const OrderViewPage({
+    super.key,
+    required this.entity,
+    // required this.buttonName,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -47,17 +53,19 @@ class OrderViewPage extends ConsumerWidget {
             CustomerDetailsWidget(entity: entity),
             const SizedBox24Widget(),
             const ItemDetailsWidget(),
-            const ItemsDetailsListviewDetails(),
+            ItemsDetailsListviewDetails(entity: [entity]),
             const TotalRowWidget(),
           ],
         ),
       ),
       bottomNavigationBar: ButtonContainerWidget(
         entity: entity,
+        // buttonName: buttonName,
         onPressed: () {
           ref
               .read(orderProvider.notifier)
-              .updateOrderType(entity.orderId, OrderType.preparing);
+              .updateOrderType(entity.uid, OrderStatus.preparing);
+          context.pop();
         },
       ),
     );

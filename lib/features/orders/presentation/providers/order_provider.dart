@@ -14,19 +14,19 @@ class Order extends _$Order {
   OrderproviderState build() {
     return OrderproviderState(
       orders: GetOrderUsecase(repository: ref.watch(orderRepositoryProvider))(
-          OrderType.order),
-      orderType: OrderType.order,
+          OrderStatus.order),
+      orderStatus: OrderStatus.order,
     );
   }
 
-  void changeTab(OrderType selectedOrder) {
+  void changeTab(OrderStatus selectedOrder) {
     final ordersStream = GetOrderUsecase(
         repository: ref.watch(orderRepositoryProvider))(selectedOrder);
-    state = state.copyWith(orderType: selectedOrder, orders: ordersStream);
+    state = state.copyWith(orderStatus: selectedOrder, orders: ordersStream);
   }
 
-  Future<void> updateOrderType(String orderId, OrderType newType) {
+  Future<void> updateOrderType(String orderId, OrderStatus newStatus) {
     return UpdateTypeUsecase(repository: ref.watch(orderRepositoryProvider))(
-        orderId, newType);
+        orderId, newStatus);
   }
 }
