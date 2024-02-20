@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:resto_admin/core/constants/orders_constants/orders_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/features/orders/domain/entity/order_entity.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/text_regular_widget.dart';
@@ -11,7 +10,7 @@ class ItemsDetailsListviewDetails extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final constants = ref.watch(orderpageConstantsProvider);
+    // final constants = ref.watch(orderpageConstantsProvider);
     final appTheme = AppTheme.of(context);
 
   
