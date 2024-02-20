@@ -18,7 +18,7 @@ import 'package:resto_admin/features/products/data/repository/product_repository
 import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
 import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
 
-final itemCountProvider = Provider<int>((ref) => 5);
+// final itemCountProvider = Provider<int>((ref) => 5);
 
 class OfferSelectingPage extends HookConsumerWidget {
   static const routePath = '/select';
@@ -106,9 +106,9 @@ class OfferSelectingPage extends HookConsumerWidget {
         text: constants.txtSave,
         onPressed: () {
           // onSavePressed();
-          ref
-              .read(selectedItemsProvider.notifier)
-              .updateSelectedItems(selectedItems.value);
+          // ref
+          //     .read(selectedItemsProvider.notifier)
+          //     .updateSelectedItems(selectedItems.value);
           context.pop(
             EditOfferPage.routePath,
           );
