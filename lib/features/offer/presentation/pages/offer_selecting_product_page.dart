@@ -14,6 +14,7 @@ import 'package:resto_admin/core/widgets/sized_box_8_widget.dart';
 import 'package:resto_admin/features/offer/presentation/pages/edit_offer_page.dart';
 import 'package:resto_admin/features/offer/presentation/provider/selected_items_provider.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/gridview_offerpage_widget.dart';
+import 'package:resto_admin/features/products/data/repository/product_repository_impl.dart';
 import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
 import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
 
@@ -29,8 +30,7 @@ class OfferSelectingPage extends HookConsumerWidget {
     final constants = SelectingProductPageConstants();
     final selectedItems = useState<Set<int>>({});
 
-    final itemCount = ref.watch(itemCountProvider);
-
+    final itemCount = ref.watch(productProvider).length;
     void selectall() {
       if (selectedItems.value.length < itemCount) {
         selectedItems.value = Set.from(Iterable.generate(itemCount, (i) => i));

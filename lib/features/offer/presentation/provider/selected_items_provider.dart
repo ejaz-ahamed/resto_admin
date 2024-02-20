@@ -20,19 +20,18 @@ part 'selected_items_provider.g.dart';
 @riverpod
 class SelectedItems extends _$SelectedItems {
   @override
-  Set<int> build() {
+  Set<String> build() {
     return {};
   }
 
-  void updateSelectedItems(Set<int> newItems) {
+  void updateSelectedItems(Set<String> newItems) {
     state = newItems;
   }
 
   void remove(int index) {
-    final updatedItems = state.toSet(); // Create a copy of the set
-    updatedItems
-        .removeWhere((id) => id == index); // Remove the item at the given index
-    state = updatedItems; // Update the state with the modified set
+    final updatedItems = state.toSet();
+    updatedItems.removeWhere((id) => id == index);
+    state = updatedItems;
   }
 
   String percentage(

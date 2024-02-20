@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/rounded_check_box_widget.dart';
-import 'package:resto_admin/features/offer/presentation/pages/offer_selecting_product_page.dart';
+
+import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
 import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
 
 class GridViewOfferPageWidget extends HookConsumerWidget {
@@ -15,7 +15,9 @@ class GridViewOfferPageWidget extends HookConsumerWidget {
     // final selectedItems = useState<Set<int>>({});
     final theme = AppTheme.of(context);
     return StreamBuilder(
-        stream: ref.read(productProvider.notifier).getAll(),
+        stream: ref
+            .read(productProvider.notifier)
+            .getAll(ref.watch(categoryProvider).selectedCategory),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return GridView.builder(

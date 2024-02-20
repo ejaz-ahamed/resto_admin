@@ -14,6 +14,7 @@ import 'package:resto_admin/core/widgets/text_field_widget.dart';
 import 'package:resto_admin/features/products/domain/entities/product_addon_entity.dart';
 import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
 import 'package:resto_admin/features/products/domain/entities/product_type_entity.dart';
+import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
 import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
 import 'package:resto_admin/features/products/presentation/widgets/image_picker_product_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/product_type_widget.dart';
@@ -21,7 +22,11 @@ import 'package:resto_admin/features/products/presentation/widgets/row_widget.da
 
 class ProductPage extends HookConsumerWidget {
   static const routePath = '/addNewProducts';
-  const ProductPage({super.key});
+  final String id;
+  const ProductPage({
+    super.key,
+    required this.id,
+  });
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);
@@ -54,9 +59,7 @@ class ProductPage extends HookConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox32Widget(),
-
                 ImagePickerProductWidget(imgProvider: imageProvider),
-
                 SizedBox(
                   height: AppTheme.of(context).spaces.space_300,
                 ),
@@ -137,6 +140,7 @@ class ProductPage extends HookConsumerWidget {
                 ],
                 id: '',
                 name: productController.text,
+                categoryId: id,
                 description: descreptionController.text,
                 imagePath: ref.watch(imageProvider)!.path,
               );

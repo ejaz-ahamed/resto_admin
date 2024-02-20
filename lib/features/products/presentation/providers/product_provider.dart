@@ -15,19 +15,23 @@ class Product extends _$Product {
   late ProductRepository repository;
 
   @override
-  void build() {
+  List<ProductEntity> build() {
     repository = ref.watch(productRepositoryProvider);
+    return [];
   }
 
-  Future<void> addProduct(
-      {required String name,
-      required String description,
-      required String imagePath,
-      required String id,
-      required List<ProductTypeEntity> types,
-      required List<ProductAddOnEntity> addOns}) {
+  Future<void> addProduct({
+    required String name,
+    required String description,
+    required String imagePath,
+    required String id,
+    required List<ProductTypeEntity> types,
+    required List<ProductAddOnEntity> addOns,
+    required String categoryId,
+  }) {
     repository = ref.watch(productRepositoryProvider);
     return AddProductUsecase(repository: repository)(
+        categoryId: categoryId,
         addOns: addOns,
         types: types,
         id: id,
@@ -41,7 +45,11 @@ class Product extends _$Product {
     return DeleteProductUsecase(repository: repository)(id);
   }
 
-  Stream<List<ProductEntity>> getAll() {
-    return GetAllProductsUseCase(repository: repository)();
+  Stream<List<ProductEntity>> getAll(String categoryId) async* {
+    final stream = GetAllProductsUseCase(repository: repository)(categoryId);
+    await for (final products in stream) {
+      state = products;
+      yield products;
+    }
   }
 }
