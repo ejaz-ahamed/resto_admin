@@ -66,6 +66,16 @@ class CategoryRepositoryImpl implements CategoryRepository {
   Future<void> deleteStorage(String fileName) async {
     await storageDataSource.delete(fileName);
   }
+
+  @override
+  Future<CategoryEntity> getById(String id) async {
+    final doc = await firestoreDataSource.getbyId(id);
+    return CategoryEntity(
+      id: doc.id,
+      imagePath: doc.id,
+      name: doc.name,
+    );
+  }
 }
 
 @riverpod

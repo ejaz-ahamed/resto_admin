@@ -13,13 +13,18 @@ final class UpdateCategoryUseCase {
       required String imagePath,
       required String name}) async {
     try {
-      await repository.deleteStorage(imagePath);
-
-      final upaloadedPath = await repository.upload(File(imagePath), name);
+      if (imagePath.startsWith('http')) {
+        final data = await repository.getById(id);
+        imagePath = data.imagePath;
+      } else {
+        final data = await repository.getById(id);
+        await repository.deleteStorage(data.name);
+        imagePath = await repository.upload(File(imagePath), name);
+      }
 
       await repository.update(CategoryEntity(
         id: id,
-        imagePath: upaloadedPath,
+        imagePath: imagePath,
         name: name,
       ));
     } catch (e) {

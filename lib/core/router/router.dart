@@ -6,6 +6,7 @@ import 'package:resto_admin/features/offer/presentation/pages/edit_offer_page.da
 import 'package:resto_admin/features/offer/presentation/pages/offer_selecting_product_page.dart';
 import 'package:resto_admin/features/orders/domain/entity/order_entity.dart';
 import 'package:resto_admin/features/orders/presentation/pages/orderview_page.dart';
+import 'package:resto_admin/features/products/domain/entities/category_entity.dart';
 import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
 import 'package:resto_admin/features/products/presentation/pages/edit_category_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/add_category_page.dart';
@@ -66,7 +67,8 @@ final router = GoRouter(
     ),
     GoRoute(
       path: EditCategoryPage.routePath,
-      builder: (context, state) => const EditCategoryPage(),
+      builder: (context, state) =>
+          EditCategoryPage(entity: state.extra as CategoryEntity),
     ),
     GoRoute(
       path: ProductPage.routePath,

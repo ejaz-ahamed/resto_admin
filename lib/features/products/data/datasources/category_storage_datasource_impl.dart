@@ -18,7 +18,7 @@ class CategoryStorageDataSourceImpl implements CategoryStorageDataSource {
 
   @override
   Future<void> delete(String fileName) async {
-    await storageRef.child(fileName).delete();
+    await storageRef.child('category/$fileName').delete();
   }
 }
 

@@ -24,7 +24,9 @@ class CategoryFirestoreDataSourceImpl implements CategoryFirestoreDataSource {
 
   @override
   Future<void> update(CategoryModel updatedModel) async {
-    await collection.doc().set(updatedModel);
+    await collection
+        .doc(updatedModel.name.toLowerCase().trim())
+        .set(updatedModel);
   }
 
   @override
@@ -35,6 +37,12 @@ class CategoryFirestoreDataSourceImpl implements CategoryFirestoreDataSource {
         for (final category in categorys.docs) category.data(),
       ];
     }
+  }
+
+  @override
+  Future<CategoryModel> getbyId(String id) async {
+    final data = await collection.doc(id).get();
+    return data.data()!;
   }
 }
 
