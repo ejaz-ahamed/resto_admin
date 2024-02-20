@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
@@ -33,6 +34,47 @@ class EditProductPage extends HookConsumerWidget {
     final productTypeControllers = useState<List<ProductTypeControllers>>([]);
     final productAddonControllers = useState<List<ProductTypeControllers>>([]);
 
+    useEffect(() {
+      Future.delayed(
+        Duration.zero,
+        () {
+          ref.read(imageProvider.notifier).state = XFile(entity.imagePath);
+          productController.text = entity.name;
+          descreptionController.text = entity.description;
+
+          /// Add addon controllers
+          for (final addon in entity.addOns) {
+            final nameController = TextEditingController();
+            final priceController = TextEditingController();
+            nameController.text = addon.name;
+            priceController.text = addon.price;
+
+            productAddonControllers.value = [
+              ...productAddonControllers.value,
+              ProductTypeControllers(
+                  nameController: nameController,
+                  priceController: priceController),
+            ];
+          }
+          for (final types in entity.types) {
+            final nameController = TextEditingController();
+            final priceController = TextEditingController();
+            nameController.text = types.name;
+            priceController.text = types.price;
+
+            productTypeControllers.value = [
+              ...productTypeControllers.value,
+              ProductTypeControllers(
+                  nameController: nameController,
+                  priceController: priceController),
+            ];
+          }
+        },
+      );
+
+      return null;
+    }, []);
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -40,7 +82,6 @@ class EditProductPage extends HookConsumerWidget {
             preferredSize: Size.fromHeight(apptheme.spaces.space_700),
             child: AppBarWidget(
               title: data.txtEditProductAppbar,
-              actionButtonName: data.txtEditbtn,
             )),
         body: SingleChildScrollView(
           child: Padding(
@@ -56,8 +97,8 @@ class EditProductPage extends HookConsumerWidget {
                 ),
                 TextFieldWidget(
                     enabled: true,
-                    textFieldTitle: entity.name,
-                    hintText: entity.description,
+                    textFieldTitle: data.txtProductName,
+                    hintText: data.txtHintProduct,
                     controller: productController),
                 TextFieldWidget(
                     enabled: true,
@@ -65,6 +106,7 @@ class EditProductPage extends HookConsumerWidget {
                     textFieldTitle: data.txtDescription,
                     hintText: data.txtHintDescription,
                     controller: descreptionController),
+                const SizedBox24Widget(),
                 HeadingWidget(
                   text: data.txtType,
                 ),
@@ -96,7 +138,7 @@ class EditProductPage extends HookConsumerWidget {
         bottomNavigationBar: ElevatedButtonWidget(
             text: data.txtSaveBtn,
             onPressed: () {
-              ref.read(productProvider.notifier).addProduct(
+              ref.read(productProvider.notifier).updateProduct(
                 addOns: [
                   for (final addOnController in productAddonControllers.value)
                     ProductAddOnEntity(
@@ -113,11 +155,11 @@ class EditProductPage extends HookConsumerWidget {
                       id: '',
                     )
                 ],
-                id: '',
+                id: entity.id,
                 name: productController.text,
                 description: descreptionController.text,
                 imagePath: ref.watch(imageProvider)!.path,
-                categoryId: '',
+                categoryId: entity.categoryId,
               );
               context.pop();
             }),

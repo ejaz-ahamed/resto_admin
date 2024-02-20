@@ -17,6 +17,7 @@ class ProductModel with _$ProductModel {
     required String imagePath,
     required String name,
     required String description,
+    required String categoryId,
     required List<ProductTypeModel> types,
     required List<ProductAddonModel> addOns,
   }) = _ProductModel;

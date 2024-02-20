@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/core/widgets/sized_box_16_widget.dart';
 
 class TextFieldWidget extends ConsumerWidget {
   final String textFieldTitle;
@@ -8,6 +9,7 @@ class TextFieldWidget extends ConsumerWidget {
   final TextEditingController controller;
   final int? maxLines;
   final bool enabled;
+  final bool expands;
 
   const TextFieldWidget({
     super.key,
@@ -16,6 +18,7 @@ class TextFieldWidget extends ConsumerWidget {
     required this.hintText,
     required this.controller,
     this.maxLines,
+    this.expands = false,
   });
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,13 +28,17 @@ class TextFieldWidget extends ConsumerWidget {
       children: [
         Text(
           textFieldTitle,
-          style: apptheme.typography.h400,
+          style: apptheme.typography.h600,
+        ),
+        SizedBox(
+          height: AppTheme.of(context).spaces.space_100,
         ),
         TextField(
           enabled: enabled,
           style: apptheme.typography.h300,
           controller: controller,
           maxLines: maxLines,
+          expands: expands,
           decoration: InputDecoration(
               contentPadding: const EdgeInsets.all(0),
               hintText: hintText,

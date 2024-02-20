@@ -6,6 +6,8 @@ final class DeleteProductUsecase {
   DeleteProductUsecase({required this.repository});
   Future<void> call(String id) async {
     try {
+      final data = await repository.getById(id);
+      await repository.deleteStorage(data.name);
       return await repository.deleteProduct(id);
     } catch (e) {
       throw BaseException('Cannot Delete product');

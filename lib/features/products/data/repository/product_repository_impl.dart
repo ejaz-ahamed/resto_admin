@@ -23,37 +23,37 @@ class ProductRepositoryImpl implements ProductRepository {
     required this.storageDataSource,
   });
   @override
-  Future<void> addProduct(ProductEntity entity) async {
+  Future<void> addProduct(ProductEntity entity, String id) async {
     List<ProductTypeModel> typeEntity = [
       for (final type in entity.types)
         ProductTypeModel(name: type.name, price: type.price, id: type.id)
     ];
     List<ProductAddonModel> addOnEntity = [
-      for (final addOn in entity.addOns!)
+      for (final addOn in entity.addOns)
         ProductAddonModel(id: addOn.id, name: addOn.name, price: addOn.price)
     ];
     await dataSource.add(ProductModel(
-      id: entity.id,
-      imagePath: entity.imagePath,
-      name: entity.name,
-      description: entity.description,
-      types: [
-        for (final d in typeEntity)
-          ProductTypeModel(
-            name: d.name,
-            price: d.price,
-            id: d.id,
-          )
-      ],
-      addOns: [
-        for (final c in addOnEntity)
-          ProductAddonModel(
-            name: c.name,
-            id: c.id,
-            price: c.price,
-          )
-      ],
-    ));
+        id: entity.id,
+        imagePath: entity.imagePath,
+        name: entity.name,
+        description: entity.description,
+        categoryId: id,
+        types: [
+          for (final d in typeEntity)
+            ProductTypeModel(
+              name: d.name,
+              price: d.price,
+              id: d.id,
+            )
+        ],
+        addOns: [
+          for (final c in addOnEntity)
+            ProductAddonModel(
+              name: c.name,
+              id: c.id,
+              price: c.price,
+            )
+        ]));
   }
 
   @override
@@ -67,8 +67,8 @@ class ProductRepositoryImpl implements ProductRepository {
   }
 
   @override
-  Stream<List<ProductEntity>> getAll() async* {
-    final data = dataSource.getAll();
+  Stream<List<ProductEntity>> getAll(String categoryId) async* {
+    final data = dataSource.getAll(categoryId);
     await for (final snapshot in data) {
       final docs = snapshot;
       yield [
@@ -94,14 +94,45 @@ class ProductRepositoryImpl implements ProductRepository {
                   price: add.price,
                 )
             ],
+            categoryId: categoryId,
           )
       ];
     }
   }
 
   @override
-  Future<void> deleteStorage(String fileName) async {
-    await storageDataSource.delete(fileName);
+  Future<void> update(ProductEntity updatedEntity) async {
+    List<ProductTypeModel> typeEntity = [
+      for (final type in updatedEntity.types)
+        ProductTypeModel(name: type.name, price: type.price, id: type.id)
+    ];
+    List<ProductAddonModel> addOnEntity = [
+      for (final addOn in updatedEntity.addOns)
+        ProductAddonModel(id: addOn.id, name: addOn.name, price: addOn.price)
+    ];
+    await dataSource.update(ProductModel(
+      id: updatedEntity.id,
+      categoryId: updatedEntity.categoryId,
+      description: updatedEntity.description,
+      imagePath: updatedEntity.imagePath,
+      name: updatedEntity.name,
+      addOns: [
+        for (final f in addOnEntity)
+          ProductAddonModel(
+            name: f.name,
+            price: f.price,
+            id: f.id,
+          )
+      ],
+      types: [
+        for (final e in typeEntity)
+          ProductTypeModel(
+            name: e.name,
+            price: e.price,
+            id: e.id,
+          )
+      ],
+    ));
   }
 
   @override
@@ -109,11 +140,31 @@ class ProductRepositoryImpl implements ProductRepository {
     final doc = await dataSource.getById(id);
     return ProductEntity(
         name: doc.name,
-        imagePath: doc.id,
+        imagePath: doc.imagePath,
         description: doc.description,
-        id: id,
-        types: [],
-        addOns: []);
+        categoryId: doc.categoryId,
+        id: doc.id,
+        types: [
+          for (final i in doc.types)
+            ProductTypeEntity(
+              name: i.name,
+              price: i.price,
+              id: i.id,
+            )
+        ],
+        addOns: [
+          for (final j in doc.addOns)
+            ProductAddOnEntity(
+              name: j.name,
+              id: j.id,
+              price: j.price,
+            )
+        ]);
+  }
+
+  @override
+  Future<void> deleteStorage(String fileName) async {
+    await storageDataSource.delete(fileName);
   }
 }
 

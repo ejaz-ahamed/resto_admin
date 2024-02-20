@@ -24,8 +24,9 @@ class ProductFirestoreDataSourceImpl implements ProductFireStoreDataSource {
   }
 
   @override
-  Stream<List<ProductModel>> getAll() async* {
-    final productSteame = collection.snapshots();
+  Stream<List<ProductModel>> getAll(String categoryId) async* {
+    final productSteame =
+        collection.where('categoryId', isEqualTo: categoryId).snapshots();
     await for (final products in productSteame) {
       yield [
         for (final product in products.docs) product.data(),
@@ -37,6 +38,11 @@ class ProductFirestoreDataSourceImpl implements ProductFireStoreDataSource {
   Future<ProductModel> getById(String id) async {
     final data = await collection.doc(id).get();
     return data.data()!;
+  }
+
+  @override
+  Future<void> update(ProductModel updatedModel) async {
+    await collection.doc(updatedModel.id).set(updatedModel);
   }
 }
 

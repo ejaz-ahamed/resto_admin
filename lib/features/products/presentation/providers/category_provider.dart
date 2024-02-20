@@ -14,11 +14,12 @@ part 'category_provider.g.dart';
 class Category extends _$Category {
   late CategoryRepository repository;
   @override
-  Future<CategoryProviderState> build() async {
+  CategoryProviderState build() {
     repository = ref.watch(categoryRepositoryProvider);
 
     return CategoryProviderState(
-      getCategory: null,
+      categories: GetAllCategoryUseCase(repository: repository)(),
+      selectedCategory: '',
     );
   }
 
@@ -37,18 +38,26 @@ class Category extends _$Category {
     await DeleteCategoryUseCase(repository: repository)(id: id);
   }
 
-  // Future<void> update(
-  //     {required String id,
-  //     required String imagePath,
-  //     required String name}) async {
-  //   await UpdateCategoryUseCase(repository: repository)(
-  //     id: id,
-  //     imagePath: imagePath,
-  //     name: name,
-  //   );
-  // }
+  void selectCategory(String id) {
+    state = state.copyWith(selectedCategory: id);
+  }
 
-  Stream<List<CategoryEntity>> getAll() {
-    return GetAllCategoryUseCase(repository: repository)();
+  Future<void> updateCategory(
+      {required String id,
+      required String imagePath,
+      required String name}) async {
+    await UpdateCategoryUseCase(repository: repository)(
+      id: id,
+      imagePath: imagePath,
+      name: name,
+    );
+  }
+
+  Stream<List<CategoryEntity>> getAll() async* {
+    final stream = GetAllCategoryUseCase(repository: repository)();
+    await for (final categories in stream) {
+      state = state.copyWith(categories: stream);
+      yield categories;
+    }
   }
 }

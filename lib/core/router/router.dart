@@ -39,7 +39,7 @@ final router = GoRouter(
     ),
     GoRoute(
       path: HomePage.routePath,
-      builder: (context, state) => const HomePage(),
+      builder: (context, state) => HomePage(),
     ),
     GoRoute(
       path: ProfilePage.routePath,
@@ -72,14 +72,11 @@ final router = GoRouter(
     ),
     GoRoute(
       path: ProductPage.routePath,
-      builder: (context, state) => const ProductPage(),
+      builder: (context, state) => ProductPage(id: state.extra as String),
     ),
     GoRoute(
-        path: AddOfferPage.routePath,
-        builder: (context, state) => const AddOfferPage()),
-    GoRoute(
-      path: ProductPage.routePath,
-      builder: (context, state) => const ProductPage(),
+      path: AddOfferPage.routePath,
+      builder: (context, state) => const AddOfferPage(),
     ),
     GoRoute(
       path: AddCategoryPage.routePath,
