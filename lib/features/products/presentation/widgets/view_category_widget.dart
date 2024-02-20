@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/features/products/domain/entities/category_entity.dart';
 import 'package:resto_admin/features/products/presentation/pages/edit_category_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/manage_categories_page.dart';
 
 class ViewCategoriesWidget extends StatelessWidget {
-  const ViewCategoriesWidget({super.key});
+  final List<CategoryEntity> entity;
+  const ViewCategoriesWidget({super.key, required this.entity});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +16,7 @@ class ViewCategoriesWidget extends StatelessWidget {
         child: GridView.builder(
       physics: const ClampingScrollPhysics(),
       shrinkWrap: true,
-      itemCount: 30,
+      itemCount: entity.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
           crossAxisSpacing: theme.spaces.space_100 * 1.25,
@@ -50,14 +52,14 @@ class ViewCategoriesWidget extends StatelessWidget {
                     width: theme.spaces.space_100 * 14.5,
                     height: theme.spaces.space_100 * 10,
                     child: Image.network(
-                      'https://www.foodiesfeed.com/wp-content/uploads/2023/04/strawberry-milk-splash.jpg',
+                      entity[index].imagePath,
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
               ),
               Text(
-                'Long category',
+                entity[index].name,
                 overflow: TextOverflow.ellipsis,
                 style: theme.typography.h400,
               ),

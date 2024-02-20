@@ -1,21 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/features/products/presentation/widgets/edit_field_widget.dart';
 
-class ProductTypeWidget extends StatelessWidget {
+class ProductTypeWidget extends HookConsumerWidget {
   final TextEditingController addOnController;
   final TextEditingController addOnPriceController;
   final String hint;
-
+  final bool enabled;
+  final TextStyle? style;
   const ProductTypeWidget(
       {super.key,
       required this.addOnController,
       required this.addOnPriceController,
-      required this.hint});
+      required this.hint,
+      required this.enabled,
+      required this.style});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);
+    final selectedIndex = useState<int>(0);
+    final types = useMemoized(() => []);
+    void tabOnPressed(int index) {
+      selectedIndex.value++;
+    }
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -29,11 +40,9 @@ class ProductTypeWidget extends StatelessWidget {
                   child: EditFieldWidget(
                     hintText: hint,
                     controller: addOnController,
-                    enabled: true,
+                    enabled: enabled,
                     onChanged: null,
-                    style: apptheme.typography.h400.copyWith(
-                        color: apptheme.colors.text,
-                        fontWeight: FontWeight.w700),
+                    style: style,
                   ),
                 ),
                 Expanded(
@@ -41,10 +50,8 @@ class ProductTypeWidget extends StatelessWidget {
                     hintText: "Enter price",
                     controller: addOnPriceController,
                     isPrice: true,
-                    enabled: true,
-                    style: apptheme.typography.h400.copyWith(
-                        color: apptheme.colors.text,
-                        fontWeight: FontWeight.w700),
+                    enabled: enabled,
+                    style: style,
                     onChanged: (value) {
                       value = value.replaceAll('\$', '');
                       if (value.isNotEmpty) {

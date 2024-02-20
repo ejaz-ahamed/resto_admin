@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/orders_constants/orders_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
+import 'package:resto_admin/features/orders/presentation/providers/order_provider.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/food_status.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/orders_list_widget.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/search_textfield_widget.dart';
@@ -42,15 +43,28 @@ class OrderScreenOne extends HookConsumerWidget {
               height: space.space_400,
             ),
             Padding(
-              padding: EdgeInsets.only(left: space.space_300),
-              child: const FoodStatus(),
-            ),
-            SizedBox(
-              height: space.space_300,
-            ),
-            Padding(
               padding: EdgeInsets.symmetric(horizontal: space.space_300),
-              child: const OrderListView(),
+              child: StreamBuilder(
+                stream: ref.watch(
+                    orderProviderProvider.select((value) => value.orders)),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Column(
+                      children: [
+                        FoodStatus(count: snapshot.data!),
+                        SizedBox(
+                          height: space.space_300,
+                        ),
+                        OrderListView(entity: snapshot.data!),
+                      ],
+                    );
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
+              ),
             )
           ],
         ),

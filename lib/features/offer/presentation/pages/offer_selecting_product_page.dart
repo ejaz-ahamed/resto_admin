@@ -9,12 +9,15 @@ import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/listview_separated_widget.dart';
+
 import 'package:resto_admin/core/widgets/sized_box_8_widget.dart';
 import 'package:resto_admin/features/offer/presentation/pages/edit_offer_page.dart';
 import 'package:resto_admin/features/offer/presentation/provider/selected_items_provider.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/gridview_offerpage_widget.dart';
+import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
+import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
 
-final itemCountProvider = Provider<int>((ref) => 2);
+final itemCountProvider = Provider<int>((ref) => 5);
 
 class OfferSelectingPage extends HookConsumerWidget {
   static const routePath = '/select';
@@ -36,11 +39,11 @@ class OfferSelectingPage extends HookConsumerWidget {
       }
     }
 
-    void onSavePressed() {
-      context.push(
-        EditOfferPage.routePath,
-      );
-    }
+    // void onSavePressed() {
+    //   context.push(
+    //     EditOfferPage.routePath,
+    //   );
+    // }
 
     return Scaffold(
       backgroundColor: theme.colors.secondary,
@@ -50,7 +53,7 @@ class OfferSelectingPage extends HookConsumerWidget {
           title: constants.txtAppbarTitle,
           actionButtonName: selectedItems.value.length < itemCount
               ? constants.txtSelectAllText
-              : 'Unselect',
+              : constants.txtUnSelect,
           onPressed: () {
             selectall();
           },
@@ -75,12 +78,22 @@ class OfferSelectingPage extends HookConsumerWidget {
               ),
               const SizedBox8Widget(),
               SizedBox(
-                  height: MediaQuery.sizeOf(context).height /
-                      theme.spaces.space_125,
-                  width: MediaQuery.sizeOf(context).width,
-                  child: ListViewSeparatedWidget(
-                    text: constants.txtListtext,
-                  )),
+                height: theme.spaces.space_100 * 10,
+                child: StreamBuilder(
+                  stream: ref.read(categoryProvider.notifier).getAll(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return ListViewSeparatedWidget(
+                        entity: snapshot.data!,
+                      );
+                    } else {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  },
+                ),
+              ),
               SizedBox(
                   child: Stack(children: [
                 GridViewOfferPageWidget(selectedItems: selectedItems),
@@ -104,3 +117,4 @@ class OfferSelectingPage extends HookConsumerWidget {
     );
   }
 }
+//  text: constants.txtListtext

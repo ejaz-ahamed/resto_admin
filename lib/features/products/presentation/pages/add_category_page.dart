@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -21,6 +23,7 @@ class AddCategoryPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);
     final data = ref.watch(productConstantsProvider);
+
     final categoryContoller = useTextEditingController();
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
@@ -41,6 +44,7 @@ class AddCategoryPage extends HookConsumerWidget {
                   controller: categoryContoller)
             ],
           ),
+
         ),
         bottomNavigationBar: ElevatedButtonWidget(
             text: data.txtSaveBtn,

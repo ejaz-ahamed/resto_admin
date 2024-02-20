@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
-import 'package:resto_admin/features/offer/presentation/pages/edit_offer_page.dart';
+
+import 'package:resto_admin/features/offer/presentation/provider/selected_items_provider.dart';
+import 'package:resto_admin/features/offer/presentation/widgets/textfield_widget.dart';
 
 class ListViewProductsWidget extends ConsumerWidget {
   final int itemCount;
@@ -19,12 +21,13 @@ class ListViewProductsWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentDollarValue = ref.watch(currentStateProvider);
+    final currentDollarValue = ref.watch(resultProvider);
     final theme = AppTheme.of(context);
     AppAssetsConstants iconConst = AppAssetsConstants();
+
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: itemCount,
+      itemCount: 3,
       itemBuilder: (context, index) {
         return Padding(
           padding: EdgeInsets.only(left: theme.spaces.space_100),
@@ -32,7 +35,8 @@ class ListViewProductsWidget extends ConsumerWidget {
             height: theme.spaces.space_500,
             child: ListTile(
               leading: Text(
-                product,
+                // snapshot.data![index].name,.
+                'yyyy',
                 style: theme.typography.h500,
               ),
               trailing: Row(
@@ -53,9 +57,15 @@ class ListViewProductsWidget extends ConsumerWidget {
                   SizedBox(
                     width: theme.spaces.space_100,
                   ),
-                  SvgPicture.asset(
-                    iconConst.icRemove,
-                  ),
+                  //
+                  GestureDetector(
+                    onTap: () {
+                      ref.read(selectedItemsProvider.notifier).remove(index);
+                    },
+                    child: SvgPicture.asset(
+                      iconConst.icRemove,
+                    ),
+                  )
                 ],
               ),
             ),

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -40,7 +42,8 @@ class EditOfferPage extends HookConsumerWidget {
       selectedIndex.value = index;
     }
 
-    final currentTextController = TextEditingController();
+    final percentageTextController = TextEditingController();
+    final amountTextController = TextEditingController();
     // final currentDollarValue = ref.watch(currentStateProvider);
 
     return GestureDetector(
@@ -105,10 +108,16 @@ class EditOfferPage extends HookConsumerWidget {
               Padding(
                   padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
                   child: TextFieldOfferWidget(
-                      hintText: selectedIndex.value == 0
-                          ? constants.txtHintTextPercentage
-                          : constants.txtHintTextAmount,
-                      controller: currentTextController)),
+                    hintText: selectedIndex.value == 0
+                        ? constants.txtHintTextPercentage
+                        : constants.txtHintTextAmount,
+                    controller: selectedIndex.value == 0
+                        ? percentageTextController
+                        : amountTextController,
+                    controller1: selectedIndex.value == 1
+                        ? percentageTextController
+                        : amountTextController,
+                  )),
               SizedBox(
                 height: spaces.space_200,
               ),
