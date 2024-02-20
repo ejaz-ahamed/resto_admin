@@ -8,7 +8,7 @@ import 'package:resto_admin/features/products/presentation/providers/category_pr
 import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
 
 class GridViewOfferPageWidget extends HookConsumerWidget {
-  final ValueNotifier<Set<int>> selectedItems;
+  final ValueNotifier<Set<String>> selectedItems;
   const GridViewOfferPageWidget({super.key, required this.selectedItems});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -29,58 +29,64 @@ class GridViewOfferPageWidget extends HookConsumerWidget {
                   crossAxisSpacing: theme.spaces.space_250,
                   mainAxisSpacing: theme.spaces.space_250,
                   mainAxisExtent: theme.spaces.space_900 * 2.75),
-              itemBuilder: (context, index) => Container(
-                decoration: BoxDecoration(
-                  color: theme.colors.secondary,
-                  borderRadius: BorderRadius.circular(theme.spaces.space_100),
-                  boxShadow: [theme.boxShadow.primary],
-                ),
-                child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(vertical: theme.spaces.space_150),
-                  child: Column(
-                    children: [
-                      Stack(
-                        children: [
-                          Container(
-                            width: theme.spaces.space_500 * 3.7,
-                            height: theme.spaces.space_500 * 3.7,
-                            decoration: BoxDecoration(
-                              color: theme.colors.textInverse,
-                            ),
-                            child: Image.network(
-                              snapshot.data![index].imagePath,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          Positioned(
-                              top: theme.spaces.space_100,
-                              right: theme.spaces.space_100,
-                              child: RoundedCheckboxWidget(
-                                isChecked: selectedItems.value.contains(index),
-                                onTap: () {
-                                  if (selectedItems.value.contains(index)) {
-                                    selectedItems.value = {
-                                      ...selectedItems.value
-                                    }..remove(index);
-                                  } else {
-                                    selectedItems.value = {
-                                      ...selectedItems.value,
-                                      index
-                                    };
-                                  }
-                                },
-                              ))
-                        ],
-                      ),
-                      SizedBox(
-                        height: theme.spaces.space_50,
-                      ),
-                      Text(snapshot.data![index].name),
-                    ],
+              itemBuilder: (context, index) {
+                final productData = snapshot.data![index];
+
+                return Container(
+                  decoration: BoxDecoration(
+                    color: theme.colors.secondary,
+                    borderRadius: BorderRadius.circular(theme.spaces.space_100),
+                    boxShadow: [theme.boxShadow.primary],
                   ),
-                ),
-              ),
+                  child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: theme.spaces.space_150),
+                    child: Column(
+                      children: [
+                        Stack(
+                          children: [
+                            Container(
+                              width: theme.spaces.space_500 * 3.7,
+                              height: theme.spaces.space_500 * 3.7,
+                              decoration: BoxDecoration(
+                                color: theme.colors.textInverse,
+                              ),
+                              child: Image.network(
+                                productData.imagePath,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Positioned(
+                                top: theme.spaces.space_100,
+                                right: theme.spaces.space_100,
+                                child: RoundedCheckboxWidget(
+                                  isChecked: selectedItems.value
+                                      .contains(productData.id),
+                                  onTap: () {
+                                    if (selectedItems.value
+                                        .contains(productData.id)) {
+                                      selectedItems.value = {
+                                        ...selectedItems.value
+                                      }..remove(productData.id);
+                                    } else {
+                                      selectedItems.value = {
+                                        ...selectedItems.value,
+                                        productData.id
+                                      };
+                                    }
+                                  },
+                                ))
+                          ],
+                        ),
+                        SizedBox(
+                          height: theme.spaces.space_50,
+                        ),
+                        Text(productData.name),
+                      ],
+                    ),
+                  ),
+                );
+              },
             );
           } else {
             return const Center(

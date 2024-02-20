@@ -15,14 +15,14 @@ import 'package:resto_admin/core/themes/app_theme.dart';
 final percentageProvider = StateProvider<double>((ref) => 0.0);
 final resultProvider = Provider<double>((ref) {
   final percentage = ref.watch(percentageProvider);
-  double value = 100;
+  double value = 200;
   return value - ((value * percentage) / 100);
 });
 final amountProvider = StateProvider<double>((ref) => 0.0);
 final amountResultProvider = Provider<double>((ref) {
-  final percentage = ref.watch(amountProvider);
+  final amount = ref.watch(amountProvider);
   double value = 90;
-  return value - percentage;
+  return value - amount;
 });
 
 class TextFieldOfferWidget extends ConsumerWidget {

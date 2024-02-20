@@ -13,12 +13,11 @@ import 'package:resto_admin/core/widgets/listview_separated_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_8_widget.dart';
 import 'package:resto_admin/features/offer/presentation/pages/edit_offer_page.dart';
 import 'package:resto_admin/features/offer/presentation/provider/selected_items_provider.dart';
+
 import 'package:resto_admin/features/offer/presentation/widgets/gridview_offerpage_widget.dart';
-import 'package:resto_admin/features/products/data/repository/product_repository_impl.dart';
+
 import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
 import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
-
-// final itemCountProvider = Provider<int>((ref) => 5);
 
 class OfferSelectingPage extends HookConsumerWidget {
   static const routePath = '/select';
@@ -28,7 +27,7 @@ class OfferSelectingPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = AppTheme.of(context);
     final constants = SelectingProductPageConstants();
-    final selectedItems = useState<Set<int>>({});
+    final selectedItems = useState<Set<String>>({});
 
     final itemCount = ref.watch(productProvider).length;
     void selectall() {
@@ -106,9 +105,9 @@ class OfferSelectingPage extends HookConsumerWidget {
         text: constants.txtSave,
         onPressed: () {
           // onSavePressed();
-          // ref
-          //     .read(selectedItemsProvider.notifier)
-          //     .updateSelectedItems(selectedItems.value);
+          ref
+              .read(selectedItemsProvider.notifier)
+              .updateSelectedItems(selectedItems.value);
           context.pop(
             EditOfferPage.routePath,
           );
