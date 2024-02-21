@@ -30,8 +30,10 @@ class EditProductPage extends HookConsumerWidget {
     final apptheme = AppTheme.of(context);
     final data = ref.watch(productConstantsProvider);
     final constants = ref.watch(productConstantsProvider);
+
     final productController = useTextEditingController();
     final descreptionController = useTextEditingController();
+
     final productTypeControllers = useState<List<ProductTypeControllers>>([]);
     final productAddonControllers = useState<List<ProductTypeControllers>>([]);
 
@@ -71,20 +73,22 @@ class EditProductPage extends HookConsumerWidget {
           }
         },
       );
+
+      /// Dispose function
       return () {
         productController.dispose();
         descreptionController.dispose();
+
         for (final controller in productAddonControllers.value) {
           controller.nameController.dispose();
           controller.priceController.dispose();
         }
+
         for (final controller in productTypeControllers.value) {
           controller.nameController.dispose();
           controller.priceController.dispose();
         }
       };
-
-      // return null;
     }, []);
 
     return GestureDetector(
@@ -148,9 +152,15 @@ class EditProductPage extends HookConsumerWidget {
                                 entity.addOns[index].id,
                               );
 
+                          final controllersToDelete =
+                              productAddonControllers.value[index];
+
                           productAddonControllers.value = [
                             ...productAddonControllers.value
                           ]..removeAt(index);
+
+                          controllersToDelete.nameController.dispose();
+                          controllersToDelete.priceController.dispose();
                         },
                         btntxt: data.txtAddOns,
                         productTypes: productAddonControllers,
