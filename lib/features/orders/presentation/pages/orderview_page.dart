@@ -15,16 +15,17 @@ import 'package:resto_admin/features/orders/presentation/widgets/item_details_li
 import 'package:resto_admin/features/orders/presentation/widgets/item_details_widget.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/profile_image_widget.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/total_row_widget.dart';
+import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
 
 class OrderViewPage extends ConsumerWidget {
   static const routePath = '/orderviewpage';
   final OrderEntity entity;
+  final ProductEntity productEntity;
   // final String buttonName;
-  const OrderViewPage({
-    super.key,
-    required this.entity,
-    // required this.buttonName,
-  });
+  const OrderViewPage(
+      {super.key, required this.entity, required this.productEntity
+      // required this.buttonName,
+      });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -53,7 +54,10 @@ class OrderViewPage extends ConsumerWidget {
             CustomerDetailsWidget(entity: entity),
             const SizedBox24Widget(),
             const ItemDetailsWidget(),
-            ItemsDetailsListviewDetails(entity: [entity]),
+            ItemsDetailsListviewDetails(
+              entity: [entity],
+              productEntity: [productEntity],
+            ),
             const TotalRowWidget(),
           ],
         ),

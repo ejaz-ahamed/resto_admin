@@ -1,7 +1,8 @@
 import 'package:resto_admin/core/enums/order_type.dart';
 import 'package:resto_admin/features/orders/data/repository/order_repository_impl.dart';
 import 'package:resto_admin/features/orders/domain/repository/order_repository.dart';
-import 'package:resto_admin/features/orders/domain/usecase/order_usecase.dart';
+import 'package:resto_admin/features/orders/domain/usecase/get_order_usecase.dart';
+import 'package:resto_admin/features/orders/domain/usecase/get_products_by_id_usecase.dart';
 import 'package:resto_admin/features/orders/domain/usecase/update_type_usecase.dart';
 import 'package:resto_admin/features/orders/presentation/providers/order_state_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -28,5 +29,10 @@ class Order extends _$Order {
   Future<void> updateOrderType(String orderId, OrderStatus newStatus) {
     return UpdateTypeUsecase(repository: ref.watch(orderRepositoryProvider))(
         orderId, newStatus);
+  }
+
+  Stream<void> getProductById(String id) async*{
+    yield GetProductByIdUsecase(repository: ref.watch(orderRepositoryProvider))(
+        id);
   }
 }

@@ -4,6 +4,9 @@ import 'package:resto_admin/features/orders/data/datasource/order_datasource_imp
 import 'package:resto_admin/features/orders/domain/entity/order_entity.dart';
 import 'package:resto_admin/features/orders/domain/entity/order_item_entity.dart';
 import 'package:resto_admin/features/orders/domain/repository/order_repository.dart';
+import 'package:resto_admin/features/products/domain/entities/product_addon_entity.dart';
+import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
+import 'package:resto_admin/features/products/domain/entities/product_type_entity.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'order_repository_impl.g.dart';
 
@@ -39,6 +42,25 @@ class OrderRepositoryImpl implements OrderRepository {
   @override
   Future<void> updateOrderType(String orderId, OrderStatus newType) async {
     await dataSource.updateType(orderId, newType);
+  }
+
+  @override
+  Stream<ProductEntity> getProductById(String productId) async*{
+    final products = dataSource.getProductsById(productId);
+    await for(final data in products){
+    yield ProductEntity(name: data.name, imagePath: data.imagePath, description: data.description, categoryId: data.categoryId, id: data.id,
+     types: [
+      for(final productItem in data.types)
+      ProductTypeEntity(name: productItem.name, price: productItem.price, id: productItem.id)
+     ],
+      addOns: [
+        for(final addOnsItem in data.addOns)
+        ProductAddOnEntity(name: addOnsItem.name, id: addOnsItem.id, price: addOnsItem.price)
+      ]);
+   
+    }
+    
+    
   }
 }
 
