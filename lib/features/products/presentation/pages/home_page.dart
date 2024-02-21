@@ -1,17 +1,20 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
-import 'package:resto_admin/core/widgets/gridview_widget.dart';
-import 'package:resto_admin/core/widgets/listview_separated_widget.dart';
+import 'package:resto_admin/core/widgets/product_gridview_widget.dart';
+import 'package:resto_admin/core/widgets/category_listview_separated_widget.dart';
 import 'package:resto_admin/features/products/presentation/pages/product_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/view_categories_page.dart';
 import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
 import 'package:resto_admin/features/products/presentation/widgets/row_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/textfield_widget.dart';
 import 'package:resto_admin/features/profile_page/presentation/pages/profile_page.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomePage extends HookConsumerWidget {
   static const routePath = '/home';
@@ -22,7 +25,9 @@ class HomePage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final data = ref.watch(productConstantsProvider);
     final theme = AppTheme.of(context);
+
     final searchController = useTextEditingController();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -84,8 +89,51 @@ class HomePage extends HookConsumerWidget {
                       AsyncError() => const Center(
                           child: Text('Error while getting data'),
                         ),
-                      _ => const Center(
-                          child: CircularProgressIndicator(),
+                      _ => Center(
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: theme.spaces.space_75),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    SizedBox(
+                                      width: theme.spaces.space_500,
+                                      height: theme.spaces.space_600,
+                                      child: Shimmer.fromColors(
+                                        baseColor: theme.colors.textInverse,
+                                        highlightColor: theme.colors.textSubtle,
+                                        child: const CircleAvatar(),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: theme.spaces.space_75,
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.symmetric(
+                                          horizontal: theme.spaces.space_150),
+                                      width: theme.spaces.space_700,
+                                      height: theme.spaces.space_150,
+                                      child: Shimmer.fromColors(
+                                        baseColor: theme.colors.textInverse,
+                                        highlightColor: theme.colors.textSubtle,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              color: theme.colors.primary,
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      theme.spaces.space_50)),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
                         ),
                     }),
                 SizedBox(
@@ -100,7 +148,7 @@ class HomePage extends HookConsumerWidget {
                 SizedBox(
                   height: theme.spaces.space_250,
                 ),
-                const GridViewWidget(),
+                const ProductGridViewWidget(),
                 SizedBox(
                   height: theme.spaces.space_250,
                 ),
