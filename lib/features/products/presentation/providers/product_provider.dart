@@ -21,11 +21,6 @@ class Product extends _$Product {
   late ProductRepository repository;
 
   @override
-<<<<<<< HEAD
-  List<ProductEntity> build() {
-    repository = ref.read(productRepositoryProvider);
-    return [];
-=======
   ProductProviderState build() {
     repository = ref.read(productRepositoryProvider);
     return ProductProviderState(
@@ -36,7 +31,6 @@ class Product extends _$Product {
 
   void clearSearchList() {
     state = state.copyWith(searchedProducts: null);
->>>>>>> ea6dee2fa44b5e844499788bd46db9db41983504
   }
 
   Future<void> addProduct({
