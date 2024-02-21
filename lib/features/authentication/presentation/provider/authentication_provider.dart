@@ -7,7 +7,7 @@ import 'package:resto_admin/features/authentication/domain/entity/user_entity.da
 import 'package:resto_admin/features/authentication/domain/usecases/get_user_details_usecases.dart';
 import 'package:resto_admin/features/authentication/domain/usecases/login_usecases.dart';
 import 'package:resto_admin/features/authentication/domain/usecases/logout_usecase.dart';
-import 'package:resto_admin/features/authentication/domain/usecases/remove_Image_usecase.dart';
+import 'package:resto_admin/features/authentication/domain/usecases/remove_image_usecase.dart';
 import 'package:resto_admin/features/authentication/domain/usecases/update_password_usecase.dart';
 import 'package:resto_admin/features/authentication/domain/usecases/set_profile_image_usecases.dart';
 import 'package:resto_admin/features/authentication/presentation/pages/login_page.dart';
