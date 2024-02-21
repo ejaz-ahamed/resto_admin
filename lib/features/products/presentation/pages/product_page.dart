@@ -19,25 +19,34 @@ import 'package:resto_admin/features/products/presentation/widgets/product_type_
 class ProductPage extends HookConsumerWidget {
   static const routePath = '/addNewProducts';
   final String id;
+
   const ProductPage({
     super.key,
     required this.id,
   });
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);
-    final data = ref.watch(productConstantsProvider);
+
+    final constants = ref.watch(productConstantsProvider);
+
     final productController = useTextEditingController();
     final descreptionController = useTextEditingController();
     final productTypeControllers = useState<List<ProductTypeControllers>>([]);
     final productAddonControllers = useState<List<ProductTypeControllers>>([]);
+
+    useEffect(() {
+      ref.invalidate(imagePickerProvider);
+      return null;
+    }, []);
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(apptheme.spaces.space_700),
-            child: AppBarWidget(title: data.txtAddPrdtsTitle)),
+            child: AppBarWidget(title: constants.txtAddPrdtsTitle)),
         body: SingleChildScrollView(
           child: Padding(
             padding:
@@ -46,45 +55,45 @@ class ProductPage extends HookConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox32Widget(),
-                ImagePickerProductWidget(imgProvider: imageProvider),
+                const ImagePickerProductWidget(),
                 SizedBox(
                   height: AppTheme.of(context).spaces.space_300,
                 ),
                 TextFieldWidget(
                     enabled: true,
-                    textFieldTitle: data.txtProductName,
-                    hintText: data.txtHintProduct,
+                    textFieldTitle: constants.txtProductName,
+                    hintText: constants.txtHintProduct,
                     controller: productController),
                 TextFieldWidget(
                     enabled: true,
                     maxLines: null,
-                    textFieldTitle: data.txtDescription,
-                    hintText: data.txtHintDescription,
+                    textFieldTitle: constants.txtDescription,
+                    hintText: constants.txtHintDescription,
                     controller: descreptionController),
                 HeadingWidget(
-                  text: data.txtType,
+                  text: constants.txtType,
                 ),
                 const SizedBox24Widget(),
                 ProductTypeWidget(
-                  btntxt: data.txtType,
+                  onTap: (int index) {},
+                  btntxt: constants.txtType,
                   style: apptheme.typography.h400
                       .copyWith(color: apptheme.colors.textDisabled),
-                  hint: data.txtType,
+                  hint: constants.txtType,
                   productTypes: productTypeControllers,
-                  onTap: () {},
                 ),
                 const SizedBox32Widget(),
                 HeadingWidget(
-                  text: data.txtAddOns,
+                  text: constants.txtAddOns,
                 ),
                 const SizedBox24Widget(),
                 ProductTypeWidget(
-                  btntxt: data.txtAddOns,
+                  onTap: (int index) {},
+                  btntxt: constants.txtAddOns,
                   productTypes: productAddonControllers,
                   style: apptheme.typography.h400
                       .copyWith(color: apptheme.colors.textDisabled),
-                  hint: data.txtAddOns,
-                  onTap: () {},
+                  hint: constants.txtAddOns,
                 ),
                 const SizedBox24Widget(),
               ],
@@ -92,7 +101,7 @@ class ProductPage extends HookConsumerWidget {
           ),
         ),
         bottomNavigationBar: ElevatedButtonWidget(
-            text: data.txtSaveBtn,
+            text: constants.txtSaveBtn,
             onPressed: () {
               ref.read(productProvider.notifier).addProduct(
                 addOns: [
@@ -115,7 +124,7 @@ class ProductPage extends HookConsumerWidget {
                 name: productController.text,
                 categoryId: id,
                 description: descreptionController.text,
-                imagePath: ref.watch(imageProvider)!.path,
+                imagePath: ref.watch(imagePickerProvider)!.path,
               );
               context.pop();
             }),
