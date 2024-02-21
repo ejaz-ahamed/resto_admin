@@ -45,13 +45,14 @@ class CategoryRepositoryImpl implements CategoryRepository {
   Stream<List<CategoryEntity>> getAll() async* {
     final data = firestoreDataSource.getAll();
     await for (final snapshot in data) {
-      final docs = snapshot.docs;
+      final docs = snapshot;
       yield [
         for (final cat in docs)
           CategoryEntity(
-              id: cat.id,
-              imagePath: cat.data().imagePath,
-              name: cat.data().name)
+            id: cat.id,
+            imagePath: cat.imagePath,
+            name: cat.name,
+          )
       ];
     }
   }
@@ -59,6 +60,26 @@ class CategoryRepositoryImpl implements CategoryRepository {
   @override
   Future<String> upload(File fileToUpload, String filePath) {
     return storageDataSource.add(fileToUpload, filePath);
+  }
+
+  @override
+  Future<void> deleteStorage(String fileName) async {
+    await storageDataSource.delete(fileName);
+  }
+
+  @override
+  Future<CategoryEntity> getById(String id) async {
+    final doc = await firestoreDataSource.getbyId(id);
+    return CategoryEntity(
+      id: doc.id,
+      imagePath: doc.imagePath,
+      name: doc.name,
+    );
+  }
+
+  @override
+  Future<void> deleteMany(List<String> docIdsToDelete) async {
+    await firestoreDataSource.deleteMany(docIdsToDelete);
   }
 }
 

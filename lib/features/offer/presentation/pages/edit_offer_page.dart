@@ -85,6 +85,7 @@ class EditOfferPage extends HookConsumerWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
                 child: TextFieldWidget(
+                  enabled: true,
                     textFieldTitle: constants.txtTitle,
                     hintText: constants.txtHintTextTitle,
                     controller: nameController),
@@ -93,6 +94,7 @@ class EditOfferPage extends HookConsumerWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
                 child: TextFieldWidget(
+                  enabled: true,
                     textFieldTitle: constants.txtDescription,
                     hintText: constants.txtHintTextdescription,
                     controller: descriptionController),

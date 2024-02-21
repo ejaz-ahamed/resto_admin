@@ -22,7 +22,7 @@ class AppBarWidget extends ConsumerWidget {
       scrolledUnderElevation: 0,
       elevation: 0,
       titleSpacing: appTheme.spaces.space_300,
-      title: InkWell(
+      title: InkWell( 
         onTap: () => context.pop(),
         child: Row(
           mainAxisSize: MainAxisSize.min,
