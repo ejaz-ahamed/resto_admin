@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
-
 import 'package:resto_admin/features/products/presentation/pages/overview_items_page.dart';
 import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
 import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
@@ -50,6 +49,8 @@ class GridViewWidget extends ConsumerWidget {
                         width: theme.spaces.space_500 * 3.7,
                         height: theme.spaces.space_500 * 3.7,
                         decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(theme.spaces.space_100),
                           color: theme.colors.textInverse,
                           image: DecorationImage(
                             image: NetworkImage(

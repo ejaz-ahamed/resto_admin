@@ -7,6 +7,8 @@ final class DeleteCategoryUseCase {
 
   Future<void> call({required String id}) async {
     try {
+      final data = await repository.getById(id);
+      await repository.deleteStorage(data.name);
       await repository.remove(id);
     } catch (e) {
       throw BaseException(e.toString());

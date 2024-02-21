@@ -8,8 +8,11 @@ import 'package:resto_admin/core/constants/offer_constants/selecting_product_con
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
+<<<<<<< HEAD
 import 'package:resto_admin/core/widgets/listview_separated_widget.dart';
 
+=======
+>>>>>>> 1738730479db985a3822689420d912403275d452
 import 'package:resto_admin/core/widgets/sized_box_8_widget.dart';
 import 'package:resto_admin/features/offer/presentation/pages/edit_offer_page.dart';
 import 'package:resto_admin/features/offer/presentation/provider/selected_items_provider.dart';

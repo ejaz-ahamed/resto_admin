@@ -6,11 +6,9 @@ import 'package:resto_admin/core/constants/products_constants/product_constants.
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/gridview_widget.dart';
 import 'package:resto_admin/core/widgets/listview_separated_widget.dart';
-import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
 import 'package:resto_admin/features/products/presentation/pages/product_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/view_categories_page.dart';
 import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
-import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
 import 'package:resto_admin/features/products/presentation/widgets/row_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/textfield_widget.dart';
 import 'package:resto_admin/features/profile_page/presentation/pages/profile_page.dart';
@@ -105,7 +103,7 @@ class HomePage extends HookConsumerWidget {
                 SizedBox(
                   height: theme.spaces.space_250,
                 ),
-                GridViewWidget(),
+                const GridViewWidget(),
                 SizedBox(
                   height: theme.spaces.space_250,
                 ),
