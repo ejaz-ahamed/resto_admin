@@ -6,7 +6,6 @@ import 'package:resto_admin/core/constants/products_constants/product_constants.
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/elevated_add_button_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
-import 'package:resto_admin/core/widgets/sized_box_8_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/edit_field_widget.dart';
 
 /// Model class to handle the text editing controller

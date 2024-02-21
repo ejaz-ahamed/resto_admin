@@ -20,6 +20,7 @@ class AppBarWidget extends ConsumerWidget {
       backgroundColor: appTheme.colors.secondary,
       automaticallyImplyLeading: false,
       scrolledUnderElevation: 0,
+      elevation: 0,
       titleSpacing: appTheme.spaces.space_300,
       title: InkWell( 
         onTap: () => context.pop(),

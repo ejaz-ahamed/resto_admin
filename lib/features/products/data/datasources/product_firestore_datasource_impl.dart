@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:resto_admin/features/products/data/datasources/product_firestore_datasource.dart';
-import 'package:resto_admin/features/products/data/models/product_addon_model.dart';
 import 'package:resto_admin/features/products/data/models/product_model.dart';
-import 'package:resto_admin/features/products/data/models/product_type_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'product_firestore_datasource_impl.g.dart';
@@ -32,6 +30,15 @@ class ProductFirestoreDataSourceImpl implements ProductFireStoreDataSource {
         for (final product in products.docs) product.data(),
       ];
     }
+  }
+
+  @override
+  Future<List<ProductModel>> search(String categoryId) async {
+    final searchedProducts =
+        await collection.where('categoryId', isEqualTo: categoryId).get();
+    return [
+      for (final product in searchedProducts.docs) product.data(),
+    ];
   }
 
   @override

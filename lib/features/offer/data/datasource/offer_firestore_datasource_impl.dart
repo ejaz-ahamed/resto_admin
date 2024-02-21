@@ -13,7 +13,31 @@ class OfferFirestoreDatasourceImpl implements OfferFirestoreDatasource {
           toFirestore: (model, _) => model.toFirestore());
   @override
   Future<void> add(OfferModel model) async {
-    await collection.doc(model.name).set(model);
+    await collection.doc().set(model);
+  }
+
+  @override
+  Stream<List<OfferModel>> getAllOffer() async* {
+    final offerStream = collection.snapshots();
+    await for (final offers in offerStream) {
+      yield [for (final offer in offers.docs) offer.data()];
+    }
+  }
+
+  @override
+  Future<void> update(OfferModel updatedModel, String id) async {
+    await collection.doc(id).set(updatedModel);
+  }
+
+  @override
+  Future<void> delete(String offerId) async {
+    await collection.doc(offerId).delete();
+  }
+
+  @override
+  Future<OfferModel> getById(String id) async {
+    final data = await collection.doc(id).get();
+    return data.data()!;
   }
 }
 

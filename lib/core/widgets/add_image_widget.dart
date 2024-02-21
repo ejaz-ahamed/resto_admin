@@ -14,6 +14,7 @@ class AddImageWidget extends ConsumerWidget {
     final assets = ref.watch(appAssetsConstantsProvider);
     final constants = ref.watch(profilePageContstantsProvider);
     final appTheme = AppTheme.of(context);
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,

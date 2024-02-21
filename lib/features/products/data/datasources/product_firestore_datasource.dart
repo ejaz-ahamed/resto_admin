@@ -1,6 +1,4 @@
-import 'package:resto_admin/features/products/data/models/product_addon_model.dart';
 import 'package:resto_admin/features/products/data/models/product_model.dart';
-import 'package:resto_admin/features/products/data/models/product_type_model.dart';
 
 abstract class ProductFireStoreDataSource {
   Future<void> add(ProductModel model);
@@ -10,4 +8,5 @@ abstract class ProductFireStoreDataSource {
   Future<ProductModel> getById(String id);
   Future<void> deleteType(String id);
   Future<void> deleteAddon(String productId, String addonId);
+  Future<List<ProductModel>> search(String categoryId);
 }
