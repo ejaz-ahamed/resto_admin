@@ -39,7 +39,8 @@ class EditProductPage extends HookConsumerWidget {
       Future.delayed(
         Duration.zero,
         () {
-          ref.read(imageProvider.notifier).state = XFile(entity.imagePath);
+          ref.read(imagePickerProvider.notifier).state =
+              XFile(entity.imagePath);
           productController.text = entity.name;
           descreptionController.text = entity.description;
 
@@ -102,7 +103,7 @@ class EditProductPage extends HookConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox32Widget(),
-                ImagePickerProductWidget(imgProvider: imageProvider),
+                const ImagePickerProductWidget(),
                 SizedBox(
                   height: AppTheme.of(context).spaces.space_300,
                 ),
@@ -188,7 +189,7 @@ class EditProductPage extends HookConsumerWidget {
                 id: entity.id,
                 name: productController.text,
                 description: descreptionController.text,
-                imagePath: ref.watch(imageProvider)!.path,
+                imagePath: ref.watch(imagePickerProvider)!.path,
                 categoryId: entity.categoryId,
               );
 

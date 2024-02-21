@@ -36,6 +36,11 @@ class ProductPage extends HookConsumerWidget {
     final productTypeControllers = useState<List<ProductTypeControllers>>([]);
     final productAddonControllers = useState<List<ProductTypeControllers>>([]);
 
+    useEffect(() {
+      ref.invalidate(imagePickerProvider);
+      return null;
+    }, []);
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -50,7 +55,7 @@ class ProductPage extends HookConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox32Widget(),
-                ImagePickerProductWidget(imgProvider: imageProvider),
+                const ImagePickerProductWidget(),
                 SizedBox(
                   height: AppTheme.of(context).spaces.space_300,
                 ),
@@ -119,7 +124,7 @@ class ProductPage extends HookConsumerWidget {
                 name: productController.text,
                 categoryId: id,
                 description: descreptionController.text,
-                imagePath: ref.watch(imageProvider)!.path,
+                imagePath: ref.watch(imagePickerProvider)!.path,
               );
               context.pop();
             }),
