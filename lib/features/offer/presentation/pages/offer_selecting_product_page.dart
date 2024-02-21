@@ -17,11 +17,12 @@ import 'package:resto_admin/features/offer/presentation/provider/selected_items_
 import 'package:resto_admin/features/offer/presentation/widgets/gridview_offerpage_widget.dart';
 import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
 import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
+import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
 
 class OfferSelectingPage extends HookConsumerWidget {
   static const routePath = '/select';
-  final List<ProductEntity>? entity;
-  const OfferSelectingPage({super.key, this.entity});
+  final List<ProductEntity> entity;
+  const OfferSelectingPage({super.key, required this.entity});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -29,12 +30,16 @@ class OfferSelectingPage extends HookConsumerWidget {
     final constants = SelectingProductPageConstants();
     final selectedItems = useState<Set<String>>({});
 
-    final itemCount = ref.read(selectedItemsProvider).totalProducts;
+    final itemCount = 0;
 
     void selectall() {
       if (selectedItems.value.length < itemCount) {
-        // selectedItems.value = '0';
-        // ref.read(productProvider).map((e) => e.id).toSet();
+        // selectedItems.value = ref
+        //     .read(getAllProductsByCategoryProvider.call(entity[itemCount].id))
+        //     .asData!
+        //     .value
+        //     .map((e) => e.id)
+        //     .toSet();
       } else {
         selectedItems.value = {};
       }

@@ -21,7 +21,7 @@ final resultProvider = Provider<double>((ref) {
 final amountProvider = StateProvider<double>((ref) => 0.0);
 final amountResultProvider = Provider<double>((ref) {
   final amount = ref.watch(amountProvider);
-  double value = 90;
+  double value = 300;
   return value - amount;
 });
 
