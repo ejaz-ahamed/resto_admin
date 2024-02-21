@@ -26,28 +26,31 @@ class ViewCategoriesPage extends ConsumerWidget {
           title: data.txtManageCategories,
         ),
       ),
-      body: StreamBuilder(
-        stream: ref.read(categoryProvider.notifier).getAll(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(theme.spaces.space_300),
-                    child: SizedBox(
-                      width: theme.spaces.space_100 * 47.5,
-                      child: ViewCategoriesWidget(entity: snapshot.data!),
+      body: Builder(
+        builder: (context) {
+          return switch (ref.watch(getAllCategoryProvider)) {
+            AsyncData(:final value) => SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(theme.spaces.space_300),
+                      child: SizedBox(
+                        width: theme.spaces.space_100 * 47.5,
+                        child: ViewCategoriesWidget(entity: value),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
+            AsyncError() => const Center(
+                child: Center(
+                  child: Text('Error while getting data'),
+                ),
+              ),
+            _ => const Center(
+                child: CircularProgressIndicator(),
+              )
+          };
         },
       ),
       bottomNavigationBar: ElevatedButtonWidget(
