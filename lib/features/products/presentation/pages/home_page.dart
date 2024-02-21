@@ -75,23 +75,19 @@ class HomePage extends HookConsumerWidget {
                   height: theme.spaces.space_250,
                 ),
                 SizedBox(
-                  height: theme.spaces.space_100 * 10,
-                  child: StreamBuilder(
-                    stream: ref.read(categoryProvider.notifier).getAll(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return ListViewSeparatedWidget(
+                    height: theme.spaces.space_100 * 10,
+                    child: switch (ref.watch(getAllCategoryProvider)) {
+                      AsyncData(:final value) => ListViewSeparatedWidget(
                           clearController: searchController,
-                          entity: snapshot.data!,
-                        );
-                      } else {
-                        return const Center(
+                          entity: value,
+                        ),
+                      AsyncError() => const Center(
+                          child: Text('Error while getting data'),
+                        ),
+                      _ => const Center(
                           child: CircularProgressIndicator(),
-                        );
-                      }
-                    },
-                  ),
-                ),
+                        ),
+                    }),
                 SizedBox(
                   height: theme.spaces.space_300,
                 ),

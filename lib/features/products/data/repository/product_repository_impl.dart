@@ -199,6 +199,11 @@ class ProductRepositoryImpl implements ProductRepository {
   Future<void> deleteStorage(String fileName) async {
     await storageDataSource.delete(fileName);
   }
+
+  @override
+  Future<void> deleteAddon(String productId, String addOnId) async {
+    await dataSource.deleteAddon(productId, addOnId);
+  }
 }
 
 @riverpod
