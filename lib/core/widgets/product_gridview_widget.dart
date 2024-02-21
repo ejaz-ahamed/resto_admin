@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/core/widgets/product_loading_widget.dart';
 import 'package:resto_admin/features/products/presentation/pages/overview_items_page.dart';
 import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
 import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
@@ -58,6 +59,9 @@ class ProductGridViewWidget extends ConsumerWidget {
                             height: theme.spaces.space_500 * 3.7,
                             decoration: BoxDecoration(
                               color: theme.colors.textInverse,
+                              borderRadius: BorderRadius.circular(
+                                theme.spaces.space_100,
+                              ),
                               image: DecorationImage(
                                 image: NetworkImage(
                                   productData.imagePath,
@@ -90,7 +94,7 @@ class ProductGridViewWidget extends ConsumerWidget {
             child: Text("Error!!!, please retry"),
           ),
           loading: () => const Center(
-            child: CircularProgressIndicator(),
+            child: LoadingProductWidget(),
           ),
         );
   }
