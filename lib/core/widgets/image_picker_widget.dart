@@ -30,8 +30,39 @@ class ImagePickerWidget extends ConsumerWidget {
       imageToShow = Image.file(
         File(imagePathPicked),
         fit: BoxFit.cover,
+      );}
+
+      return InkWell(
+        onTap: () async {
+          final imageSelected =
+              await ImagePickerUtils.showDialogueForImagePicker(context);
+          ref.read(imageProvider.notifier).state = imageSelected;
+        },
+        child: Container(
+          height: AppTheme.of(context).spaces.space_500 * 6,
+          width: MediaQuery.sizeOf(context).width,
+          decoration: BoxDecoration(
+              borderRadius:
+                  BorderRadius.circular(AppTheme.of(context).spaces.space_100),
+              border: Border.all(
+                  color: AppTheme.of(context).colors.textSubtle,
+                  width: AppTheme.of(context).spaces.space_25)),
+          child: imageToShow ??
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Center(
+                    child: AddImageWidget(),
+                  ),
+                  SizedBox(
+                    height: AppTheme.of(context).spaces.space_100,
+                  ),
+                ],
+              ),
+        ),
       );
     }
+<<<<<<< HEAD
     return InkWell(
       onTap: () async {
         final imageSelected =
@@ -61,5 +92,6 @@ class ImagePickerWidget extends ConsumerWidget {
             ),
       ),
     );
+=======
+>>>>>>> ea6dee2fa44b5e844499788bd46db9db41983504
   }
-}

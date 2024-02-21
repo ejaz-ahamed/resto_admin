@@ -101,6 +101,37 @@ class ProductRepositoryImpl implements ProductRepository {
   }
 
   @override
+
+  Future<List<ProductEntity>> search(String categoryId) async {
+    final data = await dataSource.search(categoryId);
+
+    final result = [
+      for (final results in data)
+        ProductEntity(
+          name: results.name,
+          imagePath: results.imagePath,
+          description: results.description,
+          categoryId: categoryId,
+          id: results.id,
+          types: [
+            for (final type in results.types)
+              ProductTypeEntity(
+                name: type.name,
+                price: type.price,
+                id: type.id,
+              )
+          ],
+          addOns: [
+            for (final type in results.addOns)
+              ProductAddOnEntity(
+                name: type.name,
+                price: type.price,
+                id: type.id,
+              ),
+          ],
+        )
+    ];
+    return result;
   Future<void> update(ProductEntity updatedEntity) async {
     List<ProductTypeModel> typeEntity = [
       for (final type in updatedEntity.types)

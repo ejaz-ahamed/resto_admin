@@ -9,13 +9,16 @@ import 'package:resto_admin/features/orders/domain/entity/order_entity.dart';
 import 'package:resto_admin/features/orders/presentation/pages/orderview_page.dart';
 import 'package:resto_admin/features/products/domain/entities/category_entity.dart';
 import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
-import 'package:resto_admin/features/products/domain/entities/category_entity.dart';
 import 'package:resto_admin/features/products/presentation/pages/edit_category_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/add_category_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/edit_product_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/home_page.dart';
+<<<<<<< HEAD
 import 'package:resto_admin/features/products/presentation/pages/manage_categories.dart';
 
+=======
+import 'package:resto_admin/features/products/presentation/pages/manage_categories_page.dart';
+>>>>>>> ea6dee2fa44b5e844499788bd46db9db41983504
 import 'package:resto_admin/features/products/presentation/pages/overview_items_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/view_categories_page.dart';
 import 'package:resto_admin/features/profile_page/presentation/pages/edit_password_page.dart';
