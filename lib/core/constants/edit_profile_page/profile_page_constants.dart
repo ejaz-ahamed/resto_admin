@@ -15,6 +15,7 @@ class ProfilePageContstants {
   final txtConfirmPassword = 'Confirm password';
   final txtCamera = 'Camera';
   final txtGallery = 'Gallery';
+  final txtDelete = 'Delete';
 }
 
 @riverpod

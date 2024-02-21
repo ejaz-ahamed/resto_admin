@@ -41,16 +41,14 @@ class ProductFirestoreDataSourceImpl implements ProductFireStoreDataSource {
     ];
   }
 
+
   @override
   Future<ProductModel> getById(String id) async {
     final data = await collection.doc(id).get();
     return data.data()!;
   }
 
-  @override
-  Future<void> update(ProductModel updatedModel) async {
-    await collection.doc(updatedModel.id).set(updatedModel);
-  }
+ 
 
   @override
   Future<void> deleteAddon(String productId, String addonId) async {
@@ -66,8 +64,12 @@ class ProductFirestoreDataSourceImpl implements ProductFireStoreDataSource {
 
   @override
   Future<void> deleteType(String id) async {}
+  
+  @override
+  Future<void> update(ProductModel updatedModel) async{
+    await collection.doc(updatedModel.id).set(updatedModel);
+  }
 }
-
 @riverpod
 ProductFireStoreDataSource productFireStoreDataSource(
     ProductFireStoreDataSourceRef ref) {
