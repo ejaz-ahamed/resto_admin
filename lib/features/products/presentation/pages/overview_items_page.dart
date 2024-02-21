@@ -83,7 +83,7 @@ class OverViewItemsPage extends HookConsumerWidget {
                     itemBuilder: (context, index) {
                       return ColumnWidget(
                           name: entity.types[index].name,
-                          price: entity.types[index].price);
+                          price: entity.types[index].price.toString());
                     },
                   ),
                 ),
@@ -97,7 +97,7 @@ class OverViewItemsPage extends HookConsumerWidget {
                     itemBuilder: (context, index) {
                       return ColumnWidget(
                           name: entity.addOns[index].name,
-                          price: entity.addOns[index].price);
+                          price: entity.addOns[index].price.toString());
                     },
                   ),
                 ),

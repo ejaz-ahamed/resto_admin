@@ -5,6 +5,7 @@ import 'package:resto_admin/features/orders/domain/usecase/get_order_usecase.dar
 import 'package:resto_admin/features/orders/domain/usecase/get_products_by_id_usecase.dart';
 import 'package:resto_admin/features/orders/domain/usecase/update_type_usecase.dart';
 import 'package:resto_admin/features/orders/presentation/providers/order_state_provider.dart';
+import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'order_provider.g.dart';
 
@@ -13,6 +14,7 @@ class Order extends _$Order {
   late OrderRepository repository;
   @override
   OrderproviderState build() {
+    // final results=Future.wait([]);
     return OrderproviderState(
       orders: GetOrderUsecase(repository: ref.watch(orderRepositoryProvider))(
           OrderStatus.order),
@@ -31,8 +33,8 @@ class Order extends _$Order {
         orderId, newStatus);
   }
 
-  Stream<void> getProductById(String id) async*{
-    yield GetProductByIdUsecase(repository: ref.watch(orderRepositoryProvider))(
-        id);
+  Stream<ProductEntity> getProductById(String productId) async*{
+    yield* GetProductByIdUsecase(repository: ref.watch(orderRepositoryProvider))(
+        productId);
   }
 }
