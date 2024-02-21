@@ -7,9 +7,7 @@ import 'package:resto_admin/features/products/data/datasources/product_storage_d
 import 'package:resto_admin/features/products/data/models/product_addon_model.dart';
 import 'package:resto_admin/features/products/data/models/product_model.dart';
 import 'package:resto_admin/features/products/data/models/product_type_model.dart';
-import 'package:resto_admin/features/products/domain/entities/product_addon_entity.dart';
 import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
-import 'package:resto_admin/features/products/domain/entities/product_type_entity.dart';
 import 'package:resto_admin/features/products/domain/repository/product_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

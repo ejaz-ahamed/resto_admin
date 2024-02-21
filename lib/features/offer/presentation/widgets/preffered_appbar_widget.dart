@@ -5,17 +5,25 @@ import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/widgets/text_button_widget.dart';
+import 'package:resto_admin/features/offer/domain/entity/offer_entity.dart';
+import 'package:resto_admin/features/offer/presentation/provider/offer_provider.dart';
 
 class PreferredAppBarWidget extends ConsumerWidget {
   final String title;
   final String btnText;
-  const PreferredAppBarWidget(
-      {super.key, required this.title, required this.btnText});
+  final OfferEntity entity;
+  const PreferredAppBarWidget({
+    super.key,
+    required this.title,
+    required this.btnText,
+    required this.entity,
+  });
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     AppAssetsConstants iconConst = AppAssetsConstants();
     final appTheme = AppTheme.of(context);
     return AppBar(
+      backgroundColor: appTheme.colors.secondary,
       automaticallyImplyLeading: false,
       scrolledUnderElevation: 0,
       titleSpacing: appTheme.spaces.space_300,
@@ -42,7 +50,10 @@ class PreferredAppBarWidget extends ConsumerWidget {
         Padding(
           padding: EdgeInsets.only(right: appTheme.spaces.space_300),
           child: TextButtonWidget(
-              onTap: () {},
+              onTap: () {
+                ref.read(offerProvider.notifier).remove(id: entity.id);
+                context.pop();
+              },
               buttonText: btnText,
               color: appTheme.colors.primary),
         ),

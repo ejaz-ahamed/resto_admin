@@ -10,17 +10,15 @@ final imageProvider = StateProvider<XFile?>((ref) {
   return null;
 });
 
-class ImagePickerWidget extends ConsumerWidget {
+class ImagePickerOfferWidget extends ConsumerWidget {
   final StateProvider<XFile?> imgProvider;
-  const ImagePickerWidget({super.key, required this.imgProvider});
+  const ImagePickerOfferWidget({super.key, required this.imgProvider});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    /// Path of the image picked
     final imagePathPicked = ref.watch(imageProvider)?.path;
 
     /// Image to show if the image is already picked
     Widget? imageToShow;
-
     if (imagePathPicked != null && imagePathPicked.startsWith('http')) {
       imageToShow = Image.network(
         imagePathPicked,
@@ -29,9 +27,9 @@ class ImagePickerWidget extends ConsumerWidget {
     } else if (imagePathPicked != null) {
       imageToShow = Image.file(
         File(imagePathPicked),
-        fit: BoxFit.cover,
+        fit: BoxFit.fill,
       );
-  
+    }
     return InkWell(
       onTap: () async {
         final imageSelected =
