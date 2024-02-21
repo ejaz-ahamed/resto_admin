@@ -8,19 +8,14 @@ import 'package:resto_admin/core/constants/offer_constants/selecting_product_con
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
-<<<<<<< HEAD
 import 'package:resto_admin/core/widgets/listview_separated_widget.dart';
 
-=======
->>>>>>> 1738730479db985a3822689420d912403275d452
 import 'package:resto_admin/core/widgets/sized_box_8_widget.dart';
 import 'package:resto_admin/features/offer/presentation/pages/edit_offer_page.dart';
 import 'package:resto_admin/features/offer/presentation/provider/selected_items_provider.dart';
 
 import 'package:resto_admin/features/offer/presentation/widgets/gridview_offerpage_widget.dart';
-
 import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
-import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
 
 class OfferSelectingPage extends HookConsumerWidget {
   static const routePath = '/select';
@@ -36,12 +31,14 @@ class OfferSelectingPage extends HookConsumerWidget {
 
     void selectall() {
       if (selectedItems.value.length < itemCount) {
-        selectedItems.value =
-            ref.read(productProvider).map((e) => e.id).toSet();
+        // selectedItems.value = '0';
+        // ref.read(productProvider).map((e) => e.id).toSet();
       } else {
         selectedItems.value = {};
       }
     }
+
+    final searchController = useTextEditingController();
 
     return Scaffold(
       backgroundColor: theme.colors.secondary,
@@ -76,22 +73,19 @@ class OfferSelectingPage extends HookConsumerWidget {
               ),
               const SizedBox8Widget(),
               SizedBox(
-                height: theme.spaces.space_100 * 10,
-                child: StreamBuilder(
-                  stream: ref.read(categoryProvider.notifier).getAll(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return ListViewSeparatedWidget(
-                        entity: snapshot.data!,
-                      );
-                    } else {
-                      return const Center(
+                  height: theme.spaces.space_100 * 10,
+                  child: switch (ref.watch(getAllCategoryProvider)) {
+                    AsyncData(:final value) => ListViewSeparatedWidget(
+                        clearController: searchController,
+                        entity: value,
+                      ),
+                    AsyncError() => const Center(
+                        child: Text('Error while getting data'),
+                      ),
+                    _ => const Center(
                         child: CircularProgressIndicator(),
-                      );
-                    }
-                  },
-                ),
-              ),
+                      ),
+                  }),
               SizedBox(
                   child: Stack(children: [
                 GridViewOfferPageWidget(selectedItems: selectedItems),
