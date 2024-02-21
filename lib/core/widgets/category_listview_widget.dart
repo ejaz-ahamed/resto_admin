@@ -6,11 +6,11 @@ import 'package:resto_admin/features/products/domain/entities/category_entity.da
 import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
 import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
 
-class ListViewSeparatedWidget extends HookConsumerWidget {
+class CategoryListViewWidget extends HookConsumerWidget {
   final List<CategoryEntity> entity;
   final TextEditingController? clearController;
 
-  const ListViewSeparatedWidget({
+  const CategoryListViewWidget({
     super.key,
     required this.entity,
     this.clearController,
