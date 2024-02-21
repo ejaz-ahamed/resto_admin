@@ -22,7 +22,7 @@ class ProductTypeWidget extends HookConsumerWidget {
   final TextStyle? style;
   final ValueNotifier<List<ProductTypeControllers>> productTypes;
   final String btntxt;
-  final void Function()? onTap;
+  final void Function(int) onTap;
 
   const ProductTypeWidget({
     super.key,
@@ -51,7 +51,7 @@ class ProductTypeWidget extends HookConsumerWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        for (final productType in productTypes.value)
+        for (var i = 0; i < productTypes.value.length; i++)
           Padding(
             padding: EdgeInsets.only(top: apptheme.spaces.space_200),
             child: Row(
@@ -60,7 +60,7 @@ class ProductTypeWidget extends HookConsumerWidget {
                 Expanded(
                   child: EditFieldWidget(
                     hintText: hint,
-                    controller: productType.nameController,
+                    controller: productTypes.value[i].nameController,
                     onChanged: null,
                     style: style,
                   ),
@@ -68,17 +68,16 @@ class ProductTypeWidget extends HookConsumerWidget {
                 Expanded(
                   child: EditFieldWidget(
                     hintText: ref.watch(productConstantsProvider).txtPrice,
-                    controller: productType.priceController,
+                    controller: productTypes.value[i].priceController,
                     isPrice: true,
                     style: style,
-                    onChanged: (value) {},
                   ),
                 ),
                 SizedBox(
                   width: apptheme.spaces.space_100,
                 ),
                 InkWell(
-                  onTap: onTap,
+                  onTap: () => onTap(i),
                   child: SvgPicture.asset(appAssetsConstants.icRemove),
                 )
               ],
