@@ -7,7 +7,9 @@ import 'package:resto_admin/features/products/data/datasources/product_storage_d
 import 'package:resto_admin/features/products/data/models/product_addon_model.dart';
 import 'package:resto_admin/features/products/data/models/product_model.dart';
 import 'package:resto_admin/features/products/data/models/product_type_model.dart';
+import 'package:resto_admin/features/products/domain/entities/product_addon_entity.dart';
 import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
+import 'package:resto_admin/features/products/domain/entities/product_type_entity.dart';
 import 'package:resto_admin/features/products/domain/repository/product_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -99,6 +101,37 @@ class ProductRepositoryImpl implements ProductRepository {
   }
 
   @override
+
+  Future<List<ProductEntity>> search(String categoryId) async {
+    final data = await dataSource.search(categoryId);
+
+    final result = [
+      for (final results in data)
+        ProductEntity(
+          name: results.name,
+          imagePath: results.imagePath,
+          description: results.description,
+          categoryId: categoryId,
+          id: results.id,
+          types: [
+            for (final type in results.types)
+              ProductTypeEntity(
+                name: type.name,
+                price: type.price,
+                id: type.id,
+              )
+          ],
+          addOns: [
+            for (final type in results.addOns)
+              ProductAddOnEntity(
+                name: type.name,
+                price: type.price,
+                id: type.id,
+              ),
+          ],
+        )
+    ];
+    return result;
   Future<void> update(ProductEntity updatedEntity) async {
     List<ProductTypeModel> typeEntity = [
       for (final type in updatedEntity.types)

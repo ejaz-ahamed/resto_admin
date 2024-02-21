@@ -13,7 +13,6 @@ Future<void> main() async {
   );
 
   await FirebaseFirestore.instance.clearPersistence();
-
   runApp(const ProviderScope(child: MyApp()));
 }
 
