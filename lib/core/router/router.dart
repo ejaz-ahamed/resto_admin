@@ -67,7 +67,7 @@ final router = GoRouter(
       path: OrderViewPage.routePath,
       builder: (context, state) => OrderViewPage(
         entity: state.extra as OrderEntity,
-        productEntity: state.extra as ProductEntity,
+        // productEntity: state.extra as ProductEntity,
       ),
     ),
     GoRoute(
@@ -107,8 +107,9 @@ final router = GoRouter(
     ),
     GoRoute(
       path: EditProductPage.routePath,
-      builder: (context, state) =>
-          EditProductPage(entity: state.extra as ProductEntity),
+      builder: (context, state) => EditProductPage(
+        entity: state.extra as ProductEntity,
+      ),
     ),
   ],
 );

@@ -7,9 +7,11 @@ import 'package:resto_admin/features/products/domain/entities/product_entity.dar
 
 class ItemsDetailsListviewDetails extends ConsumerWidget {
   final List<OrderEntity> entity;
-  final List<ProductEntity> productEntity;
+  // final List<ProductEntity> productEntity;
   const ItemsDetailsListviewDetails(
-      {super.key, required this.entity, required this.productEntity});
+      {super.key, required this.entity,
+      //  required this.productEntity,
+       });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,7 +24,7 @@ class ItemsDetailsListviewDetails extends ConsumerWidget {
         itemCount: entity.length,
         itemBuilder: (context, index) {
           final data = entity[index].items[index];
-          final productData = productEntity[index].types[index];
+          // final productData = productEntity[index].types[index];
           return Padding(
             padding:
                 EdgeInsets.symmetric(horizontal: appTheme.spaces.space_300),
@@ -31,15 +33,15 @@ class ItemsDetailsListviewDetails extends ConsumerWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  TextRegularWidget(text: productData.name),
+                  TextRegularWidget(text: data.type),
                   SizedBox(
                     width: appTheme.spaces.space_500 * 4.7,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        TextRegularWidget(text: data.productId!),
+                        TextRegularWidget(text: data.type),
                         TextRegularWidget(text: data.quantity.toString()),
-                        TextRegularWidget(text: productData.price),
+                        TextRegularWidget(text: data.quantity.toString()),
                       ],
                     ),
                   ),

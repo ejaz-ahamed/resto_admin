@@ -101,7 +101,6 @@ class ProductRepositoryImpl implements ProductRepository {
   }
 
   @override
-
   Future<List<ProductEntity>> search(String categoryId) async {
     final data = await dataSource.search(categoryId);
 
@@ -132,6 +131,9 @@ class ProductRepositoryImpl implements ProductRepository {
         )
     ];
     return result;
+  }
+
+  @override
   Future<void> update(ProductEntity updatedEntity) async {
     List<ProductTypeModel> typeEntity = [
       for (final type in updatedEntity.types)
@@ -197,6 +199,11 @@ class ProductRepositoryImpl implements ProductRepository {
   Future<void> deleteStorage(String fileName) async {
     await storageDataSource.delete(fileName);
   }
+
+  @override
+  Future<void> deleteAddon(String productId, String addOnId) async {
+    await dataSource.deleteAddon(productId, addOnId);
+  }
 }
 
 @riverpod
@@ -205,5 +212,4 @@ ProductRepository productRepository(ProductRepositoryRef ref) {
     storageDataSource: ref.watch(productStorageDataSourceProvider),
     dataSource: ref.watch(productFireStoreDataSourceProvider),
   );
-}
 }

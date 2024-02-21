@@ -20,10 +20,11 @@ import 'package:resto_admin/features/products/domain/entities/product_entity.dar
 class OrderViewPage extends ConsumerWidget {
   static const routePath = '/orderviewpage';
   final OrderEntity entity;
-  final ProductEntity productEntity;
+  // final ProductEntity productEntity;
   // final String buttonName;
   const OrderViewPage(
-      {super.key, required this.entity, required this.productEntity
+      {super.key, required this.entity, 
+      // required this.productEntity
       // required this.buttonName,
       });
 
@@ -56,7 +57,7 @@ class OrderViewPage extends ConsumerWidget {
             const ItemDetailsWidget(),
             ItemsDetailsListviewDetails(
               entity: [entity],
-              productEntity: [productEntity],
+              // productEntity: [productEntity],
             ),
             const TotalRowWidget(),
           ],
