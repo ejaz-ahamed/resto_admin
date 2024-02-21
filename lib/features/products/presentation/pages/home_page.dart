@@ -7,7 +7,6 @@ import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/loading_category_widget.dart';
 import 'package:resto_admin/core/widgets/category_listview_separated_widget.dart';
 import 'package:resto_admin/core/widgets/product_gridview_widget.dart';
-import 'package:resto_admin/core/widgets/product_loading_widget.dart';
 import 'package:resto_admin/features/products/presentation/pages/product_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/view_categories_page.dart';
 import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
