@@ -11,4 +11,5 @@ abstract class ProductRepository {
   Future<List<ProductEntity>> search(String categoryId);
   Future<ProductEntity> getById(String id);
   Future<void> deleteStorage(String fileName);
+  Future<void> deleteAddon(String productId, String addOnId);
 }

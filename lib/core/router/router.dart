@@ -110,8 +110,9 @@ final router = GoRouter(
     ),
     GoRoute(
       path: EditProductPage.routePath,
-      builder: (context, state) =>
-          EditProductPage(entity: state.extra as ProductEntity),
+      builder: (context, state) => EditProductPage(
+        entity: state.extra as ProductEntity,
+      ),
     ),
   ],
 );
