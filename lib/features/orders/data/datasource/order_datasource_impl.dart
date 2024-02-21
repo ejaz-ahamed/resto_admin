@@ -21,7 +21,6 @@ class OrderFirestoreDataSourceImpl implements OrderFirestoreDataSource {
 
   @override
   Future<OrderModel> update(String orderId, OrderType orderType) {
-    // TODO: implement update
     throw UnimplementedError();
   }
 }

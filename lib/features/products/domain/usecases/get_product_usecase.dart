@@ -1,10 +1,8 @@
 import 'package:resto_admin/core/exceptions/base_exception/base_exception.dart';
 import 'package:resto_admin/core/utils/firebase_storage_utils.dart';
-import 'package:resto_admin/features/products/domain/entities/category_entity.dart';
 import 'package:resto_admin/features/products/domain/entities/product_addon_entity.dart';
 import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
 import 'package:resto_admin/features/products/domain/entities/product_type_entity.dart';
-import 'package:resto_admin/features/products/domain/repository/category_repository.dart';
 import 'package:resto_admin/features/products/domain/repository/product_repository.dart';
 
 final class GetAllProductsUseCase {
@@ -34,7 +32,7 @@ final class GetAllProductsUseCase {
                   )
               ],
               addOns: [
-                for (final add in product.types)
+                for (final add in product.addOns)
                   ProductAddOnEntity(
                     name: add.name,
                     price: add.price,

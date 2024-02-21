@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -10,6 +12,7 @@ part 'product_model.freezed.dart';
 class ProductModel with _$ProductModel {
   const ProductModel._();
 
+  // ignore: invalid_annotation_target
   @JsonSerializable(explicitToJson: true)
   factory ProductModel({
     required String id,
