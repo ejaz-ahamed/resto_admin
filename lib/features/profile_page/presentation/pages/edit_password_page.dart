@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:resto_admin/core/constants/edit_profile_page/profile_page_constants.dart';
+import 'package:resto_admin/core/constants/profile_page/profile_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
@@ -19,8 +19,8 @@ class EditPasswordPage extends HookConsumerWidget {
     final currentPasswordController = useTextEditingController();
     final newPasswordController = useTextEditingController();
     final confirmPasswordController = useTextEditingController();
-    final constants = ref.watch(profilePageContstantsProvider);
-    final hintText = ref.watch(profilePageContstantsProvider).txtHintenterHere;
+    final constants = ref.watch(profilePageConstantsProvider);
+    final hintText = ref.watch(profilePageConstantsProvider).txtHintenterHere;
     final appTheme = AppTheme.of(context);
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
@@ -38,16 +38,19 @@ class EditPasswordPage extends HookConsumerWidget {
           child: Column(
             children: [
               TextFieldWidget(
+                enabled: true,
                   textFieldTitle: constants.txtCurrentPassword,
                   hintText: hintText,
                   controller: currentPasswordController),
               const SizedBox32Widget(),
               TextFieldWidget(
+                enabled: true,
                   textFieldTitle: constants.txtNewPassword,
                   hintText: hintText,
                   controller: newPasswordController),
               const SizedBox32Widget(),
               TextFieldWidget(
+                enabled: true,
                   textFieldTitle: constants.txtConfirmPassword,
                   hintText: hintText,
                   controller: confirmPasswordController),

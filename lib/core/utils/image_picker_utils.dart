@@ -1,8 +1,9 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:resto_admin/core/constants/edit_profile_page/profile_page_constants.dart';
+import 'package:resto_admin/core/constants/profile_page/profile_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/utils/snack_bar_utils.dart';
 
@@ -33,8 +34,9 @@ class ImagePickerUtils {
     }
   }
 
-  static void showDialogueForImagePicker(BuildContext context) {
-    showDialog(
+  static Future<XFile?> showDialogueForImagePicker(BuildContext context) async {
+    final imageCompleter = Completer<XFile?>();
+    await showDialog(
       context: context,
       builder: (context) => AlertDialog(
           backgroundColor: AppTheme.of(context).colors.secondary,
@@ -42,26 +44,31 @@ class ImagePickerUtils {
             builder: (context, ref, child) => Column(
               children: [
                 TextButton(
-                    onPressed: () {
-                      ImagePickerUtils.pickImageFromCamera(context);
-                      context.pop();
+                    onPressed: () async {
+                      imageCompleter.complete(
+                          await ImagePickerUtils.pickImageFromCamera(context));
+                      Future.sync(() => context.pop());
                     },
                     child: Text(
-                      ref.watch(profilePageContstantsProvider).txtCamera,
+                      ref.watch(profilePageConstantsProvider).txtCamera,
                       style: AppTheme.of(context).typography.h500,
                     )),
                 TextButton(
-                    onPressed: () {
-                      ImagePickerUtils.pickImageFromGallery(context);
-                      context.pop();
+                    onPressed: () async {
+                      imageCompleter.complete(
+                        await ImagePickerUtils.pickImageFromGallery(context),
+                      );
+                      Future.sync(() => context.pop());
                     },
                     child: Text(
-                      ref.watch(profilePageContstantsProvider).txtGallery,
+                      ref.watch(profilePageConstantsProvider).txtGallery,
                       style: AppTheme.of(context).typography.h500,
                     )),
               ],
             ),
           )),
     );
+    final imageSelected = await (imageCompleter.future);
+    return imageSelected;
   }
 }
