@@ -66,6 +66,8 @@ class EditProfilePage extends HookConsumerWidget {
                         }
                       },
                       child: const SelectOpeningTimeWidget(),
+
+                      
                     ),
                     const SizedBox24Widget(),
                     InkWell(
@@ -81,7 +83,6 @@ class EditProfilePage extends HookConsumerWidget {
                     ),
                   ],
                 ),
-
               ],
             ),
           ),

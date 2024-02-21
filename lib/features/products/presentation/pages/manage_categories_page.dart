@@ -27,8 +27,12 @@ class ManageCategoriesPage extends HookConsumerWidget {
 
     void selectAll() {
       if (selectedItems.value.length < itemCount) {
-        selectedItems.value =
-            ref.read(categoryProvider).categories.map((e) => e.id).toSet();
+        selectedItems.value = ref
+            .read(getAllCategoryProvider)
+            .asData!
+            .value
+            .map((e) => e.id)
+            .toSet();
       } else {
         selectedItems.value = {};
       }

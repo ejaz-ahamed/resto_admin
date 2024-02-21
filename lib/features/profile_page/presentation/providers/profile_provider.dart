@@ -36,4 +36,3 @@ final openingTimeProvider = StateProvider<TimeOfDay>((ref) {
 final closingTimeProvider = StateProvider<TimeOfDay>((ref) {
   return TimeOfDay.now();
 });
- 

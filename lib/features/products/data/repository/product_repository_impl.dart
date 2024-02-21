@@ -133,38 +133,9 @@ class ProductRepositoryImpl implements ProductRepository {
     return result;
   }
 
-  
-
   @override
-  Future<ProductEntity> getById(String id) async {
-    final doc = await dataSource.getById(id);
-    return ProductEntity(
-        name: doc.name,
-        imagePath: doc.imagePath,
-        description: doc.description,
-        categoryId: doc.categoryId,
-        id: doc.id,
-        types: [
-          for (final i in doc.types)
-            ProductTypeEntity(
-              name: i.name,
-              price: i.price,
-              id: i.id,
-            )
-        ],
-        addOns: [
-          for (final j in doc.addOns)
-            ProductAddOnEntity(
-              name: j.name,
-              id: j.id,
-              price: j.price,
-            )
-        ]);
-  }
-
-  @override
-  Future<void> update(ProductEntity updatedEntity)async {
-   List<ProductTypeModel> typeEntity = [
+  Future<void> update(ProductEntity updatedEntity) async {
+    List<ProductTypeModel> typeEntity = [
       for (final type in updatedEntity.types)
         ProductTypeModel(name: type.name, price: type.price, id: type.id)
     ];
@@ -196,11 +167,43 @@ class ProductRepositoryImpl implements ProductRepository {
       ],
     ));
   }
+
+  @override
+  Future<ProductEntity> getById(String id) async {
+    final doc = await dataSource.getById(id);
+    return ProductEntity(
+        name: doc.name,
+        imagePath: doc.imagePath,
+        description: doc.description,
+        categoryId: doc.categoryId,
+        id: doc.id,
+        types: [
+          for (final i in doc.types)
+            ProductTypeEntity(
+              name: i.name,
+              price: i.price,
+              id: i.id,
+            )
+        ],
+        addOns: [
+          for (final j in doc.addOns)
+            ProductAddOnEntity(
+              name: j.name,
+              id: j.id,
+              price: j.price,
+            )
+        ]);
+  }
+
   @override
   Future<void> deleteStorage(String fileName) async {
     await storageDataSource.delete(fileName);
   }
-  
+
+  @override
+  Future<void> deleteAddon(String productId, String addOnId) async {
+    await dataSource.deleteAddon(productId, addOnId);
+  }
 }
 
 @riverpod
