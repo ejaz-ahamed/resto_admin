@@ -19,7 +19,6 @@ class Category extends _$Category {
     repository = ref.read(categoryRepositoryProvider);
 
     return CategoryProviderState(
-      categories: [],
       selectedCategory: '',
     );
   }
@@ -52,17 +51,14 @@ class Category extends _$Category {
     state = state.copyWith(selectedCategory: id);
   }
 
-  Stream<List<CategoryEntity>> getAll() async* {
-    final stream = GetAllCategoryUseCase(repository: repository)();
-    await for (final categories in stream) {
-      state = state.copyWith(categories: categories);
-      yield categories;
-    }
-  }
-
   Future<void> deleteMany({required List<String> docIdsToDelete}) async {
     await DeleteManyCategoryUseCase(repository: repository)(
         docIdsToDelete: docIdsToDelete);
   }
 }
 
+@riverpod
+Stream<List<CategoryEntity>> getAllCategory(GetAllCategoryRef ref) {
+  final repository = ref.read(categoryRepositoryProvider);
+  return GetAllCategoryUseCase(repository: repository)();
+}

@@ -43,33 +43,22 @@ class OfferPage extends ConsumerWidget {
           ),
         ],
       ),
-      body: StreamBuilder(
-        stream: ref.read(offerProvider.notifier).getAll(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return Padding(
-              padding: EdgeInsets.only(top: spaces.space_400),
-              child: SizedBox(
-                child: OfferBannerWidget(
-                  entity: snapshot.data!,
-                ),
+      body: switch (ref.watch(getAllOffersProvider)) {
+        AsyncData(:final value) => Padding(
+            padding: EdgeInsets.only(top: spaces.space_400),
+            child: SizedBox(
+              child: OfferBannerWidget(
+                entity: value,
               ),
-            );
-          } else if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (snapshot.hasError) {
-            return Center(
-              child: Text(snapshot.error.toString()),
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-        },
-      ),
+            ),
+          ),
+        AsyncError() => const Center(
+            child: Text('Error while getting data'),
+          ),
+        _ => const Center(
+            child: CircularProgressIndicator(),
+          )
+      },
     );
   }
 }

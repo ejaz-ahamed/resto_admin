@@ -22,7 +22,10 @@ import 'package:resto_admin/features/products/presentation/widgets/product_type_
 class EditProductPage extends HookConsumerWidget {
   static const routePath = '/editProducts';
   final ProductEntity entity;
-  const EditProductPage({super.key, required this.entity});
+  const EditProductPage({
+    super.key,
+    required this.entity,
+  });
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);
@@ -121,6 +124,7 @@ class EditProductPage extends HookConsumerWidget {
                 ),
                 const SizedBox24Widget(),
                 ProductTypeWidget(
+                  onTap: () {},
                   btntxt: data.txtType,
                   style: apptheme.typography.h400
                       .copyWith(color: apptheme.colors.textDisabled),
@@ -129,16 +133,29 @@ class EditProductPage extends HookConsumerWidget {
                 ),
                 const SizedBox32Widget(),
                 HeadingWidget(
-                  
                   text: data.txtAddOns,
                 ),
                 const SizedBox24Widget(),
-                ProductTypeWidget(
-                  btntxt: data.txtAddOns,
-                  productTypes: productAddonControllers,
-                  style: apptheme.typography.h400
-                      .copyWith(color: apptheme.colors.textDisabled),
-                  hint: constants.txtAddOns,
+                SizedBox(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: 1,
+                    itemBuilder: (context, index) {
+                      return ProductTypeWidget(
+                        onTap: () {
+                          ref.read(productProvider.notifier).deleteAddOn(
+                                entity.id,
+                                entity.addOns[index].id,
+                              );
+                        },
+                        btntxt: data.txtAddOns,
+                        productTypes: productAddonControllers,
+                        style: apptheme.typography.h400
+                            .copyWith(color: apptheme.colors.textDisabled),
+                        hint: constants.txtAddOns,
+                      );
+                    },
+                  ),
                 ),
                 const SizedBox24Widget(),
               ],

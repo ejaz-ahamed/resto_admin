@@ -11,11 +11,8 @@ part 'offer_provider.g.dart';
 
 @riverpod
 class Offer extends _$Offer {
-  // late OfferRepository repository;
   @override
-  List<OfferEntity>? build() {
-    return null;
-  }
+  void build() {}
 
   Future<void> addOffer({
     required String id,
@@ -35,11 +32,6 @@ class Offer extends _$Offer {
         amount: amount,
         offerType: offerType,
         product: product = []);
-  }
-
-  Stream<List<OfferEntity>> getAll() {
-    final repository = ref.watch(offerRepositoryProvider);
-    return GetOfferUseCase(repository: repository)();
   }
 
   Future<void> remove({required String id}) async {
@@ -65,11 +57,13 @@ class Offer extends _$Offer {
         amount: amount,
         offerType: offerType,
         product: product = []);
-  }  
+  }
+
+  getAll() {}
 }
 
-
-
-
-
-
+@riverpod
+Stream<List<OfferEntity>> getAllOffers(GetAllOffersRef ref) {
+  final repository = ref.read(offerRepositoryProvider);
+  return GetOfferUseCase(repository: repository)();
+}
