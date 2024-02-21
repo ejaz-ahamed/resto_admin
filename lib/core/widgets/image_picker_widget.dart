@@ -15,6 +15,7 @@ class ImagePickerWidget extends ConsumerWidget {
   const ImagePickerWidget({super.key, required this.imgProvider});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
     /// Path of the image picked
     final imagePathPicked = ref.watch(imageProvider)?.path;
 
