@@ -7,12 +7,17 @@ class TextFieldWidget extends ConsumerWidget {
   final String hintText;
   final TextEditingController controller;
   final int? maxLines;
+  final bool enabled;
+  final bool expands;
+
   const TextFieldWidget({
     super.key,
+    required this.enabled,
     required this.textFieldTitle,
     required this.hintText,
     required this.controller,
-    this.maxLines = 1,
+    this.maxLines,
+    this.expands = false,
   });
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,18 +27,26 @@ class TextFieldWidget extends ConsumerWidget {
       children: [
         Text(
           textFieldTitle,
-          style: apptheme.typography.h400,
+          style: apptheme.typography.h600,
+        ),
+        SizedBox(
+          height: AppTheme.of(context).spaces.space_100,
         ),
         TextField(
+          enabled: enabled,
           style: apptheme.typography.h300,
           controller: controller,
           maxLines: maxLines,
+          expands: expands,
           decoration: InputDecoration(
               contentPadding: const EdgeInsets.all(0),
               hintText: hintText,
               hintStyle: apptheme.typography.h300
                   .copyWith(color: apptheme.colors.textSubtlest),
               border: const OutlineInputBorder(borderSide: BorderSide.none)),
+        ),
+        SizedBox(
+          height: AppTheme.of(context).spaces.space_200,
         ),
       ],
     );

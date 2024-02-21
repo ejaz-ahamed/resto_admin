@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:resto_admin/features/products/data/datasources/product_firestore_datasource.dart';
 import 'package:resto_admin/features/products/data/models/product_model.dart';
@@ -15,7 +13,6 @@ class ProductFirestoreDataSourceImpl implements ProductFireStoreDataSource {
           toFirestore: (model, _) => model.toFirestore());
   @override
   Future<void> add(ProductModel model) async {
-    print(jsonEncode(model.toJson()));
     await collection.doc(model.name).set(model);
   }
 
@@ -23,6 +20,52 @@ class ProductFirestoreDataSourceImpl implements ProductFireStoreDataSource {
   Future<void> remove(String id) async {
     return await collection.doc(id).delete();
   }
+
+  @override
+  Stream<List<ProductModel>> getAll(String categoryId) async* {
+    final productSteame =
+        collection.where('categoryId', isEqualTo: categoryId).snapshots();
+    await for (final products in productSteame) {
+      yield [
+        for (final product in products.docs) product.data(),
+      ];
+    }
+  }
+
+  @override
+  Future<List<ProductModel>> search(String categoryId) async {
+    final searchedProducts =
+        await collection.where('categoryId', isEqualTo: categoryId).get();
+    return [
+      for (final product in searchedProducts.docs) product.data(),
+    ];
+  }
+
+  @override
+  Future<ProductModel> getById(String id) async {
+    final data = await collection.doc(id).get();
+    return data.data()!;
+  }
+
+  @override
+  Future<void> update(ProductModel updatedModel) async {
+    await collection.doc(updatedModel.id).set(updatedModel);
+  }
+
+  @override
+  Future<void> deleteAddon(String productId, String addonId) async {
+    final data = await collection.doc(productId).get();
+    final update = <String, dynamic>{
+      'addOns': [
+        for (final addon in data.data()!.addOns)
+          if (addon.id != addonId) addon.toFirestore()
+      ],
+    };
+    await collection.doc(productId).update(update);
+  }
+
+  @override
+  Future<void> deleteType(String id) async {}
 }
 
 @riverpod

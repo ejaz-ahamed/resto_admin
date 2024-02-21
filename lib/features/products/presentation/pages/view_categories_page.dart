@@ -6,6 +6,7 @@ import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/features/products/presentation/pages/add_category_page.dart';
+import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
 import 'package:resto_admin/features/products/presentation/widgets/view_category_widget.dart';
 
 class ViewCategoriesPage extends ConsumerWidget {
@@ -25,18 +26,32 @@ class ViewCategoriesPage extends ConsumerWidget {
           title: data.txtManageCategories,
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(theme.spaces.space_300),
-              child: SizedBox(
-                width: theme.spaces.space_100 * 47.5,
-                child: const ViewCategoriesWidget(),
+      body: Builder(
+        builder: (context) {
+          return switch (ref.watch(getAllCategoryProvider)) {
+            AsyncData(:final value) => SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(theme.spaces.space_300),
+                      child: SizedBox(
+                        width: theme.spaces.space_100 * 47.5,
+                        child: ViewCategoriesWidget(entity: value),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
+            AsyncError() => const Center(
+                child: Center(
+                  child: Text('Error while getting data'),
+                ),
+              ),
+            _ => const Center(
+                child: CircularProgressIndicator(),
+              )
+          };
+        },
       ),
       bottomNavigationBar: ElevatedButtonWidget(
         text: data.txtAddCategory,

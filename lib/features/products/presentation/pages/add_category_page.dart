@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -12,7 +10,6 @@ import 'package:resto_admin/core/widgets/image_picker_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
-import 'package:resto_admin/features/products/presentation/pages/view_categories_page.dart';
 import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
 
 class AddCategoryPage extends HookConsumerWidget {
@@ -39,12 +36,12 @@ class AddCategoryPage extends HookConsumerWidget {
               ImagePickerWidget(imgProvider: imageProvider),
               const SizedBox24Widget(),
               TextFieldWidget(
+                enabled: true,
                   textFieldTitle: data.txtCategory,
                   hintText: data.txtHintProduct,
                   controller: categoryContoller)
             ],
           ),
-
         ),
         bottomNavigationBar: ElevatedButtonWidget(
             text: data.txtSaveBtn,
@@ -53,7 +50,8 @@ class AddCategoryPage extends HookConsumerWidget {
                   id: '',
                   imagePath: ref.watch(imageProvider)!.path,
                   name: categoryContoller.text);
-              context.go(ViewCategoriesPage.routePath);
+              ref.read(imageProvider.notifier).state = null;
+              context.pop();
             }),
       ),
     );

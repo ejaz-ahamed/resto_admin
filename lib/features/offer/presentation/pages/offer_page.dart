@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/offer_constants/offer_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/text_button_widget.dart';
 import 'package:resto_admin/features/offer/presentation/pages/add_offer_page.dart';
+import 'package:resto_admin/features/offer/presentation/provider/offer_provider.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/offer_banner_widget.dart';
 
-class OfferPage extends StatelessWidget {
+class OfferPage extends ConsumerWidget {
   const OfferPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final color = AppTheme.of(context).colors;
     final spaces = AppTheme.of(context).spaces;
     final theme = AppTheme.of(context);
@@ -18,10 +20,10 @@ class OfferPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: theme.colors.secondary,
-
       appBar: AppBar(
         backgroundColor: theme.colors.secondary,
         elevation: 0,
+        scrolledUnderElevation: 0,
         title: Padding(
           padding: EdgeInsets.only(
             left: spaces.space_100,
@@ -41,16 +43,22 @@ class OfferPage extends StatelessWidget {
           ),
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.only(top: spaces.space_400),
-        child: SizedBox(
-          child: OfferBannerWidget(
-            offerImage: const NetworkImage(
-                'https://i.pinimg.com/originals/80/1b/5d/801b5da41f2abd03df3941b5f6ed35bc.jpg'),
-            offerText: constants.txtOfferText,
+      body: switch (ref.watch(getAllOffersProvider)) {
+        AsyncData(:final value) => Padding(
+            padding: EdgeInsets.only(top: spaces.space_400),
+            child: SizedBox(
+              child: OfferBannerWidget(
+                entity: value,
+              ),
+            ),
           ),
-        ),
-      ),
+        AsyncError() => const Center(
+            child: Text('Error while getting data'),
+          ),
+        _ => const Center(
+            child: CircularProgressIndicator(),
+          )
+      },
     );
   }
 }
