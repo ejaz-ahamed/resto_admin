@@ -7,12 +7,12 @@ import 'package:resto_admin/core/enums/offer_type.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
-import 'package:resto_admin/core/widgets/image_picker_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_16_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_8_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
 import 'package:resto_admin/features/offer/presentation/provider/offer_provider.dart';
+import 'package:resto_admin/features/offer/presentation/widgets/image_picker_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/row_heading_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/tab_button_widget.dart.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/textfield_widget.dart';
@@ -25,6 +25,7 @@ class AddOfferPage extends HookConsumerWidget {
     final nameController = useTextEditingController();
     final descriptionController = useTextEditingController();
     final percentageController = useTextEditingController();
+
     AddOfferPageConstants constants = AddOfferPageConstants();
     //Theme data
     final spaces = AppTheme.of(context).spaces;
@@ -44,6 +45,7 @@ class AddOfferPage extends HookConsumerWidget {
         },
       ],
     );
+
     //Handle tapping on the tab items
     void tabOnPressed(int index) {
       selectedOfferType.value = tabsToShow[index]['type'] as OfferType;
@@ -62,14 +64,13 @@ class AddOfferPage extends HookConsumerWidget {
               const SizedBox16Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
-                child: ImagePickerWidget(
-                  imgProvider: imageProvider,
-                ),
+                child: ImagePickerOfferWidget(imgProvider: imageProvider),
               ),
               const SizedBox24Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
                 child: TextFieldWidget(
+                  enabled: true,
                     textFieldTitle: constants.txtTitle,
                     hintText: constants.txtHintTextTitle,
                     controller: nameController),
@@ -78,6 +79,8 @@ class AddOfferPage extends HookConsumerWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
                 child: TextFieldWidget(
+                    maxLines: null,
+                  enabled: true,
                     textFieldTitle: constants.txtDescription,
                     hintText: constants.txtHintTextdescription,
                     controller: descriptionController),
@@ -132,17 +135,19 @@ class AddOfferPage extends HookConsumerWidget {
           onPressed: () {
             double amount = double.parse(percentageController.text);
             ref.read(offerProvider.notifier).addOffer(
-                  imagepath: ref.watch(imageProvider)!.path,
+                  imagePath: ref.watch(imageProvider)!.path,
                   name: nameController.text,
                   description: descriptionController.text,
                   amount: amount,
                   offerType: selectedOfferType.value,
-                  products: [],
+                  product: [],
                   id: '',
                 );
+
             nameController.clear();
             descriptionController.clear();
             percentageController.clear();
+
             context.pop();
           },
         ),

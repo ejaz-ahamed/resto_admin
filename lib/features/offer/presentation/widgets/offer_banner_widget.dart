@@ -7,6 +7,7 @@ import 'package:resto_admin/features/offer/presentation/pages/edit_offer_page.da
 class OfferBannerWidget extends StatelessWidget {
   final List<OfferEntity> entity;
   const OfferBannerWidget({super.key, required this.entity});
+
   @override
   Widget build(BuildContext context) {
     final color = AppTheme.of(context).colors;

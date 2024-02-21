@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:resto_admin/core/enums/offer_type.dart';
@@ -11,13 +13,12 @@ class OfferModel with _$OfferModel {
 
   factory OfferModel({
     required String? id,
-    // ignore: invalid_annotation_target
     @JsonKey(name: "imagepath") required String? imagePath,
     required String? name,
     required String? description,
-    required OfferType offerType,
-    required List<String>? products,
     required double? amount,
+    required OfferType offerType,
+    required List<String> products,
   }) = _OfferModel;
 
   factory OfferModel.fromJson(Map<String, dynamic> json) =>

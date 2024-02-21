@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:resto_admin/features/products/data/datasources/product_firestore_datasource.dart';
 import 'package:resto_admin/features/products/data/models/product_model.dart';
@@ -15,7 +13,6 @@ class ProductFirestoreDataSourceImpl implements ProductFireStoreDataSource {
           toFirestore: (model, _) => model.toFirestore());
   @override
   Future<void> add(ProductModel model) async {
-    print(jsonEncode(model.toJson()));
     await collection.doc(model.name).set(model);
   }
 
@@ -33,6 +30,17 @@ class ProductFirestoreDataSourceImpl implements ProductFireStoreDataSource {
         for (final product in products.docs) product.data(),
       ];
     }
+  }
+
+  @override
+  Future<ProductModel> getById(String id) async {
+    final data = await collection.doc(id).get();
+    return data.data()!;
+  }
+
+  @override
+  Future<void> update(ProductModel updatedModel) async {
+    await collection.doc(updatedModel.id).set(updatedModel);
   }
 }
 

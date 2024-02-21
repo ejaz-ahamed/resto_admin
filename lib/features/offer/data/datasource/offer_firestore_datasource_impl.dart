@@ -17,21 +17,21 @@ class OfferFirestoreDatasourceImpl implements OfferFirestoreDatasource {
   }
 
   @override
-  Future<void> delete(String offerId) async {
-    await collection.doc(offerId).delete();
-  }
-
-  @override
-  Future<void> update(OfferModel updateModel, String id) async {
-    await collection.doc(id).set(updateModel);
-  }
-
-  @override
   Stream<List<OfferModel>> getAllOffer() async* {
     final offerStream = collection.snapshots();
     await for (final offers in offerStream) {
       yield [for (final offer in offers.docs) offer.data()];
     }
+  }
+
+  @override
+  Future<void> update(OfferModel updatedModel, String id) async {
+    await collection.doc(id).set(updatedModel);
+  }
+
+  @override
+  Future<void> delete(String offerId) async {
+    await collection.doc(offerId).delete();
   }
 
   @override

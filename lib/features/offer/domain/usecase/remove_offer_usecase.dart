@@ -6,7 +6,9 @@ final class RemoveOfferUsecase {
   RemoveOfferUsecase({required this.repository});
   Future<void> call(String offerId) async {
     try {
-      return await repository.deleteOffer(offerId);
+      final data = await repository.getById(offerId);
+      await repository.deleteStorage(data.name);
+      return repository.delete(offerId);
     } catch (e) {
       throw BaseException(e.toString());
     }

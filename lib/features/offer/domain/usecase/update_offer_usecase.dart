@@ -1,4 +1,5 @@
 import 'dart:io';
+
 import 'package:resto_admin/core/enums/offer_type.dart';
 import 'package:resto_admin/core/exception/base_exception.dart';
 import 'package:resto_admin/features/offer/domain/entity/offer_entity.dart';
@@ -6,7 +7,9 @@ import 'package:resto_admin/features/offer/domain/repository/offer_repository.da
 
 final class UpdateOfferUseCase {
   final OfferRepository repository;
+
   UpdateOfferUseCase({required this.repository});
+
   Future<void> call({
     required String imagePath,
     required String id,
@@ -14,7 +17,7 @@ final class UpdateOfferUseCase {
     required String description,
     required double amount,
     required OfferType offerType,
-    required List<String> products,
+    required List<String> product,
   }) async {
     try {
       if (imagePath.startsWith('http')) {
@@ -22,10 +25,10 @@ final class UpdateOfferUseCase {
         imagePath = data.imagePath;
       } else {
         final data = await repository.getById(id);
-        await repository.deleteOffer(data.name);
+        await repository.delete(data.name);
         imagePath = await repository.upload(File(imagePath), name);
       }
-      await repository.update(
+      await repository.updateOffer(
           OfferEntity(
               id: id,
               imagePath: imagePath,
@@ -33,7 +36,7 @@ final class UpdateOfferUseCase {
               description: description,
               amount: amount,
               offerType: offerType,
-              products: products),
+              products: product),
           id);
     } catch (e) {
       throw BaseException(e.toString());

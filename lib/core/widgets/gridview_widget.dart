@@ -49,6 +49,8 @@ class GridViewWidget extends ConsumerWidget {
                         width: theme.spaces.space_500 * 3.7,
                         height: theme.spaces.space_500 * 3.7,
                         decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(theme.spaces.space_100),
                           color: theme.colors.textInverse,
                           image: DecorationImage(
                             image: NetworkImage(

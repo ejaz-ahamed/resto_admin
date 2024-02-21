@@ -22,7 +22,8 @@ class Authentication extends _$Authentication {
     try {
       await LoginUsecase(repositery: ref.watch(authRepositeryProvider))(
           email, password);
-      MyApp.navigatorKey.currentContext!.go(BottomNaviWidget.routePath);
+      Future.sync(() =>
+          MyApp.navigatorKey.currentContext!.go(BottomNaviWidget.routePath));
     } on BaseException catch (e) {
       SnackBarUtils.showMessage(e.message);
     }
@@ -31,7 +32,8 @@ class Authentication extends _$Authentication {
   Future<void> logout() async {
     try {
       await LogOutUsecase(repositery: ref.watch(authRepositeryProvider))();
-      MyApp.navigatorKey.currentContext!.go(LoginPage.routePath);
+      Future.sync(
+          () => MyApp.navigatorKey.currentContext!.go(LoginPage.routePath));
     } on BaseException catch (e) {
       SnackBarUtils.showMessage(e.message);
     }
@@ -48,8 +50,7 @@ class Authentication extends _$Authentication {
 
   Future<void> updateUserDetails(UserEntity userEntity) async {
     try {
-      await UpdateuserDetailsUsecases(
-          repositery: ref.watch(authRepositeryProvider));
+      UpdateuserDetailsUsecases(repositery: ref.watch(authRepositeryProvider));
     } on BaseException catch (e) {
       SnackBarUtils.showMessage(e.message);
     }

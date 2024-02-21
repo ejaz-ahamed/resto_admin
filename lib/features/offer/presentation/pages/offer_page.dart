@@ -21,6 +21,7 @@ class OfferPage extends ConsumerWidget {
       appBar: AppBar(
         backgroundColor: theme.colors.secondary,
         elevation: 0,
+        scrolledUnderElevation: 0,
         title: Padding(
           padding: EdgeInsets.only(
             left: spaces.space_100,

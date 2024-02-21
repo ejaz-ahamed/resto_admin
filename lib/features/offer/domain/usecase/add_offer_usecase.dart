@@ -9,22 +9,22 @@ final class AddOfferUseCase {
   final OfferRepository repository;
   AddOfferUseCase({required this.repository});
   Future<void> call({
-    required String imagepath,
+    required String imagePath,
     required String id,
     required String name,
     required String description,
     required double amount,
     required OfferType offerType,
-    required List<String> products,
+    required List<String> product,
   }) async {
     try {
-      final uploadPath = await repository.upload(File(imagepath), name);
+      final uploadPath = await repository.upload(File(imagePath), name);
       return await repository.addOffer(OfferEntity(
           imagePath: uploadPath,
           name: name,
           description: description,
           offerType: offerType,
-          products: products,
+          products: product,
           amount: amount,
           id: id));
     } catch (e) {
