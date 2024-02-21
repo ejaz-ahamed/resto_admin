@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
@@ -97,11 +96,13 @@ class EditProfilePage extends HookConsumerWidget {
                     )),
                 const SizedBox32Widget(),
                 TextFieldWidget(
+                    enabled: true,
                     textFieldTitle: constants.txtOpeningTime,
                     hintText: hintText,
                     controller: openingTimeController),
                 const SizedBox24Widget(),
                 TextFieldWidget(
+                    enabled: true,
                     textFieldTitle: constants.txtClosingTime,
                     hintText: hintText,
                     controller: closingTimeController),

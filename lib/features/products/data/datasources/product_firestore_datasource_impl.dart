@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:resto_admin/features/products/data/datasources/product_firestore_datasource.dart';
 import 'package:resto_admin/features/products/data/models/product_model.dart';
@@ -15,7 +13,6 @@ class ProductFirestoreDataSourceImpl implements ProductFireStoreDataSource {
           toFirestore: (model, _) => model.toFirestore());
   @override
   Future<void> add(ProductModel model) async {
-    print(jsonEncode(model.toJson()));
     await collection.doc(model.name).set(model);
   }
 
@@ -23,8 +20,42 @@ class ProductFirestoreDataSourceImpl implements ProductFireStoreDataSource {
   Future<void> remove(String id) async {
     return await collection.doc(id).delete();
   }
+
+  @override
+  Stream<List<ProductModel>> getAll(String categoryId) async* {
+    final productSteame =
+        collection.where('categoryId', isEqualTo: categoryId).snapshots();
+    await for (final products in productSteame) {
+      yield [
+        for (final product in products.docs) product.data(),
+      ];
+    }
+  }
+
+  @override
+
+  Future<List<ProductModel>> search(String categoryId) async {
+    final searchedProducts =
+        await collection.where('categoryId', isEqualTo: categoryId).get();
+    return [
+      for (final product in searchedProducts.docs) product.data(),
+    ];
+
+
 }
 
+  @override
+  Future<ProductModel> getById(String id) {
+    // TODO: implement getById
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> update(ProductModel updatedModel) {
+    // TODO: implement update
+    throw UnimplementedError();
+  }
+}
 @riverpod
 ProductFireStoreDataSource productFireStoreDataSource(
     ProductFireStoreDataSourceRef ref) {

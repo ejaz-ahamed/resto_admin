@@ -5,11 +5,11 @@ import 'package:resto_admin/features/authentication/domain/entity/user_entity.da
 import 'package:resto_admin/features/authentication/domain/repositery/auth_repositery.dart';
 import 'package:resto_admin/features/profile_page/domain/repository/profile_repository.dart';
 
-class UpdateuserDetailsUsecases {
+class SetProfileImageUsecases {
   final AuthRepositery repositery;
   final ProfileRepository profileRepository;
 
-  UpdateuserDetailsUsecases(
+  SetProfileImageUsecases(
       {required this.repositery, required this.profileRepository});
   Future<void> call({required String imagePath}) async {
     try {

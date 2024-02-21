@@ -42,6 +42,7 @@ class AddImageWidget extends ConsumerWidget {
           )
         ],
       ),
+
     );
   }
 }

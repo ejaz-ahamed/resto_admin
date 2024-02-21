@@ -6,6 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'category_firestore_datasource_impl.g.dart';
 
 class CategoryFirestoreDataSourceImpl implements CategoryFirestoreDataSource {
+  final firestore = FirebaseFirestore.instance;
   final collection = FirebaseFirestore.instance
       .collection('category')
       .withConverter(
@@ -24,12 +25,33 @@ class CategoryFirestoreDataSourceImpl implements CategoryFirestoreDataSource {
 
   @override
   Future<void> update(CategoryModel updatedModel) async {
-    await collection.doc().set(updatedModel);
+    await collection.doc(updatedModel.id).set(updatedModel);
   }
 
   @override
-  Stream<QuerySnapshot<CategoryModel>> getAll() {
-    return collection.snapshots();
+  Stream<List<CategoryModel>> getAll() async* {
+    final categorySteame = collection.snapshots();
+    await for (final categorys in categorySteame) {
+      yield [
+        for (final category in categorys.docs) category.data(),
+      ];
+    }
+  }
+
+  @override
+  Future<CategoryModel> getbyId(String id) async {
+    final data = await collection.doc(id).get();
+    return data.data()!;
+  }
+
+  @override
+  Future<void> deleteMany(List<String> docIdsToDelete) async {
+    final batch = firestore.batch();
+    for (final docId in docIdsToDelete) {
+      final docRef = collection.doc(docId);
+      batch.delete(docRef);
+    }
+    await batch.commit();
   }
 }
 

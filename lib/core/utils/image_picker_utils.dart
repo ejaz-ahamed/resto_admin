@@ -6,7 +6,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:resto_admin/core/constants/edit_profile_page/profile_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/utils/snack_bar_utils.dart';
-import 'package:resto_admin/features/authentication/presentation/provider/authentication_provider.dart';
 
 class ImagePickerUtils {
   static Future<XFile?> pickImageFromCamera(BuildContext context) async {

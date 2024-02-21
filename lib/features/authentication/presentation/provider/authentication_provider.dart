@@ -9,7 +9,7 @@ import 'package:resto_admin/features/authentication/domain/usecases/login_usecas
 import 'package:resto_admin/features/authentication/domain/usecases/logout_usecase.dart';
 import 'package:resto_admin/features/authentication/domain/usecases/remove_Image_usecase.dart';
 import 'package:resto_admin/features/authentication/domain/usecases/update_password_usecase.dart';
-import 'package:resto_admin/features/authentication/domain/usecases/update_user_details_usecases.dart';
+import 'package:resto_admin/features/authentication/domain/usecases/set_profile_image_usecases.dart';
 import 'package:resto_admin/features/authentication/presentation/pages/login_page.dart';
 import 'package:resto_admin/features/profile_page/data/repository/profile_repository_impl.dart';
 import 'package:resto_admin/main.dart';
@@ -52,7 +52,7 @@ class Authentication extends _$Authentication {
   }
 
   Future<void> setProfileImage({required String imagePath}) async {
-    await UpdateuserDetailsUsecases(
+    await SetProfileImageUsecases(
             repositery: ref.watch(authRepositeryProvider),
             profileRepository: ref.watch(profileRepositoryProvider))(
         imagePath: imagePath);
@@ -65,5 +65,6 @@ class Authentication extends _$Authentication {
 
   Future<void> removeImage() async {
     await RemoveImageUsecase(repositery: ref.watch(authRepositeryProvider))();
+ 
   }
 }
