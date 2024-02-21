@@ -4,16 +4,14 @@ import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/constants/offer_constants/add_offer_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/text_button_widget.dart';
-import 'package:resto_admin/features/offer/presentation/pages/edit_offer_page.dart';
 import 'package:resto_admin/features/offer/presentation/pages/offer_selecting_product_page.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/listview_products_widget.dart';
 
 class RowHeadingWidget extends ConsumerWidget {
-  const RowHeadingWidget({Key? key});
+  const RowHeadingWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentDollarValue = ref.watch(currentStateProvider);
     AddOfferPageConstants constants = AddOfferPageConstants();
     return Column(
       children: [
@@ -39,7 +37,11 @@ class RowHeadingWidget extends ConsumerWidget {
           ),
         ),
         const ListViewProductsWidget(
-            itemCount: 10, product: 'mango', newPrice: '0', oldPrice: '20')
+          itemCount: 10,
+          product: 'mango',
+          newPrice: '0',
+          oldPrice: '20',
+        )
       ],
     );
   }

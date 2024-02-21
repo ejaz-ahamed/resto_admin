@@ -89,9 +89,7 @@ final router = GoRouter(
     ),
     GoRoute(
       path: OfferSelectingPage.routePath,
-      builder: (context, state) => OfferSelectingPage(
-        entity: state.extra as List<ProductEntity>,
-      ),
+      builder: (context, state) => const OfferSelectingPage(),
     ),
     GoRoute(
         path: OverViewItemsPage.routePath,

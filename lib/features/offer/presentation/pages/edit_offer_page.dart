@@ -64,10 +64,6 @@ class EditOfferPage extends HookConsumerWidget {
       selectedOfferType.value = tabsToShow[index]['type'] as OfferType;
     }
 
-    final percentageTextController = TextEditingController();
-    final amountTextController = TextEditingController();
-    // final currentDollarValue = ref.watch(currentStateProvider);
-
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(

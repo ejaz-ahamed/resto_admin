@@ -9,10 +9,13 @@ import 'package:resto_admin/features/products/presentation/providers/product_pro
 
 class GridViewOfferPageWidget extends HookConsumerWidget {
   final ValueNotifier<Set<String>> selectedItems;
+
   const GridViewOfferPageWidget({super.key, required this.selectedItems});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // final selectedItems = useState<Set<int>>({});
+
     final selectedCategory =
         ref.watch(categoryProvider.select((value) => value.selectedCategory));
     final theme = AppTheme.of(context);

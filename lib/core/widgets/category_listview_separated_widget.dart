@@ -8,12 +8,12 @@ import 'package:resto_admin/features/products/presentation/providers/product_pro
 
 class ListViewSeparatedWidget extends HookConsumerWidget {
   final List<CategoryEntity> entity;
-  final TextEditingController clearController;
+  final TextEditingController? clearController;
 
   const ListViewSeparatedWidget({
     super.key,
     required this.entity,
-    required this.clearController,
+    this.clearController,
   });
 
   @override
@@ -41,7 +41,7 @@ class ListViewSeparatedWidget extends HookConsumerWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      clearController.clear();
+                      clearController?.clear();
                       ref.read(productProvider.notifier).clearSearchList();
                       ref
                           .read(categoryProvider.notifier)
