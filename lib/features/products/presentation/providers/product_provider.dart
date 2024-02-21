@@ -24,7 +24,6 @@ class Product extends _$Product {
   ProductProviderState build() {
     repository = ref.read(productRepositoryProvider);
     return ProductProviderState(
-      selectedCategoryProducts: [],
       searchedProducts: null,
     );
   }
