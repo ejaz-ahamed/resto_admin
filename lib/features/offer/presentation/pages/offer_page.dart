@@ -6,6 +6,7 @@ import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/text_button_widget.dart';
 import 'package:resto_admin/features/offer/presentation/pages/add_offer_page.dart';
 import 'package:resto_admin/features/offer/presentation/provider/offer_provider.dart';
+import 'package:resto_admin/features/offer/presentation/widgets/image_picker_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/offer_banner_widget.dart';
 
 class OfferPage extends ConsumerWidget {
@@ -36,6 +37,7 @@ class OfferPage extends ConsumerWidget {
             padding: EdgeInsets.only(right: spaces.space_300),
             child: TextButtonWidget(
                 onTap: () {
+                  ref.read(offerImageProvider.notifier).state = null;
                   context.push(AddOfferPage.routePath);
                 },
                 buttonText: constants.txtAddOfferText,

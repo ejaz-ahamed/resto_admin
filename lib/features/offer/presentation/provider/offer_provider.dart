@@ -58,8 +58,6 @@ class Offer extends _$Offer {
         offerType: offerType,
         product: product = []);
   }
-
-  getAll() {}
 }
 
 @riverpod

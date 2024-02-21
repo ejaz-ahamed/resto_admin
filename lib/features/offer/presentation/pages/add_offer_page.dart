@@ -66,13 +66,13 @@ class AddOfferPage extends HookConsumerWidget {
               const SizedBox16Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
-                child: ImagePickerOfferWidget(imgProvider: imageProvider),
+                child: ImagePickerOfferWidget(imgProvider: offerImageProvider),
               ),
               const SizedBox24Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
                 child: TextFieldWidget(
-                  enabled: true,
+                    enabled: true,
                     textFieldTitle: constants.txtTitle,
                     hintText: constants.txtHintTextTitle,
                     controller: nameController),
@@ -82,7 +82,7 @@ class AddOfferPage extends HookConsumerWidget {
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
                 child: TextFieldWidget(
                     maxLines: null,
-                  enabled: true,
+                    enabled: true,
                     textFieldTitle: constants.txtDescription,
                     hintText: constants.txtHintTextdescription,
                     controller: descriptionController),
@@ -137,7 +137,7 @@ class AddOfferPage extends HookConsumerWidget {
           onPressed: () {
             double amount = double.parse(percentageController.text);
             ref.read(offerProvider.notifier).addOffer(
-                  imagePath: ref.watch(imageProvider)!.path,
+                  imagePath: ref.watch(offerImageProvider)!.path,
                   name: nameController.text,
                   description: descriptionController.text,
                   amount: amount,

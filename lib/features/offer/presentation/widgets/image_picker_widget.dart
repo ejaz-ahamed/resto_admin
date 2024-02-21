@@ -6,7 +6,7 @@ import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/utils/image_picker_utils.dart';
 import 'package:resto_admin/core/widgets/add_image_widget.dart';
 
-final imageProvider = StateProvider<XFile?>((ref) {
+final offerImageProvider = StateProvider<XFile?>((ref) {
   return null;
 });
 
@@ -15,7 +15,7 @@ class ImagePickerOfferWidget extends ConsumerWidget {
   const ImagePickerOfferWidget({super.key, required this.imgProvider});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final imagePathPicked = ref.watch(imageProvider)?.path;
+    final imagePathPicked = ref.watch(offerImageProvider)?.path;
 
     /// Image to show if the image is already picked
     Widget? imageToShow;
@@ -34,7 +34,7 @@ class ImagePickerOfferWidget extends ConsumerWidget {
       onTap: () async {
         final imageSelected =
             await ImagePickerUtils.showDialogueForImagePicker(context);
-        ref.read(imageProvider.notifier).state = imageSelected;
+        ref.read(offerImageProvider.notifier).state = imageSelected;
       },
       child: Container(
         height: AppTheme.of(context).spaces.space_500 * 6,

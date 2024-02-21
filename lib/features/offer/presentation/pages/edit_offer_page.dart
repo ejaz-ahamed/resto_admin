@@ -39,7 +39,7 @@ class EditOfferPage extends HookConsumerWidget {
 
     useEffect(() {
       Future.delayed(Duration.zero, () {
-        ref.read(imageProvider.notifier).state = XFile(entity.imagePath);
+        ref.read(offerImageProvider.notifier).state = XFile(entity.imagePath);
         nameController.text = entity.name;
         descriptionController.text = entity.description;
         percentageController.text = entity.amount.toString();
@@ -79,13 +79,15 @@ class EditOfferPage extends HookConsumerWidget {
               const SizedBox24Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
-                child: ImagePickerOfferWidget(imgProvider: imageProvider,),
+                child: ImagePickerOfferWidget(
+                  imgProvider: offerImageProvider,
+                ),
               ),
               const SizedBox24Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
                 child: TextFieldWidget(
-                  enabled: true,
+                    enabled: true,
                     textFieldTitle: constants.txtTitle,
                     hintText: constants.txtHintTextTitle,
                     controller: nameController),
@@ -94,7 +96,7 @@ class EditOfferPage extends HookConsumerWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
                 child: TextFieldWidget(
-                  enabled: true,
+                    enabled: true,
                     textFieldTitle: constants.txtDescription,
                     hintText: constants.txtHintTextdescription,
                     controller: descriptionController),
@@ -150,7 +152,7 @@ class EditOfferPage extends HookConsumerWidget {
             double amount = double.parse(percentageController.text);
             ref.read(offerProvider.notifier).updateOffer(
                 id: entity.id,
-                imagePath: ref.watch(imageProvider)!.path,
+                imagePath: ref.watch(offerImageProvider)!.path,
                 name: nameController.text,
                 description: descriptionController.text,
                 amount: amount,
