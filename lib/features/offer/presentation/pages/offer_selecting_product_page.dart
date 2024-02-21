@@ -15,11 +15,13 @@ import 'package:resto_admin/features/offer/presentation/pages/edit_offer_page.da
 import 'package:resto_admin/features/offer/presentation/provider/selected_items_provider.dart';
 
 import 'package:resto_admin/features/offer/presentation/widgets/gridview_offerpage_widget.dart';
+import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
 import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
 
 class OfferSelectingPage extends HookConsumerWidget {
   static const routePath = '/select';
-  const OfferSelectingPage({super.key});
+  final List<ProductEntity>? entity;
+  const OfferSelectingPage({super.key, this.entity});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
