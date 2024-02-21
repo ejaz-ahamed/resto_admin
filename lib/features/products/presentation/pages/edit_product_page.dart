@@ -6,7 +6,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
-import 'package:resto_admin/core/widgets/bottom_navigation/bottom_nav_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
@@ -189,7 +188,7 @@ class EditProductPage extends HookConsumerWidget {
                 categoryId: entity.categoryId,
               );
 
-              context.go(BottomNaviWidget.routePath);
+              context.pop();
             }),
       ),
     );

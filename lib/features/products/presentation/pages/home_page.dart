@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
-import 'package:resto_admin/core/widgets/gridview_widget.dart';
+import 'package:resto_admin/core/widgets/product_gridview_widget.dart';
 import 'package:resto_admin/core/widgets/listview_separated_widget.dart';
 import 'package:resto_admin/features/products/presentation/pages/product_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/view_categories_page.dart';
@@ -22,7 +22,9 @@ class HomePage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final data = ref.watch(productConstantsProvider);
     final theme = AppTheme.of(context);
+
     final searchController = useTextEditingController();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -100,7 +102,7 @@ class HomePage extends HookConsumerWidget {
                 SizedBox(
                   height: theme.spaces.space_250,
                 ),
-                const GridViewWidget(),
+                const ProductGridViewWidget(),
                 SizedBox(
                   height: theme.spaces.space_250,
                 ),

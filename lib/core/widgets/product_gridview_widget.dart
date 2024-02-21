@@ -6,14 +6,15 @@ import 'package:resto_admin/features/products/presentation/pages/overview_items_
 import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
 import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
 
-class GridViewWidget extends ConsumerWidget {
-  const GridViewWidget({
+class ProductGridViewWidget extends ConsumerWidget {
+  const ProductGridViewWidget({
     super.key,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = AppTheme.of(context);
+
     final selectedCategory =
         ref.watch(categoryProvider.select((value) => value.selectedCategory));
 
@@ -50,7 +51,7 @@ class GridViewWidget extends ConsumerWidget {
                         InkWell(
                           onTap: () {
                             context.push(OverViewItemsPage.routePath,
-                                extra: productData);
+                                extra: (selectedCategory, productData.id));
                           },
                           child: Container(
                             width: theme.spaces.space_500 * 3.7,
@@ -63,7 +64,6 @@ class GridViewWidget extends ConsumerWidget {
                                 ),
                                 fit: BoxFit.cover,
                               ),
-
                             ),
                           ),
                         ),
