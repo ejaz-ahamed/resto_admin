@@ -45,7 +45,7 @@ class CustomerDetailsWidget extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  TextRegularWidget(text: entity.orderId),
+                  TextRegularWidget(text: entity.uid),
                   TextRegularWidget(text: entity.name),
                   TextRegularWidget(text: entity.time),
                   TextRegularWidget(text: entity.location),

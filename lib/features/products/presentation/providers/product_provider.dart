@@ -88,9 +88,10 @@ class Product extends _$Product {
   }
 }
 
-@riverpod
-Stream<List<ProductEntity>> getAllProductsByCategory(
-    GetAllProductsByCategoryRef ref, String categoryId) {
-  final repository = ref.read(productRepositoryProvider);
-  return GetAllProductsUseCase(repository: repository)(categoryId);
-}
+  @riverpod
+  Stream<List<ProductEntity>> getAllProductsByCategory(
+      GetAllProductsByCategoryRef ref, String categoryId) {
+    final repository = ref.read(productRepositoryProvider);
+    return GetAllProductsUseCase(repository: repository)(categoryId);
+  }
+

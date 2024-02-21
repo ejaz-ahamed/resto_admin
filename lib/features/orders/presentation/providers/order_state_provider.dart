@@ -7,6 +7,6 @@ part 'order_state_provider.freezed.dart';
 class OrderproviderState with _$OrderproviderState {
   factory OrderproviderState({
     required Stream<List<OrderEntity>> orders,
-    required OrderType orderType,
+    required OrderStatus orderStatus,
   }) = _OrderproviderState;
 }

@@ -69,8 +69,9 @@ final router = GoRouter(
     ),
     GoRoute(
       path: OrderViewPage.routePath,
-      builder: (context, state) =>
-          OrderViewPage(entity: state.extra as OrderEntity),
+      builder: (context, state) => OrderViewPage(
+        entity: state.extra as OrderEntity,
+      ),
     ),
     GoRoute(
       path: EditCategoryPage.routePath,
