@@ -32,7 +32,7 @@ final class AddProductUsecase {
           ),
           categoryId);
     } catch (e) {
-      throw BaseException('Cannot add product');
+      throw BaseException('Cannot add product Details');
     }
   }
 }

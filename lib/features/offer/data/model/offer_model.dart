@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:resto_admin/core/enums/offer_type.dart';
@@ -10,11 +12,13 @@ class OfferModel with _$OfferModel {
   const OfferModel._();
 
   factory OfferModel({
-    required String imagepath,
-    required String name,
-    required String description,
+    required String? id,
+    @JsonKey(name: "imagepath") required String? imagePath,
+    required String? name,
+    required String? description,
+    required double? amount,
     required OfferType offerType,
-    required List<String> product,
+    required List<String> products,
   }) = _OfferModel;
 
   factory OfferModel.fromJson(Map<String, dynamic> json) =>
@@ -25,9 +29,10 @@ class OfferModel with _$OfferModel {
     SnapshotOptions? options,
   ) {
     final data = snapshot.data()!;
+    data['id'] = snapshot.id;
     return OfferModel.fromJson(data);
   }
   Map<String, dynamic> toFirestore() {
-    return toJson();
+    return toJson()..remove('id');
   }
 }

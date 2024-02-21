@@ -63,6 +63,7 @@ class GridViewWidget extends ConsumerWidget {
                                 ),
                                 fit: BoxFit.cover,
                               ),
+
                             ),
                           ),
                         ),
