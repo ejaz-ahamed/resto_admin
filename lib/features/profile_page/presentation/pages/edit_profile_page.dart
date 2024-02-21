@@ -57,15 +57,7 @@ class EditProfilePage extends HookConsumerWidget {
               children: [
                 Align(
                     alignment: Alignment.center,
-                    child: InkWell(
-                      onTap: () async {
-                        final imageSelected =
-                            await ImagePickerUtils.showDialogueForImagePicker(
-                                context);
-                        ref.read(editImageProvider.notifier).state =
-                            imageSelected;
-                      },
-                      child: Container(
+                    child: Ink(
                         height: appTheme.spaces.space_400 * 7,
                         width: appTheme.spaces.space_400 * 7,
                         decoration: BoxDecoration(
@@ -73,59 +65,67 @@ class EditProfilePage extends HookConsumerWidget {
                             border: Border.all(
                                 color: appTheme.colors.textDisabled,
                                 width: appTheme.spaces.space_25)),
-                        child: StreamBuilder(
-                          stream: ref
-                              .watch(authenticationProvider.notifier)
-                              .getProfileImage(),
-                          builder: (context, snapshot) {
-                            /// If the user is selected new image in the image picker,
-                            /// then show it
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(
+                              appTheme.spaces.space_900 * 100),
+                          onTap: () async {
+                            final imageSelected = await ImagePickerUtils
+                                .showDialogueForImagePicker(context, true);
+                            ref.read(editImageProvider.notifier).state =
+                                imageSelected;
+                          },
+                          child: switch (ref.watch(userProfileStreamProvider)) {
+                            AsyncData(:final value) => Builder(
+                                builder: (context) {
+                                  /// If the user is selected new image in the image picker,
+                                  /// then show it
+                                  final selectedImage =
+                                      ref.watch(editImageProvider);
+                                  if (selectedImage != null &&
+                                      selectedImage.path.isNotEmpty) {
+                                    return ClipRRect(
+                                        borderRadius: BorderRadius.circular(
+                                            appTheme.spaces.space_900 * 100),
+                                        child: Image.file(
+                                            File(selectedImage.path)));
+                                  }
 
-                            final selectedImage = ref.watch(editImageProvider);
-                            if (selectedImage != null) {
-                              return ClipRRect(
-                                  borderRadius: BorderRadius.circular(
-                                      appTheme.spaces.space_900 * 100),
-                                  child: Image.file(File(selectedImage.path)));
-                            }
+                                  /// If the user is not selected any image for this account so far
+                                  /// the show a default image view
+                                  ///
+                                  /// or If the user clicked on the 'Delete' button, then
+                                  /// the newly selected image path becomes empty.
+                                  /// So in this case we need to show the default image
+                                  else if ((selectedImage != null &&
+                                          selectedImage.path.isEmpty) ||
+                                      (value.imgPath.trim().isEmpty)) {
+                                    return const AddImageWidget();
+                                  }
 
-                            /// If the user already have a valid image selected previously,
-                            /// then show it
-                            else if (snapshot.hasData &&
-                                snapshot.data!.imgPath.trim().isNotEmpty) {
-                              return ClipRRect(
-                                  borderRadius: BorderRadius.circular(
-                                      appTheme.spaces.space_900 * 100),
-                                  child: Image.network(snapshot.data!.imgPath));
-                            }
-
-                            /// If the user is not selected any image for this account so far
-                            /// the show a default image view
-                            else if (snapshot.hasData &&
-                                snapshot.data!.imgPath.trim().isEmpty) {
-                              return const AddImageWidget();
-                            }
-
-                            /// Else if there is any error while loading the user image data
-                            /// then show error message
-                            else if (snapshot.hasError) {
-                              return const Center(
+                                  /// If the user already have a valid image selected previously,
+                                  /// then show it
+                                  else if (value.imgPath.trim().isNotEmpty) {
+                                    return ClipRRect(
+                                        borderRadius: BorderRadius.circular(
+                                            appTheme.spaces.space_900 * 100),
+                                        child: Image.network(value.imgPath));
+                                  } else {
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  }
+                                },
+                              ),
+                            AsyncError() => const Center(
                                 child: FittedBox(
                                   child: Text('Cannot Load User Image'),
                                 ),
-                              );
-                            }
-
-                            /// For all other cases, show a progress indicator
-                            else {
-                              return const Center(
+                              ),
+                            _ => const Center(
                                 child: CircularProgressIndicator(),
-                              );
-                            }
+                              ),
                           },
-                        ),
-                      ),
-                    )),
+                        ))),
                 const SizedBox32Widget(),
                 TextFieldWidget(
                     enabled: true,
@@ -138,11 +138,11 @@ class EditProfilePage extends HookConsumerWidget {
                     textFieldTitle: constants.txtClosingTime,
                     hintText: constants.txtHintenterHere,
                     controller: closingTimeController),
-                TextButton(
-                    onPressed: () {
-                      ref.read(authenticationProvider.notifier).removeImage();
-                    },
-                    child: const Text('delete image'))
+                // TextButton(
+                //     onPressed: () {
+                //       ref.read(authenticationProvider.notifier).removeImage();
+                //     },
+                //     child: const Text('delete image'))
               ],
             ),
           ),

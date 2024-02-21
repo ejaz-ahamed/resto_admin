@@ -16,10 +16,19 @@ class AddImageUsecase {
 
   Future<void> call(String fileToUpload) async {
     try {
-      final imageUploadedPath = await profileRepo.upload(File(fileToUpload));
+      final String uploadedPath;
+
+      /// If the image path is empty, then we need to remove the image
+      /// from backend
+      if (fileToUpload.trim().isEmpty) {
+        uploadedPath = '';
+      } else {
+        uploadedPath = await profileRepo.upload(File(fileToUpload));
+      }
+
       await SetProfileImageUsecases(
           repositery: authRepo,
-          profileRepository: profileRepo)(imagePath: imageUploadedPath);
+          profileRepository: profileRepo)(imagePath: uploadedPath);
     } catch (e) {
       throw BaseException(e.toString());
     }

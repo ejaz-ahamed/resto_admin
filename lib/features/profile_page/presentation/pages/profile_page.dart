@@ -49,42 +49,34 @@ class ProfilePage extends ConsumerWidget {
                     border: Border.all(
                         color: appTheme.colors.textDisabled,
                         width: appTheme.spaces.space_25)),
-                child: StreamBuilder(
-                  stream: ref
-                      .watch(authenticationProvider.notifier)
-                      .getProfileImage(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return ClipRRect(
-                          borderRadius: BorderRadius.circular(
-                              appTheme.spaces.space_900 * 100),
-                          child: Image.network(snapshot.data!.imgPath));
-                    } else if (snapshot.hasError) {
-                      return const Center(
-                        child: Text('Error'),
-                      );
-                    } else if (snapshot.data == null) {
-                      return Padding(
-                        padding: EdgeInsets.all(appTheme.spaces.space_900),
-                        child: SvgPicture.asset(
-                          ref.watch(appAssetsConstantsProvider).icUser,
-                          height: 50,
-                        ),
-                      );
-                    } else {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                  },
-                ),
-                // child: ref.watch(editImageProvider) == null
-                //     ? const AddImageWidget()
-                //     : ClipRRect(
-                //         borderRadius: BorderRadius.circular(
-                //             appTheme.spaces.space_900 * 100),
-                //         child: Image.file(
-                //             File(ref.watch(editImageProvider)!.path))),
+                child: switch (ref.watch(userProfileStreamProvider)) {
+                  AsyncData(:final value) => Builder(builder: (context) {
+                      /// If the image is not set by the user, then show a
+                      /// default user image
+                      if (value.imgPath.trim().isEmpty) {
+                        return Padding(
+                          padding: EdgeInsets.all(appTheme.spaces.space_900),
+                          child: SvgPicture.asset(
+                            ref.watch(appAssetsConstantsProvider).icUser,
+                            height: 50,
+                          ),
+                        );
+                      } else {
+                        return ClipRRect(
+                            borderRadius: BorderRadius.circular(
+                                appTheme.spaces.space_900 * 100),
+                            child: Image.network(value.imgPath));
+                      }
+                    }),
+                  AsyncError() => const Center(
+                      child: FittedBox(
+                        child: Text('Cannot Load User Image'),
+                      ),
+                    ),
+                  _ => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                },
               ),
             ),
             SizedBox(

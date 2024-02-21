@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -18,31 +16,32 @@ class AddImageWidget extends ConsumerWidget {
     final assets = ref.watch(appAssetsConstantsProvider);
     final constants = ref.watch(profilePageContstantsProvider);
     final appTheme = AppTheme.of(context);
-    return InkWell(
-      onTap: () async {
-        ref.read(editImageProvider.notifier).state =
-            await ImagePickerUtils.showDialogueForImagePicker(context);
-        log("${ref.watch(editImageProvider)?.path}");
-      },
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SvgPicture.asset(
-            assets.icAddImage,
-            height: appTheme.spaces.space_500,
-            colorFilter: ColorFilter.mode(
-                appTheme.colors.textDisabled, BlendMode.srcATop),
-          ),
-          const SizedBox8Widget(),
-          Text(
-            constants.txtAddImage,
-            style: appTheme.typography.uiSemibold
-                .copyWith(color: appTheme.colors.textDisabled),
-          )
-        ],
+    return Ink(
+      child: InkWell(
+        borderRadius: BorderRadius.circular(appTheme.spaces.space_900 * 100),
+        onTap: () async {
+          ref.read(editImageProvider.notifier).state =
+              await ImagePickerUtils.showDialogueForImagePicker(context);
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SvgPicture.asset(
+              assets.icAddImage,
+              height: appTheme.spaces.space_500,
+              colorFilter: ColorFilter.mode(
+                  appTheme.colors.textDisabled, BlendMode.srcATop),
+            ),
+            const SizedBox8Widget(),
+            Text(
+              constants.txtAddImage,
+              style: appTheme.typography.uiSemibold
+                  .copyWith(color: appTheme.colors.textDisabled),
+            )
+          ],
+        ),
       ),
-
     );
   }
 }
