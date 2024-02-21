@@ -6,7 +6,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
-import 'package:resto_admin/core/widgets/bottom_navigation/bottom_nav_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
@@ -31,8 +30,10 @@ class EditProductPage extends HookConsumerWidget {
     final apptheme = AppTheme.of(context);
     final data = ref.watch(productConstantsProvider);
     final constants = ref.watch(productConstantsProvider);
+
     final productController = useTextEditingController();
     final descreptionController = useTextEditingController();
+
     final productTypeControllers = useState<List<ProductTypeControllers>>([]);
     final productAddonControllers = useState<List<ProductTypeControllers>>([]);
 
@@ -40,7 +41,8 @@ class EditProductPage extends HookConsumerWidget {
       Future.delayed(
         Duration.zero,
         () {
-          ref.read(imageProvider.notifier).state = XFile(entity.imagePath);
+          ref.read(imagePickerProvider.notifier).state =
+              XFile(entity.imagePath);
           productController.text = entity.name;
           descreptionController.text = entity.description;
 
@@ -71,20 +73,22 @@ class EditProductPage extends HookConsumerWidget {
           }
         },
       );
+
+      /// Dispose function
       return () {
         productController.dispose();
         descreptionController.dispose();
+
         for (final controller in productAddonControllers.value) {
           controller.nameController.dispose();
           controller.priceController.dispose();
         }
+
         for (final controller in productTypeControllers.value) {
           controller.nameController.dispose();
           controller.priceController.dispose();
         }
       };
-
-      // return null;
     }, []);
 
     return GestureDetector(
@@ -103,7 +107,7 @@ class EditProductPage extends HookConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox32Widget(),
-                ImagePickerProductWidget(imgProvider: imageProvider),
+                const ImagePickerProductWidget(),
                 SizedBox(
                   height: AppTheme.of(context).spaces.space_300,
                 ),
@@ -124,7 +128,7 @@ class EditProductPage extends HookConsumerWidget {
                 ),
                 const SizedBox24Widget(),
                 ProductTypeWidget(
-                  onTap: () {},
+                  onTap: (int index) {},
                   btntxt: data.txtType,
                   style: apptheme.typography.h400
                       .copyWith(color: apptheme.colors.textDisabled),
@@ -142,11 +146,21 @@ class EditProductPage extends HookConsumerWidget {
                     itemCount: 1,
                     itemBuilder: (context, index) {
                       return ProductTypeWidget(
-                        onTap: () {
-                          ref.read(productProvider.notifier).deleteAddOn(
+                        onTap: (int index) async {
+                          await ref.read(productProvider.notifier).deleteAddOn(
                                 entity.id,
                                 entity.addOns[index].id,
                               );
+
+                          final controllersToDelete =
+                              productAddonControllers.value[index];
+
+                          productAddonControllers.value = [
+                            ...productAddonControllers.value
+                          ]..removeAt(index);
+
+                          controllersToDelete.nameController.dispose();
+                          controllersToDelete.priceController.dispose();
                         },
                         btntxt: data.txtAddOns,
                         productTypes: productAddonControllers,
@@ -185,11 +199,11 @@ class EditProductPage extends HookConsumerWidget {
                 id: entity.id,
                 name: productController.text,
                 description: descreptionController.text,
-                imagePath: ref.watch(imageProvider)!.path,
+                imagePath: ref.watch(imagePickerProvider)!.path,
                 categoryId: entity.categoryId,
               );
 
-              context.go(BottomNaviWidget.routePath);
+              context.pop();
             }),
       ),
     );

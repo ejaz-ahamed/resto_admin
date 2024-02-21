@@ -14,16 +14,27 @@ import 'package:resto_admin/features/products/presentation/widgets/column_widget
 
 class OverViewItemsPage extends HookConsumerWidget {
   static const routePath = '/overview';
-  final ProductEntity entity;
+  final String productId;
+  final String categoryId;
+
   const OverViewItemsPage({
     super.key,
-    required this.entity,
+    required this.productId,
+    required this.categoryId,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);
+
     final data = ref.watch(productConstantsProvider);
+
+    final ProductEntity entity = ref
+        .watch(getAllProductsByCategoryProvider(categoryId))
+        .asData!
+        .value
+        .firstWhere((product) => product.id == productId);
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
