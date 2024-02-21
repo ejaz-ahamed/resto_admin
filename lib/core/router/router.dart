@@ -7,8 +7,8 @@ import 'package:resto_admin/features/offer/presentation/pages/offer_selecting_pr
 import 'package:resto_admin/features/orders/domain/entity/order_entity.dart';
 import 'package:resto_admin/features/orders/presentation/pages/orderview_page.dart';
 import 'package:resto_admin/features/products/domain/entities/category_entity.dart';
+import 'package:resto_admin/features/products/domain/entities/product_addon_entity.dart';
 import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
-import 'package:resto_admin/features/products/domain/entities/category_entity.dart';
 import 'package:resto_admin/features/products/presentation/pages/edit_category_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/add_category_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/edit_product_page.dart';
@@ -104,8 +104,9 @@ final router = GoRouter(
     ),
     GoRoute(
       path: EditProductPage.routePath,
-      builder: (context, state) =>
-          EditProductPage(entity: state.extra as ProductEntity),
+      builder: (context, state) => EditProductPage(
+        entity: state.extra as ProductEntity,
+      ),
     ),
   ],
 );

@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:resto_admin/features/products/data/datasources/product_firestore_datasource.dart';
+import 'package:resto_admin/features/products/data/models/product_addon_model.dart';
 import 'package:resto_admin/features/products/data/models/product_model.dart';
+import 'package:resto_admin/features/products/data/models/product_type_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'product_firestore_datasource_impl.g.dart';
@@ -42,6 +44,21 @@ class ProductFirestoreDataSourceImpl implements ProductFireStoreDataSource {
   Future<void> update(ProductModel updatedModel) async {
     await collection.doc(updatedModel.id).set(updatedModel);
   }
+
+  @override
+  Future<void> deleteAddon(String productId, String addonId) async {
+    final data = await collection.doc(productId).get();
+    final update = <String, dynamic>{
+      'addOns': [
+        for (final addon in data.data()!.addOns)
+          if (addon.id != addonId) addon.toFirestore()
+      ],
+    };
+    await collection.doc(productId).update(update);
+  }
+
+  @override
+  Future<void> deleteType(String id) async {}
 }
 
 @riverpod

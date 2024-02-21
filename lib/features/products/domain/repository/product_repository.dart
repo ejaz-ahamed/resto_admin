@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:resto_admin/features/products/domain/entities/product_addon_entity.dart';
 import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
 
 abstract class ProductRepository {
@@ -10,4 +11,5 @@ abstract class ProductRepository {
   Stream<List<ProductEntity>> getAll(String categoryId);
   Future<ProductEntity> getById(String id);
   Future<void> deleteStorage(String fileName);
+  Future<void> deleteAddon(String productId,String addOnId);
 }
