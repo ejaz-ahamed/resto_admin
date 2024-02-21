@@ -12,21 +12,22 @@ class SwitchButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final colors = AppTheme.of(context).colors;
-    return Consumer(builder: (context, watch, _) {
-      final switchstate = ref.watch(profileProvider);
-      return Switch(
-          thumbIcon: MaterialStatePropertyAll(Icon(
-            Icons.circle,
-            color: colors.primary,
-          )),
-          trackOutlineColor: MaterialStatePropertyAll(colors.text),
-          thumbColor: MaterialStatePropertyAll(colors.primary),
-          trackColor: MaterialStatePropertyAll(colors.secondary),
-          value: switchstate,
-          onChanged: (value) {
-            ref.read(profileProvider.notifier).toggleTheme();
-            ref.read(themeProvider.notifier).switchTheme();
-          });
-    });
+
+    final switchstate = ref.watch(profileProvider);
+
+    return Switch(
+      thumbIcon: MaterialStatePropertyAll(Icon(
+        Icons.circle,
+        color: colors.primary,
+      )),
+      trackOutlineColor: MaterialStatePropertyAll(colors.text),
+      thumbColor: MaterialStatePropertyAll(colors.primary),
+      trackColor: MaterialStatePropertyAll(colors.secondary),
+      value: switchstate,
+      onChanged: (value) {
+        ref.read(profileProvider.notifier).toggleTheme();
+        ref.read(themeProvider.notifier).switchTheme();
+      },
+    );
   }
 }

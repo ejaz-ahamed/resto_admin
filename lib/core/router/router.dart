@@ -94,10 +94,15 @@ final router = GoRouter(
       ),
     ),
     GoRoute(
-      path: OverViewItemsPage.routePath,
-      builder: (context, state) =>
-          OverViewItemsPage(entity: state.extra as ProductEntity),
-    ),
+        path: OverViewItemsPage.routePath,
+        builder: (context, state) {
+          final (String, String) extra = state.extra as (String, String);
+
+          return OverViewItemsPage(
+            categoryId: extra.$1,
+            productId: extra.$2,
+          );
+        }),
     GoRoute(
       path: ViewCategoriesPage.routePath,
       builder: (context, state) => const ViewCategoriesPage(),

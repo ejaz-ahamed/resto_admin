@@ -36,8 +36,7 @@ class ListViewSeparatedWidget extends HookConsumerWidget {
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: theme.spaces.space_150),
             child: SizedBox(
-              width: theme.spaces.space_100 * 9,
-              // height: theme.spaces.space_100*9,
+              width: theme.spaces.space_900,
               child: Column(
                 children: [
                   InkWell(
