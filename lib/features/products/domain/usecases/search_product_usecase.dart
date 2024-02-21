@@ -43,8 +43,10 @@ class SearchProductUsecase {
               )
           ],
         );
-        if (product.name.contains(keyword) ||
-            product.description.contains(keyword)) {
+
+        keyword = keyword.toLowerCase().trim();
+        if (product.name.toLowerCase().trim().contains(keyword) ||
+            product.description.toLowerCase().trim().contains(keyword)) {
           searchResult.add(productEntity);
         }
       }

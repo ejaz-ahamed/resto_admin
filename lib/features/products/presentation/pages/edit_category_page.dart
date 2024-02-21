@@ -57,7 +57,7 @@ class EditCategoryPage extends HookConsumerWidget {
               ImagePickerWidget(imgProvider: imageProvider),
               const SizedBox16Widget(),
               TextFieldWidget(
-                enabled: true,
+                  enabled: true,
                   textFieldTitle: data.txtCategoryName,
                   hintText: data.txtSoups,
                   controller: controller),
@@ -66,12 +66,12 @@ class EditCategoryPage extends HookConsumerWidget {
         ),
         bottomNavigationBar: ElevatedButtonWidget(
           text: data.txtSaveBtn,
-          onPressed: () {
-            ref.read(categoryProvider.notifier).updateCategory(
+          onPressed: () async {
+            await ref.read(categoryProvider.notifier).updateCategory(
                 id: entity.id,
                 imagePath: ref.watch(imageProvider)!.path,
                 name: controller.text);
-            context.pop();
+            Future.sync(() => context.pop());
           },
         ),
       ),
