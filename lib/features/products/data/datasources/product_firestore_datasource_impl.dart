@@ -31,6 +31,15 @@ class ProductFirestoreDataSourceImpl implements ProductFireStoreDataSource {
       ];
     }
   }
+   Future<ProductModel> getById(String id) async {
+    final data = await collection.doc(id).get();
+    return data.data()!;
+  }
+
+  @override
+  Future<void> update(ProductModel updatedModel) async {
+    await collection.doc(updatedModel.id).set(updatedModel);
+  }
 
   @override
 
@@ -41,15 +50,8 @@ class ProductFirestoreDataSourceImpl implements ProductFireStoreDataSource {
       for (final product in searchedProducts.docs) product.data(),
     ];
 
-  Future<ProductModel> getById(String id) async {
-    final data = await collection.doc(id).get();
-    return data.data()!;
-  }
-
-  @override
-  Future<void> update(ProductModel updatedModel) async {
-    await collection.doc(updatedModel.id).set(updatedModel);
-  }
+ 
+}
 }
 
 @riverpod

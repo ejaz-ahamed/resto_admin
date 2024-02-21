@@ -70,7 +70,7 @@ class ProductPage extends HookConsumerWidget {
                   btntxt: data.txtType,
                   style: apptheme.typography.h400
                       .copyWith(color: apptheme.colors.textDisabled),
-                  hint: constants.txtType,
+                  hint: data.txtType,
                   productTypes: productTypeControllers,
                 ),
                 const SizedBox32Widget(),
@@ -83,7 +83,7 @@ class ProductPage extends HookConsumerWidget {
                   productTypes: productAddonControllers,
                   style: apptheme.typography.h400
                       .copyWith(color: apptheme.colors.textDisabled),
-                  hint: constants.txtAddOns,
+                  hint: data.txtAddOns,
                 ),
                 const SizedBox24Widget(),
               ],
