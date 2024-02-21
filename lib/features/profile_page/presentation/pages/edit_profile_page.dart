@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
@@ -15,6 +17,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:resto_admin/features/authentication/presentation/provider/authentication_provider.dart';
 import 'package:resto_admin/features/profile_page/presentation/providers/profile_provider.dart';
 
+/// To store the image selected in the image picker
 final editImageProvider = StateProvider<XFile?>((ref) => null);
 
 class EditProfilePage extends HookConsumerWidget {
@@ -26,9 +29,17 @@ class EditProfilePage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final openingTimeController = useTextEditingController();
     final closingTimeController = useTextEditingController();
+
     final constants = ref.watch(profilePageContstantsProvider);
-    final hintText = ref.watch(profilePageContstantsProvider).txtHintenterHere;
     final appTheme = AppTheme.of(context);
+
+    useEffect(() {
+      /// Clear the image already selected in the image provider
+      ref.invalidate(editImageProvider);
+
+      return null;
+    }, []);
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -67,44 +78,65 @@ class EditProfilePage extends HookConsumerWidget {
                               .watch(authenticationProvider.notifier)
                               .getProfileImage(),
                           builder: (context, snapshot) {
-                            if (snapshot.hasData) {
+                            /// If the user is selected new image in the image picker,
+                            /// then show it
+
+                            final selectedImage = ref.watch(editImageProvider);
+                            if (selectedImage != null) {
+                              return ClipRRect(
+                                  borderRadius: BorderRadius.circular(
+                                      appTheme.spaces.space_900 * 100),
+                                  child: Image.file(File(selectedImage.path)));
+                            }
+
+                            /// If the user already have a valid image selected previously,
+                            /// then show it
+                            else if (snapshot.hasData &&
+                                snapshot.data!.imgPath.trim().isNotEmpty) {
                               return ClipRRect(
                                   borderRadius: BorderRadius.circular(
                                       appTheme.spaces.space_900 * 100),
                                   child: Image.network(snapshot.data!.imgPath));
-                            } else if (snapshot.hasError) {
-                              return const Center(
-                                child: Text('Error'),
-                              );
-                            } else if (snapshot.data == null) {
+                            }
+
+                            /// If the user is not selected any image for this account so far
+                            /// the show a default image view
+                            else if (snapshot.hasData &&
+                                snapshot.data!.imgPath.trim().isEmpty) {
                               return const AddImageWidget();
-                            } else {
+                            }
+
+                            /// Else if there is any error while loading the user image data
+                            /// then show error message
+                            else if (snapshot.hasError) {
+                              return const Center(
+                                child: FittedBox(
+                                  child: Text('Cannot Load User Image'),
+                                ),
+                              );
+                            }
+
+                            /// For all other cases, show a progress indicator
+                            else {
                               return const Center(
                                 child: CircularProgressIndicator(),
                               );
                             }
                           },
                         ),
-                        // child: ref.watch(editImageProvider) == null
-                        //     ? const AddImageWidget()
-                        //     : ClipRRect(
-                        //         borderRadius: BorderRadius.circular(
-                        //             appTheme.spaces.space_900 * 100),
-                        //         child: Image.file(
-                        //             File(ref.watch(editImageProvider)!.path))),
                       ),
                     )),
                 const SizedBox32Widget(),
                 TextFieldWidget(
                     enabled: true,
                     textFieldTitle: constants.txtOpeningTime,
-                    hintText: hintText,
+                    hintText: constants.txtHintenterHere,
                     controller: openingTimeController),
                 const SizedBox24Widget(),
                 TextFieldWidget(
                     enabled: true,
                     textFieldTitle: constants.txtClosingTime,
-                    hintText: hintText,
+                    hintText: constants.txtHintenterHere,
                     controller: closingTimeController),
                 TextButton(
                     onPressed: () {
@@ -117,15 +149,19 @@ class EditProfilePage extends HookConsumerWidget {
         ),
         bottomNavigationBar: ElevatedButtonWidget(
           text: constants.txtSave,
-          onPressed: () {
-            ref
-                .read(profileProvider.notifier)
-                .upload(ref.watch(editImageProvider)!.path);
-            ref
-                .read(authenticationProvider.notifier)
-                .setProfileImage(imagePath: ref.watch(editImageProvider)!.path);
+          onPressed: () async {
+            /// Image to upload
+            final image = ref.read(editImageProvider);
 
-            context.pop();
+            /// Only when the user select a new image, upload the new image
+            /// Else use the existing image
+            if (image != null) {
+              await ref
+                  .read(profileProvider.notifier)
+                  .upload(ref.watch(editImageProvider)!.path);
+            }
+
+            Future.sync(() => context.pop());
           },
         ),
       ),

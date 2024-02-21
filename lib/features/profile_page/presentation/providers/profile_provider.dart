@@ -1,3 +1,4 @@
+import 'package:resto_admin/features/authentication/data/repositery/auth_repositery_impl.dart';
 import 'package:resto_admin/features/profile_page/data/repository/profile_repository_impl.dart';
 import 'package:resto_admin/features/profile_page/domain/usecase/add_image_usecase.dart';
 import 'package:resto_admin/features/profile_page/domain/usecase/delete_image_usecase.dart';
@@ -17,9 +18,13 @@ class Profile extends _$Profile {
     state = !state;
   }
 
-  Future<String> upload(String fileToUpload) async {
-    return AddImageUsecase(repository: ref.watch(profileRepositoryProvider))(
-        fileToUpload);
+  Future<void> upload(String fileToUpload) async {
+    return AddImageUsecase(
+      profileRepo: ref.watch(profileRepositoryProvider),
+      authRepo: ref.watch(authRepositeryProvider),
+    )(
+      fileToUpload,
+    );
   }
 
   Future<void> deleteImage() async {
