@@ -45,19 +45,36 @@ class OrderRepositoryImpl implements OrderRepository {
   }
 
   @override
-  Stream<ProductEntity> getProductById(String productId) async*{
+  Stream<List<ProductEntity>> getProductById(String productId) async* {
     final products = dataSource.getProductsById(productId);
-    await for(final data in products){
-    yield ProductEntity(name: data.name, imagePath: data.imagePath, description: data.description, categoryId: data.categoryId, id: data.id,
-     types: [
-      for(final productItem in data.types)
-      ProductTypeEntity(name: productItem.name, price: productItem.price, id: productItem.id)
-     ],
-      addOns: [
-        for(final addOnsItem in data.addOns)
-        ProductAddOnEntity(name: addOnsItem.name, id: addOnsItem.id, price: addOnsItem.price)
-      ]);
-   
+    await for (final snapshot in products) {
+      final docs = snapshot;
+      yield [
+        for (final product in docs)
+          ProductEntity(
+            name: product.name,
+            imagePath: product.imagePath,
+            description: product.description,
+            id: product.id,
+            types: [
+              for (final type in product.types)
+                ProductTypeEntity(
+                  name: type.name,
+                  price: type.price,
+                  id: type.id,
+                )
+            ],
+            addOns: [
+              for (final add in product.addOns)
+                ProductAddOnEntity(
+                  name: add.name,
+                  id: add.id,
+                  price: add.price,
+                )
+            ],
+            categoryId: '',
+          )
+      ];
     }
   }
 }

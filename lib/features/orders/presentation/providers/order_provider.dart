@@ -33,8 +33,15 @@ class Order extends _$Order {
         orderId, newStatus);
   }
 
-  Stream<ProductEntity> getProductById(String productId) async*{
-    yield* GetProductByIdUsecase(repository: ref.watch(orderRepositoryProvider))(
-        productId);
-  }
+  // Stream<ProductEntity> getProductById(String productId) async*{
+  //   yield* GetProductByIdUsecase(repository: ref.watch(orderRepositoryProvider))(
+  //       productId);
+  // }
+}
+
+@riverpod
+Stream<List<ProductEntity>> getProductById(
+    GetProductByIdRef ref, String productId) {
+  final repo = ref.read(orderRepositoryProvider);
+  return GetProductByIdUsecase(repository: repo)(productId);
 }

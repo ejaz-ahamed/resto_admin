@@ -12,8 +12,8 @@ import 'package:resto_admin/features/products/presentation/providers/category_pr
 import 'package:resto_admin/features/products/presentation/widgets/row_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/textfield_widget.dart';
 import 'package:resto_admin/features/profile_page/presentation/pages/profile_page.dart';
+import 'package:shimmer/shimmer.dart';
 // import 'package:shimmer/shimmer.dart';
-
 
 class HomePage extends HookConsumerWidget {
   static const routePath = '/home';
@@ -99,35 +99,35 @@ class HomePage extends HookConsumerWidget {
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    // SizedBox(
-                                    //   width: theme.spaces.space_500,
-                                    //   height: theme.spaces.space_600,
-                                    //   child: Shimmer.fromColors(
-                                    //     baseColor: theme.colors.textInverse,
-                                    //     highlightColor: theme.colors.textSubtle,
-                                    //     child: const CircleAvatar(),
-                                    //   ),
-                                    // ),
+                                    SizedBox(
+                                      width: theme.spaces.space_500,
+                                      height: theme.spaces.space_600,
+                                      child: Shimmer.fromColors(
+                                        baseColor: theme.colors.textInverse,
+                                        highlightColor: theme.colors.textSubtle,
+                                        child: const CircleAvatar(),
+                                      ),
+                                    ),
                                     SizedBox(
                                       height: theme.spaces.space_75,
                                     ),
-                                    // Container(
-                                    //   margin: EdgeInsets.symmetric(
-                                    //       horizontal: theme.spaces.space_150),
-                                    //   width: theme.spaces.space_700,
-                                    //   height: theme.spaces.space_150,
-                                    //   child: Shimmer.fromColors(
-                                    //     baseColor: theme.colors.textInverse,
-                                    //     highlightColor: theme.colors.textSubtle,
-                                    //     child: Container(
-                                    //       decoration: BoxDecoration(
-                                    //           color: theme.colors.primary,
-                                    //           borderRadius:
-                                    //               BorderRadius.circular(
-                                    //                   theme.spaces.space_50)),
-                                    //     ),
-                                    //   ),
-                                    // ),
+                                    Container(
+                                      margin: EdgeInsets.symmetric(
+                                          horizontal: theme.spaces.space_150),
+                                      width: theme.spaces.space_700,
+                                      height: theme.spaces.space_150,
+                                      child: Shimmer.fromColors(
+                                        baseColor: theme.colors.textInverse,
+                                        highlightColor: theme.colors.textSubtle,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              color: theme.colors.primary,
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      theme.spaces.space_50)),
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
                               );

@@ -5,5 +5,5 @@ import 'package:resto_admin/features/products/data/models/product_model.dart';
 abstract class OrderFirestoreDataSource {
   Stream<List<OrderModel>> getAll(OrderStatus orderStatus);
   Future<void> updateType(String orderId, OrderStatus newStatus);
-  Stream<ProductModel>getProductsById(String productId);
+  Stream<List<ProductModel>> getProductsById(String productId);
 }
