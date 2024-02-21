@@ -6,18 +6,29 @@ import 'package:resto_admin/features/products/domain/repository/product_reposito
 import 'package:resto_admin/features/products/domain/usecases/add_product_usecase.dart';
 import 'package:resto_admin/features/products/domain/usecases/delete_product_usecase.dart';
 import 'package:resto_admin/features/products/domain/usecases/get_product_usecase.dart';
+import 'package:resto_admin/features/products/domain/usecases/search_product_usecase.dart';
+import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
+import 'package:resto_admin/features/products/presentation/providers/products_provider_state.dart';
 import 'package:resto_admin/features/products/domain/usecases/update_product_usecase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'product_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class Product extends _$Product {
   late ProductRepository repository;
 
   @override
-  void build() {
-    repository = ref.watch(productRepositoryProvider);
+  ProductProviderState build() {
+    repository = ref.read(productRepositoryProvider);
+    return ProductProviderState(
+      selectedCategoryProducts: [],
+      searchedProducts: null,
+    );
+  }
+
+  void clearSearchList() {
+    state = state.copyWith(searchedProducts: null);
   }
 
   Future<void> addProduct({
@@ -29,7 +40,7 @@ class Product extends _$Product {
     required List<ProductAddOnEntity> addOns,
     required String categoryId,
   }) {
-    repository = ref.watch(productRepositoryProvider);
+    repository = ref.read(productRepositoryProvider);
     return AddProductUsecase(repository: repository)(
         categoryId: categoryId,
         addOns: addOns,
@@ -41,8 +52,14 @@ class Product extends _$Product {
   }
 
   Future<void> deleteProduct(String id) {
-    final repository = ref.watch(productRepositoryProvider);
+    final repository = ref.read(productRepositoryProvider);
     return DeleteProductUsecase(repository: repository)(id);
+  }
+
+  void search(String keyword) async {
+    final searchedProducts = await SearchProductUsecase(repository: repository)(
+        keyword, ref.read(categoryProvider).selectedCategory);
+    state = state.copyWith(searchedProducts: searchedProducts);
   }
 
   Future<void> updateProduct({
@@ -54,7 +71,7 @@ class Product extends _$Product {
     required List<ProductAddOnEntity> addOns,
     required String categoryId,
   }) {
-    repository = ref.watch(productRepositoryProvider);
+    repository = ref.read(productRepositoryProvider);
     return UpdatedProductUseCase(repository: repository)(
         categoryId: categoryId,
         addOns: addOns,
@@ -64,8 +81,11 @@ class Product extends _$Product {
         description: description,
         imagePath: imagePath);
   }
+}
 
-  Stream<List<ProductEntity>> getAll(String categoryId) {
-    return GetAllProductsUseCase(repository: repository)(categoryId);
-  }
+@riverpod
+Stream<List<ProductEntity>> getAllProductsByCategory(
+    GetAllProductsByCategoryRef ref, String categoryId) {
+  final repository = ref.read(productRepositoryProvider);
+  return GetAllProductsUseCase(repository: repository)(categoryId);
 }
