@@ -70,7 +70,7 @@ class AddOfferPage extends HookConsumerWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
                 child: TextFieldWidget(
-                  enabled: true,
+                    enabled: true,
                     textFieldTitle: constants.txtTitle,
                     hintText: constants.txtHintTextTitle,
                     controller: nameController),
@@ -80,7 +80,7 @@ class AddOfferPage extends HookConsumerWidget {
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
                 child: TextFieldWidget(
                     maxLines: null,
-                  enabled: true,
+                    enabled: true,
                     textFieldTitle: constants.txtDescription,
                     hintText: constants.txtHintTextdescription,
                     controller: descriptionController),
