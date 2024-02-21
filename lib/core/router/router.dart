@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/widgets/bottom_navigation/bottom_nav_widget.dart';
 import 'package:resto_admin/features/authentication/presentation/pages/auth_switcher.dart';
+import 'package:resto_admin/features/offer/domain/entity/offer_entity.dart';
 import 'package:resto_admin/features/offer/presentation/pages/add_offer_page.dart';
 import 'package:resto_admin/features/offer/presentation/pages/edit_offer_page.dart';
 import 'package:resto_admin/features/offer/presentation/pages/offer_selecting_product_page.dart';
@@ -8,8 +9,10 @@ import 'package:resto_admin/features/orders/domain/entity/order_entity.dart';
 import 'package:resto_admin/features/orders/presentation/pages/orderview_page.dart';
 import 'package:resto_admin/features/products/domain/entities/category_entity.dart';
 import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
+import 'package:resto_admin/features/products/domain/entities/category_entity.dart';
 import 'package:resto_admin/features/products/presentation/pages/edit_category_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/add_category_page.dart';
+import 'package:resto_admin/features/products/presentation/pages/edit_product_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/home_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/manage_categories.dart';
 import 'package:resto_admin/features/products/presentation/pages/overview_items_page.dart';
@@ -58,7 +61,8 @@ final router = GoRouter(
     ),
     GoRoute(
       path: EditOfferPage.routePath,
-      builder: (context, state) => const EditOfferPage(),
+      builder: (context, state) =>
+          EditOfferPage(entity: state.extra as OfferEntity),
     ),
     GoRoute(
       path: OrderViewPage.routePath,
@@ -101,6 +105,11 @@ final router = GoRouter(
       path: ManageCategoriesPage.routePath,
       builder: (context, state) =>
           ManageCategoriesPage(entity: state.extra as List<CategoryEntity>),
+    ),
+    GoRoute(
+      path: EditProductPage.routePath,
+      builder: (context, state) =>
+          EditProductPage(entity: state.extra as ProductEntity),
     ),
   ],
 );

@@ -32,13 +32,11 @@ class ImagePickerWidget extends ConsumerWidget {
         File(imagePathPicked),
         fit: BoxFit.cover,
       );
-    }
-
+  
     return InkWell(
       onTap: () async {
         final imageSelected =
             await ImagePickerUtils.showDialogueForImagePicker(context);
-
         ref.read(imageProvider.notifier).state = imageSelected;
       },
       child: Container(

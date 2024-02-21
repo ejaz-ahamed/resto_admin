@@ -7,21 +7,24 @@ class EditFieldWidget extends ConsumerWidget {
   final bool isPrice;
   final TextEditingController controller;
   final bool? enabled;
+  final bool? cursor;
   final void Function(String)? onChanged;
   final TextStyle? style;
-  const EditFieldWidget({
-    super.key,
-    required this.hintText,
-    required this.controller,
-    this.isPrice = false,
-    this.enabled,
-    this.onChanged,
-    required this.style,
-  });
+  const EditFieldWidget(
+      {super.key,
+      required this.hintText,
+      required this.controller,
+      this.isPrice = false,
+      this.enabled,
+      this.onChanged,
+      required this.style,
+      this.cursor});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);
     return TextField(
+      showCursor: cursor,
+      
       controller: controller,
       onChanged: onChanged,
       enabled: enabled,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
 
 class SearchTextFieldWidget extends HookConsumerWidget {
   final TextEditingController searchController;
@@ -12,6 +13,12 @@ class SearchTextFieldWidget extends HookConsumerWidget {
     final theme = AppTheme.of(context);
     return TextField(
       controller: searchController,
+      onChanged: (keyword) {
+        ref.read(productProvider.notifier).search(keyword);
+      },
+      onSubmitted: (keyword) {
+        ref.read(productProvider.notifier).search(keyword);
+      },
       cursorColor: theme.colors.text,
       decoration: InputDecoration(
         hintText: data.txtFieldHint,

@@ -32,7 +32,7 @@ final class GetAllProductsUseCase {
                   )
               ],
               addOns: [
-                for (final add in product.types)
+                for (final add in product.addOns)
                   ProductAddOnEntity(
                     name: add.name,
                     price: add.price,
