@@ -30,6 +30,11 @@ class OfferSelectingPage extends HookConsumerWidget {
             .watch(categoryProvider.select((value) => value.selectedCategory))))
         .asData;
 
+    /// The IDs of the currently selected category products
+    final currentCategoryProductIds = productsData != null
+        ? productsData.value.map((e) => e.id).toList()
+        : <String>[];
+
     /// Once the product data is loaded, this count will have a positive value
     /// So that when this count is negative, we have to hide the selection UI
     /// (e.g: Select All button)
@@ -43,10 +48,17 @@ class OfferSelectingPage extends HookConsumerWidget {
         return;
       }
 
-      if (selectedItems.value.length < itemCount) {
-        selectedItems.value = productsData!.value.map((e) => e.id).toSet();
+      if (selectedItems.value
+              .where((product) => currentCategoryProductIds.contains(product))
+              .length <
+          itemCount) {
+        /// Need to select all products from the current category
+        selectedItems.value = {...selectedItems.value}
+          ..addAll(currentCategoryProductIds);
       } else {
-        selectedItems.value = {};
+        /// Need to remove all products from the current category
+        selectedItems.value = {...selectedItems.value}
+          ..removeAll(currentCategoryProductIds);
       }
     }
 
@@ -55,7 +67,10 @@ class OfferSelectingPage extends HookConsumerWidget {
     if (itemCount <= 0) {
       /// Page not loaded completely
       appBarActionTitle = '';
-    } else if (selectedItems.value.length < itemCount) {
+    } else if (selectedItems.value
+            .where((product) => currentCategoryProductIds.contains(product))
+            .length <
+        itemCount) {
       /// Currently all items are not selected
       appBarActionTitle = constants.txtSelectAllText;
     } else {
