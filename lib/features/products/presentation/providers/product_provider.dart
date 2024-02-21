@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:resto_admin/features/products/data/repository/product_repository_impl.dart';
 import 'package:resto_admin/features/products/domain/entities/product_addon_entity.dart';
 import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
@@ -16,7 +17,7 @@ class Product extends _$Product {
 
   @override
   List<ProductEntity> build() {
-    repository = ref.watch(productRepositoryProvider);
+    repository = ref.read(productRepositoryProvider);
     return [];
   }
 
@@ -29,7 +30,7 @@ class Product extends _$Product {
     required List<ProductAddOnEntity> addOns,
     required String categoryId,
   }) {
-    repository = ref.watch(productRepositoryProvider);
+    repository = ref.read(productRepositoryProvider);
     return AddProductUsecase(repository: repository)(
         categoryId: categoryId,
         addOns: addOns,
@@ -41,14 +42,17 @@ class Product extends _$Product {
   }
 
   Future<void> deleteProduct(String id) {
-    final repository = ref.watch(productRepositoryProvider);
+    final repository = ref.read(productRepositoryProvider);
     return DeleteProductUsecase(repository: repository)(id);
   }
 
   Stream<List<ProductEntity>> getAll(String categoryId) async* {
     final stream = GetAllProductsUseCase(repository: repository)(categoryId);
     await for (final products in stream) {
-      state = products;
+      debugPrint('Loading..');
+      if (state != products) {
+        state = products;
+      }
       yield products;
     }
   }
