@@ -66,12 +66,12 @@ class ProductPage extends HookConsumerWidget {
                 ),
                 const SizedBox24Widget(),
                 ProductTypeWidget(
-                  onTap: () {},
                   btntxt: data.txtType,
                   style: apptheme.typography.h400
                       .copyWith(color: apptheme.colors.textDisabled),
                   hint: data.txtType,
                   productTypes: productTypeControllers,
+                  onTap: () {},
                 ),
                 const SizedBox32Widget(),
                 HeadingWidget(
@@ -79,12 +79,12 @@ class ProductPage extends HookConsumerWidget {
                 ),
                 const SizedBox24Widget(),
                 ProductTypeWidget(
-                  onTap: () {},
                   btntxt: data.txtAddOns,
                   productTypes: productAddonControllers,
                   style: apptheme.typography.h400
                       .copyWith(color: apptheme.colors.textDisabled),
                   hint: data.txtAddOns,
+                  onTap: () {},
                 ),
                 const SizedBox24Widget(),
               ],
