@@ -10,7 +10,7 @@ import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/features/products/domain/entities/category_entity.dart';
 import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
-import 'package:resto_admin/features/products/presentation/widgets/category_grid_widget.dart';
+import 'package:resto_admin/features/products/presentation/widgets/category_Grid_widget.dart';
 
 class ManageCategoriesPage extends HookConsumerWidget {
   static const routePath = '/manageCotegory';

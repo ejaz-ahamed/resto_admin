@@ -41,6 +41,7 @@ class ProductTypeWidget extends HookConsumerWidget {
           priceController: TextEditingController(),
         ),
       ];
+    }
 
     return Column(
       mainAxisSize: MainAxisSize.min,
