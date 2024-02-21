@@ -11,12 +11,12 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'category_provider.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class Category extends _$Category {
   late CategoryRepository repository;
   @override
   CategoryProviderState build() {
-    repository = ref.watch(categoryRepositoryProvider);
+    repository = ref.read(categoryRepositoryProvider);
 
     return CategoryProviderState(
       categories: [],

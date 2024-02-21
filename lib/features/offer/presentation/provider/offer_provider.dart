@@ -69,3 +69,7 @@ class Offer extends _$Offer {
 }
 
 
+
+
+
+
