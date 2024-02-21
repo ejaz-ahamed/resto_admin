@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/features/products/domain/entities/category_entity.dart';
 import 'package:resto_admin/features/products/presentation/pages/edit_category_page.dart';
-import 'package:resto_admin/features/products/presentation/pages/manage_categories.dart';
+import 'package:resto_admin/features/products/presentation/pages/manage_categories_page.dart';
 
 class ViewCategoriesWidget extends StatelessWidget {
   final List<CategoryEntity> entity;
