@@ -63,31 +63,31 @@ class Product extends _$Product {
         keyword, ref.read(categoryProvider).selectedCategory);
     state = state.copyWith(searchedProducts: searchedProducts);
   }
-    Future<void> updateProduct({
-      required String name,
-      required String description,
-      required String imagePath,
-      required String id,
-      required List<ProductTypeEntity> types,
-      required List<ProductAddOnEntity> addOns,
-      required String categoryId,
-    }) {
-      repository = ref.read(productRepositoryProvider);
-      return UpdatedProductUseCase(repository: repository)(
-          categoryId: categoryId,
-          addOns: addOns,
-          types: types,
-          id: id,
-          name: name,
-          description: description,
-          imagePath: imagePath);
-    }
-  }
 
-  @riverpod
-  Stream<List<ProductEntity>> getAllProductsByCategory(
-      GetAllProductsByCategoryRef ref, String categoryId) {
-    final repository = ref.read(productRepositoryProvider);
-    return GetAllProductsUseCase(repository: repository)(categoryId);
+  Future<void> updateProduct({
+    required String name,
+    required String description,
+    required String imagePath,
+    required String id,
+    required List<ProductTypeEntity> types,
+    required List<ProductAddOnEntity> addOns,
+    required String categoryId,
+  }) {
+    repository = ref.read(productRepositoryProvider);
+    return UpdatedProductUseCase(repository: repository)(
+        categoryId: categoryId,
+        addOns: addOns,
+        types: types,
+        id: id,
+        name: name,
+        description: description,
+        imagePath: imagePath);
   }
+}
+
+@riverpod
+Stream<List<ProductEntity>> getAllProductsByCategory(
+    GetAllProductsByCategoryRef ref, String categoryId) {
+  final repository = ref.read(productRepositoryProvider);
+  return GetAllProductsUseCase(repository: repository)(categoryId);
 }
