@@ -44,7 +44,7 @@ class Authentication extends _$Authentication {
 
   Stream<UserEntity> getProfileImage() async* {
     try {
-      yield* GetUserDetailsUsecases(
+      yield* GetProfileImageUsecases(
           repositery: ref.watch(authRepositeryProvider))();
     } on BaseException catch (e) {
       SnackBarUtils.showMessage(e.message);

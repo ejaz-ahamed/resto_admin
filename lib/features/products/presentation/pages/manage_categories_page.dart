@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
-
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
-
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/features/products/domain/entities/category_entity.dart';
 import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
@@ -27,8 +25,12 @@ class ManageCategoriesPage extends HookConsumerWidget {
 
     void selectAll() {
       if (selectedItems.value.length < itemCount) {
-        selectedItems.value =
-            ref.read(categoryProvider).categories.map((e) => e.id).toSet();
+        selectedItems.value = ref
+            .read(getAllCategoryProvider)
+            .asData!
+            .value
+            .map((e) => e.id)
+            .toSet();
       } else {
         selectedItems.value = {};
       }

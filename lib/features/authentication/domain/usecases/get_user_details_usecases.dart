@@ -3,10 +3,10 @@ import 'package:resto_admin/core/utils/firebase_storage_utils.dart';
 import 'package:resto_admin/features/authentication/domain/entity/user_entity.dart';
 import 'package:resto_admin/features/authentication/domain/repositery/auth_repositery.dart';
 
-class GetUserDetailsUsecases {
+class GetProfileImageUsecases {
   final AuthRepositery repositery;
 
-  GetUserDetailsUsecases({required this.repositery});
+  GetProfileImageUsecases({required this.repositery});
   Stream<UserEntity> call() async* {
     try {
       final profileStreams = repositery.getProfileImage();

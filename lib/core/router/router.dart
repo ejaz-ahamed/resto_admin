@@ -14,7 +14,7 @@ import 'package:resto_admin/features/products/presentation/pages/edit_category_p
 import 'package:resto_admin/features/products/presentation/pages/add_category_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/edit_product_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/home_page.dart';
-import 'package:resto_admin/features/products/presentation/pages/manage_categories.dart';
+import 'package:resto_admin/features/products/presentation/pages/manage_categories_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/overview_items_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/view_categories_page.dart';
 import 'package:resto_admin/features/profile_page/presentation/pages/edit_password_page.dart';
@@ -109,8 +109,9 @@ final router = GoRouter(
     ),
     GoRoute(
       path: EditProductPage.routePath,
-      builder: (context, state) =>
-          EditProductPage(entity: state.extra as ProductEntity),
+      builder: (context, state) => EditProductPage(
+        entity: state.extra as ProductEntity,
+      ),
     ),
   ],
 );

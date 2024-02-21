@@ -106,6 +106,11 @@ class EditProfilePage extends HookConsumerWidget {
                     textFieldTitle: constants.txtClosingTime,
                     hintText: hintText,
                     controller: closingTimeController),
+                TextButton(
+                    onPressed: () {
+                      ref.read(authenticationProvider.notifier).removeImage();
+                    },
+                    child: const Text('delete image'))
               ],
             ),
           ),

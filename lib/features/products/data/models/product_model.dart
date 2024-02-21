@@ -11,6 +11,7 @@ part 'product_model.freezed.dart';
 @freezed
 class ProductModel with _$ProductModel {
   const ProductModel._();
+
   @JsonSerializable(explicitToJson: true)
   factory ProductModel({
     required String id,
