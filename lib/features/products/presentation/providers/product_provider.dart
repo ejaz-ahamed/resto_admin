@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:resto_admin/features/products/data/repository/product_repository_impl.dart';
 import 'package:resto_admin/features/products/domain/entities/product_addon_entity.dart';
+import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
 import 'package:resto_admin/features/products/domain/entities/product_type_entity.dart';
 import 'package:resto_admin/features/products/domain/repository/product_repository.dart';
 import 'package:resto_admin/features/products/domain/usecases/add_product_usecase.dart';
@@ -57,40 +58,36 @@ class Product extends _$Product {
     return DeleteProductUsecase(repository: repository)(id);
   }
 
-
   void search(String keyword) async {
     final searchedProducts = await SearchProductUsecase(repository: repository)(
         keyword, ref.read(categoryProvider).selectedCategory);
     state = state.copyWith(searchedProducts: searchedProducts);
 
-  Future<void> updateProduct({
-    required String name,
-    required String description,
-    required String imagePath,
-    required String id,
-    required List<ProductTypeEntity> types,
-    required List<ProductAddOnEntity> addOns,
-    required String categoryId,
-  }) {
-    repository = ref.watch(productRepositoryProvider);
-    return UpdatedProductUseCase(repository: repository)(
-        categoryId: categoryId,
-        addOns: addOns,
-        types: types,
-        id: id,
-        name: name,
-        description: description,
-        imagePath: imagePath);
+    Future<void> updateProduct({
+      required String name,
+      required String description,
+      required String imagePath,
+      required String id,
+      required List<ProductTypeEntity> types,
+      required List<ProductAddOnEntity> addOns,
+      required String categoryId,
+    }) {
+      repository = ref.read(productRepositoryProvider);
+      return UpdatedProductUseCase(repository: repository)(
+          categoryId: categoryId,
+          addOns: addOns,
+          types: types,
+          id: id,
+          name: name,
+          description: description,
+          imagePath: imagePath);
+    }
   }
 
-  Stream<List<ProductEntity>> getAll(String categoryId) {
+  @riverpod
+  Stream<List<ProductEntity>> getAllProductsByCategory(
+      GetAllProductsByCategoryRef ref, String categoryId) {
+    final repository = ref.read(productRepositoryProvider);
     return GetAllProductsUseCase(repository: repository)(categoryId);
   }
-}
-
-@riverpod
-Stream<List<ProductEntity>> getAllProductsByCategory(
-    GetAllProductsByCategoryRef ref, String categoryId) {
-  final repository = ref.read(productRepositoryProvider);
-  return GetAllProductsUseCase(repository: repository)(categoryId);
 }

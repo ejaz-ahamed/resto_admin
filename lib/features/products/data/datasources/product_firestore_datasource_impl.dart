@@ -33,13 +33,13 @@ class ProductFirestoreDataSourceImpl implements ProductFireStoreDataSource {
   }
 
   @override
-
   Future<List<ProductModel>> search(String categoryId) async {
     final searchedProducts =
         await collection.where('categoryId', isEqualTo: categoryId).get();
     return [
       for (final product in searchedProducts.docs) product.data(),
     ];
+  }
 
   Future<ProductModel> getById(String id) async {
     final data = await collection.doc(id).get();

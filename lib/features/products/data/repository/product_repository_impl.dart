@@ -99,7 +99,6 @@ class ProductRepositoryImpl implements ProductRepository {
   }
 
   @override
-
   Future<List<ProductEntity>> search(String categoryId) async {
     final data = await dataSource.search(categoryId);
 
@@ -130,6 +129,8 @@ class ProductRepositoryImpl implements ProductRepository {
         )
     ];
     return result;
+  }
+
   Future<void> update(ProductEntity updatedEntity) async {
     List<ProductTypeModel> typeEntity = [
       for (final type in updatedEntity.types)
