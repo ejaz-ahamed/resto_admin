@@ -6,7 +6,6 @@ part 'products_provider_state.freezed.dart';
 @freezed
 class ProductProviderState with _$ProductProviderState {
   factory ProductProviderState({
-    required List<ProductEntity> selectedCategoryProducts,
     required List<ProductEntity>? searchedProducts,
   }) = _ProductProviderState;
 }
