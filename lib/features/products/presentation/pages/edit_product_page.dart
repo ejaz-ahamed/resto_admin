@@ -129,7 +129,6 @@ class EditProductPage extends HookConsumerWidget {
                 ),
                 const SizedBox32Widget(),
                 HeadingWidget(
-                  
                   text: data.txtAddOns,
                 ),
                 const SizedBox24Widget(),

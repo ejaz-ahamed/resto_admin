@@ -62,7 +62,7 @@ class Product extends _$Product {
     final searchedProducts = await SearchProductUsecase(repository: repository)(
         keyword, ref.read(categoryProvider).selectedCategory);
     state = state.copyWith(searchedProducts: searchedProducts);
-
+  }
     Future<void> updateProduct({
       required String name,
       required String description,

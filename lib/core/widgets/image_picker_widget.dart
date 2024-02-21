@@ -32,6 +32,7 @@ class ImagePickerWidget extends ConsumerWidget {
         fit: BoxFit.cover,
       );
     }
+
     return InkWell(
       onTap: () async {
         final imageSelected =
