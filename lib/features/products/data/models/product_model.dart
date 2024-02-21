@@ -12,7 +12,7 @@ part 'product_model.freezed.dart';
 class ProductModel with _$ProductModel {
   const ProductModel._();
 
-  // ignore: invalid_annotation_target
+  
   @JsonSerializable(explicitToJson: true)
   factory ProductModel({
     required String id,

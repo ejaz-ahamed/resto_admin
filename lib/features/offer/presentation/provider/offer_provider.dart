@@ -65,7 +65,7 @@ class Offer extends _$Offer {
         amount: amount,
         offerType: offerType,
         product: product = []);
-  }
-
-  
+  }  
 }
+
+

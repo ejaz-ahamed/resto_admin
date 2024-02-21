@@ -65,3 +65,4 @@ class Category extends _$Category {
         docIdsToDelete: docIdsToDelete);
   }
 }
+
