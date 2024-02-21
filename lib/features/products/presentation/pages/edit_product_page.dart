@@ -123,7 +123,7 @@ class EditProductPage extends HookConsumerWidget {
                 ),
                 const SizedBox24Widget(),
                 ProductTypeWidget(
-                  onTap: () {},
+                  onTap: (int index) {},
                   btntxt: data.txtType,
                   style: apptheme.typography.h400
                       .copyWith(color: apptheme.colors.textDisabled),
@@ -141,11 +141,15 @@ class EditProductPage extends HookConsumerWidget {
                     itemCount: 1,
                     itemBuilder: (context, index) {
                       return ProductTypeWidget(
-                        onTap: () {
-                          ref.read(productProvider.notifier).deleteAddOn(
+                        onTap: (int index) async {
+                          await ref.read(productProvider.notifier).deleteAddOn(
                                 entity.id,
                                 entity.addOns[index].id,
                               );
+
+                          productAddonControllers.value = [
+                            ...productAddonControllers.value
+                          ]..removeAt(index);
                         },
                         btntxt: data.txtAddOns,
                         productTypes: productAddonControllers,
