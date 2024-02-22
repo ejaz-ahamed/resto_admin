@@ -19,7 +19,7 @@ class RowHeadingWidget extends ConsumerWidget {
         children: [
           Text(
             constants.txtProduct,
-            style: AppTheme.of(context).typography.h700,
+            style: AppTheme.of(context).typography.h600,
           ),
           const Spacer(),
           TextButtonWidget(

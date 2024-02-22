@@ -49,7 +49,7 @@ class ListViewProductsWidget extends ConsumerWidget {
               if (offerType == OfferType.amount) {
                 offerPrice = max(0.0, currentPrice - offerValue);
               } else {
-                offerPrice = currentPrice * (offerValue / 100);
+                offerPrice = currentPrice - (currentPrice * (offerValue / 100));
               }
 
               return Padding(

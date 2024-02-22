@@ -10,6 +10,7 @@ import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_16_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
+import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_8_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
 import 'package:resto_admin/features/offer/domain/entity/offer_entity.dart';
@@ -18,7 +19,6 @@ import 'package:resto_admin/features/offer/presentation/widgets/image_picker_wid
 import 'package:resto_admin/features/offer/presentation/widgets/listview_products_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/row_heading_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/tab_button_widget.dart.dart';
-import 'package:resto_admin/features/offer/presentation/widgets/textfield_widget.dart';
 
 final currentStateProvider = StateProvider<double>((_) => 100);
 
@@ -33,11 +33,14 @@ class EditOfferPage extends HookConsumerWidget {
     final nameController = useTextEditingController();
     final descriptionController = useTextEditingController();
     final percentageController = useTextEditingController();
-    EditOfferPageConstants constants = EditOfferPageConstants();
-    //Theme data
+
+    final constants = EditOfferPageConstants();
+
+    /// Theme data
     final spaces = AppTheme.of(context).spaces;
     final typography = AppTheme.of(context).typography;
-    //Selected tab
+
+    /// Selected tab
     final selectedOfferType = useState<OfferType>(OfferType.percentage);
 
     useEffect(() {
@@ -49,6 +52,7 @@ class EditOfferPage extends HookConsumerWidget {
       });
       return null;
     }, []);
+
     //Tabs to Show
     final tabsToShow = useMemoized(() => [
           {
@@ -60,6 +64,7 @@ class EditOfferPage extends HookConsumerWidget {
             'type': OfferType.amount,
           },
         ]);
+
     //Handle tapping on the tab items
     void tabOnPressed(int index) {
       selectedOfferType.value = tabsToShow[index]['type'] as OfferType;
@@ -81,6 +86,7 @@ class EditOfferPage extends HookConsumerWidget {
             )),
         body: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox24Widget(),
               Padding(
@@ -89,7 +95,7 @@ class EditOfferPage extends HookConsumerWidget {
                   imgProvider: imageProvider,
                 ),
               ),
-              const SizedBox24Widget(),
+              const SizedBox32Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
                 child: TextFieldWidget(
@@ -98,7 +104,7 @@ class EditOfferPage extends HookConsumerWidget {
                     hintText: constants.txtHintTextTitle,
                     controller: nameController),
               ),
-              const SizedBox16Widget(),
+              const SizedBox8Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
                 child: TextFieldWidget(
@@ -110,14 +116,7 @@ class EditOfferPage extends HookConsumerWidget {
               const SizedBox16Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
-                child: Row(
-                  children: [
-                    Text(
-                      constants.txtOfferDetails,
-                      style: typography.h400,
-                    ),
-                  ],
-                ),
+                child: Text(constants.txtOfferDetails, style: typography.h600),
               ),
               const SizedBox16Widget(),
               Padding(
@@ -134,10 +133,15 @@ class EditOfferPage extends HookConsumerWidget {
                   ],
                 ),
               ),
-              const SizedBox8Widget(),
+              const SizedBox32Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
-                child: TextFieldOfferWidget(
+                child: TextFieldWidget(
+                    enabled: true,
+                    textFieldTitle:
+                        selectedOfferType.value == OfferType.percentage
+                            ? 'Offer Percentage'
+                            : 'Offfer Amount',
                     hintText: selectedOfferType.value == OfferType.percentage
                         ? constants.txtHintTextPercentage
                         : constants.txtHintTextAmount,
@@ -147,9 +151,9 @@ class EditOfferPage extends HookConsumerWidget {
                 height: spaces.space_200,
               ),
               const RowHeadingWidget(),
-              const ListViewProductsWidget(
-                offerType: OfferType.amount,
-                offerValue: 50.0,
+              ListViewProductsWidget(
+                offerType: selectedOfferType.value,
+                offerValue: double.parse(percentageController.text),
               ),
               const SizedBox8Widget(),
               const SizedBox()
