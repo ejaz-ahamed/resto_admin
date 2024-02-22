@@ -55,7 +55,7 @@ class EditCategoryPage extends HookConsumerWidget {
               SizedBox(
                 height: theme.spaces.space_200,
               ),
-              ImagePickerWidget(imgProvider: imageProvider),
+              const ImagePickerWidget(),
               const SizedBox16Widget(),
               TextFieldWidget(
                   enabled: true,
