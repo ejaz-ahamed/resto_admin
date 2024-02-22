@@ -32,101 +32,103 @@ class ProfilePage extends ConsumerWidget {
           title: ref.watch(profilePageProvider).txtTitle,
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: appTheme.spaces.space_300,
-            vertical: appTheme.spaces.space_400),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                height: appTheme.spaces.space_400 * 7,
-                width: appTheme.spaces.space_400 * 7,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                        color: appTheme.colors.textDisabled,
-                        width: appTheme.spaces.space_25)),
-                child: switch (ref.watch(userProfileStreamProvider)) {
-                  AsyncData(:final value) => Builder(builder: (context) {
-                      /// If the image is not set by the user, then show a
-                      /// default user image
-                      if (value.imgPath.trim().isEmpty) {
-                        return Padding(
-                          padding: EdgeInsets.all(appTheme.spaces.space_900),
-                          child: SvgPicture.asset(
-                            ref.watch(appAssetsConstantsProvider).icUser,
-                            height: 50,
-                          ),
-                        );
-                      } else {
-                        return ClipRRect(
-                            borderRadius: BorderRadius.circular(
-                                appTheme.spaces.space_900 * 100),
-                            child: Image.network(value.imgPath));
-                      }
-                    }),
-                  AsyncError() => const Center(
-                      child: FittedBox(
-                        child: Text('Cannot Load User Image'),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: appTheme.spaces.space_300,
+              vertical: appTheme.spaces.space_400),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Align(
+                alignment: Alignment.center,
+                child: Container(
+                  height: appTheme.spaces.space_400 * 7,
+                  width: appTheme.spaces.space_400 * 7,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                          color: appTheme.colors.textDisabled,
+                          width: appTheme.spaces.space_25)),
+                  child: switch (ref.watch(userProfileStreamProvider)) {
+                    AsyncData(:final value) => Builder(builder: (context) {
+                        /// If the image is not set by the user, then show a
+                        /// default user image
+                        if (value.imgPath.trim().isEmpty) {
+                          return Padding(
+                            padding: EdgeInsets.all(appTheme.spaces.space_900),
+                            child: SvgPicture.asset(
+                              ref.watch(appAssetsConstantsProvider).icUser,
+                              height: 50,
+                            ),
+                          );
+                        } else {
+                          return ClipRRect(
+                              borderRadius: BorderRadius.circular(
+                                  appTheme.spaces.space_900 * 100),
+                              child: Image.network(value.imgPath));
+                        }
+                      }),
+                    AsyncError() => const Center(
+                        child: FittedBox(
+                          child: Text('Cannot Load User Image'),
+                        ),
                       ),
-                    ),
-                  _ => const Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                },
-              ),
-            ),
-            SizedBox(
-              height: appTheme.spaces.space_400,
-            ),
-            Text(
-              constatnts.txtOpeningTime,
-              style: appTheme.typography.h400,
-            ),
-            SizedBox(
-              height: appTheme.spaces.space_100,
-            ),
-            const Text("9:35 AM"),
-            SizedBox(
-              height: appTheme.spaces.space_400,
-            ),
-            Text(
-              constatnts.txtClosingtime,
-              style: appTheme.typography.h400,
-            ),
-            SizedBox(
-              height: appTheme.spaces.space_100,
-            ),
-            const Text("11:30 PM"),
-            SizedBox(
-              height: appTheme.spaces.space_300,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  constatnts.txtDarktheme,
-                  style: appTheme.typography.h400,
+                    _ => const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                  },
                 ),
-                const SwitchButton()
-              ],
-            ),
-            SizedBox(
-              height: appTheme.spaces.space_300,
-            ),
-            InkWell(
-              onTap: () => context.push(EditPasswordPage.routePath),
-              child: Text(
-                constatnts.txtUpdatePassword,
+              ),
+              SizedBox(
+                height: appTheme.spaces.space_400,
+              ),
+              Text(
+                constatnts.txtOpeningTime,
                 style: appTheme.typography.h400,
               ),
-            ),
-            const SizedBox32Widget(),
-            const LogoutButtonWidget(),
-          ],
+              SizedBox(
+                height: appTheme.spaces.space_100,
+              ),
+              const Text("9:35 AM"),
+              SizedBox(
+                height: appTheme.spaces.space_400,
+              ),
+              Text(
+                constatnts.txtClosingtime,
+                style: appTheme.typography.h400,
+              ),
+              SizedBox(
+                height: appTheme.spaces.space_100,
+              ),
+              const Text("11:30 PM"),
+              SizedBox(
+                height: appTheme.spaces.space_300,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    constatnts.txtDarktheme,
+                    style: appTheme.typography.h400,
+                  ),
+                  const SwitchButton()
+                ],
+              ),
+              SizedBox(
+                height: appTheme.spaces.space_300,
+              ),
+              InkWell(
+                onTap: () => context.push(EditPasswordPage.routePath),
+                child: Text(
+                  constatnts.txtUpdatePassword,
+                  style: appTheme.typography.h400,
+                ),
+              ),
+              const SizedBox32Widget(),
+              const LogoutButtonWidget(),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: ElevatedButtonWidget(
