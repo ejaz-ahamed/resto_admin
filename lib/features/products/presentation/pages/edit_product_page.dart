@@ -91,6 +91,68 @@ class EditProductPage extends HookConsumerWidget {
       };
     }, []);
 
+    /// Remove a type from the product
+    void removeProductType(int index) async {
+      await ref.read(productProvider.notifier).deleteType(
+            entity.id,
+            entity.types[index].id,
+          );
+
+      final controllersToDelete = productTypeControllers.value[index];
+
+      productTypeControllers.value = [...productTypeControllers.value]
+        ..removeAt(index);
+
+      controllersToDelete.nameController.dispose();
+      controllersToDelete.priceController.dispose();
+    }
+
+    /// Remove an addon from the product
+    void removeAddon(int index) async {
+      await ref.read(productProvider.notifier).deleteAddOn(
+            entity.id,
+            entity.addOns[index].id,
+          );
+
+      final controllersToDelete = productAddonControllers.value[index];
+
+      productAddonControllers.value = [...productAddonControllers.value]
+        ..removeAt(index);
+
+      controllersToDelete.nameController.dispose();
+      controllersToDelete.priceController.dispose();
+    }
+
+    /// Save the new changes to the product
+    void saveProductDetails() {
+      ref.read(productProvider.notifier).updateProduct(
+          addOns: [
+            for (final addOnController in productAddonControllers.value)
+              ProductAddOnEntity(
+                name: addOnController.nameController.text,
+                id: addOnController.nameController.text,
+                price: addOnController.priceController.text,
+              )
+          ],
+          types: [
+            for (final typeController in productTypeControllers.value)
+              ProductTypeEntity(
+                name: typeController.nameController.text,
+                price: typeController.priceController.text,
+                id: typeController.nameController.text,
+              )
+          ],
+          id: entity.id,
+          name: productController.text,
+          description: descreptionController.text,
+          imagePath: ref.watch(imagePickerProvider)!.path,
+          categoryId: entity.categoryId,
+          availabeFrom: entity.availableFrom,
+          availableTo: entity.availableUpTo);
+
+      context.pop();
+    }
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -127,49 +189,40 @@ class EditProductPage extends HookConsumerWidget {
                   text: data.txtType,
                 ),
                 const SizedBox24Widget(),
-                ProductTypeWidget(
-                  onTap: (int index) {},
-                  btntxt: data.txtType,
-                  style: apptheme.typography.h400
-                      .copyWith(color: apptheme.colors.textDisabled),
-                  hint: constants.txtType,
-                  productTypes: productTypeControllers,
+                ListView.builder(
+                  physics: const ClampingScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: 1,
+                  itemBuilder: (context, index) {
+                    return ProductTypeWidget(
+                      onTap: removeProductType,
+                      btntxt: data.txtType,
+                      productTypes: productTypeControllers,
+                      style: apptheme.typography.h400
+                          .copyWith(color: apptheme.colors.textDisabled),
+                      hint: constants.txtAddOns,
+                    );
+                  },
                 ),
                 const SizedBox32Widget(),
                 HeadingWidget(
                   text: data.txtAddOns,
                 ),
                 const SizedBox24Widget(),
-                SizedBox(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: 1,
-                    itemBuilder: (context, index) {
-                      return ProductTypeWidget(
-                        onTap: (int index) async {
-                          await ref.read(productProvider.notifier).deleteAddOn(
-                                entity.id,
-                                entity.addOns[index].id,
-                              );
-
-                          final controllersToDelete =
-                              productAddonControllers.value[index];
-
-                          productAddonControllers.value = [
-                            ...productAddonControllers.value
-                          ]..removeAt(index);
-
-                          controllersToDelete.nameController.dispose();
-                          controllersToDelete.priceController.dispose();
-                        },
-                        btntxt: data.txtAddOns,
-                        productTypes: productAddonControllers,
-                        style: apptheme.typography.h400
-                            .copyWith(color: apptheme.colors.textDisabled),
-                        hint: constants.txtAddOns,
-                      );
-                    },
-                  ),
+                ListView.builder(
+                  physics: const ClampingScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: 1,
+                  itemBuilder: (context, index) {
+                    return ProductTypeWidget(
+                      onTap: removeAddon,
+                      btntxt: data.txtAddOns,
+                      productTypes: productAddonControllers,
+                      style: apptheme.typography.h400
+                          .copyWith(color: apptheme.colors.textDisabled),
+                      hint: constants.txtAddOns,
+                    );
+                  },
                 ),
                 const SizedBox24Widget(),
               ],
@@ -177,34 +230,7 @@ class EditProductPage extends HookConsumerWidget {
           ),
         ),
         bottomNavigationBar: ElevatedButtonWidget(
-            text: data.txtSaveBtn,
-            onPressed: () {
-              ref.read(productProvider.notifier).updateProduct(
-                addOns: [
-                  for (final addOnController in productAddonControllers.value)
-                    ProductAddOnEntity(
-                      name: addOnController.nameController.text,
-                      id: addOnController.nameController.text,
-                      price: addOnController.priceController.text,
-                    )
-                ],
-                types: [
-                  for (final typeController in productTypeControllers.value)
-                    ProductTypeEntity(
-                      name: typeController.nameController.text,
-                      price: typeController.priceController.text,
-                      id: typeController.nameController.text,
-                    )
-                ],
-                id: entity.id,
-                name: productController.text,
-                description: descreptionController.text,
-                imagePath: ref.watch(imagePickerProvider)!.path,
-                categoryId: entity.categoryId,
-              );
-
-              context.pop();
-            }),
+            text: data.txtSaveBtn, onPressed: saveProductDetails),
       ),
     );
   }

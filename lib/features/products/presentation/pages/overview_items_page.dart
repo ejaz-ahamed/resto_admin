@@ -89,6 +89,7 @@ class OverViewItemsPage extends HookConsumerWidget {
                 const SizedBox16Widget(),
                 SizedBox(
                   child: ListView.builder(
+                    physics: const ClampingScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: entity.types.length,
                     itemBuilder: (context, index) {
@@ -103,6 +104,7 @@ class OverViewItemsPage extends HookConsumerWidget {
                 const SizedBox16Widget(),
                 SizedBox(
                   child: ListView.builder(
+                    physics: const ClampingScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: entity.addOns.length,
                     itemBuilder: (context, index) {
@@ -111,6 +113,15 @@ class OverViewItemsPage extends HookConsumerWidget {
                           price: entity.addOns[index].price);
                     },
                   ),
+                ),
+                HeadingWidget(text: data.txtAvailablity),
+                const SizedBox16Widget(),
+                Row(
+                  children: [
+                    Text(entity.availableFrom),
+                    const Text(' to '),
+                    Text(entity.availableUpTo)
+                  ],
                 ),
               ],
             ),

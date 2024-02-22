@@ -16,6 +16,13 @@ import 'package:resto_admin/features/products/presentation/widgets/heading_widge
 import 'package:resto_admin/features/products/presentation/widgets/image_picker_product_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/product_type_widget.dart';
 
+final availableFromProvider = StateProvider<TimeOfDay>((ref) {
+  return TimeOfDay.now();
+});
+final availableToProvider = StateProvider<TimeOfDay>((ref) {
+  return TimeOfDay.now();
+});
+
 class ProductPage extends HookConsumerWidget {
   static const routePath = '/addNewProducts';
   final String id;
@@ -27,6 +34,8 @@ class ProductPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final availableFrom = ref.watch(availableFromProvider);
+    final availableTo = ref.watch(availableToProvider);
     final apptheme = AppTheme.of(context);
 
     final constants = ref.watch(productConstantsProvider);
@@ -38,6 +47,9 @@ class ProductPage extends HookConsumerWidget {
 
     useEffect(() {
       ref.invalidate(imagePickerProvider);
+      ref.invalidate(availableFromProvider);
+      ref.invalidate(availableToProvider);
+
       return null;
     }, []);
 
@@ -74,28 +86,101 @@ class ProductPage extends HookConsumerWidget {
                   text: constants.txtType,
                 ),
                 const SizedBox24Widget(),
-                ProductTypeWidget(
-                  onTap: (int index) {},
-                  btntxt: constants.txtType,
-                  style: apptheme.typography.h400
-                      .copyWith(color: apptheme.colors.textDisabled),
-                  hint: constants.txtType,
-                  productTypes: productTypeControllers,
+                SizedBox(
+                  child: ListView.builder(
+                    physics: const ClampingScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: 1,
+                    itemBuilder: (context, index) {
+                      return ProductTypeWidget(
+                        onTap: (int index) async {
+                          final controllersToDelete =
+                              productTypeControllers.value[index];
+
+                          productTypeControllers.value = [
+                            ...productTypeControllers.value
+                          ]..removeAt(index);
+
+                          controllersToDelete.nameController.dispose();
+                          controllersToDelete.priceController.dispose();
+                        },
+                        btntxt: constants.txtType,
+                        productTypes: productTypeControllers,
+                        style: apptheme.typography.h400
+                            .copyWith(color: apptheme.colors.textDisabled),
+                        hint: constants.txtType,
+                      );
+                    },
+                  ),
                 ),
                 const SizedBox32Widget(),
                 HeadingWidget(
                   text: constants.txtAddOns,
                 ),
                 const SizedBox24Widget(),
-                ProductTypeWidget(
-                  onTap: (int index) {},
-                  btntxt: constants.txtAddOns,
-                  productTypes: productAddonControllers,
-                  style: apptheme.typography.h400
-                      .copyWith(color: apptheme.colors.textDisabled),
-                  hint: constants.txtAddOns,
+                SizedBox(
+                  child: ListView.builder(
+                    physics: const ClampingScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: 1,
+                    itemBuilder: (context, index) {
+                      return ProductTypeWidget(
+                        onTap: (int index) async {
+                          final controllersToDelete =
+                              productAddonControllers.value[index];
+
+                          productAddonControllers.value = [
+                            ...productAddonControllers.value
+                          ]..removeAt(index);
+
+                          controllersToDelete.nameController.dispose();
+                          controllersToDelete.priceController.dispose();
+                        },
+                        btntxt: constants.txtAddOns,
+                        productTypes: productAddonControllers,
+                        style: apptheme.typography.h400
+                            .copyWith(color: apptheme.colors.textDisabled),
+                        hint: constants.txtAddOns,
+                      );
+                    },
+                  ),
                 ),
                 const SizedBox24Widget(),
+                HeadingWidget(
+                  text: constants.txtAvailablity,
+                ),
+                const SizedBox24Widget(),
+                Row(
+                  children: [
+                    Expanded(
+                      child: InkWell(
+                          onTap: () async {
+                            final pickedTime = await showTimePicker(
+                                context: context, initialTime: availableFrom);
+                            if (pickedTime != null) {
+                              ref.read(availableFromProvider.notifier).state =
+                                  pickedTime;
+                            }
+                          },
+                          child: Text(availableFrom.format(context))),
+                    ),
+                    SizedBox(
+                      width: AppTheme.of(context).spaces.space_400 * 5,
+                    ),
+                    Expanded(
+                      child: InkWell(
+                          onTap: () async {
+                            final pickedTime = await showTimePicker(
+                                context: context, initialTime: availableTo);
+                            if (pickedTime != null) {
+                              ref.read(availableToProvider.notifier).state =
+                                  pickedTime;
+                            }
+                          },
+                          child: Text(availableTo.format(context))),
+                    ),
+                  ],
+                )
               ],
             ),
           ),
@@ -104,28 +189,29 @@ class ProductPage extends HookConsumerWidget {
             text: constants.txtSaveBtn,
             onPressed: () {
               ref.read(productProvider.notifier).addProduct(
-                addOns: [
-                  for (final addOnController in productAddonControllers.value)
-                    ProductAddOnEntity(
-                      name: addOnController.nameController.text,
-                      id: addOnController.nameController.text,
-                      price: addOnController.priceController.text,
-                    )
-                ],
-                types: [
-                  for (final typeController in productTypeControllers.value)
-                    ProductTypeEntity(
-                      name: typeController.nameController.text,
-                      price: typeController.priceController.text,
-                      id: typeController.nameController.text,
-                    )
-                ],
-                id: '',
-                name: productController.text,
-                categoryId: id,
-                description: descreptionController.text,
-                imagePath: ref.watch(imagePickerProvider)!.path,
-              );
+                  addOns: [
+                    for (final addOnController in productAddonControllers.value)
+                      ProductAddOnEntity(
+                        name: addOnController.nameController.text,
+                        id: addOnController.nameController.text,
+                        price: addOnController.priceController.text,
+                      )
+                  ],
+                  types: [
+                    for (final typeController in productTypeControllers.value)
+                      ProductTypeEntity(
+                        name: typeController.nameController.text,
+                        price: typeController.priceController.text,
+                        id: typeController.nameController.text,
+                      )
+                  ],
+                  id: '',
+                  name: productController.text,
+                  categoryId: id,
+                  description: descreptionController.text,
+                  imagePath: ref.watch(imagePickerProvider)!.path,
+                  availableFrom: availableFrom.format(context),
+                  availableTo: availableTo.format(context));
               context.pop();
             }),
       ),

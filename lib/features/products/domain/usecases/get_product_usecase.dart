@@ -17,6 +17,8 @@ final class GetAllProductsUseCase {
         yield [
           for (final product in products)
             ProductEntity(
+              availableFrom: product.availableFrom,
+              availableUpTo: product.availableUpTo,
               name: product.name,
               imagePath:
                   await FirebaseStorageUtils.getDownloadUrl(product.imagePath),

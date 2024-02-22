@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:resto_admin/core/exception/base_exception.dart';
+import 'package:resto_admin/core/utils/snack_bar_utils.dart';
 import 'package:resto_admin/features/products/domain/entities/product_addon_entity.dart';
 import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
 import 'package:resto_admin/features/products/domain/entities/product_type_entity.dart';
@@ -17,20 +18,31 @@ final class AddProductUsecase {
     required List<ProductTypeEntity> types,
     required List<ProductAddOnEntity> addOns,
     required String categoryId,
+    required String availableFrom,
+    required String availableto,
   }) async {
     try {
-      final uploadedPath = await repository.upload(File(imagePath), name);
-      await repository.addProduct(
-          ProductEntity(
-            types: types,
-            addOns: addOns,
-            id: id,
-            categoryId: categoryId,
-            name: name,
-            imagePath: uploadedPath,
-            description: description,
-          ),
-          categoryId);
+      if (types.isEmpty) {
+        Future.sync(
+          () => SnackBarUtils.showMessage(
+              "Atleast one type is required,try again."),
+        );
+      } else {
+        final uploadedPath = await repository.upload(File(imagePath), name);
+        await repository.addProduct(
+            ProductEntity(
+              availableFrom: availableFrom,
+              availableUpTo: availableto,
+              types: types,
+              addOns: addOns,
+              id: id,
+              categoryId: categoryId,
+              name: name,
+              imagePath: uploadedPath,
+              description: description,
+            ),
+            categoryId);
+      }
     } catch (e) {
       throw BaseException('Cannot add product Details');
     }
