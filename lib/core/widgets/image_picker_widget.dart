@@ -11,11 +11,9 @@ final imageProvider = StateProvider<XFile?>((ref) {
 });
 
 class ImagePickerWidget extends ConsumerWidget {
-  final StateProvider<XFile?> imgProvider;
-  const ImagePickerWidget({super.key, required this.imgProvider});
+  const ImagePickerWidget({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     /// Path of the image picked
     final imagePathPicked = ref.watch(imageProvider)?.path;
 
