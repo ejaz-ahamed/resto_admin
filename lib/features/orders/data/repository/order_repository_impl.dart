@@ -18,6 +18,7 @@ class OrderRepositoryImpl implements OrderRepository {
       yield [
         for (final data in doc)
           OrderEntity(
+            id: data.id,
             uid: data.uid,
             location: data.location,
             time: data.time,
@@ -46,6 +47,7 @@ class OrderRepositoryImpl implements OrderRepository {
     final result = [
       for (final data in orders)
         OrderEntity(
+          id: data.id,
           uid: data.uid,
           location: data.location,
           time: data.time,

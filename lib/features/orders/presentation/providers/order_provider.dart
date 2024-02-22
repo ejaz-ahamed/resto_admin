@@ -39,6 +39,8 @@ class Order extends _$Order {
     );
     state = state.copyWith(searchOrder: searchOrders);
   }
+
+  /// Get the products
 }
 
 @riverpod
