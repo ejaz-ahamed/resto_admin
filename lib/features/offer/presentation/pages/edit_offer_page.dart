@@ -15,6 +15,7 @@ import 'package:resto_admin/core/widgets/text_field_widget.dart';
 import 'package:resto_admin/features/offer/domain/entity/offer_entity.dart';
 import 'package:resto_admin/features/offer/presentation/provider/offer_provider.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/image_picker_widget.dart';
+import 'package:resto_admin/features/offer/presentation/widgets/listview_products_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/row_heading_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/tab_button_widget.dart.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/textfield_widget.dart';
@@ -77,8 +78,7 @@ class EditOfferPage extends HookConsumerWidget {
                 ref.read(offerProvider.notifier).remove(id: entity.id);
                 context.pop();
               },
-            )
-            ),
+            )),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -147,6 +147,10 @@ class EditOfferPage extends HookConsumerWidget {
                 height: spaces.space_200,
               ),
               const RowHeadingWidget(),
+              const ListViewProductsWidget(
+                offerType: OfferType.amount,
+                offerValue: 50.0,
+              ),
               const SizedBox8Widget(),
               const SizedBox()
             ],

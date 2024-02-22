@@ -2,16 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 
-// final percentageProvider = StateProvider<TextEditingController>((ref) => TextEditingController());
-// final valueProvider = StateProvider<double>((ref) => 100.0);
-
-// final formatStringProvider = Provider<String>((ref) {
-//   final percentageController = ref.watch(percentageProvider).state;
-//   final value = ref.watch(valueProvider).state;
-//   final percentage = double.tryParse(percentageController.text) ?? 0.0;
-//   final result = value - ((value * percentage) / 100);
-//   return '$percentage% - $value = $result';
-// });
 final percentageProvider = StateProvider<double>((ref) => 0.0);
 final resultProvider = Provider<double>((ref) {
   final percentage = ref.watch(percentageProvider);

@@ -5,6 +5,9 @@ import 'package:resto_admin/features/offer/domain/usecase/add_offer_usecase.dart
 import 'package:resto_admin/features/offer/domain/usecase/get_offer_usecase.dart';
 import 'package:resto_admin/features/offer/domain/usecase/remove_offer_usecase.dart';
 import 'package:resto_admin/features/offer/domain/usecase/update_offer_usecase.dart';
+import 'package:resto_admin/features/products/data/repository/product_repository_impl.dart';
+import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
+import 'package:resto_admin/features/products/domain/usecases/get_many_products_usecase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'offer_provider.g.dart';
@@ -59,7 +62,12 @@ class Offer extends _$Offer {
         product: product = []);
   }
 
-  getAll() {}
+  /// Get the selected products
+  Future<List<ProductEntity>> getSelectedProducts(
+      Set<String> productIds) async {
+    return GetManyProductsUseCase(
+        repository: ref.read(productRepositoryProvider))(productIds);
+  }
 }
 
 @riverpod
