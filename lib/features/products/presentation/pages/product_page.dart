@@ -16,10 +16,11 @@ import 'package:resto_admin/features/products/presentation/widgets/heading_widge
 import 'package:resto_admin/features/products/presentation/widgets/image_picker_product_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/product_type_widget.dart';
 
-final availableFromProvider = StateProvider<TimeOfDay>((ref) {
+final _availableFromProvider = StateProvider<TimeOfDay>((ref) {
   return TimeOfDay.now();
 });
-final availableToProvider = StateProvider<TimeOfDay>((ref) {
+
+final _availableToProvider = StateProvider<TimeOfDay>((ref) {
   return TimeOfDay.now();
 });
 
@@ -34,8 +35,8 @@ class ProductPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final availableFrom = ref.watch(availableFromProvider);
-    final availableTo = ref.watch(availableToProvider);
+    final availableFrom = ref.watch(_availableFromProvider);
+    final availableTo = ref.watch(_availableToProvider);
     final apptheme = AppTheme.of(context);
 
     final constants = ref.watch(productConstantsProvider);
@@ -45,13 +46,83 @@ class ProductPage extends HookConsumerWidget {
     final productTypeControllers = useState<List<ProductTypeControllers>>([]);
     final productAddonControllers = useState<List<ProductTypeControllers>>([]);
 
+    /// Init state and dispose
     useEffect(() {
       ref.invalidate(imagePickerProvider);
-      ref.invalidate(availableFromProvider);
-      ref.invalidate(availableToProvider);
+      ref.invalidate(_availableFromProvider);
+      ref.invalidate(_availableToProvider);
 
       return null;
     }, []);
+
+    /// Remove a type from the product
+    void removeProductType(int index) {
+      final controllersToDelete = productTypeControllers.value[index];
+
+      productTypeControllers.value = [...productTypeControllers.value]
+        ..removeAt(index);
+
+      controllersToDelete.nameController.dispose();
+      controllersToDelete.priceController.dispose();
+    }
+
+    /// Remove an addon from the product
+    void removeProductAddon(int index) {
+      final controllersToDelete = productAddonControllers.value[index];
+
+      productAddonControllers.value = [...productAddonControllers.value]
+        ..removeAt(index);
+
+      controllersToDelete.nameController.dispose();
+      controllersToDelete.priceController.dispose();
+    }
+
+    /// Pick the available from time
+    void pickAvailableFrom() async {
+      final pickedTime =
+          await showTimePicker(context: context, initialTime: availableFrom);
+      if (pickedTime != null) {
+        ref.read(_availableFromProvider.notifier).state = pickedTime;
+      }
+    }
+
+    /// Pick available to time
+    void pickAvailableTo() async {
+      final pickedTime =
+          await showTimePicker(context: context, initialTime: availableTo);
+      if (pickedTime != null) {
+        ref.read(_availableToProvider.notifier).state = pickedTime;
+      }
+    }
+
+    /// Add new product
+    void addNewProdcut() {
+      ref.read(productProvider.notifier).addProduct(
+          addOns: [
+            for (final addOnController in productAddonControllers.value)
+              ProductAddOnEntity(
+                name: addOnController.nameController.text,
+                id: addOnController.nameController.text,
+                price: addOnController.priceController.text,
+              )
+          ],
+          types: [
+            for (final typeController in productTypeControllers.value)
+              ProductTypeEntity(
+                name: typeController.nameController.text,
+                price: typeController.priceController.text,
+                id: typeController.nameController.text,
+              )
+          ],
+          id: '',
+          name: productController.text,
+          categoryId: id,
+          description: descreptionController.text,
+          imagePath: ref.watch(imagePickerProvider)!.path,
+          availableFrom: availableFrom.format(context),
+          availableTo: availableTo.format(context));
+      context.pop();
+    }
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
@@ -93,17 +164,7 @@ class ProductPage extends HookConsumerWidget {
                     itemCount: 1,
                     itemBuilder: (context, index) {
                       return ProductTypeWidget(
-                        onTap: (int index) async {
-                          final controllersToDelete =
-                              productTypeControllers.value[index];
-
-                          productTypeControllers.value = [
-                            ...productTypeControllers.value
-                          ]..removeAt(index);
-
-                          controllersToDelete.nameController.dispose();
-                          controllersToDelete.priceController.dispose();
-                        },
+                        onTap: removeProductType,
                         btntxt: constants.txtType,
                         productTypes: productTypeControllers,
                         style: apptheme.typography.h400
@@ -125,17 +186,7 @@ class ProductPage extends HookConsumerWidget {
                     itemCount: 1,
                     itemBuilder: (context, index) {
                       return ProductTypeWidget(
-                        onTap: (int index) async {
-                          final controllersToDelete =
-                              productAddonControllers.value[index];
-
-                          productAddonControllers.value = [
-                            ...productAddonControllers.value
-                          ]..removeAt(index);
-
-                          controllersToDelete.nameController.dispose();
-                          controllersToDelete.priceController.dispose();
-                        },
+                        onTap: removeProductAddon,
                         btntxt: constants.txtAddOns,
                         productTypes: productAddonControllers,
                         style: apptheme.typography.h400
@@ -154,14 +205,7 @@ class ProductPage extends HookConsumerWidget {
                   children: [
                     Expanded(
                       child: InkWell(
-                          onTap: () async {
-                            final pickedTime = await showTimePicker(
-                                context: context, initialTime: availableFrom);
-                            if (pickedTime != null) {
-                              ref.read(availableFromProvider.notifier).state =
-                                  pickedTime;
-                            }
-                          },
+                          onTap: pickAvailableFrom,
                           child: Text(availableFrom.format(context))),
                     ),
                     SizedBox(
@@ -169,14 +213,7 @@ class ProductPage extends HookConsumerWidget {
                     ),
                     Expanded(
                       child: InkWell(
-                          onTap: () async {
-                            final pickedTime = await showTimePicker(
-                                context: context, initialTime: availableTo);
-                            if (pickedTime != null) {
-                              ref.read(availableToProvider.notifier).state =
-                                  pickedTime;
-                            }
-                          },
+                          onTap: pickAvailableTo,
                           child: Text(availableTo.format(context))),
                     ),
                   ],
@@ -186,34 +223,9 @@ class ProductPage extends HookConsumerWidget {
           ),
         ),
         bottomNavigationBar: ElevatedButtonWidget(
-            text: constants.txtSaveBtn,
-            onPressed: () {
-              ref.read(productProvider.notifier).addProduct(
-                  addOns: [
-                    for (final addOnController in productAddonControllers.value)
-                      ProductAddOnEntity(
-                        name: addOnController.nameController.text,
-                        id: addOnController.nameController.text,
-                        price: addOnController.priceController.text,
-                      )
-                  ],
-                  types: [
-                    for (final typeController in productTypeControllers.value)
-                      ProductTypeEntity(
-                        name: typeController.nameController.text,
-                        price: typeController.priceController.text,
-                        id: typeController.nameController.text,
-                      )
-                  ],
-                  id: '',
-                  name: productController.text,
-                  categoryId: id,
-                  description: descreptionController.text,
-                  imagePath: ref.watch(imagePickerProvider)!.path,
-                  availableFrom: availableFrom.format(context),
-                  availableTo: availableTo.format(context));
-              context.pop();
-            }),
+          text: constants.txtSaveBtn,
+          onPressed: addNewProdcut,
+        ),
       ),
     );
   }
