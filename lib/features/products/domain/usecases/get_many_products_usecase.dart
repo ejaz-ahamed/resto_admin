@@ -46,6 +46,8 @@ final class GetManyProductsUseCase {
                   id: add.id,
                 )
             ],
+            availableFrom: product.availableFrom,
+            availableUpTo: product.availableUpTo,
           ),
         );
       }
