@@ -27,6 +27,12 @@ class FirebaseAuthDataSourseImpl implements FirebaseAuthDataSourse {
   Future<void> logout() async {
     await FirebaseAuth.instance.signOut();
   }
+  
+  @override
+  Future<void> updatePassword(String newPassword)async {
+   final user = FirebaseAuth.instance.currentUser;
+   await user!.updatePassword(newPassword);
+  }
 }
 
 @riverpod

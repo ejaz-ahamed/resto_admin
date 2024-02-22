@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -6,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:resto_admin/core/constants/offer_constants/edit_offer_page_constants.dart';
 import 'package:resto_admin/core/enums/offer_type.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_16_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
@@ -14,7 +16,6 @@ import 'package:resto_admin/core/widgets/text_field_widget.dart';
 import 'package:resto_admin/features/offer/domain/entity/offer_entity.dart';
 import 'package:resto_admin/features/offer/presentation/provider/offer_provider.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/image_picker_widget.dart';
-import 'package:resto_admin/features/offer/presentation/widgets/preffered_appbar_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/row_heading_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/tab_button_widget.dart.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/textfield_widget.dart';
@@ -68,24 +69,30 @@ class EditOfferPage extends HookConsumerWidget {
         backgroundColor: AppTheme.of(context).colors.secondary,
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(spaces.space_700),
-            child: PreferredAppBarWidget(
+            child: AppBarWidget(
               title: constants.txtAppbarTitle,
-              btnText: constants.txtDelete,
-              entity: entity,
-            )),
+              actionButtonName: constants.txtDelete,
+              onPressed: () {
+                ref.read(offerProvider.notifier).remove(id: entity.id);
+                context.pop();
+              },
+            )
+            ),
         body: SingleChildScrollView(
           child: Column(
             children: [
               const SizedBox24Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
-                child: ImagePickerOfferWidget(imgProvider: imageProvider,),
+                child: ImagePickerOfferWidget(
+                  imgProvider: imageProvider,
+                ),
               ),
               const SizedBox24Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
                 child: TextFieldWidget(
-                  enabled: true,
+                    enabled: true,
                     textFieldTitle: constants.txtTitle,
                     hintText: constants.txtHintTextTitle,
                     controller: nameController),
@@ -94,7 +101,7 @@ class EditOfferPage extends HookConsumerWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
                 child: TextFieldWidget(
-                  enabled: true,
+                    enabled: true,
                     textFieldTitle: constants.txtDescription,
                     hintText: constants.txtHintTextdescription,
                     controller: descriptionController),

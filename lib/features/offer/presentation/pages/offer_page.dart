@@ -7,17 +7,16 @@ import 'package:resto_admin/core/widgets/text_button_widget.dart';
 import 'package:resto_admin/features/offer/presentation/pages/add_offer_page.dart';
 import 'package:resto_admin/features/offer/presentation/provider/offer_provider.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/offer_banner_widget.dart';
+import 'package:resto_admin/features/offer/presentation/widgets/offer_page_shimmer.dart';
 
 class OfferPage extends ConsumerWidget {
   const OfferPage({super.key});
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final color = AppTheme.of(context).colors;
     final spaces = AppTheme.of(context).spaces;
     final theme = AppTheme.of(context);
     final OfferPageConstants constants = OfferPageConstants();
-
     return Scaffold(
       backgroundColor: theme.colors.secondary,
       appBar: AppBar(
@@ -56,7 +55,7 @@ class OfferPage extends ConsumerWidget {
             child: Text('Error while getting data'),
           ),
         _ => const Center(
-            child: CircularProgressIndicator(),
+            child: OfferPageShimmer(),
           )
       },
     );
