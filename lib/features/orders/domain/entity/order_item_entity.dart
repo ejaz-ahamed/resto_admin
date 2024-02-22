@@ -6,6 +6,6 @@ class OrderItemEntity with _$OrderItemEntity {
   factory OrderItemEntity({
     required String productId,
     required String type,
-    required String quantity,
+    required int quantity,
   }) = _OrderItemEntity;
 }

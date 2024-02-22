@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -18,6 +19,8 @@ import 'package:resto_admin/features/offer/presentation/widgets/image_picker_wid
 import 'package:resto_admin/features/offer/presentation/widgets/row_heading_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/tab_button_widget.dart.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/textfield_widget.dart';
+
+final currentStateProvider = StateProvider<double>((_) => 100);
 
 class EditOfferPage extends HookConsumerWidget {
   static const routePath = '/EditOfferPage';

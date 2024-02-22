@@ -20,6 +20,8 @@ class SearchProductUsecase {
 
       for (final product in allProducts) {
         final productEntity = ProductEntity(
+          availableFrom: product.availableFrom,
+          availableUpTo: product.availableUpTo,
           name: product.name,
           imagePath:
               await FirebaseStorageUtils.getDownloadUrl(product.imagePath),

@@ -7,9 +7,9 @@ class GetOrderUsecase {
   final OrderRepository repository;
 
   GetOrderUsecase({required this.repository});
-  Stream<List<OrderEntity>> call(OrderType orderType) {
+  Stream<List<OrderEntity>> call(OrderStatus orderStatus) {
     try {
-      return repository.getOrderByType(orderType);
+      return repository.getOrderByType(orderStatus);
     } catch (e) {
       throw BaseException("cannot get");
     }

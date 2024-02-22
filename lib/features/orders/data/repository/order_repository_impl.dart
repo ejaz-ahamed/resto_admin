@@ -4,33 +4,78 @@ import 'package:resto_admin/features/orders/data/datasource/order_datasource_imp
 import 'package:resto_admin/features/orders/domain/entity/order_entity.dart';
 import 'package:resto_admin/features/orders/domain/entity/order_item_entity.dart';
 import 'package:resto_admin/features/orders/domain/repository/order_repository.dart';
+import 'package:resto_admin/features/products/domain/entities/product_addon_entity.dart';
+import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
+import 'package:resto_admin/features/products/domain/entities/product_type_entity.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'order_repository_impl.g.dart';
 
 class OrderRepositoryImpl implements OrderRepository {
   final OrderFirestoreDataSource dataSource;
-
   OrderRepositoryImpl({required this.dataSource});
+
   @override
-  Stream<List<OrderEntity>> getOrderByType(OrderType orderType) async* {
-    final orders = dataSource.getAll(orderType);
+  Stream<List<OrderEntity>> getOrderByType(OrderStatus orderStatus) async* {
+    final orders = dataSource.getAll(orderStatus);
     await for (final doc in orders) {
       yield [
         for (final data in doc)
           OrderEntity(
-            orderId: data.uid,
+            uid: data.uid,
             location: data.location,
             time: data.time,
-            ordersItem: [
-              for (final orderItem in data.items!)
+            items: [
+              for (final orderItem in data.items)
                 OrderItemEntity(
-                    productId: orderItem.productId,
-                    type: orderItem.type,
-                    quantity: orderItem.quantity),
+                  productId: orderItem.productId,
+                  type: orderItem.type,
+                  quantity: orderItem.quantity,
+                ),
             ],
-            orderType: orderType,
+            orderStatus: orderStatus,
             name: data.name,
           ),
+      ];
+    }
+  }
+
+  @override
+  Future<void> updateOrderType(String orderId, OrderStatus newType) async {
+    await dataSource.updateType(orderId, newType);
+  }
+
+  @override
+  Stream<List<ProductEntity>> getProductById(String productId) async* {
+    final products = dataSource.getProductsById(productId);
+    await for (final snapshot in products) {
+      final docs = snapshot;
+      yield [
+        for (final product in docs)
+          ProductEntity(
+            name: product.name,
+            imagePath: product.imagePath,
+            description: product.description,
+            id: product.id,
+            types: [
+              for (final type in product.types)
+                ProductTypeEntity(
+                  name: type.name,
+                  price: type.price,
+                  id: type.id,
+                )
+            ],
+            addOns: [
+              for (final add in product.addOns)
+                ProductAddOnEntity(
+                  name: add.name,
+                  id: add.id,
+                  price: add.price,
+                )
+            ],
+            categoryId: '',
+            availableFrom: '',
+            availableUpTo: '',
+          )
       ];
     }
   }
