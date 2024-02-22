@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'selected_items_provider.g.dart';
