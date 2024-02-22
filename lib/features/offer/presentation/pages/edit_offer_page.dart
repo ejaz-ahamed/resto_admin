@@ -21,8 +21,6 @@ import 'package:resto_admin/features/offer/presentation/widgets/listview_product
 import 'package:resto_admin/features/offer/presentation/widgets/row_heading_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/tab_button_widget.dart.dart';
 
-final currentStateProvider = StateProvider<double>((_) => 100);
-
 class EditOfferPage extends HookConsumerWidget {
   static const routePath = '/EditOfferPage';
   final OfferEntity entity;

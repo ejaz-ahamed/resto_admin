@@ -12,14 +12,17 @@ import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_8_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
 import 'package:resto_admin/features/offer/presentation/provider/offer_provider.dart';
+import 'package:resto_admin/features/offer/presentation/provider/selected_items_provider.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/image_picker_widget.dart';
+import 'package:resto_admin/features/offer/presentation/widgets/listview_products_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/row_heading_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/tab_button_widget.dart.dart';
-import 'package:resto_admin/features/offer/presentation/widgets/textfield_widget.dart';
 
 class AddOfferPage extends HookConsumerWidget {
   static const routePath = '/AddOfferPage';
-  const AddOfferPage({super.key});
+  const AddOfferPage({
+    super.key,
+  });
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final nameController = useTextEditingController();
@@ -32,6 +35,7 @@ class AddOfferPage extends HookConsumerWidget {
     final typography = AppTheme.of(context).typography;
     //Selected tab
     final selectedOfferType = useState<OfferType>(OfferType.percentage);
+
     //Tabs to Show
     final tabsToShow = useMemoized(
       () => [
@@ -49,6 +53,23 @@ class AddOfferPage extends HookConsumerWidget {
     //Handle tapping on the tab items
     void tabOnPressed(int index) {
       selectedOfferType.value = tabsToShow[index]['type'] as OfferType;
+    }
+
+    /// Save offer updates
+    void addOffer() async {
+      double amount = double.parse(percentageController.text);
+
+      await ref.read(offerProvider.notifier).addOffer(
+            id: '',
+            imagePath: ref.watch(imageProvider)!.path,
+            name: nameController.text,
+            description: descriptionController.text,
+            amount: amount,
+            offerType: selectedOfferType.value,
+            product: ref.read(selectedItemsProvider).selectedItems.toList(),
+          );
+
+      Future.sync(() => context.pop());
     }
 
     return GestureDetector(
@@ -115,7 +136,12 @@ class AddOfferPage extends HookConsumerWidget {
               const SizedBox8Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
-                child: TextFieldOfferWidget(
+                child: TextFieldWidget(
+                    enabled: true,
+                    textFieldTitle:
+                        selectedOfferType.value == OfferType.percentage
+                            ? 'Offer Percentage'
+                            : 'Offfer Amount',
                     hintText: selectedOfferType.value == OfferType.percentage
                         ? constants.txtHintTextPercentage
                         : constants.txtHintTextAmount,
@@ -125,6 +151,13 @@ class AddOfferPage extends HookConsumerWidget {
                 height: spaces.space_200,
               ),
               const RowHeadingWidget(),
+              ListViewProductsWidget(
+                offerType: selectedOfferType.value,
+                offerValue: double.parse(
+                    percentageController.text.trim().isNotEmpty
+                        ? percentageController.text
+                        : '0'),
+              ),
               const SizedBox8Widget(),
               const SizedBox()
             ],
@@ -132,24 +165,7 @@ class AddOfferPage extends HookConsumerWidget {
         ),
         bottomNavigationBar: ElevatedButtonWidget(
           text: constants.txtSave,
-          onPressed: () {
-            double amount = double.parse(percentageController.text);
-            ref.read(offerProvider.notifier).addOffer(
-                  imagePath: ref.watch(imageProvider)!.path,
-                  name: nameController.text,
-                  description: descriptionController.text,
-                  amount: amount,
-                  offerType: selectedOfferType.value,
-                  product: [],
-                  id: '',
-                );
-
-            nameController.clear();
-            descriptionController.clear();
-            percentageController.clear();
-
-            context.pop();
-          },
+          onPressed: addOffer,
         ),
       ),
     );
