@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:resto_admin/core/constants/orders_constants/orders_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
@@ -28,29 +29,36 @@ class CustomerDetailsWidget extends ConsumerWidget {
             )),
         child: Padding(
           padding: EdgeInsets.all(appTheme.spaces.space_200),
-          child: Row(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              Row(
                 children: [
-                  TextWidget(text: constants.txtOrderId),
-                  TextWidget(text: constants.txtCustomerName),
-                  TextWidget(text: constants.txtTime),
-                  TextWidget(text: constants.txtLocation),
+                  Expanded(child: TextWidget(text: constants.txtOrderId)),
+                  TextRegularWidget(text: entity.uid),
                 ],
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              SizedBox(height: appTheme.spaces.space_100),
+              Row(
                 children: [
-                  TextRegularWidget(text: entity.uid),
-                  TextRegularWidget(text: entity.name),
+                  Expanded(child: TextWidget(text: constants.txtCustomerName)),
+                  const TextRegularWidget(text: ''),
+                ],
+              ),
+              SizedBox(height: appTheme.spaces.space_100),
+              Row(
+                children: [
+                  Expanded(child: TextWidget(text: constants.txtTime)),
                   TextRegularWidget(text: entity.time),
+                ],
+              ),
+              SizedBox(height: appTheme.spaces.space_100),
+              Row(
+                children: [
+                  Expanded(child: TextWidget(text: constants.txtLocation)),
                   TextRegularWidget(text: entity.location),
                 ],
-              )
+              ),
             ],
           ),
         ),

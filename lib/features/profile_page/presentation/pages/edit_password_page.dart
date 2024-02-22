@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:resto_admin/core/constants/profile_page/profile_page_constants.dart';
+import 'package:resto_admin/core/constants/profile_constants/profile_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/utils/snack_bar_utils.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';

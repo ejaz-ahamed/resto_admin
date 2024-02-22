@@ -7,6 +7,7 @@ import 'package:resto_admin/features/products/domain/usecases/add_product_usecas
 import 'package:resto_admin/features/products/domain/usecases/delete_addon_usecase.dart';
 import 'package:resto_admin/features/products/domain/usecases/delete_product_usecase.dart';
 import 'package:resto_admin/features/products/domain/usecases/delete_type_usecase.dart';
+import 'package:resto_admin/features/products/domain/usecases/get_product_by_id_usecase.dart';
 import 'package:resto_admin/features/products/domain/usecases/get_product_usecase.dart';
 import 'package:resto_admin/features/products/domain/usecases/search_product_usecase.dart';
 import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
@@ -99,6 +100,12 @@ class Product extends _$Product {
         imagePath: imagePath,
         availableFrom: availabeFrom,
         availableTo: availableTo);
+  }
+
+  /// Get a product with the given product ID
+  Future<ProductEntity> getProductById(String productId) {
+    return GetProductByIdUseCase(
+        repository: ref.read(productRepositoryProvider))(productId);
   }
 }
 

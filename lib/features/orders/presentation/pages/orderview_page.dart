@@ -19,13 +19,10 @@ import 'package:resto_admin/features/orders/presentation/widgets/total_row_widge
 class OrderViewPage extends ConsumerWidget {
   static const routePath = '/orderviewpage';
   final OrderEntity entity;
-  // final ProductEntity productEntity;
-  // final String buttonName;
+
   const OrderViewPage({
     super.key,
     required this.entity,
-    // required this.productEntity
-    // required this.buttonName,
   });
 
   @override
@@ -56,7 +53,7 @@ class OrderViewPage extends ConsumerWidget {
             const SizedBox24Widget(),
             const ItemDetailsWidget(),
             ItemsDetailsListviewDetails(
-              entity: [entity],
+              items: entity.items,
               // productEntity: [productEntity],
             ),
             const TotalRowWidget(),
