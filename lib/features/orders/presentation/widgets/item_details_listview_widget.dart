@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/features/orders/presentation/providers/order_provider.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/text_regular_widget.dart';
-
 import '../../domain/entity/order_item_entity.dart';
 
 class ItemsDetailsListviewDetails extends ConsumerWidget {

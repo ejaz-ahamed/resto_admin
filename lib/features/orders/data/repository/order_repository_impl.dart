@@ -71,6 +71,8 @@ class OrderRepositoryImpl implements OrderRepository {
             )
         ],
         categoryId: '',
+        availableFrom: '',
+        availableUpTo: '',
       );
     }
   }

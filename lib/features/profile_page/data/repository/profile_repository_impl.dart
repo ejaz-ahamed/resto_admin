@@ -1,7 +1,6 @@
-import 'dart:io';
-
 import 'package:resto_admin/features/profile_page/data/data_source/profile_firestore_data_source.dart';
 import 'package:resto_admin/features/profile_page/data/data_source/profile_firestore_data_source_impl.dart';
+import 'dart:io';
 import 'package:resto_admin/features/profile_page/data/data_source/profile_storage_datasource.dart';
 import 'package:resto_admin/features/profile_page/data/data_source/profile_storage_datasource_impl.dart';
 import 'package:resto_admin/features/profile_page/data/model/profile_model.dart';
@@ -17,29 +16,34 @@ class ProfileRepositoryImpl implements ProfileRepository {
       {required this.profileFirestoreDataSource,
       required this.storageDataSource});
   @override
-  Future<void> addOpeningTime(ProfileEntity profileEntity) async {
+  @override
+  Future<void> setTime(ProfileEntity profileEntity) async {
     final model = ProfileModel(
-        openingTime: profileEntity.openingTime,
-        closingTime: profileEntity.closingTime);
-    await profileFirestoreDataSource.setOpeningTime(model);
+      openingTime: profileEntity.openingTime!,
+      closingTime: profileEntity.closingTime!,
+    );
+    await profileFirestoreDataSource.setTime(model);
   }
 
   @override
-  Future<void> addClosingTime(ProfileEntity profileEntity) async {
-    final model = ProfileModel(
-        openingTime: profileEntity.openingTime,
-        closingTime: profileEntity.closingTime);
-    await profileFirestoreDataSource.setClosingTime(model);
+  Stream<ProfileEntity> getTime() async* {
+    final models = profileFirestoreDataSource.getTime();
+
+    await for (final profileModel in models) {
+      yield ProfileEntity(
+          openingTime: profileModel.openingTime,
+          closingTime: profileModel.closingTime);
+    }
   }
 
   @override
-  Future<String> upload(File fileToUpload) async {
+  Future<void> deleteImage() {
+    return storageDataSource.deleteImage();
+  }
+
+  @override
+  Future<String> upload(File fileToUpload) {
     return storageDataSource.addImage(fileToUpload);
-  }
-  
-  @override
-  Future<void> deleteImage()async {
-    await storageDataSource.deleteImage();
   }
 }
 

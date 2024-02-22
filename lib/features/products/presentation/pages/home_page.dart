@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/loading_category_widget.dart';
-import 'package:resto_admin/core/widgets/category_listview_separated_widget.dart';
+import 'package:resto_admin/core/widgets/category_listview_widget.dart';
 import 'package:resto_admin/core/widgets/product_gridview_widget.dart';
 import 'package:resto_admin/features/products/presentation/pages/product_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/view_categories_page.dart';
@@ -91,7 +91,7 @@ class HomePage extends HookConsumerWidget {
                   SizedBox(
                       height: theme.spaces.space_100 * 10,
                       child: switch (ref.watch(getAllCategoryProvider)) {
-                        AsyncData(:final value) => ListViewSeparatedWidget(
+                        AsyncData(:final value) => CategoryListViewWidget(
                             clearController: searchController,
                             entity: value,
                           ),
