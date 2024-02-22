@@ -22,7 +22,7 @@ class OfferSelectingPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = AppTheme.of(context);
-    final constants = SelectingProductPageConstants();
+    final constants = ref.watch(selectingProductPageConstantsProvider);
     final selectedItems = useState<Set<String>>({});
 
     final productsData = ref
