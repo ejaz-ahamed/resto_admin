@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -26,8 +25,8 @@ class AddOfferPage extends HookConsumerWidget {
     final nameController = useTextEditingController();
     final descriptionController = useTextEditingController();
     final percentageController = useTextEditingController();
+    final constants = ref.watch(addOfferPageConstantsProvider);
 
-    AddOfferPageConstants constants = AddOfferPageConstants();
     //Theme data
     final spaces = AppTheme.of(context).spaces;
     final typography = AppTheme.of(context).typography;

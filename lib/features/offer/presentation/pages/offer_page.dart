@@ -16,7 +16,8 @@ class OfferPage extends ConsumerWidget {
     final color = AppTheme.of(context).colors;
     final spaces = AppTheme.of(context).spaces;
     final theme = AppTheme.of(context);
-    final OfferPageConstants constants = OfferPageConstants();
+    final constants = ref.watch(offerPageConstantsProvider);
+
     return Scaffold(
       backgroundColor: theme.colors.secondary,
       appBar: AppBar(
