@@ -14,7 +14,9 @@ import 'package:resto_admin/features/products/presentation/pages/edit_category_p
 import 'package:resto_admin/features/products/presentation/pages/add_category_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/edit_product_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/home_page.dart';
+
 import 'package:resto_admin/features/products/presentation/pages/manage_categories_page.dart';
+
 import 'package:resto_admin/features/products/presentation/pages/overview_items_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/view_categories_page.dart';
 import 'package:resto_admin/features/profile_page/presentation/pages/edit_password_page.dart';
@@ -69,8 +71,9 @@ final router = GoRouter(
     ),
     GoRoute(
       path: OrderViewPage.routePath,
-      builder: (context, state) =>
-          OrderViewPage(entity: state.extra as OrderEntity),
+      builder: (context, state) => OrderViewPage(
+        entity: state.extra as OrderEntity,
+      ),
     ),
     GoRoute(
       path: EditCategoryPage.routePath,
@@ -78,9 +81,12 @@ final router = GoRouter(
           EditCategoryPage(entity: state.extra as CategoryEntity),
     ),
     GoRoute(
-      path: ProductPage.routePath,
-      builder: (context, state) => ProductPage(id: state.extra as String),
-    ),
+        path: ProductPage.routePath,
+        builder: (context, state) {
+          return ProductPage(
+            id: state.extra as String,
+          );
+        }),
     GoRoute(
       path: AddOfferPage.routePath,
       builder: (context, state) => const AddOfferPage(),
@@ -114,6 +120,7 @@ final router = GoRouter(
     ),
     GoRoute(
       path: EditProductPage.routePath,
+
       builder: (context, state) => EditProductPage(
         entity: state.extra as ProductEntity,
       ),

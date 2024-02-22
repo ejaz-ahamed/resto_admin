@@ -7,8 +7,11 @@ import 'package:resto_admin/features/authentication/presentation/provider/authen
 
 class LogoutButtonWidget extends ConsumerWidget {
   const LogoutButtonWidget({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final constants = ref.watch(profilePageConstantsProvider);
+
     final appTheme = AppTheme.of(context);
     return InkWell(
       onTap: () => showDialog(
@@ -23,7 +26,7 @@ class LogoutButtonWidget extends ConsumerWidget {
                         ref.read(authenticationProvider.notifier).logout();
                       },
                       child: Text(
-                        ref.watch(profilePageProvider).txtLogOut,
+                        constants.txtLogOut,
                         style: AppTheme.of(context).typography.h500,
                       )),
                   TextButton(
@@ -31,7 +34,7 @@ class LogoutButtonWidget extends ConsumerWidget {
                         context.pop();
                       },
                       child: Text(
-                        ref.watch(profilePageProvider).txtCancel,
+                        constants.txtCancel,
                         style: AppTheme.of(context).typography.h500,
                       )),
                 ],
@@ -39,7 +42,7 @@ class LogoutButtonWidget extends ConsumerWidget {
             )),
       ),
       child: Text(
-        ref.watch(profilePageProvider).txtLogOut,
+        constants.txtLogOut,
         style: appTheme.typography.h400,
       ),
     );
