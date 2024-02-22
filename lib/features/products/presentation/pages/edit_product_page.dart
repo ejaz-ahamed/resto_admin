@@ -21,10 +21,12 @@ import 'package:resto_admin/features/products/presentation/widgets/product_type_
 class EditProductPage extends HookConsumerWidget {
   static const routePath = '/editProducts';
   final ProductEntity entity;
+
   const EditProductPage({
     super.key,
     required this.entity,
   });
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);
@@ -93,11 +95,6 @@ class EditProductPage extends HookConsumerWidget {
 
     /// Remove a type from the product
     void removeProductType(int index) async {
-      await ref.read(productProvider.notifier).deleteType(
-            entity.id,
-            entity.types[index].id,
-          );
-
       final controllersToDelete = productTypeControllers.value[index];
 
       productTypeControllers.value = [...productTypeControllers.value]
@@ -109,11 +106,6 @@ class EditProductPage extends HookConsumerWidget {
 
     /// Remove an addon from the product
     void removeAddon(int index) async {
-      await ref.read(productProvider.notifier).deleteAddOn(
-            entity.id,
-            entity.addOns[index].id,
-          );
-
       final controllersToDelete = productAddonControllers.value[index];
 
       productAddonControllers.value = [...productAddonControllers.value]
@@ -200,7 +192,7 @@ class EditProductPage extends HookConsumerWidget {
                       productTypes: productTypeControllers,
                       style: apptheme.typography.h400
                           .copyWith(color: apptheme.colors.textDisabled),
-                      hint: constants.txtAddOns,
+                      hint: constants.txtType,
                     );
                   },
                 ),
