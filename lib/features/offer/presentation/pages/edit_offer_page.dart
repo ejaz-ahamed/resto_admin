@@ -40,7 +40,14 @@ class EditOfferPage extends HookConsumerWidget {
     final typography = AppTheme.of(context).typography;
 
     /// Selected tab
-    final selectedOfferType = useState<OfferType>(OfferType.percentage);
+    final selectedOfferType = useState<OfferType>(entity.offerType);
+
+    final amountState = useState<double>(0);
+
+    /// save state offer amount
+    percentageController.addListener(() {
+      amountState.value = double.parse(percentageController.text.trim());
+    });
 
     useEffect(() {
       Future.delayed(Duration.zero, () {
@@ -140,7 +147,7 @@ class EditOfferPage extends HookConsumerWidget {
               const SizedBox16Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
-                child: Text(constants.txtOfferDetails, style: typography.h600),
+                child: Text(constants.txtOfferDetails, style: typography.h400),
               ),
               const SizedBox16Widget(),
               Padding(
@@ -177,10 +184,7 @@ class EditOfferPage extends HookConsumerWidget {
               const RowHeadingWidget(),
               ListViewProductsWidget(
                 offerType: selectedOfferType.value,
-                offerValue: double.parse(
-                    percentageController.text.trim().isNotEmpty
-                        ? percentageController.text
-                        : '0'),
+                offerValue: amountState.value,
               ),
               const SizedBox8Widget(),
               const SizedBox()

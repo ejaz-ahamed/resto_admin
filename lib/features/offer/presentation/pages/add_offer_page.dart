@@ -9,6 +9,7 @@ import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_16_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
+import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_8_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
 import 'package:resto_admin/features/offer/presentation/provider/offer_provider.dart';
@@ -81,13 +82,14 @@ class AddOfferPage extends HookConsumerWidget {
             child: AppBarWidget(title: constants.txtAppbarTitle)),
         body: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox16Widget(),
+              const SizedBox24Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
                 child: ImagePickerOfferWidget(imgProvider: imageProvider),
               ),
-              const SizedBox24Widget(),
+              const SizedBox32Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
                 child: TextFieldWidget(
@@ -96,7 +98,7 @@ class AddOfferPage extends HookConsumerWidget {
                     hintText: constants.txtHintTextTitle,
                     controller: nameController),
               ),
-              const SizedBox16Widget(),
+              const SizedBox8Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
                 child: TextFieldWidget(
@@ -109,13 +111,9 @@ class AddOfferPage extends HookConsumerWidget {
               const SizedBox16Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
-                child: Row(
-                  children: [
-                    Text(
-                      constants.txtOfferDetails,
-                      style: typography.h400,
-                    ),
-                  ],
+                child: Text(
+                  constants.txtOfferDetails,
+                  style: typography.h400,
                 ),
               ),
               const SizedBox16Widget(),
@@ -133,7 +131,7 @@ class AddOfferPage extends HookConsumerWidget {
                   ],
                 ),
               ),
-              const SizedBox8Widget(),
+              const SizedBox32Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
                 child: TextFieldWidget(
