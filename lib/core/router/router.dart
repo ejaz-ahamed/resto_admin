@@ -20,7 +20,6 @@ import 'package:resto_admin/features/products/presentation/pages/view_categories
 import 'package:resto_admin/features/profile_page/presentation/pages/edit_password_page.dart';
 import 'package:resto_admin/features/profile_page/presentation/pages/edit_profile_page.dart';
 import 'package:resto_admin/features/profile_page/presentation/pages/profile_page.dart';
-
 import 'package:resto_admin/features/products/presentation/pages/product_page.dart';
 import 'package:resto_admin/main.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -95,10 +94,15 @@ final router = GoRouter(
       builder: (context, state) => const OfferSelectingPage(),
     ),
     GoRoute(
-      path: OverViewItemsPage.routePath,
-      builder: (context, state) =>
-          OverViewItemsPage(entity: state.extra as ProductEntity),
-    ),
+        path: OverViewItemsPage.routePath,
+        builder: (context, state) {
+          final (String, String) extra = state.extra as (String, String);
+
+          return OverViewItemsPage(
+            categoryId: extra.$1,
+            productId: extra.$2,
+          );
+        }),
     GoRoute(
       path: ViewCategoriesPage.routePath,
       builder: (context, state) => const ViewCategoriesPage(),

@@ -9,3 +9,4 @@ class ProfileEntity with _$ProfileEntity {
     required String? closingTime,
   }) = _ProfileEntity;
 }
+

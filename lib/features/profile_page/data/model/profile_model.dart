@@ -7,11 +7,13 @@ part 'profile_model.g.dart';
 class ProfileModel with _$ProfileModel{
   const ProfileModel._();
   factory ProfileModel({
-   required String? openingTime,
-   required String? closingTime,
+   required String openingTime,
+   required String closingTime,
   }) = _ProfileModel;
+
   factory ProfileModel.fromJson(Map<String, dynamic> json) =>
       _$ProfileModelFromJson(json);
+
   factory ProfileModel.fromFirestore(
     DocumentSnapshot<Map<String, dynamic>> snapshot,
     SnapshotOptions? options,

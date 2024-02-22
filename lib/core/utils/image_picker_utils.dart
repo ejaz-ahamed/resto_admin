@@ -34,40 +34,64 @@ class ImagePickerUtils {
     }
   }
 
-  static Future<XFile?> showDialogueForImagePicker(BuildContext context) async {
+  static Future<XFile?> showDialogueForImagePicker(
+    BuildContext context, [
+    bool showDeleteOption = false,
+  ]) async {
     final imageCompleter = Completer<XFile?>();
     await showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-          backgroundColor: AppTheme.of(context).colors.secondary,
+      builder: (context) {
+        final theme = AppTheme.of(context);
+
+        return AlertDialog(
+          backgroundColor: theme.colors.secondary,
           title: Consumer(
-            builder: (context, ref, child) => Column(
-              children: [
-                TextButton(
-                    onPressed: () async {
-                      imageCompleter.complete(
-                          await ImagePickerUtils.pickImageFromCamera(context));
-                      Future.sync(() => context.pop());
-                    },
-                    child: Text(
-                      ref.watch(profilePageConstantsProvider).txtCamera,
-                      style: AppTheme.of(context).typography.h500,
-                    )),
-                TextButton(
-                    onPressed: () async {
-                      imageCompleter.complete(
-                        await ImagePickerUtils.pickImageFromGallery(context),
-                      );
-                      Future.sync(() => context.pop());
-                    },
-                    child: Text(
-                      ref.watch(profilePageConstantsProvider).txtGallery,
-                      style: AppTheme.of(context).typography.h500,
-                    )),
-              ],
-            ),
-          )),
+            builder: (context, ref, child) {
+              final constants = ref.watch(profilePageConstantsProvider);
+
+              return Column(
+                children: [
+                  TextButton(
+                      onPressed: () async {
+                        imageCompleter.complete(
+                            await ImagePickerUtils.pickImageFromCamera(
+                                context));
+                        Future.sync(() => context.pop());
+                      },
+                      child: Text(constants.txtCamera,
+                          style: theme.typography.h500)),
+                  TextButton(
+                      onPressed: () async {
+                        imageCompleter.complete(
+                          await ImagePickerUtils.pickImageFromGallery(context),
+                        );
+                        Future.sync(() => context.pop());
+                      },
+                      child: Text(constants.txtGallery,
+                          style: theme.typography.h500)),
+
+                  /// Show the delete option if required
+                  if (showDeleteOption)
+                    TextButton(
+                        onPressed: () async {
+                          /// An empty path is given to remove the selected image
+                          imageCompleter.complete(
+                            XFile(''),
+                          );
+                          Future.sync(() => context.pop());
+                        },
+                        child: Text(constants.txtDelete,
+                            style: theme.typography.h500
+                                .copyWith(color: theme.colors.primary))),
+                ],
+              );
+            },
+          ),
+        );
+      },
     );
+
     final imageSelected = await (imageCompleter.future);
     return imageSelected;
   }

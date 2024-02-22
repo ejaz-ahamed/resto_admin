@@ -25,6 +25,9 @@ class ProfilePageConstants {
   final txtLogOut = 'Log out';
   final txtCancel = 'Cancel';
   final txtLoading = 'Loading...';
+  final txtDelete = 'Delete';
+  final errorPassword = "Password doesn't match";
+  final errorEmptyPassword = "Input is Empty";
 }
 
 @riverpod

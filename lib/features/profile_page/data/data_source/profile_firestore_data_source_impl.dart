@@ -28,5 +28,6 @@ class ProfileFirestoreDataSourceImpl implements ProfileFirestoreDataSource {
 @riverpod
 ProfileFirestoreDataSource profileFirestoreDataSource(
     ProfileFirestoreDataSourceRef ref) {
+
   return ProfileFirestoreDataSourceImpl();
 }

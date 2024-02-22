@@ -20,14 +20,13 @@ dependencies:
   hooks_riverpod: ^2.4.10
   flutter_svg: ^2.0.9
   image_picker: ^1.0.7
-
-  intl: ^0.19.0
-  firebase_auth: ^4.17.5
-  firebase_core: ^2.25.4
   freezed_annotation: ^2.4.1
   cloud_firestore: ^4.15.5
   json_annotation: ^4.8.1
+  firebase_auth: ^4.17.4
+  firebase_core: ^2.25.4
   firebase_storage: ^11.6.6
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -40,7 +39,6 @@ dev_dependencies:
   riverpod_lint: ^2.3.9
   freezed: ^2.4.7
   json_serializable: ^6.7.1
-
 
 flutter:
   uses-material-design: true

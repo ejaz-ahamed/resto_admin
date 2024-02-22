@@ -11,8 +11,8 @@ class LogoutButtonWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final constants = ref.watch(profilePageConstantsProvider);
-    final appTheme = AppTheme.of(context);
 
+    final appTheme = AppTheme.of(context);
     return InkWell(
       onTap: () => showDialog(
         context: context,
@@ -31,14 +31,11 @@ class LogoutButtonWidget extends ConsumerWidget {
                       )),
                   TextButton(
                       onPressed: () {
-                        context.pop;
+                        context.pop();
                       },
                       child: Text(
                         constants.txtCancel,
-                        style: AppTheme.of(context)
-                            .typography
-                            .h500
-                            .copyWith(fontWeight: FontWeight.normal),
+                        style: AppTheme.of(context).typography.h500,
                       )),
                 ],
               ),

@@ -4,3 +4,4 @@ abstract class ProfileFirestoreDataSource {
   Future<void> setTime(ProfileModel profileModel);
   Stream<ProfileModel> getTime();
 }
+
