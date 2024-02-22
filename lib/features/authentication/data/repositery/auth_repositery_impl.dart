@@ -24,21 +24,27 @@ class AuthRepositeryImpl implements AuthRepositery {
   }
 
   @override
-  Stream<UserEntity> getUserDetails(String uid) async* {
-    final data = userDataSourse.getUserDetails(uid);
+  Future<void> updatePassword(String newPassword) async {
+    dataSourse.updatePassword(newPassword);
+  }
+
+  @override
+  Stream<UserEntity> getProfileImage() async* {
+    final data = userDataSourse.getProfileImage();
     await for (final model in data) {
-      yield UserEntity(
-          uid: model.uid, name: model.name, imgPath: model.imgPath);
+      yield UserEntity(imgPath: model.imgPath);
     }
   }
 
   @override
-  Future<void> updateUserDetails(UserEntity userEntity) async {
-    final model = UserModel(
-        uid: userEntity.uid,
-        name: userEntity.name,
-        imgPath: userEntity.imgPath);
-    await userDataSourse.updateUserDetails(model);
+  Future<void> setProfileImage(UserEntity userEntity) async {
+    final model = UserModel(imgPath: userEntity.imgPath);
+    await userDataSourse.setProfileImage(model);
+  }
+  
+  @override
+  Future<void> removeImage() async{
+   await userDataSourse.removeImage();
   }
 }
 

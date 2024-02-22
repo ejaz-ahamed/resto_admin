@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/widgets/bottom_navigation/bottom_nav_widget.dart';
 import 'package:resto_admin/features/authentication/presentation/pages/auth_switcher.dart';
+import 'package:resto_admin/features/authentication/presentation/pages/login_page.dart';
 import 'package:resto_admin/features/offer/domain/entity/offer_entity.dart';
 import 'package:resto_admin/features/offer/presentation/pages/add_offer_page.dart';
 import 'package:resto_admin/features/offer/presentation/pages/edit_offer_page.dart';
@@ -19,7 +20,6 @@ import 'package:resto_admin/features/products/presentation/pages/view_categories
 import 'package:resto_admin/features/profile_page/presentation/pages/edit_password_page.dart';
 import 'package:resto_admin/features/profile_page/presentation/pages/edit_profile_page.dart';
 import 'package:resto_admin/features/profile_page/presentation/pages/profile_page.dart';
-
 import 'package:resto_admin/features/products/presentation/pages/product_page.dart';
 import 'package:resto_admin/main.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -37,6 +37,10 @@ final router = GoRouter(
     GoRoute(
       path: BottomNaviWidget.routePath,
       builder: (context, state) => const BottomNaviWidget(),
+    ),
+    GoRoute(
+      path: LoginPage.routePath,
+      builder: (context, state) => const LoginPage(),
     ),
     GoRoute(
       path: HomePage.routePath,

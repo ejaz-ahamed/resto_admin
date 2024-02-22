@@ -9,6 +9,8 @@ class ProfilePageConstants {
   final txtUpdatePassword = 'Update Password';
   final txtEdit = 'Edit';
   final icArrowBackward = 'assets/icons/ic_arrow_backward.svg';
+  final txtLogOut = 'Log out';
+  final txtCancel = 'Cancel';
 }
 
 @riverpod
