@@ -79,9 +79,12 @@ final router = GoRouter(
           EditCategoryPage(entity: state.extra as CategoryEntity),
     ),
     GoRoute(
-      path: ProductPage.routePath,
-      builder: (context, state) => ProductPage(id: state.extra as String),
-    ),
+        path: ProductPage.routePath,
+        builder: (context, state) {
+          return ProductPage(
+            id: state.extra as String,
+          );
+        }),
     GoRoute(
       path: AddOfferPage.routePath,
       builder: (context, state) => const AddOfferPage(),

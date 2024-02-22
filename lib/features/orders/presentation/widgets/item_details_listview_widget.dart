@@ -4,7 +4,6 @@ import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/features/orders/domain/entity/order_entity.dart';
 import 'package:resto_admin/features/orders/presentation/providers/order_provider.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/text_regular_widget.dart';
-import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
 
 class ItemsDetailsListviewDetails extends ConsumerWidget {
   final List<OrderEntity> entity;
@@ -57,10 +56,10 @@ class ItemsDetailsListviewDetails extends ConsumerWidget {
                   ),
                 ),
               ),
-            AsyncError() => Center(
+            AsyncError() => const Center(
                 child: Text(''),
               ),
-            _ => CircularProgressIndicator(),
+            _ => const CircularProgressIndicator(),
           };
         },
       ),
