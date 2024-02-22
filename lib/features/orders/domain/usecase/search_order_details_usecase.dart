@@ -16,6 +16,7 @@ class SearchOrderUsecase {
       final List<OrderEntity> searchResult = [];
       for (final order in allOrders) {
         final orderEntity = OrderEntity(
+          id: order.id,
           uid: order.uid,
           location: order.location,
           time: order.time,
