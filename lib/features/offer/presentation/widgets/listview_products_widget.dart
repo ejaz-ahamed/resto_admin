@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
@@ -22,13 +24,15 @@ class ListViewProductsWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentDollarValue = ref.watch(resultProvider);
+    final data = ref.watch(selectedItemsProvider).selectedItems;
     final theme = AppTheme.of(context);
     AppAssetsConstants iconConst = AppAssetsConstants();
 
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: 3,
+      itemCount: data.length,
       itemBuilder: (context, index) {
+        log(data.toString());
         return Padding(
           padding: EdgeInsets.only(left: theme.spaces.space_100),
           child: SizedBox(
@@ -36,7 +40,7 @@ class ListViewProductsWidget extends ConsumerWidget {
             child: ListTile(
               leading: Text(
                 // snapshot.data![index].name,.
-                'yyyy',
+                "",
                 style: theme.typography.h500,
               ),
               trailing: Row(
