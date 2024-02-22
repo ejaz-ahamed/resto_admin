@@ -19,7 +19,6 @@ class SearchOrderUsecase {
           uid: order.uid,
           location: order.location,
           time: order.time,
-          name: order.name,
           items: [
             for (final item in order.items)
               OrderItemEntity(
@@ -31,8 +30,7 @@ class SearchOrderUsecase {
           orderStatus: orderStatus,
         );
         keyword = keyword.toLowerCase().trim();
-        if (order.name.toLowerCase().trim().contains(keyword) ||
-            order.location.toLowerCase().trim().contains(keyword) ||
+        if (order.location.toLowerCase().trim().contains(keyword) ||
             order.uid.toLowerCase().trim().contains(keyword)) {
           searchResult.add(orderEntity);
         }

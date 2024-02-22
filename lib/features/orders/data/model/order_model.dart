@@ -11,11 +11,11 @@ class OrderModel with _$OrderModel {
   factory OrderModel({
     required String uid,
     required String location,
-    required String name,
     required String time,
     required List<OrderItemModel> items,
     required OrderStatus orderStatus,
   }) = _OrderModel;
+
   factory OrderModel.fromJson(Map<String, dynamic> json) =>
       _$OrderModelFromJson(json);
 
@@ -26,6 +26,7 @@ class OrderModel with _$OrderModel {
     final data = snapshot.data()!;
     return OrderModel.fromJson(data);
   }
+
   Map<String, dynamic> toFirestore() {
     return toJson();
   }

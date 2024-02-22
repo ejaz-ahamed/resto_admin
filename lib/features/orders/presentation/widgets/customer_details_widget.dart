@@ -46,7 +46,7 @@ class CustomerDetailsWidget extends ConsumerWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   TextRegularWidget(text: entity.uid),
-                  TextRegularWidget(text: entity.name),
+                  // TextRegularWidget(text: entity.name),
                   TextRegularWidget(text: entity.time),
                   TextRegularWidget(text: entity.location),
                 ],
