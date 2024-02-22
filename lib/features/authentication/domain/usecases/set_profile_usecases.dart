@@ -1,7 +1,7 @@
 import 'package:resto_admin/core/exceptions/base_exception/base_exception.dart';
 import 'package:resto_admin/features/authentication/domain/entity/user_entity.dart';
 import 'package:resto_admin/features/authentication/domain/repository/auth_repository.dart';
-import 'package:resto_admin/features/profile_page/domain/repository/profile_repository.dart';
+import 'package:resto_admin/features/profile/domain/repository/profile_repository.dart';
 
 class UpdateUserProfileUsecases {
   final AuthRepository repositery;

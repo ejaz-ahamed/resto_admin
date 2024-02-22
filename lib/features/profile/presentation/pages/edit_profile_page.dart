@@ -12,11 +12,11 @@ import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:resto_admin/features/profile_page/domain/entity/profile_entity.dart';
-import 'package:resto_admin/features/profile_page/presentation/providers/profile_provider.dart';
-import 'package:resto_admin/features/profile_page/presentation/widgets/select_closing_time_widget.dart';
+import 'package:resto_admin/features/profile/domain/entity/profile_entity.dart';
+import 'package:resto_admin/features/profile/presentation/providers/profile_provider.dart';
+import 'package:resto_admin/features/profile/presentation/widgets/select_closing_time_widget.dart';
 
-import 'package:resto_admin/features/profile_page/presentation/widgets/select_opening_time_widget.dart';
+import 'package:resto_admin/features/profile/presentation/widgets/select_opening_time_widget.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:resto_admin/features/authentication/presentation/provider/authentication_provider.dart';
 

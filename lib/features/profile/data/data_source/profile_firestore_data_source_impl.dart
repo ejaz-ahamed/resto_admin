@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:resto_admin/features/profile_page/data/data_source/profile_firestore_data_source.dart';
-import 'package:resto_admin/features/profile_page/data/model/profile_model.dart';
+import 'package:resto_admin/features/profile/data/data_source/profile_firestore_data_source.dart';
+import 'package:resto_admin/features/profile/data/model/profile_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'profile_firestore_data_source_impl.g.dart';

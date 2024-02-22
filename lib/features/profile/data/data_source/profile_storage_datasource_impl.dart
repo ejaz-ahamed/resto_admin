@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:resto_admin/features/profile_page/data/data_source/profile_storage_datasource.dart';
+import 'package:resto_admin/features/profile/data/data_source/profile_storage_datasource.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'profile_storage_datasource_impl.g.dart';
 

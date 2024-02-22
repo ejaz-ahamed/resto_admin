@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:resto_admin/features/profile_page/domain/entity/profile_entity.dart';
+import 'package:resto_admin/features/profile/domain/entity/profile_entity.dart';
 
 part 'profile_provider_state.freezed.dart';
 

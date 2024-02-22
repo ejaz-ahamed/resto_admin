@@ -19,9 +19,9 @@ import 'package:resto_admin/features/products/presentation/pages/manage_categori
 
 import 'package:resto_admin/features/products/presentation/pages/overview_items_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/view_categories_page.dart';
-import 'package:resto_admin/features/profile_page/presentation/pages/edit_password_page.dart';
-import 'package:resto_admin/features/profile_page/presentation/pages/edit_profile_page.dart';
-import 'package:resto_admin/features/profile_page/presentation/pages/profile_page.dart';
+import 'package:resto_admin/features/profile/presentation/pages/edit_password_page.dart';
+import 'package:resto_admin/features/profile/presentation/pages/edit_profile_page.dart';
+import 'package:resto_admin/features/profile/presentation/pages/profile_page.dart';
 import 'package:resto_admin/features/products/presentation/pages/product_page.dart';
 import 'package:resto_admin/main.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

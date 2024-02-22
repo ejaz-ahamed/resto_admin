@@ -9,13 +9,13 @@ import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
-import 'package:resto_admin/features/profile_page/presentation/pages/edit_password_page.dart';
-import 'package:resto_admin/features/profile_page/presentation/pages/edit_profile_page.dart';
-import 'package:resto_admin/features/profile_page/presentation/widgets/logout_button_widget.dart';
-import 'package:resto_admin/features/profile_page/presentation/widgets/select_closing_time_widget.dart';
-import 'package:resto_admin/features/profile_page/presentation/widgets/select_opening_time_widget.dart';
+import 'package:resto_admin/features/profile/presentation/pages/edit_password_page.dart';
+import 'package:resto_admin/features/profile/presentation/pages/edit_profile_page.dart';
+import 'package:resto_admin/features/profile/presentation/widgets/logout_button_widget.dart';
+import 'package:resto_admin/features/profile/presentation/widgets/select_closing_time_widget.dart';
+import 'package:resto_admin/features/profile/presentation/widgets/select_opening_time_widget.dart';
 import 'package:resto_admin/features/authentication/presentation/provider/authentication_provider.dart';
-import 'package:resto_admin/features/profile_page/presentation/widgets/switch_button_widgets.dart';
+import 'package:resto_admin/features/profile/presentation/widgets/switch_button_widgets.dart';
 
 class ProfilePage extends ConsumerWidget {
   static const routePath = '/profile';

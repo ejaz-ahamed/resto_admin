@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
-import 'package:resto_admin/features/profile_page/presentation/pages/edit_profile_page.dart';
+import 'package:resto_admin/features/profile/presentation/pages/edit_profile_page.dart';
 
 class AdminProfileImageWidget extends ConsumerWidget {
   final Widget child;

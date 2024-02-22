@@ -12,7 +12,7 @@ import 'package:resto_admin/features/products/presentation/pages/view_categories
 import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
 import 'package:resto_admin/features/products/presentation/widgets/row_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/textfield_widget.dart';
-import 'package:resto_admin/features/profile_page/presentation/pages/profile_page.dart';
+import 'package:resto_admin/features/profile/presentation/pages/profile_page.dart';
 import 'package:shimmer/shimmer.dart';
 // import 'package:shimmer/shimmer.dart';
 

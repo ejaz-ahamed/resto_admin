@@ -11,7 +11,7 @@ import 'package:resto_admin/features/authentication/domain/usecases/remove_image
 import 'package:resto_admin/features/authentication/domain/usecases/update_password_usecase.dart';
 import 'package:resto_admin/features/authentication/domain/usecases/set_profile_usecases.dart';
 import 'package:resto_admin/features/authentication/presentation/pages/login_page.dart';
-import 'package:resto_admin/features/profile_page/data/repository/profile_repository_impl.dart';
+import 'package:resto_admin/features/profile/data/repository/profile_repository_impl.dart';
 import 'package:resto_admin/main.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
