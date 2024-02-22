@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:resto_admin/core/constants/edit_profile_page/profile_page_constants.dart';
+import 'package:resto_admin/core/constants/profile_page/profile_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/utils/snack_bar_utils.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
@@ -20,8 +20,8 @@ class EditPasswordPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final newPasswordController = useTextEditingController();
     final confirmPasswordController = useTextEditingController();
-    final constants = ref.watch(profilePageContstantsProvider);
-    final hintText = ref.watch(profilePageContstantsProvider).txtHintenterHere;
+    final constants = ref.watch(profilePageConstantsProvider);
+    final hintText = ref.watch(profilePageConstantsProvider).txtHintenterHere;
     final appTheme = AppTheme.of(context);
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
@@ -38,16 +38,14 @@ class EditPasswordPage extends HookConsumerWidget {
               horizontal: appTheme.spaces.space_300),
           child: Column(
             children: [
-
-              const SizedBox32Widget(),
               TextFieldWidget(
-                enabled: true,
+                  enabled: true,
                   textFieldTitle: constants.txtNewPassword,
                   hintText: hintText,
                   controller: newPasswordController),
               const SizedBox32Widget(),
               TextFieldWidget(
-                enabled: true,
+                  enabled: true,
                   textFieldTitle: constants.txtConfirmPassword,
                   hintText: hintText,
                   controller: confirmPasswordController),
@@ -64,10 +62,11 @@ class EditPasswordPage extends HookConsumerWidget {
               context.go(LoginPage.routePath);
               newPasswordController.clear();
               confirmPasswordController.clear();
+            } else if (newPasswordController.text.isEmpty ||
+                confirmPasswordController.text.isEmpty) {
+              SnackBarUtils.showMessage(constants.errorEmptyPassword);
             } else {
-              SnackBarUtils.showMessage('incorrect password');
-              newPasswordController.clear();
-              confirmPasswordController.clear();
+              SnackBarUtils.showMessage(constants.errorPassword);
             }
           },
         ),
