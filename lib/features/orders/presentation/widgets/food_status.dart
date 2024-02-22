@@ -10,7 +10,9 @@ import 'package:resto_admin/features/orders/presentation/widgets/button_widget.d
 
 class FoodStatus extends HookConsumerWidget {
   final List<OrderEntity> count;
-  const FoodStatus({super.key, required this.count});
+  final TextEditingController clearController;
+  const FoodStatus(
+      {super.key, required this.count, required this.clearController});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -53,7 +55,11 @@ class FoodStatus extends HookConsumerWidget {
         children: [
           for (var i = 0; i < tabsText.length; i++)
             ButtonWidget(
-              onPressed: () => tabOnPressed(i),
+              onPressed: () {
+                tabOnPressed(i);
+                clearController.clear();
+                ref.read(orderProvider.notifier).clearSearchList();
+              },
               text: tabsText[i]['text'] as String,
               isSelected: ref.watch(
                       orderProvider.select((value) => value.orderStatus)) ==

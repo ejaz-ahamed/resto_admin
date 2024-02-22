@@ -33,6 +33,8 @@ class ProductRepositoryImpl implements ProductRepository {
         ProductAddonModel(id: addOn.id, name: addOn.name, price: addOn.price)
     ];
     await dataSource.add(ProductModel(
+        availableFrom: entity.availableFrom,
+        availableUpTo: entity.availableUpTo,
         id: entity.id,
         imagePath: entity.imagePath,
         name: entity.name,
@@ -74,6 +76,8 @@ class ProductRepositoryImpl implements ProductRepository {
       yield [
         for (final product in docs)
           ProductEntity(
+            availableFrom: product.availableFrom,
+            availableUpTo: product.availableUpTo,
             name: product.name,
             imagePath: product.imagePath,
             description: product.description,
@@ -107,6 +111,8 @@ class ProductRepositoryImpl implements ProductRepository {
     final result = [
       for (final results in data)
         ProductEntity(
+          availableFrom: results.availableFrom,
+          availableUpTo: results.availableUpTo,
           name: results.name,
           imagePath: results.imagePath,
           description: results.description,
@@ -145,6 +151,8 @@ class ProductRepositoryImpl implements ProductRepository {
         ProductAddonModel(id: addOn.id, name: addOn.name, price: addOn.price)
     ];
     await dataSource.update(ProductModel(
+      availableFrom: updatedEntity.availableFrom,
+      availableUpTo: updatedEntity.availableUpTo,
       id: updatedEntity.id,
       categoryId: updatedEntity.categoryId,
       description: updatedEntity.description,
@@ -173,6 +181,8 @@ class ProductRepositoryImpl implements ProductRepository {
   Future<ProductEntity> getById(String id) async {
     final doc = await dataSource.getById(id);
     return ProductEntity(
+        availableFrom: doc.availableFrom,
+        availableUpTo: doc.availableUpTo,
         name: doc.name,
         imagePath: doc.imagePath,
         description: doc.description,
@@ -204,6 +214,11 @@ class ProductRepositoryImpl implements ProductRepository {
   @override
   Future<void> deleteAddon(String productId, String addOnId) async {
     await dataSource.deleteAddon(productId, addOnId);
+  }
+
+  @override
+  Future<void> deleteType(String productId, String typeId) async {
+    await dataSource.deleteType(productId, typeId);
   }
 }
 

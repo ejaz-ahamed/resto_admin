@@ -6,14 +6,14 @@ import 'package:resto_admin/features/products/domain/entities/category_entity.da
 import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
 import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
 
-class ListViewSeparatedWidget extends HookConsumerWidget {
+class CategoryListViewWidget extends HookConsumerWidget {
   final List<CategoryEntity> entity;
-  final TextEditingController clearController;
+  final TextEditingController? clearController;
 
-  const ListViewSeparatedWidget({
+  const CategoryListViewWidget({
     super.key,
     required this.entity,
-    required this.clearController,
+    this.clearController,
   });
 
   @override
@@ -41,7 +41,7 @@ class ListViewSeparatedWidget extends HookConsumerWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      clearController.clear();
+                      clearController?.clear();
                       ref.read(productProvider.notifier).clearSearchList();
                       ref
                           .read(categoryProvider.notifier)

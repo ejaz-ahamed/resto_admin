@@ -11,7 +11,7 @@ class GetOrderUsecase {
     try {
       return repository.getOrderByType(orderStatus);
     } catch (e) {
-      throw BaseException("cannot get");
+      throw BaseException("Cannot get orders");
     }
   }
 }

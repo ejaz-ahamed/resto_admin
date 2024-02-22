@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:resto_admin/core/constants/app_assets_constants.dart';
-import 'package:resto_admin/core/constants/edit_profile_page/profile_page_constants.dart';
+import 'package:resto_admin/core/constants/profile_constants/profile_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/utils/image_picker_utils.dart';
 import 'package:resto_admin/core/widgets/sized_box_8_widget.dart';
@@ -14,7 +14,7 @@ class AddImageWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final assets = ref.watch(appAssetsConstantsProvider);
-    final constants = ref.watch(profilePageContstantsProvider);
+    final constants = ref.watch(profilePageConstantsProvider);
     final appTheme = AppTheme.of(context);
     return Ink(
       child: InkWell(

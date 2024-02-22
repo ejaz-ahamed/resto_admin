@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -8,6 +7,7 @@ import 'package:resto_admin/core/enums/offer_type.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
+import 'package:resto_admin/core/widgets/image_picker_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_16_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_8_widget.dart';
@@ -28,6 +28,11 @@ class AddOfferPage extends HookConsumerWidget {
     final percentageController = useTextEditingController();
 
     AddOfferPageConstants constants = AddOfferPageConstants();
+
+    useEffect(() {
+      ref.invalidate(imageProvider);
+      return null;
+    });
     //Theme data
     final spaces = AppTheme.of(context).spaces;
     final typography = AppTheme.of(context).typography;
@@ -65,7 +70,7 @@ class AddOfferPage extends HookConsumerWidget {
               const SizedBox16Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
-                child: ImagePickerOfferWidget(imgProvider: offerImageProvider),
+                child: const ImagePickerWidget(),
               ),
               const SizedBox24Widget(),
               Padding(

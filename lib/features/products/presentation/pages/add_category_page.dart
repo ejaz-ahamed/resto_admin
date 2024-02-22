@@ -34,7 +34,7 @@ class AddCategoryPage extends HookConsumerWidget {
           child: Column(
             children: [
               const SizedBox32Widget(),
-              ImagePickerWidget(imgProvider: imageProvider),
+              const ImagePickerWidget(),
               const SizedBox24Widget(),
               TextFieldWidget(
                 enabled: true,

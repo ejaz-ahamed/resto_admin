@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:resto_admin/core/constants/profile_page/profile_page_constants.dart';
+import 'package:resto_admin/core/constants/profile_constants/profile_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/features/authentication/presentation/provider/authentication_provider.dart';
 
 class LogoutButtonWidget extends ConsumerWidget {
   const LogoutButtonWidget({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final constants = ref.watch(profilePageConstantsProvider);
+
     final appTheme = AppTheme.of(context);
     return InkWell(
       onTap: () => showDialog(
@@ -23,7 +26,7 @@ class LogoutButtonWidget extends ConsumerWidget {
                         ref.read(authenticationProvider.notifier).logout();
                       },
                       child: Text(
-                        ref.watch(profilePageProvider).txtLogOut,
+                        constants.txtLogOut,
                         style: AppTheme.of(context).typography.h500,
                       )),
                   TextButton(
@@ -31,7 +34,7 @@ class LogoutButtonWidget extends ConsumerWidget {
                         context.pop();
                       },
                       child: Text(
-                        ref.watch(profilePageProvider).txtCancel,
+                        constants.txtCancel,
                         style: AppTheme.of(context).typography.h500,
                       )),
                 ],
@@ -39,7 +42,7 @@ class LogoutButtonWidget extends ConsumerWidget {
             )),
       ),
       child: Text(
-        ref.watch(profilePageProvider).txtLogOut,
+        constants.txtLogOut,
         style: appTheme.typography.h400,
       ),
     );

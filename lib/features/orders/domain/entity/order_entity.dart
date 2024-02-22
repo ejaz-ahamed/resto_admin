@@ -9,7 +9,6 @@ class OrderEntity with _$OrderEntity {
     required String uid,
     required String location,
     required String time,
-    required String name,
     required List<OrderItemEntity> items,
     required OrderStatus orderStatus,
   }) = _OrderEntity;
