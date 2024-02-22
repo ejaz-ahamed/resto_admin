@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/core/widgets/admin_profile_image_widget.dart';
 import 'package:resto_admin/core/widgets/product_gridview_widget.dart';
 import 'package:resto_admin/core/widgets/category_listview_separated_widget.dart';
 import 'package:resto_admin/features/products/presentation/pages/product_page.dart';
@@ -38,13 +39,13 @@ class HomePage extends HookConsumerWidget {
             child: Row(
               children: [
                 InkWell(
-                  onTap: () => context.push(ProfilePage.routePath),
-                  child: CircleAvatar(
-                    radius: theme.spaces.space_300,
-                  ),
-                ),
+                    onTap: () => context.push(ProfilePage.routePath),
+                    child: AdminProfileImageWidget(
+                      height: theme.spaces.space_600,
+                      width: theme.spaces.space_600,
+                    )),
                 SizedBox(
-                  width: theme.spaces.space_100 * 2.5,
+                  width: theme.spaces.space_100 * 2,
                 ),
                 Text(
                   data.txtProductTitle,
