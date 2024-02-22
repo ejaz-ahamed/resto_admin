@@ -3,6 +3,9 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'profile_page_constants.g.dart';
 
 class ProfilePageConstants {
+  /// The user ID of the admin user
+  final txtAdminUserId = 'admin';
+
   final txtEditprofile = 'Edit profile';
   final txtEditPassword = 'Edit Password';
   final txtAddImage = 'Add image';

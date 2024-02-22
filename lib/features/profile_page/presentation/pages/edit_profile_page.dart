@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:resto_admin/core/constants/profile_page/profile_page_constants.dart';
+import 'package:resto_admin/core/constants/profile_constants/profile_page_constants.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/utils/image_picker_utils.dart';
@@ -74,7 +74,8 @@ class EditProfilePage extends HookConsumerWidget {
                             ref.read(editImageProvider.notifier).state =
                                 imageSelected;
                           },
-                          child: switch (ref.watch(userProfileStreamProvider)) {
+                          child: switch (ref.watch(userProfileStreamProvider(
+                              constants.txtAdminUserId))) {
                             AsyncData(:final value) => Builder(
                                 builder: (context) {
                                   /// If the user is selected new image in the image picker,

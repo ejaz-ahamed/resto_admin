@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/constants/app_assets_constants.dart';
-import 'package:resto_admin/core/constants/profile_page/profile_page_constants.dart';
+import 'package:resto_admin/core/constants/profile_constants/profile_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
@@ -53,7 +53,8 @@ class ProfilePage extends ConsumerWidget {
                     border: Border.all(
                         color: appTheme.colors.textDisabled,
                         width: appTheme.spaces.space_25)),
-                child: switch (ref.watch(userProfileStreamProvider)) {
+                child: switch (ref.watch(
+                    userProfileStreamProvider(constatnts.txtAdminUserId))) {
                   AsyncData(:final value) => Builder(builder: (context) {
                       /// If the image is not set by the user, then show a
                       /// default user image

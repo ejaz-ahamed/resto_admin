@@ -5,7 +5,7 @@ import 'package:resto_admin/features/profile_page/domain/entity/profile_entity.d
 import 'package:resto_admin/features/profile_page/data/repository/profile_repository_impl.dart';
 import 'package:resto_admin/features/profile_page/domain/usecase/get_time_usecase.dart';
 import 'package:resto_admin/features/profile_page/domain/usecase/set_time_usecase.dart';
-import 'package:resto_admin/features/authentication/data/repositery/auth_repositery_impl.dart';
+import 'package:resto_admin/features/authentication/data/repository/auth_repositery_impl.dart';
 import 'package:resto_admin/features/profile_page/domain/usecase/add_image_usecase.dart';
 import 'package:resto_admin/features/profile_page/domain/usecase/delete_image_usecase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

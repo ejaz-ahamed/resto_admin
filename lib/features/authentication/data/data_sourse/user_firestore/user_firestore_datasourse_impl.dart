@@ -5,32 +5,22 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'user_firestore_datasourse_impl.g.dart';
 
 class UserFirestoreDatasourseImpl implements UserFirestoreDatasourse {
-  final db = FirebaseFirestore.instance
-      .collection("admin_profile")
-      .withConverter(
+  final db = FirebaseFirestore.instance.collection("users").withConverter(
         fromFirestore: UserModel.fromFirestore,
         toFirestore: (UserModel userModel, options) => userModel.toFirestore(),
       );
   @override
-  Stream<UserModel> getProfileImage() async* {
-    final snapshots = db.doc('profile_image').snapshots();
+  Stream<UserModel> getUser(String userId) async* {
+    final snapshots = db.doc(userId).snapshots();
     await for (final snapshot in snapshots) {
       yield snapshot.data()!;
     }
   }
 
   @override
-  Future<void> setProfileImage(UserModel userModel) async {
-    final userDoc = db.doc('profile_image');
+  Future<void> setUser(UserModel userModel) async {
+    final userDoc = db.doc(userModel.uid);
     await userDoc.set(userModel);
-  }
-
-  @override
-  Future<void> removeImage() async {
-    await FirebaseFirestore.instance
-        .collection("admin_profile")
-        .doc('profile_image')
-        .delete();
   }
 }
 
