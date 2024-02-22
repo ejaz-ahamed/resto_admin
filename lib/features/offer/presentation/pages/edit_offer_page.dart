@@ -20,6 +20,8 @@ import 'package:resto_admin/features/offer/presentation/widgets/row_heading_widg
 import 'package:resto_admin/features/offer/presentation/widgets/tab_button_widget.dart.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/textfield_widget.dart';
 
+final currentStateProvider = StateProvider<double>((_) => 100);
+
 class EditOfferPage extends HookConsumerWidget {
   static const routePath = '/EditOfferPage';
   final OfferEntity entity;
