@@ -74,6 +74,30 @@ class OrderRepositoryImpl implements OrderRepository {
       );
     }
   }
+
+  @override
+  Future<List<OrderEntity>> serach(OrderStatus orderStatus) async {
+    final orders = await dataSource.search(orderStatus);
+    final result = [
+      for (final data in orders)
+        OrderEntity(
+          uid: data.uid,
+          location: data.location,
+          time: data.time,
+          items: [
+            for (final orderItem in data.items)
+              OrderItemEntity(
+                productId: orderItem.productId,
+                type: orderItem.type,
+                quantity: orderItem.quantity,
+              ),
+          ],
+          orderStatus: orderStatus,
+          name: data.name,
+        ),
+    ];
+    return result;
+  }
 }
 
 @riverpod

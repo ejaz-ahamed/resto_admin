@@ -3,11 +3,15 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/constants/orders_constants/orders_constants.dart';
+import 'package:resto_admin/core/enums/order_type.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/features/orders/domain/entity/order_entity.dart';
+import 'package:resto_admin/features/orders/presentation/providers/order_provider.dart';
 
 class TextFieldSearchWidget extends HookConsumerWidget {
   final TextEditingController searchController;
-  const TextFieldSearchWidget({super.key, required this.searchController});
+  const TextFieldSearchWidget(
+      {super.key, required this.searchController});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final data = ref.watch(orderpageConstantsProvider);
@@ -15,6 +19,11 @@ class TextFieldSearchWidget extends HookConsumerWidget {
     AppAssetsConstants iconsConst = AppAssetsConstants();
     return TextField(
       controller: searchController,
+      onChanged: (keyword) {
+        ref
+            .read(orderProvider.notifier)
+            .search(keyword);
+      },
       cursorColor: theme.colors.text,
       decoration: InputDecoration(
         hintText: data.txtSearch,
@@ -36,10 +45,6 @@ class TextFieldSearchWidget extends HookConsumerWidget {
             ),
           ],
         ),
-        // Icon(
-        //   Icons.search,
-        //   color: theme.colors.textSubtlest,
-        // ),
       ),
     );
   }

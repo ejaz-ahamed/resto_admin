@@ -6,4 +6,5 @@ abstract class OrderFirestoreDataSource {
   Stream<List<OrderModel>> getAll(OrderStatus orderStatus);
   Future<void> updateType(String orderId, OrderStatus newStatus);
   Stream<ProductModel> getProductsById(String productId);
+  Future<List<OrderModel>> search(OrderStatus orderStatus);
 }

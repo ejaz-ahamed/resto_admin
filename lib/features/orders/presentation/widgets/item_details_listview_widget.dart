@@ -17,8 +17,10 @@ class ItemsDetailsListviewDetails extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final appTheme = AppTheme.of(context);
     return SizedBox(
-      height: appTheme.spaces.space_500 * 4,
+      height: appTheme.spaces.space_500 * items.length,
       child: ListView.builder(
+        physics: const ClampingScrollPhysics(),
+        shrinkWrap: true,
         itemCount: items.length,
         itemBuilder: (context, index) {
           return switch (

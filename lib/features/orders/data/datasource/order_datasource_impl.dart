@@ -42,6 +42,14 @@ class OrderFirestoreDataSourceImpl implements OrderFirestoreDataSource {
       yield product.data()!;
     }
   }
+
+  @override
+  Future<List<OrderModel>> search(OrderStatus orderStatus) async {
+    final orderStream =
+        await db.where('orderStatus', isEqualTo: orderStatus.name).get();
+
+    return [for (final order in orderStream.docs) order.data()];
+  }
 }
 
 @riverpod
