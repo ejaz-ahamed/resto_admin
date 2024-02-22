@@ -15,6 +15,7 @@ import 'package:resto_admin/core/widgets/sized_box_8_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
 import 'package:resto_admin/features/offer/domain/entity/offer_entity.dart';
 import 'package:resto_admin/features/offer/presentation/provider/offer_provider.dart';
+import 'package:resto_admin/features/offer/presentation/provider/selected_items_provider.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/image_picker_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/listview_products_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/row_heading_widget.dart';
@@ -49,11 +50,16 @@ class EditOfferPage extends HookConsumerWidget {
         nameController.text = entity.name;
         descriptionController.text = entity.description;
         percentageController.text = entity.amount.toString();
+
+        /// Set the selected products value to the provider
+        ref
+            .read(selectedItemsProvider.notifier)
+            .updateSelectedItems(entity.products.toSet());
       });
       return null;
     }, []);
 
-    //Tabs to Show
+    /// Tabs to Show
     final tabsToShow = useMemoized(() => [
           {
             'text': constants.txtPercentageText,
@@ -65,9 +71,32 @@ class EditOfferPage extends HookConsumerWidget {
           },
         ]);
 
-    //Handle tapping on the tab items
+    /// Handle tapping on the tab items
     void tabOnPressed(int index) {
       selectedOfferType.value = tabsToShow[index]['type'] as OfferType;
+    }
+
+    /// Delete the offer
+    void deleteOffer() {
+      ref.read(offerProvider.notifier).remove(id: entity.id);
+      context.pop();
+    }
+
+    /// Save offer updates
+    void saveOffer() async {
+      double amount = double.parse(percentageController.text);
+
+      await ref.read(offerProvider.notifier).updateOffer(
+            id: entity.id,
+            imagePath: ref.watch(imageProvider)!.path,
+            name: nameController.text,
+            description: descriptionController.text,
+            amount: amount,
+            offerType: selectedOfferType.value,
+            product: ref.read(selectedItemsProvider).selectedItems.toList(),
+          );
+
+      Future.sync(() => context.pop());
     }
 
     return GestureDetector(
@@ -79,10 +108,7 @@ class EditOfferPage extends HookConsumerWidget {
             child: AppBarWidget(
               title: constants.txtAppbarTitle,
               actionButtonName: constants.txtDelete,
-              onPressed: () {
-                ref.read(offerProvider.notifier).remove(id: entity.id);
-                context.pop();
-              },
+              onPressed: deleteOffer,
             )),
         body: SingleChildScrollView(
           child: Column(
@@ -153,7 +179,10 @@ class EditOfferPage extends HookConsumerWidget {
               const RowHeadingWidget(),
               ListViewProductsWidget(
                 offerType: selectedOfferType.value,
-                offerValue: double.parse(percentageController.text),
+                offerValue: double.parse(
+                    percentageController.text.trim().isNotEmpty
+                        ? percentageController.text
+                        : '0'),
               ),
               const SizedBox8Widget(),
               const SizedBox()
@@ -162,18 +191,7 @@ class EditOfferPage extends HookConsumerWidget {
         ),
         bottomNavigationBar: ElevatedButtonWidget(
           text: constants.txtSave,
-          onPressed: () {
-            double amount = double.parse(percentageController.text);
-            ref.read(offerProvider.notifier).updateOffer(
-                id: entity.id,
-                imagePath: ref.watch(imageProvider)!.path,
-                name: nameController.text,
-                description: descriptionController.text,
-                amount: amount,
-                offerType: selectedOfferType.value,
-                product: []);
-            context.pop();
-          },
+          onPressed: saveOffer,
         ),
       ),
     );

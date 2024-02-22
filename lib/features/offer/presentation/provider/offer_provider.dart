@@ -24,7 +24,7 @@ class Offer extends _$Offer {
     required String description,
     required double amount,
     required OfferType offerType,
-    required List<String>? product,
+    required List<String> product,
   }) {
     final repository = ref.watch(offerRepositoryProvider);
     return AddOfferUseCase(repository: repository)(
@@ -34,7 +34,7 @@ class Offer extends _$Offer {
         description: description,
         amount: amount,
         offerType: offerType,
-        product: product = []);
+        product: product = product);
   }
 
   Future<void> remove({required String id}) async {
@@ -49,7 +49,7 @@ class Offer extends _$Offer {
     required String description,
     required double amount,
     required OfferType offerType,
-    required List<String>? product,
+    required List<String> product,
   }) async {
     final repository = ref.watch(offerRepositoryProvider);
     await UpdateOfferUseCase(repository: repository)(
@@ -59,7 +59,7 @@ class Offer extends _$Offer {
         description: description,
         amount: amount,
         offerType: offerType,
-        product: product = []);
+        product: product = product);
   }
 
   /// Get the selected products
