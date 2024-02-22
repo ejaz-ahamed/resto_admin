@@ -35,8 +35,6 @@ class ProductPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final availableFrom = ref.watch(_availableFromProvider);
-    final availableTo = ref.watch(_availableToProvider);
     final apptheme = AppTheme.of(context);
 
     final constants = ref.watch(productConstantsProvider);
@@ -79,8 +77,8 @@ class ProductPage extends HookConsumerWidget {
 
     /// Pick the available from time
     void pickAvailableFrom() async {
-      final pickedTime =
-          await showTimePicker(context: context, initialTime: availableFrom);
+      final pickedTime = await showTimePicker(
+          context: context, initialTime: ref.read(_availableFromProvider));
       if (pickedTime != null) {
         ref.read(_availableFromProvider.notifier).state = pickedTime;
       }
@@ -88,8 +86,8 @@ class ProductPage extends HookConsumerWidget {
 
     /// Pick available to time
     void pickAvailableTo() async {
-      final pickedTime =
-          await showTimePicker(context: context, initialTime: availableTo);
+      final pickedTime = await showTimePicker(
+          context: context, initialTime: ref.read(_availableToProvider));
       if (pickedTime != null) {
         ref.read(_availableToProvider.notifier).state = pickedTime;
       }
@@ -119,8 +117,8 @@ class ProductPage extends HookConsumerWidget {
           categoryId: id,
           description: descreptionController.text,
           imagePath: ref.watch(imagePickerProvider)!.path,
-          availableFrom: availableFrom.format(context),
-          availableTo: availableTo.format(context));
+          availableFrom: ref.read(_availableFromProvider).format(context),
+          availableTo: ref.read(_availableToProvider).format(context));
       context.pop();
     }
 
@@ -206,7 +204,9 @@ class ProductPage extends HookConsumerWidget {
                     Expanded(
                       child: InkWell(
                           onTap: pickAvailableFrom,
-                          child: Text(availableFrom.format(context))),
+                          child: Text(ref
+                              .watch(_availableFromProvider)
+                              .format(context))),
                     ),
                     SizedBox(
                       width: AppTheme.of(context).spaces.space_400 * 5,
@@ -214,7 +214,8 @@ class ProductPage extends HookConsumerWidget {
                     Expanded(
                       child: InkWell(
                           onTap: pickAvailableTo,
-                          child: Text(availableTo.format(context))),
+                          child: Text(
+                              ref.watch(_availableToProvider).format(context))),
                     ),
                   ],
                 )

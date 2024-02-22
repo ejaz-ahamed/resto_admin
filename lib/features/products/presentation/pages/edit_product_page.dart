@@ -3,10 +3,12 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
+import 'package:resto_admin/core/widgets/sized_box_16_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
@@ -17,6 +19,14 @@ import 'package:resto_admin/features/products/presentation/providers/product_pro
 import 'package:resto_admin/features/products/presentation/widgets/heading_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/image_picker_product_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/product_type_widget.dart';
+
+final _availableFromProvider = StateProvider<TimeOfDay>((ref) {
+  return TimeOfDay.now();
+});
+
+final _availableToProvider = StateProvider<TimeOfDay>((ref) {
+  return TimeOfDay.now();
+});
 
 class EditProductPage extends HookConsumerWidget {
   static const routePath = '/editProducts';
@@ -73,6 +83,13 @@ class EditProductPage extends HookConsumerWidget {
                   priceController: priceController),
             ];
           }
+
+          /// Set the available from and to time providers
+          final timeFormat = DateFormat("h':'m' 'a");
+          ref.read(_availableFromProvider.notifier).state =
+              TimeOfDay.fromDateTime(timeFormat.parse(entity.availableFrom));
+          ref.read(_availableToProvider.notifier).state =
+              TimeOfDay.fromDateTime(timeFormat.parse(entity.availableUpTo));
         },
       );
 
@@ -116,8 +133,8 @@ class EditProductPage extends HookConsumerWidget {
     }
 
     /// Save the new changes to the product
-    void saveProductDetails() {
-      ref.read(productProvider.notifier).updateProduct(
+    void saveProductDetails() async {
+      await ref.read(productProvider.notifier).updateProduct(
           addOns: [
             for (final addOnController in productAddonControllers.value)
               ProductAddOnEntity(
@@ -139,10 +156,28 @@ class EditProductPage extends HookConsumerWidget {
           description: descreptionController.text,
           imagePath: ref.watch(imagePickerProvider)!.path,
           categoryId: entity.categoryId,
-          availabeFrom: entity.availableFrom,
-          availableTo: entity.availableUpTo);
+          availabeFrom: ref.read(_availableFromProvider).format(context),
+          availableTo: ref.read(_availableToProvider).format(context));
 
-      context.pop();
+      Future.sync(() => context.pop());
+    }
+
+    /// Pick the available from time
+    void pickAvailableFrom() async {
+      final pickedTime = await showTimePicker(
+          context: context, initialTime: ref.read(_availableFromProvider));
+      if (pickedTime != null) {
+        ref.read(_availableFromProvider.notifier).state = pickedTime;
+      }
+    }
+
+    /// Pick available to time
+    void pickAvailableTo() async {
+      final pickedTime = await showTimePicker(
+          context: context, initialTime: ref.read(_availableToProvider));
+      if (pickedTime != null) {
+        ref.read(_availableToProvider.notifier).state = pickedTime;
+      }
     }
 
     return GestureDetector(
@@ -216,7 +251,32 @@ class EditProductPage extends HookConsumerWidget {
                     );
                   },
                 ),
-                const SizedBox24Widget(),
+                const SizedBox32Widget(),
+                HeadingWidget(
+                  text: constants.txtAvailablity,
+                ),
+                const SizedBox16Widget(),
+                Row(
+                  children: [
+                    Expanded(
+                      child: InkWell(
+                          onTap: pickAvailableFrom,
+                          child: Text(ref
+                              .watch(_availableFromProvider)
+                              .format(context))),
+                    ),
+                    SizedBox(
+                      width: AppTheme.of(context).spaces.space_400 * 5,
+                    ),
+                    Expanded(
+                      child: InkWell(
+                          onTap: pickAvailableTo,
+                          child: Text(
+                              ref.watch(_availableToProvider).format(context))),
+                    ),
+                  ],
+                ),
+                const SizedBox32Widget(),
               ],
             ),
           ),

@@ -6,6 +6,7 @@ import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_16_widget.dart';
+import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
 import 'package:resto_admin/features/products/presentation/pages/edit_product_page.dart';
 import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
@@ -27,7 +28,7 @@ class OverViewItemsPage extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final apptheme = AppTheme.of(context);
 
-    final data = ref.watch(productConstantsProvider);
+    final constants = ref.watch(productConstantsProvider);
 
     final ProductEntity entity = ref
         .watch(getAllProductsByCategoryProvider(categoryId))
@@ -44,7 +45,7 @@ class OverViewItemsPage extends HookConsumerWidget {
           ),
           child: AppBarWidget(
             title: entity.name,
-            actionButtonName: data.txtDelete,
+            actionButtonName: constants.txtDelete,
             onPressed: () {
               ref.read(productProvider.notifier).deleteProduct(entity.id);
               context.pop();
@@ -56,6 +57,7 @@ class OverViewItemsPage extends HookConsumerWidget {
             padding:
                 EdgeInsets.symmetric(horizontal: apptheme.spaces.space_300),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
                   height: apptheme.spaces.space_200,
@@ -75,7 +77,7 @@ class OverViewItemsPage extends HookConsumerWidget {
                 Align(
                     alignment: Alignment.centerLeft,
                     child: HeadingWidget(
-                      text: data.txtDescription,
+                      text: constants.txtDescription,
                     )),
                 const SizedBox16Widget(),
                 Text(
@@ -85,7 +87,7 @@ class OverViewItemsPage extends HookConsumerWidget {
                   textAlign: TextAlign.justify,
                 ),
                 const SizedBox16Widget(),
-                HeadingWidget(text: data.txtType),
+                HeadingWidget(text: constants.txtType),
                 const SizedBox16Widget(),
                 SizedBox(
                   child: ListView.builder(
@@ -100,7 +102,7 @@ class OverViewItemsPage extends HookConsumerWidget {
                   ),
                 ),
                 const SizedBox16Widget(),
-                HeadingWidget(text: data.txtAddOns),
+                HeadingWidget(text: constants.txtAddOns),
                 const SizedBox16Widget(),
                 SizedBox(
                   child: ListView.builder(
@@ -114,21 +116,17 @@ class OverViewItemsPage extends HookConsumerWidget {
                     },
                   ),
                 ),
-                HeadingWidget(text: data.txtAvailablity),
+                HeadingWidget(text: constants.txtAvailablity),
                 const SizedBox16Widget(),
-                Row(
-                  children: [
-                    Text(entity.availableFrom),
-                    const Text(' to '),
-                    Text(entity.availableUpTo)
-                  ],
-                ),
+                Text('${entity.availableFrom} to ${entity.availableUpTo}',
+                    style: apptheme.typography.ui),
+                const SizedBox24Widget(),
               ],
             ),
           ),
         ),
         bottomNavigationBar: ElevatedButtonWidget(
-          text: data.txtEditbtn,
+          text: constants.txtEditbtn,
           onPressed: () {
             context.push(EditProductPage.routePath, extra: entity);
           },

@@ -34,7 +34,8 @@ class HomePage extends HookConsumerWidget {
           backgroundColor: theme.colors.secondary,
           scrolledUnderElevation: 0,
           title: Padding(
-            padding: EdgeInsets.only(left: theme.spaces.space_100),
+            padding: EdgeInsets.only(
+                left: theme.spaces.space_100, top: theme.spaces.space_100),
             child: Row(
               children: [
                 InkWell(
