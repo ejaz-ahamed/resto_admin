@@ -52,6 +52,7 @@ class ProductFirestoreDataSourceImpl implements ProductFireStoreDataSource {
     await collection.doc(updatedModel.id).set(updatedModel);
   }
 
+
   @override
   Future<void> deleteAddon(String productId, String addonId) async {
     final data = await collection.doc(productId).get();
@@ -65,7 +66,16 @@ class ProductFirestoreDataSourceImpl implements ProductFireStoreDataSource {
   }
 
   @override
-  Future<void> deleteType(String id) async {}
+  Future<void> deleteType(String productId, String typeId) async {
+    final data = await collection.doc(productId).get();
+    final update = <String, dynamic>{
+      'types': [
+        for (final type in data.data()!.types)
+          if (type.id != typeId) type.toFirestore()
+      ],
+    };
+    await collection.doc(productId).update(update);
+  }
 }
 
 @riverpod

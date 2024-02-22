@@ -6,7 +6,7 @@ import 'package:resto_admin/features/products/domain/repository/product_reposito
 import 'package:resto_admin/features/products/domain/usecases/add_product_usecase.dart';
 import 'package:resto_admin/features/products/domain/usecases/delete_addon_usecase.dart';
 import 'package:resto_admin/features/products/domain/usecases/delete_product_usecase.dart';
-
+import 'package:resto_admin/features/products/domain/usecases/delete_type_usecase.dart';
 import 'package:resto_admin/features/products/domain/usecases/get_product_usecase.dart';
 import 'package:resto_admin/features/products/domain/usecases/search_product_usecase.dart';
 import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
@@ -40,6 +40,8 @@ class Product extends _$Product {
     required List<ProductTypeEntity> types,
     required List<ProductAddOnEntity> addOns,
     required String categoryId,
+    required String availableFrom,
+    required String availableTo,
   }) {
     repository = ref.read(productRepositoryProvider);
     return AddProductUsecase(repository: repository)(
@@ -49,7 +51,9 @@ class Product extends _$Product {
         id: id,
         name: name,
         description: description,
-        imagePath: imagePath);
+        imagePath: imagePath,
+        availableFrom: availableFrom,
+        availableto: availableTo);
   }
 
   Future<void> deleteProduct(String id) {
@@ -60,6 +64,11 @@ class Product extends _$Product {
   Future<void> deleteAddOn(String id, String addOnId) async {
     repository = ref.read(productRepositoryProvider);
     return DeleteAddOnUseCase(repository: repository)(id, addOnId);
+  }
+
+  Future<void> deleteType(String id, String typeId) async {
+    repository = ref.read(productRepositoryProvider);
+    return DeleteTypeUseCase(repository: repository)(id, typeId);
   }
 
   void search(String keyword) async {
@@ -76,6 +85,8 @@ class Product extends _$Product {
     required List<ProductTypeEntity> types,
     required List<ProductAddOnEntity> addOns,
     required String categoryId,
+    required String availabeFrom,
+    required String availableTo,
   }) {
     repository = ref.read(productRepositoryProvider);
     return UpdatedProductUseCase(repository: repository)(
@@ -85,7 +96,9 @@ class Product extends _$Product {
         id: id,
         name: name,
         description: description,
-        imagePath: imagePath);
+        imagePath: imagePath,
+        availableFrom: availabeFrom,
+        availableTo: availableTo);
   }
 }
 

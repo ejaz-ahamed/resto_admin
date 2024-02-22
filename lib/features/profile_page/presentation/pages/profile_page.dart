@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/constants/profile_page/profile_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
-
+import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
+import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/features/profile_page/presentation/pages/edit_password_page.dart';
 import 'package:resto_admin/features/profile_page/presentation/pages/edit_profile_page.dart';
-import 'package:resto_admin/features/profile_page/presentation/widgets/admin_profile_image_widget.dart';
+import 'package:resto_admin/features/profile_page/presentation/widgets/logout_button_widget.dart';
+import 'package:resto_admin/features/profile_page/presentation/widgets/select_closing_time_widget.dart';
+import 'package:resto_admin/features/profile_page/presentation/widgets/select_opening_time_widget.dart';
+import 'package:resto_admin/features/authentication/presentation/provider/authentication_provider.dart';
 import 'package:resto_admin/features/profile_page/presentation/widgets/switch_button_widgets.dart';
 
 class ProfilePage extends ConsumerWidget {
@@ -20,8 +24,8 @@ class ProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appTheme = AppTheme.of(context);
-    final constatnts = ref.watch(profilePageProvider);
-    final assets = ref.watch(appAssetsConstantsProvider);
+    final constatnts = ref.watch(profilePageConstantsProvider);
+
     return Scaffold(
       backgroundColor: appTheme.colors.secondary,
       appBar: PreferredSize(
@@ -29,7 +33,7 @@ class ProfilePage extends ConsumerWidget {
           appTheme.spaces.space_700,
         ),
         child: AppBarWidget(
-          title: ref.watch(profilePageProvider).txtTitle,
+          title: ref.watch(profilePageConstantsProvider).txtTitle,
         ),
       ),
       body: Padding(
@@ -39,38 +43,51 @@ class ProfilePage extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AdminProfileImageWidget(
-                child: SvgPicture.asset(
-              assets.icUser,
-              colorFilter:
-                  ColorFilter.mode(appTheme.colors.text, BlendMode.srcATop),
-              
-            )),
-            SizedBox(
-              height: appTheme.spaces.space_400,
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                height: appTheme.spaces.space_400 * 7,
+                width: appTheme.spaces.space_400 * 7,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                        color: appTheme.colors.textDisabled,
+                        width: appTheme.spaces.space_25)),
+                child: switch (ref.watch(userProfileStreamProvider)) {
+                  AsyncData(:final value) => Builder(builder: (context) {
+                      /// If the image is not set by the user, then show a
+                      /// default user image
+                      if (value.imgPath.trim().isEmpty) {
+                        return Padding(
+                          padding: EdgeInsets.all(appTheme.spaces.space_900),
+                          child: SvgPicture.asset(
+                            ref.watch(appAssetsConstantsProvider).icUser,
+                            height: 50,
+                          ),
+                        );
+                      } else {
+                        return ClipRRect(
+                            borderRadius: BorderRadius.circular(
+                                appTheme.spaces.space_900 * 100),
+                            child: Image.network(value.imgPath));
+                      }
+                    }),
+                  AsyncError() => const Center(
+                      child: FittedBox(
+                        child: Text('Cannot Load User Image'),
+                      ),
+                    ),
+                  _ => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                },
+              ),
             ),
-            Text(
-              constatnts.txtOpeningTime,
-              style: appTheme.typography.h400,
-            ),
-            SizedBox(
-              height: appTheme.spaces.space_100,
-            ),
-            const Text("9:35 AM"),
-            SizedBox(
-              height: appTheme.spaces.space_400,
-            ),
-            Text(
-              constatnts.txtClosingtime,
-              style: appTheme.typography.h400,
-            ),
-            SizedBox(
-              height: appTheme.spaces.space_100,
-            ),
-            const Text("11:30 PM"),
-            SizedBox(
-              height: appTheme.spaces.space_300,
-            ),
+            const SizedBox32Widget(),
+            const SelectOpeningTimeWidget(),
+            const SizedBox24Widget(),
+            const SelectClosingTimeWidget(),
+            const SizedBox32Widget(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -91,13 +108,17 @@ class ProfilePage extends ConsumerWidget {
                 style: appTheme.typography.h400,
               ),
             ),
+            const SizedBox32Widget(),
+            const LogoutButtonWidget()
           ],
         ),
       ),
       bottomNavigationBar: ElevatedButtonWidget(
         text: constatnts.txtEdit,
         onPressed: () {
-          context.push(EditProfilePage.routePath);
+          context.push(
+            EditProfilePage.routePath,
+          );
         },
       ),
     );

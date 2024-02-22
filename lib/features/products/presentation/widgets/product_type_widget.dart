@@ -76,6 +76,8 @@ class ProductTypeWidget extends HookConsumerWidget {
                 SizedBox(
                   width: apptheme.spaces.space_100,
                 ),
+
+                /// Delete Button
                 InkWell(
                   onTap: () => onTap(i),
                   child: SvgPicture.asset(appAssetsConstants.icRemove),

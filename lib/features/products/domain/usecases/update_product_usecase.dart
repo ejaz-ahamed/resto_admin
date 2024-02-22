@@ -17,6 +17,8 @@ final class UpdatedProductUseCase {
     required List<ProductTypeEntity> types,
     required List<ProductAddOnEntity> addOns,
     required String categoryId,
+    required String availableFrom,
+    required String availableTo,
   }) async {
     try {
       if (imagePath.startsWith('http')) {
@@ -29,6 +31,8 @@ final class UpdatedProductUseCase {
       }
       await repository.update(
         ProductEntity(
+          availableFrom: availableFrom,
+          availableUpTo: availableTo,
           types: types,
           addOns: addOns,
           id: id,

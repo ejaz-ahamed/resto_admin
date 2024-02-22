@@ -7,10 +7,14 @@ import 'package:resto_admin/features/authentication/domain/entity/user_entity.da
 import 'package:resto_admin/features/authentication/domain/usecases/get_user_details_usecases.dart';
 import 'package:resto_admin/features/authentication/domain/usecases/login_usecases.dart';
 import 'package:resto_admin/features/authentication/domain/usecases/logout_usecase.dart';
-import 'package:resto_admin/features/authentication/domain/usecases/update_user_details_usecases.dart';
+import 'package:resto_admin/features/authentication/domain/usecases/remove_image_usecase.dart';
+import 'package:resto_admin/features/authentication/domain/usecases/update_password_usecase.dart';
+import 'package:resto_admin/features/authentication/domain/usecases/set_profile_image_usecases.dart';
 import 'package:resto_admin/features/authentication/presentation/pages/login_page.dart';
+import 'package:resto_admin/features/profile_page/data/repository/profile_repository_impl.dart';
 import 'package:resto_admin/main.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 part 'authentication_provider.g.dart';
 
 @riverpod
@@ -39,20 +43,26 @@ class Authentication extends _$Authentication {
     }
   }
 
-  Stream<UserEntity> getUserDetails(String uid) async* {
-    try {
-      yield* GetUserDetailsUsecases(
-          repositery: ref.watch(authRepositeryProvider))(uid);
-    } on BaseException catch (e) {
-      SnackBarUtils.showMessage(e.message);
-    }
+  Future<void> setProfileImage({required String imagePath}) async {
+    await SetProfileImageUsecases(
+            repositery: ref.watch(authRepositeryProvider),
+            profileRepository: ref.watch(profileRepositoryProvider))(
+        imagePath: imagePath);
   }
 
-  Future<void> updateUserDetails(UserEntity userEntity) async {
-    try {
-      UpdateuserDetailsUsecases(repositery: ref.watch(authRepositeryProvider));
-    } on BaseException catch (e) {
-      SnackBarUtils.showMessage(e.message);
-    }
+  Future<void> updatePassword(String newPassword) async {
+    await UpdatePasswordUsecase(repositery: ref.watch(authRepositeryProvider))(
+        newPassword);
   }
+
+  Future<void> removeImage() async {
+    await RemoveImageUsecase(repositery: ref.watch(authRepositeryProvider))();
+  }
+}
+
+/// Provider for the user data
+@riverpod
+Stream<UserEntity> userProfileStream(UserProfileStreamRef ref) {
+  return GetProfileImageUsecases(
+      repositery: ref.watch(authRepositeryProvider))();
 }

@@ -14,5 +14,7 @@ class ProductEntity with _$ProductEntity {
     required String id,
     required List<ProductTypeEntity> types,
     required List<ProductAddOnEntity> addOns,
+    required String availableFrom,
+    required String availableUpTo,
   }) = _ProductEntity;
 }
