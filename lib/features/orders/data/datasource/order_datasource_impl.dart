@@ -36,17 +36,10 @@ class OrderFirestoreDataSourceImpl implements OrderFirestoreDataSource {
   }
 
   @override
-  Stream<List<ProductModel>> getProductsById(String productId) async* {
-    // final data = productDb.doc(productId).snapshots();
-    // await for (final d in data) {
-    //   yield d.data()!;
-    // }
-    final productSteame =
-        productDb.where('name', isEqualTo: productId).snapshots();
-    await for (final products in productSteame) {
-      yield [
-        for (final product in products.docs) product.data(),
-      ];
+  Stream<ProductModel> getProductsById(String productId) async* {
+    final data = productDb.doc(productId).snapshots();
+    await for (final product in data) {
+      yield product.data()!;
     }
   }
 }

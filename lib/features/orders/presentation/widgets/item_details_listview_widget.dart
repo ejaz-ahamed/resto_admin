@@ -1,66 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
-import 'package:resto_admin/features/orders/domain/entity/order_entity.dart';
 import 'package:resto_admin/features/orders/presentation/providers/order_provider.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/text_regular_widget.dart';
-import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
+
+import '../../domain/entity/order_item_entity.dart';
 
 class ItemsDetailsListviewDetails extends ConsumerWidget {
-  final List<OrderEntity> entity;
-  // final List<ProductEntity> productEntity;
+  final List<OrderItemEntity> items;
   const ItemsDetailsListviewDetails({
     super.key,
-    required this.entity,
-    //  required this.productEntity,
+    required this.items,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final constants = ref.watch(orderpageConstantsProvider);
     final appTheme = AppTheme.of(context);
-
     return SizedBox(
       height: appTheme.spaces.space_500 * 4,
       child: ListView.builder(
-        itemCount: entity.length,
+        itemCount: items.length,
         itemBuilder: (context, index) {
-          final entityData = entity[index].items[index];
-          // final productData = productEntity[index].types[index];
           return switch (
-              ref.watch(getProductByIdProvider(entityData.productId))) {
+              ref.watch(getProductByIdProvider(items[index].productId))) {
             AsyncData(:final value) => Padding(
                 padding:
                     EdgeInsets.symmetric(horizontal: appTheme.spaces.space_300),
                 child: Padding(
                   padding: EdgeInsets.all(appTheme.spaces.space_100 * 1.25),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  child: Table(
+                    defaultColumnWidth:
+                        FixedColumnWidth(appTheme.spaces.space_100 * 10),
                     children: [
-                      TextRegularWidget(text: value[index].name),
-                      SizedBox(
-                        width: appTheme.spaces.space_500 * 4.7,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            TextRegularWidget(
-                                text: value[index].types[index].name),
-                            TextRegularWidget(
-                                text: entityData.quantity.toString()),
-                            TextRegularWidget(
-                                text:
-                                    '${(int.parse(value[index].types[index].price)) * (entityData.quantity)}'),
-                          ],
-                        ),
+                      TableRow(
+                        children: [
+                          TextRegularWidget(text: value.name),
+                          SizedBox(
+                            width: appTheme.spaces.space_500,
+                          ),
+                          TextRegularWidget(text: items[index].type),
+                          TextRegularWidget(
+                              text: items[index].quantity.toString()),
+                          TextRegularWidget(
+                              text:
+                                  '${(int.parse(value.types[0].price)) * (items[index].quantity)}'),
+                        ],
                       ),
                     ],
                   ),
                 ),
               ),
-            AsyncError() => Center(
-                child: Text(''),
+            AsyncError() => const Center(
+                child: Text('No Order Items'),
               ),
-            _ => CircularProgressIndicator(),
+            _ => const Center(child: CircularProgressIndicator()),
           };
         },
       ),

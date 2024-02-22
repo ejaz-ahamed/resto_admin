@@ -5,5 +5,5 @@ import 'package:resto_admin/features/products/domain/entities/product_entity.dar
 abstract class OrderRepository {
   Stream<List<OrderEntity>> getOrderByType(OrderStatus orderStatus);
   Future<void> updateOrderType(String orderId, OrderStatus newStatus);
-  Stream<List<ProductEntity>> getProductById(String productId);
+  Stream<ProductEntity> getProductById(String productId);
 }

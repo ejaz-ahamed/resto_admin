@@ -40,7 +40,7 @@ class Order extends _$Order {
 }
 
 @riverpod
-Stream<List<ProductEntity>> getProductById(
+Stream<ProductEntity> getProductById(
     GetProductByIdRef ref, String productId) {
   final repo = ref.read(orderRepositoryProvider);
   return GetProductByIdUsecase(repository: repo)(productId);

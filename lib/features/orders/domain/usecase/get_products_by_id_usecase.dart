@@ -6,7 +6,7 @@ class GetProductByIdUsecase {
   final OrderRepository repository;
   GetProductByIdUsecase({required this.repository});
 
-  Stream<List<ProductEntity>> call(String productId) {
+  Stream<ProductEntity> call(String productId) {
     try {
       return repository.getProductById(productId);
     } catch (e) {
