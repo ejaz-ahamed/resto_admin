@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:resto_admin/core/constants/app_assets_constants.dart';
+import 'package:resto_admin/core/constants/profile_constants/profile_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/features/authentication/presentation/provider/authentication_provider.dart';
 import 'package:shimmer/shimmer.dart';
@@ -15,6 +16,8 @@ class AdminProfileImageWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appTheme = AppTheme.of(context);
+    final constants = ref.watch(profilePageConstantsProvider);
+
     return Align(
       alignment: Alignment.center,
       child: Container(
@@ -25,7 +28,8 @@ class AdminProfileImageWidget extends ConsumerWidget {
             border: Border.all(
                 color: appTheme.colors.textDisabled,
                 width: appTheme.spaces.space_25)),
-        child: switch (ref.watch(userProfileStreamProvider)) {
+        child: switch (
+            ref.watch(userProfileStreamProvider(constants.txtAdminUserId))) {
           AsyncData(:final value) => Builder(builder: (context) {
               /// If the image is not set by the user, then show a
               /// default user image
