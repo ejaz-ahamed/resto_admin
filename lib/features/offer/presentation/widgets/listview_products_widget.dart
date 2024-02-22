@@ -84,7 +84,7 @@ class ListViewProductsWidget extends ConsumerWidget {
                           onTap: () {
                             ref
                                 .read(selectedItemsProvider.notifier)
-                                .remove(index);
+                                .remove(productData.id);
                           },
                           child: SvgPicture.asset(
                             iconConst.icRemove,
