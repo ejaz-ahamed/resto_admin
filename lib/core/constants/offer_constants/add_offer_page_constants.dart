@@ -1,3 +1,7 @@
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'add_offer_page_constants.g.dart';
+
 class AddOfferPageConstants {
   final txtAppbarTitle = 'Add Offers';
   final txtTitle = 'Title';
@@ -13,4 +17,9 @@ class AddOfferPageConstants {
   final txtAdd = 'Add';
   final txtSave = 'Save';
   final txtAddImage = 'Add Image';
+}
+
+@riverpod
+AddOfferPageConstants addOfferPageConstants(AddOfferPageConstantsRef ref) {
+  return AddOfferPageConstants();
 }

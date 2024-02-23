@@ -10,13 +10,16 @@ import 'package:resto_admin/features/offer/presentation/widgets/offer_banner_wid
 import 'package:resto_admin/features/offer/presentation/widgets/offer_page_shimmer.dart';
 
 class OfferPage extends ConsumerWidget {
-  const OfferPage({super.key});
+  const OfferPage({
+    super.key,
+  });
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final color = AppTheme.of(context).colors;
     final spaces = AppTheme.of(context).spaces;
     final theme = AppTheme.of(context);
-    final OfferPageConstants constants = OfferPageConstants();
+    final constants = ref.watch(offerPageConstantsProvider);
+
     return Scaffold(
       backgroundColor: theme.colors.secondary,
       appBar: AppBar(

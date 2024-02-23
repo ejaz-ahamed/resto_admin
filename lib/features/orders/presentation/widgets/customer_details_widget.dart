@@ -3,13 +3,20 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:resto_admin/core/constants/orders_constants/orders_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/features/authentication/domain/entity/user_entity.dart';
 import 'package:resto_admin/features/orders/domain/entity/order_entity.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/text_regular_widget.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/text_widget.dart';
 
 class CustomerDetailsWidget extends ConsumerWidget {
   final OrderEntity entity;
-  const CustomerDetailsWidget({super.key, required this.entity});
+  final UserEntity userDetails;
+
+  const CustomerDetailsWidget({
+    super.key,
+    required this.userDetails,
+    required this.entity,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -35,14 +42,14 @@ class CustomerDetailsWidget extends ConsumerWidget {
               Row(
                 children: [
                   Expanded(child: TextWidget(text: constants.txtOrderId)),
-                  TextRegularWidget(text: entity.uid),
+                  TextRegularWidget(text: entity.id),
                 ],
               ),
               SizedBox(height: appTheme.spaces.space_100),
               Row(
                 children: [
                   Expanded(child: TextWidget(text: constants.txtCustomerName)),
-                  const TextRegularWidget(text: ''),
+                  TextRegularWidget(text: userDetails.name),
                 ],
               ),
               SizedBox(height: appTheme.spaces.space_100),
