@@ -7,6 +7,7 @@ import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_16_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
+import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
 import 'package:resto_admin/features/products/presentation/pages/edit_product_page.dart';
 import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
@@ -59,9 +60,7 @@ class OverViewItemsPage extends HookConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
-                  height: apptheme.spaces.space_200,
-                ),
+                const SizedBox16Widget(),
                 Container(
                   width: MediaQuery.sizeOf(context).width,
                   height: apptheme.spaces.space_500 * 6.4,
@@ -73,7 +72,7 @@ class OverViewItemsPage extends HookConsumerWidget {
                     fit: BoxFit.cover,
                   )),
                 ),
-                const SizedBox16Widget(),
+                const SizedBox32Widget(),
                 Align(
                     alignment: Alignment.centerLeft,
                     child: HeadingWidget(
@@ -82,11 +81,10 @@ class OverViewItemsPage extends HookConsumerWidget {
                 const SizedBox16Widget(),
                 Text(
                   entity.description,
-                  style: apptheme.typography.h300
-                      .copyWith(color: apptheme.colors.text),
+                  style: apptheme.typography.ui,
                   textAlign: TextAlign.justify,
                 ),
-                const SizedBox16Widget(),
+                const SizedBox32Widget(),
                 HeadingWidget(text: constants.txtType),
                 const SizedBox16Widget(),
                 SizedBox(
@@ -101,7 +99,7 @@ class OverViewItemsPage extends HookConsumerWidget {
                     },
                   ),
                 ),
-                const SizedBox16Widget(),
+                const SizedBox32Widget(),
                 HeadingWidget(text: constants.txtAddOns),
                 const SizedBox16Widget(),
                 SizedBox(
@@ -116,9 +114,10 @@ class OverViewItemsPage extends HookConsumerWidget {
                     },
                   ),
                 ),
+                const SizedBox32Widget(),
                 HeadingWidget(text: constants.txtAvailablity),
                 const SizedBox16Widget(),
-                Text('${entity.availableFrom} to ${entity.availableUpTo}',
+                Text('${entity.availableFrom} - ${entity.availableUpTo}',
                     style: apptheme.typography.ui),
                 const SizedBox24Widget(),
               ],

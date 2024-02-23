@@ -34,7 +34,8 @@ class TextFieldWidget extends ConsumerWidget {
         ),
         TextField(
           enabled: enabled,
-          style: apptheme.typography.h300,
+          style: apptheme.typography.ui,
+          textAlign: TextAlign.justify,
           controller: controller,
           maxLines: maxLines,
           expands: expands,
@@ -42,11 +43,8 @@ class TextFieldWidget extends ConsumerWidget {
               contentPadding: const EdgeInsets.all(0),
               hintText: hintText,
               hintStyle: apptheme.typography.h300
-                  .copyWith(color: apptheme.colors.textSubtlest),
+                  .copyWith(color: apptheme.colors.textDisabled),
               border: const OutlineInputBorder(borderSide: BorderSide.none)),
-        ),
-        SizedBox(
-          height: AppTheme.of(context).spaces.space_200,
         ),
       ],
     );

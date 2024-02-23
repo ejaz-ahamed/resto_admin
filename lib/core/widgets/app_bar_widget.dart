@@ -61,6 +61,7 @@ class AppBarWidget extends ConsumerWidget {
             child: Ink(
               height: appTheme.spaces.space_500,
               child: InkWell(
+                borderRadius: BorderRadius.circular(appTheme.spaces.space_100),
                 onTap: onPressed,
                 child: Padding(
                   padding: EdgeInsets.symmetric(
@@ -68,7 +69,7 @@ class AppBarWidget extends ConsumerWidget {
                   child: Center(
                     child: Text(
                       actionButtonName ?? '',
-                      style: appTheme.typography.h300.copyWith(
+                      style: appTheme.typography.h600.copyWith(
                         color: appTheme.colors.primary,
                       ),
                     ),
