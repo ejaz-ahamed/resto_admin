@@ -29,11 +29,7 @@ class OrderListView extends ConsumerWidget {
         ),
         itemBuilder: (context, index) => InkWell(
           onTap: () {
-            context.push(
-              OrderViewPage.routePath,
-              extra: (entity[index])
-
-            );
+            context.push(OrderViewPage.routePath, extra: (entity[index]));
           },
           child: Container(
             height: space.space_100 * 11,
@@ -72,7 +68,7 @@ class OrderListView extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      entity[index].uid,
+                      entity[index].user.uid,
                       style: typography.h500,
                     ),
                     Text(

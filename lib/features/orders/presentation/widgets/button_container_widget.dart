@@ -36,7 +36,7 @@ class ButtonContainerWidget extends ConsumerWidget {
               onPressed: () {
                 ref
                     .read(orderProvider.notifier)
-                    .updateOrderType(entity.uid, OrderStatus.rejected);
+                    .updateOrderType(entity.id, OrderStatus.rejected);
                 context.pop();
               },
               color: appTheme.colors.secondary,

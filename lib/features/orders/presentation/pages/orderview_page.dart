@@ -7,7 +7,6 @@ import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
-import 'package:resto_admin/features/authentication/presentation/provider/authentication_provider.dart';
 import 'package:resto_admin/features/orders/domain/entity/order_entity.dart';
 import 'package:resto_admin/features/orders/presentation/providers/order_provider.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/button_container_widget.dart';
@@ -41,40 +40,29 @@ class OrderViewPage extends ConsumerWidget {
           onPressed: () {},
         ),
       ),
-      body: Builder(
-        builder: (context) =>
-            switch (ref.watch(userProfileStreamProvider(entity.uid))) {
-          AsyncData(:final value) => SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: MediaQuery.sizeOf(context).width,
-                  ),
-                  const SizedBox24Widget(),
-                  ProfileImageWidget(userDetails: value),
-                  const SizedBox32Widget(),
-                  CustomerDetailsWidget(
-                    entity: entity,
-                    userDetails: value,
-                  ),
-                  const SizedBox24Widget(),
-                  const ItemDetailsWidget(),
-                  ItemsDetailsListviewDetails(
-                    items: entity.items,
-                    // productEntity: [productEntity],
-                  ),
-                  const TotalRowWidget(),
-                ],
-              ),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              width: MediaQuery.sizeOf(context).width,
             ),
-          AsyncError() => const Center(
-              child: Text('Cannot Load Order Details'),
+            const SizedBox24Widget(),
+            ProfileImageWidget(userDetails: entity.user),
+            const SizedBox32Widget(),
+            CustomerDetailsWidget(
+              entity: entity,
+              userDetails: entity.user,
             ),
-          _ => const Center(
-              child: CircularProgressIndicator(),
+            const SizedBox24Widget(),
+            const ItemDetailsWidget(),
+            ItemsDetailsListviewDetails(
+              items: entity.items,
+              // productEntity: [productEntity],
             ),
-        },
+            const TotalRowWidget(),
+          ],
+        ),
       ),
       bottomNavigationBar: ButtonContainerWidget(
         entity: entity,
@@ -82,7 +70,7 @@ class OrderViewPage extends ConsumerWidget {
         onPressed: () {
           ref
               .read(orderProvider.notifier)
-              .updateOrderType(entity.uid, OrderStatus.preparing);
+              .updateOrderType(entity.user.uid, OrderStatus.preparing);
           context.pop();
         },
       ),

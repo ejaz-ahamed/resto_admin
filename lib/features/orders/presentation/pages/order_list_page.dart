@@ -9,18 +9,22 @@ import 'package:resto_admin/features/orders/presentation/widgets/food_status.dar
 import 'package:resto_admin/features/orders/presentation/widgets/orders_list_widget.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/search_textfield_widget.dart';
 
-class OrderScreenOne extends HookConsumerWidget {
-  const OrderScreenOne({super.key});
+class OrdersListPage extends HookConsumerWidget {
+  const OrdersListPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final select =
         ref.watch(orderProvider.select((value) => value.orderStatus));
+
     final searchController = useTextEditingController();
+
     final space = AppTheme.of(context).spaces;
     final typography = AppTheme.of(context).typography;
     final colors = AppTheme.of(context).colors;
+
     final constants = ref.watch(orderpageConstantsProvider);
+
     return Scaffold(
       backgroundColor: AppTheme.of(context).colors.secondary,
       appBar: AppBar(
