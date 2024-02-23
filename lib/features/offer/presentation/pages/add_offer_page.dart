@@ -27,11 +27,7 @@ class AddOfferPage extends HookConsumerWidget {
     final percentageController = useTextEditingController();
 
     AddOfferPageConstants constants = AddOfferPageConstants();
-
-    // useEffect(() {
-    //   ref.invalidate(imageProvider);
-    //   return null;
-    // });
+    
     //Theme data
     final spaces = AppTheme.of(context).spaces;
     final typography = AppTheme.of(context).typography;
