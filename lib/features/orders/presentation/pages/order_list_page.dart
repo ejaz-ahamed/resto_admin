@@ -14,7 +14,7 @@ class OrdersListPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final select =
+    final selectedTab =
         ref.watch(orderProvider.select((value) => value.orderStatus));
 
     final searchController = useTextEditingController();
@@ -50,25 +50,29 @@ class OrdersListPage extends HookConsumerWidget {
             ),
             Padding(
                 padding: EdgeInsets.symmetric(horizontal: space.space_300),
-                child: ref.watch(getOrdersProvider(select)).when(
+                child: ref.watch(getOrdersProvider(selectedTab)).when(
                   data: (data) {
-                    final datas = ref.watch(orderProvider).searchOrder ?? data;
+                    /// If search is in progress, then show the search result, else
+                    /// show all orders
+                    final ordersToShow =
+                        ref.watch(orderProvider).searchOrder ?? data;
+
                     return Column(
                       children: [
                         FoodStatus(
-                          count: datas,
+                          count: ordersToShow,
                           clearController: searchController,
                         ),
                         SizedBox(
                           height: space.space_300,
                         ),
-                        OrderListView(entity: datas),
+                        OrderListView(entity: ordersToShow),
                       ],
                     );
                   },
                   error: (Object error, StackTrace stackTrace) {
                     return const Center(
-                      child: Text(''),
+                      child: Text('Cannot get orders'),
                     );
                   },
                   loading: () {

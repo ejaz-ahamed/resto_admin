@@ -16,12 +16,17 @@ class SearchOrderUsecase {
       final List<OrderEntity> searchResult = [];
 
       for (final order in allOrders) {
-        final orderAfterImagePathUpdate = order.copyWith(
-          user: order.user.copyWith(
-            imgPath:
-                await FirebaseStorageUtils.getDownloadUrl(order.user.imgPath),
-          ),
-        );
+        final OrderEntity orderAfterImagePathUpdate;
+        if (order.user.imgPath.trim().isNotEmpty) {
+          orderAfterImagePathUpdate = order.copyWith(
+            user: order.user.copyWith(
+              imgPath:
+                  await FirebaseStorageUtils.getDownloadUrl(order.user.imgPath),
+            ),
+          );
+        } else {
+          orderAfterImagePathUpdate = order;
+        }
 
         keyword = keyword.toLowerCase().trim();
         if (order.location.toLowerCase().trim().contains(keyword) ||
