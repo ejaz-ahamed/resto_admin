@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/constants/profile_constants/profile_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
-import 'package:resto_admin/core/widgets/admin_profile_image_widget.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
@@ -93,39 +92,25 @@ class ProfilePage extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                AdminProfileImageWidget(
-                  height: appTheme.spaces.space_400 * 7,
-                  width: appTheme.spaces.space_400 * 7,
+                Text(
+                  constatnts.txtDarktheme,
+                  style: appTheme.typography.h400,
                 ),
-                const SizedBox32Widget(),
-                const SelectOpeningTimeWidget(),
-                const SizedBox24Widget(),
-                const SelectClosingTimeWidget(),
-                const SizedBox32Widget(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      constatnts.txtDarktheme,
-                      style: appTheme.typography.h400,
-                    ),
-                    const SwitchButton()
-                  ],
-                ),
-                SizedBox(
-                  height: appTheme.spaces.space_300,
-                ),
-                InkWell(
-                  onTap: () => context.push(EditPasswordPage.routePath),
-                  child: Text(
-                    constatnts.txtUpdatePassword,
-                    style: appTheme.typography.h400,
-                  ),
-                ),
-                const SizedBox32Widget(),
-                const LogoutButtonWidget()
+                const SwitchButton()
               ],
             ),
+            SizedBox(
+              height: appTheme.spaces.space_300,
+            ),
+            InkWell(
+              onTap: () => context.push(EditPasswordPage.routePath),
+              child: Text(
+                constatnts.txtUpdatePassword,
+                style: appTheme.typography.h400,
+              ),
+            ),
+            const SizedBox32Widget(),
+            const LogoutButtonWidget()
           ],
         ),
       ),
