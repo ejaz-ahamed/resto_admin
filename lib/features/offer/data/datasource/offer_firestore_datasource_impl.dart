@@ -18,7 +18,7 @@ class OfferFirestoreDatasourceImpl implements OfferFirestoreDatasource {
 
   @override
   Stream<List<OfferModel>> getAllOffer() async* {
-    final offerStream = collection.snapshots();
+    final offerStream = collection.snapshots(includeMetadataChanges: true);
     await for (final offers in offerStream) {
       yield [for (final offer in offers.docs) offer.data()];
     }
