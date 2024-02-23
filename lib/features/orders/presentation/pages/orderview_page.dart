@@ -58,9 +58,10 @@ class OrderViewPage extends ConsumerWidget {
             const ItemDetailsWidget(),
             ItemsDetailsListviewDetails(
               items: entity.items,
-              // productEntity: [productEntity],
             ),
-            const TotalRowWidget(),
+            TotalRowWidget(
+              items: entity.items,
+            ),
           ],
         ),
       ),

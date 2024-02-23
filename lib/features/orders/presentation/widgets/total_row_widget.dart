@@ -2,15 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:resto_admin/core/constants/orders_constants/orders_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/features/orders/domain/entity/order_item_entity.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/text_widget.dart';
 
 class TotalRowWidget extends ConsumerWidget {
-  const TotalRowWidget({super.key});
+  final List<OrderItemEntity> items;
+
+  const TotalRowWidget({
+    super.key,
+    required this.items,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final constants = ref.watch(orderpageConstantsProvider);
     final appTheme = AppTheme.of(context);
+
+    /// The total amount
+    final totalAmount = items.fold<double>(
+        0,
+        (prev, item) =>
+            double.parse(item.product.types
+                    .where((type) => type.id == item.type)
+                    .first
+                    .price) *
+                item.quantity +
+            prev);
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: appTheme.spaces.space_300),
       child: Container(
@@ -32,7 +50,7 @@ class TotalRowWidget extends ConsumerWidget {
               SizedBox(
                 width: appTheme.spaces.space_500 * 5,
               ),
-              TextWidget(text: constants.txtPrice),
+              TextWidget(text: totalAmount.toString()),
             ],
           ),
         ),
