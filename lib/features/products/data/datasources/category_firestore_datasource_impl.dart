@@ -30,7 +30,7 @@ class CategoryFirestoreDataSourceImpl implements CategoryFirestoreDataSource {
 
   @override
   Stream<List<CategoryModel>> getAll() async* {
-    final categorySteame = collection.snapshots();
+    final categorySteame = collection.snapshots(includeMetadataChanges: true);
     await for (final categorys in categorySteame) {
       yield [
         for (final category in categorys.docs) category.data(),
