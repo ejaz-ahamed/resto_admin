@@ -16,7 +16,6 @@ import 'package:resto_admin/features/orders/presentation/widgets/item_details_li
 import 'package:resto_admin/features/orders/presentation/widgets/item_details_widget.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/profile_image_widget.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/total_row_widget.dart';
-import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
 
 class OrderViewPage extends ConsumerWidget {
   static const routePath = '/orderviewpage';
