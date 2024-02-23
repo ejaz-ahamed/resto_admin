@@ -69,8 +69,9 @@ final router = GoRouter(
     ),
     GoRoute(
       path: OrderViewPage.routePath,
-      builder: (context, state) =>
-          OrderViewPage(entity: state.extra as OrderEntity),
+      builder: (context, state) => OrderViewPage(
+        entity: state.extra as OrderEntity,
+      ),
     ),
     GoRoute(
       path: EditCategoryPage.routePath,
@@ -78,9 +79,12 @@ final router = GoRouter(
           EditCategoryPage(entity: state.extra as CategoryEntity),
     ),
     GoRoute(
-      path: ProductPage.routePath,
-      builder: (context, state) => ProductPage(id: state.extra as String),
-    ),
+        path: ProductPage.routePath,
+        builder: (context, state) {
+          return ProductPage(
+            id: state.extra as String,
+          );
+        }),
     GoRoute(
       path: AddOfferPage.routePath,
       builder: (context, state) => const AddOfferPage(),
@@ -114,6 +118,7 @@ final router = GoRouter(
     ),
     GoRoute(
       path: EditProductPage.routePath,
+
       builder: (context, state) => EditProductPage(
         entity: state.extra as ProductEntity,
       ),

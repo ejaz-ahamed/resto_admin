@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/constants/orders_constants/orders_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/features/orders/presentation/providers/order_provider.dart';
 
 class TextFieldSearchWidget extends HookConsumerWidget {
   final TextEditingController searchController;
@@ -15,6 +16,9 @@ class TextFieldSearchWidget extends HookConsumerWidget {
     AppAssetsConstants iconsConst = AppAssetsConstants();
     return TextField(
       controller: searchController,
+      onChanged: (keyword) {
+        ref.read(orderProvider.notifier).search(keyword);
+      },
       cursorColor: theme.colors.text,
       decoration: InputDecoration(
         hintText: data.txtSearch,
@@ -36,10 +40,6 @@ class TextFieldSearchWidget extends HookConsumerWidget {
             ),
           ],
         ),
-        // Icon(
-        //   Icons.search,
-        //   color: theme.colors.textSubtlest,
-        // ),
       ),
     );
   }

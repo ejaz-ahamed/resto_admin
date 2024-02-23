@@ -9,30 +9,58 @@ part 'order_repository_impl.g.dart';
 
 class OrderRepositoryImpl implements OrderRepository {
   final OrderFirestoreDataSource dataSource;
-
   OrderRepositoryImpl({required this.dataSource});
+
   @override
-  Stream<List<OrderEntity>> getOrderByType(OrderType orderType) async* {
-    final orders = dataSource.getAll(orderType);
+  Stream<List<OrderEntity>> getOrderByType(OrderStatus orderStatus) async* {
+    final orders = dataSource.getAll(orderStatus);
     await for (final doc in orders) {
       yield [
         for (final data in doc)
           OrderEntity(
-            orderId: data.uid,
+            uid: data.uid,
             location: data.location,
             time: data.time,
-            ordersItem: [
-              for (final orderItem in data.items!)
+            items: [
+              for (final orderItem in data.items)
                 OrderItemEntity(
-                    productId: orderItem.productId,
-                    type: orderItem.type,
-                    quantity: orderItem.quantity),
+                  productId: orderItem.productId,
+                  type: orderItem.type,
+                  quantity: orderItem.quantity,
+                ),
             ],
-            orderType: orderType,
-            name: data.name,
+            orderStatus: orderStatus,
           ),
       ];
     }
+  }
+
+  @override
+  Future<void> updateOrderType(String orderId, OrderStatus newType) async {
+    await dataSource.updateType(orderId, newType);
+  }
+
+  @override
+  Future<List<OrderEntity>> serach(OrderStatus orderStatus) async {
+    final orders = await dataSource.search(orderStatus);
+    final result = [
+      for (final data in orders)
+        OrderEntity(
+          uid: data.uid,
+          location: data.location,
+          time: data.time,
+          items: [
+            for (final orderItem in data.items)
+              OrderItemEntity(
+                productId: orderItem.productId,
+                type: orderItem.type,
+                quantity: orderItem.quantity,
+              ),
+          ],
+          orderStatus: orderStatus,
+        ),
+    ];
+    return result;
   }
 }
 

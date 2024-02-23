@@ -7,9 +7,10 @@ part 'order_item_model.g.dart';
 class OrderItemModel with _$OrderItemModel {
   const OrderItemModel._();
   factory OrderItemModel({
-    required String productId,
+    // ignore: invalid_annotation_target
+    @JsonKey(name: 'product_id') required String productId,
     required String type,
-    required String quantity,
+    required int quantity,
   }) = _OrderItemModel;
   factory OrderItemModel.fromJson(Map<String, dynamic> json) =>
       _$OrderItemModelFromJson(json);

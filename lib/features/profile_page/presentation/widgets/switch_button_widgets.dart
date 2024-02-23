@@ -13,6 +13,7 @@ class SwitchButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final colors = AppTheme.of(context).colors;
 
+
     final switchstate = ref.watch(profileProvider);
 
     return Switch(

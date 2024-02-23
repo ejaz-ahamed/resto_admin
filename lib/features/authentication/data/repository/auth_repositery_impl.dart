@@ -4,15 +4,15 @@ import 'package:resto_admin/features/authentication/data/data_sourse/user_firest
 import 'package:resto_admin/features/authentication/data/data_sourse/user_firestore/user_firestore_datasourse_impl.dart';
 import 'package:resto_admin/features/authentication/data/model/user_model.dart';
 import 'package:resto_admin/features/authentication/domain/entity/user_entity.dart';
-import 'package:resto_admin/features/authentication/domain/repositery/auth_repositery.dart';
+import 'package:resto_admin/features/authentication/domain/repository/auth_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'auth_repositery_impl.g.dart';
 
-class AuthRepositeryImpl implements AuthRepositery {
+class AuthRepositoryImpl implements AuthRepository {
   final FirebaseAuthDataSourse dataSourse;
   final UserFirestoreDatasourse userDataSourse;
 
-  AuthRepositeryImpl({required this.userDataSourse, required this.dataSourse});
+  AuthRepositoryImpl({required this.userDataSourse, required this.dataSourse});
   @override
   Future<void> login(String email, String password) async {
     await dataSourse.login(email, password);
@@ -29,28 +29,32 @@ class AuthRepositeryImpl implements AuthRepositery {
   }
 
   @override
-  Stream<UserEntity> getProfileImage() async* {
-    final data = userDataSourse.getProfileImage();
+  Stream<UserEntity> getUser(String userId) async* {
+    final data = userDataSourse.getUser(userId);
     await for (final model in data) {
-      yield UserEntity(imgPath: model.imgPath);
+      yield UserEntity(
+        imgPath: model.imgPath,
+        name: model.name,
+        uid: model.uid,
+      );
     }
   }
 
   @override
-  Future<void> setProfileImage(UserEntity userEntity) async {
-    final model = UserModel(imgPath: userEntity.imgPath);
-    await userDataSourse.setProfileImage(model);
-  }
-  
-  @override
-  Future<void> removeImage() async{
-   await userDataSourse.removeImage();
+  Future<void> setUser(UserEntity userEntity) async {
+    final model = UserModel(
+      name: userEntity.name,
+      uid: userEntity.uid,
+      imgPath: userEntity.imgPath,
+    );
+
+    await userDataSourse.setUser(model);
   }
 }
 
 @riverpod
-AuthRepositery authRepositery(AuthRepositeryRef ref) {
-  return AuthRepositeryImpl(
+AuthRepository authRepositery(AuthRepositeryRef ref) {
+  return AuthRepositoryImpl(
       dataSourse: ref.watch(firebaseAuthDataSourseProvider),
       userDataSourse: ref.watch(userFirestoreDatasourseProvider));
 }

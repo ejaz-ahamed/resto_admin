@@ -20,6 +20,7 @@ final class OrderpageConstants {
   final String txtRejct = 'Reject';
   final String txtAccept = 'Accept';
   final String txtSearch = 'Search';
+  final String txtNoOrders = 'No orders';
 }
 
 @riverpod

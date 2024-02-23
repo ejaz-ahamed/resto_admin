@@ -6,11 +6,10 @@ part 'order_entity.freezed.dart';
 @freezed
 class OrderEntity with _$OrderEntity {
   const factory OrderEntity({
-    required String orderId,
+    required String uid,
     required String location,
     required String time,
-    required String name,
-    required List<OrderItemEntity>? ordersItem,
-    required OrderType orderType,
+    required List<OrderItemEntity> items,
+    required OrderStatus orderStatus,
   }) = _OrderEntity;
 }

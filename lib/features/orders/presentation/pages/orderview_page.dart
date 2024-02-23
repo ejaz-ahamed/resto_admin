@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/orders_constants/orders_constants.dart';
+import 'package:resto_admin/core/enums/order_type.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/features/orders/domain/entity/order_entity.dart';
+import 'package:resto_admin/features/orders/presentation/providers/order_provider.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/button_container_widget.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/customer_details_widget.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/item_details_listview_widget.dart';
@@ -16,7 +19,11 @@ import 'package:resto_admin/features/orders/presentation/widgets/total_row_widge
 class OrderViewPage extends ConsumerWidget {
   static const routePath = '/orderviewpage';
   final OrderEntity entity;
-  const OrderViewPage({super.key, required this.entity});
+
+  const OrderViewPage({
+    super.key,
+    required this.entity,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -45,12 +52,24 @@ class OrderViewPage extends ConsumerWidget {
             CustomerDetailsWidget(entity: entity),
             const SizedBox24Widget(),
             const ItemDetailsWidget(),
-            const ItemsDetailsListviewDetails(),
+            ItemsDetailsListviewDetails(
+              items: entity.items,
+              // productEntity: [productEntity],
+            ),
             const TotalRowWidget(),
           ],
         ),
       ),
-      bottomNavigationBar: const ButtonContainerWidget(),
+      bottomNavigationBar: ButtonContainerWidget(
+        entity: entity,
+        // buttonName: buttonName,
+        onPressed: () {
+          ref
+              .read(orderProvider.notifier)
+              .updateOrderType(entity.uid, OrderStatus.preparing);
+          context.pop();
+        },
+      ),
     );
   }
 }

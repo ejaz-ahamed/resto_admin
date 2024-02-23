@@ -6,13 +6,15 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'order_datasource_impl.g.dart';
 
 class OrderFirestoreDataSourceImpl implements OrderFirestoreDataSource {
+  final instance = FirebaseFirestore.instance;
   final db = FirebaseFirestore.instance.collection("orders").withConverter(
       fromFirestore: OrderModel.fromFirestore,
       toFirestore: (model, _) => model.toFirestore());
 
   @override
-  Stream<List<OrderModel>> getAll(OrderType orderType) async* {
-    final orderStream = db.where('type', isEqualTo: orderType.name).snapshots();
+  Stream<List<OrderModel>> getAll(OrderStatus orderStatus) async* {
+    final orderStream =
+        db.where('orderStatus', isEqualTo: orderStatus.name).snapshots();
 
     await for (final orders in orderStream) {
       yield [for (final order in orders.docs) order.data()];
@@ -20,8 +22,19 @@ class OrderFirestoreDataSourceImpl implements OrderFirestoreDataSource {
   }
 
   @override
-  Future<OrderModel> update(String orderId, OrderType orderType) {
-    throw UnimplementedError();
+  Future<void> updateType(String orderId, OrderStatus newStatus) async {
+    await instance
+        .collection("orders")
+        .doc(orderId)
+        .update({'orderStatus': newStatus.name});
+  }
+
+  @override
+  Future<List<OrderModel>> search(OrderStatus orderStatus) async {
+    final orderStream =
+        await db.where('orderStatus', isEqualTo: orderStatus.name).get();
+
+    return [for (final order in orderStream.docs) order.data()];
   }
 }
 

@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/constants/orders_constants/orders_constants.dart';
+import 'package:resto_admin/core/enums/order_type.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/features/orders/domain/entity/order_entity.dart';
+import 'package:resto_admin/features/orders/presentation/providers/order_provider.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/button_bottom_widget.dart';
 
 class ButtonContainerWidget extends ConsumerWidget {
-  const ButtonContainerWidget({super.key});
-
+  final OrderEntity entity;
+  // final String buttonName;
+  final void Function() onPressed;
+  const ButtonContainerWidget({
+    super.key,
+    required this.entity,
+    required this.onPressed,
+    // required this.buttonName
+  });
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final constants = ref.watch(orderpageConstantsProvider);
@@ -22,14 +33,19 @@ class ButtonContainerWidget extends ConsumerWidget {
           children: [
             ButtonWidget(
               text: constants.txtRejct,
-              onPressed: () {},
+              onPressed: () {
+                ref
+                    .read(orderProvider.notifier)
+                    .updateOrderType(entity.uid, OrderStatus.rejected);
+                context.pop();
+              },
               color: appTheme.colors.secondary,
               borderColor: appTheme.colors.textSubtle,
               textColor: appTheme.colors.text,
             ),
             ButtonWidget(
               text: constants.txtAccept,
-              onPressed: () {},
+              onPressed: onPressed,
               color: appTheme.colors.primary,
               borderColor: appTheme.colors.primary,
               textColor: appTheme.colors.secondary,

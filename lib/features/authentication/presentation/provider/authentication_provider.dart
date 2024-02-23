@@ -2,14 +2,14 @@ import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/exceptions/base_exception/base_exception.dart';
 import 'package:resto_admin/core/utils/snack_bar_utils.dart';
 import 'package:resto_admin/core/widgets/bottom_navigation/bottom_nav_widget.dart';
-import 'package:resto_admin/features/authentication/data/repositery/auth_repositery_impl.dart';
+import 'package:resto_admin/features/authentication/data/repository/auth_repositery_impl.dart';
 import 'package:resto_admin/features/authentication/domain/entity/user_entity.dart';
 import 'package:resto_admin/features/authentication/domain/usecases/get_user_details_usecases.dart';
 import 'package:resto_admin/features/authentication/domain/usecases/login_usecases.dart';
 import 'package:resto_admin/features/authentication/domain/usecases/logout_usecase.dart';
 import 'package:resto_admin/features/authentication/domain/usecases/remove_image_usecase.dart';
 import 'package:resto_admin/features/authentication/domain/usecases/update_password_usecase.dart';
-import 'package:resto_admin/features/authentication/domain/usecases/set_profile_image_usecases.dart';
+import 'package:resto_admin/features/authentication/domain/usecases/set_profile_usecases.dart';
 import 'package:resto_admin/features/authentication/presentation/pages/login_page.dart';
 import 'package:resto_admin/features/profile_page/data/repository/profile_repository_impl.dart';
 import 'package:resto_admin/main.dart';
@@ -44,7 +44,7 @@ class Authentication extends _$Authentication {
   }
 
   Future<void> setProfileImage({required String imagePath}) async {
-    await SetProfileImageUsecases(
+    await UpdateUserProfileUsecases(
             repositery: ref.watch(authRepositeryProvider),
             profileRepository: ref.watch(profileRepositoryProvider))(
         imagePath: imagePath);
@@ -62,7 +62,7 @@ class Authentication extends _$Authentication {
 
 /// Provider for the user data
 @riverpod
-Stream<UserEntity> userProfileStream(UserProfileStreamRef ref) {
-  return GetProfileImageUsecases(
-      repositery: ref.watch(authRepositeryProvider))();
+Stream<UserEntity> userProfileStream(UserProfileStreamRef ref, String userId) {
+  return GetUserDetailsUsecases(repositery: ref.watch(authRepositeryProvider))(
+      userId);
 }

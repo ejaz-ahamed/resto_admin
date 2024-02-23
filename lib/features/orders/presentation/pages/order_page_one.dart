@@ -14,6 +14,8 @@ class OrderScreenOne extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final select =
+        ref.watch(orderProvider.select((value) => value.orderStatus));
     final searchController = useTextEditingController();
     final space = AppTheme.of(context).spaces;
     final typography = AppTheme.of(context).typography;
@@ -43,29 +45,34 @@ class OrderScreenOne extends HookConsumerWidget {
               height: space.space_400,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: space.space_300),
-              child: StreamBuilder(
-                stream: ref.watch(
-                    orderProviderProvider.select((value) => value.orders)),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
+                padding: EdgeInsets.symmetric(horizontal: space.space_300),
+                child: ref.watch(getOrdersProvider(select)).when(
+                  data: (data) {
+                    final datas = ref.watch(orderProvider).searchOrder ?? data;
                     return Column(
                       children: [
-                        FoodStatus(count: snapshot.data!),
+                        FoodStatus(
+                          count: datas,
+                          clearController: searchController,
+                        ),
                         SizedBox(
                           height: space.space_300,
                         ),
-                        OrderListView(entity: snapshot.data!),
+                        OrderListView(entity: datas),
                       ],
                     );
-                  } else {
+                  },
+                  error: (Object error, StackTrace stackTrace) {
+                    return const Center(
+                      child: Text(''),
+                    );
+                  },
+                  loading: () {
                     return const Center(
                       child: CircularProgressIndicator(),
                     );
-                  }
-                },
-              ),
-            )
+                  },
+                ))
           ],
         ),
       ),

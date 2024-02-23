@@ -2,12 +2,12 @@ import 'package:resto_admin/core/exceptions/base_exception/base_exception.dart';
 import 'package:resto_admin/features/profile_page/domain/entity/profile_entity.dart';
 import 'package:resto_admin/features/profile_page/domain/repository/profile_repository.dart';
 
-class OpeningTimeUsecase{
+class GetTimeUsecase {
   final ProfileRepository repository;
-  OpeningTimeUsecase({required this.repository});
-  Future<void>call(ProfileEntity profileEntity)async{
+  GetTimeUsecase({required this.repository});
+  Stream<ProfileEntity> call() {
     try {
-      repository.addOpeningTime(profileEntity);
+      return repository.getTime();
     } catch (e) {
       throw BaseException(e.toString());
     }
