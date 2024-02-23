@@ -15,8 +15,8 @@ class ProfileStorageDataSourceImpl implements ProfileStorageDataSource{
   }
   
   @override
-  Future<void> deleteImage()async {
-    await storageRef.child('profile/profile_image').delete();
+  Future<void> deleteImage(String fileName)async {
+    await storageRef.child('profile/$fileName').delete();
   }
 }
 @riverpod

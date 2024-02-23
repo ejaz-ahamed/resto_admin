@@ -9,15 +9,18 @@ class UpdateUserProfileUsecases {
 
   UpdateUserProfileUsecases(
       {required this.repositery, required this.profileRepository});
+
   Future<void> call({
     required String imagePath,
+    required String name,
+    required String uid,
   }) async {
     try {
       await repositery.setUser(
         UserEntity(
           imgPath: imagePath,
-          name: '',
-          uid: '',
+          name: name,
+          uid: uid,
         ),
       );
     } catch (e) {

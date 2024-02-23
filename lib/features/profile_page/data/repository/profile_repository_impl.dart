@@ -37,8 +37,8 @@ class ProfileRepositoryImpl implements ProfileRepository {
   }
 
   @override
-  Future<void> deleteImage() {
-    return storageDataSource.deleteImage();
+  Future<void> deleteImage(String fileName) {
+    return storageDataSource.deleteImage(fileName);
   }
 
   @override

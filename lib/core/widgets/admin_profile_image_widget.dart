@@ -52,7 +52,7 @@ class AdminProfileImageWidget extends ConsumerWidget {
             }),
           AsyncError() => const Center(
               child: FittedBox(
-                child: Text('Cannot Load User Image'),
+                child: Text('Cannot Load User data'),
               ),
             ),
           _ => Center(

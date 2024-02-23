@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/constants/profile_constants/profile_page_constants.dart';
@@ -15,7 +14,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/features/profile_page/domain/entity/profile_entity.dart';
 import 'package:resto_admin/features/profile_page/presentation/providers/profile_provider.dart';
 import 'package:resto_admin/features/profile_page/presentation/widgets/select_closing_time_widget.dart';
-
 import 'package:resto_admin/features/profile_page/presentation/widgets/select_opening_time_widget.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:resto_admin/features/authentication/presentation/provider/authentication_provider.dart';
@@ -184,12 +182,19 @@ class EditProfilePage extends HookConsumerWidget {
               /// Only when the user select a new image, upload the new image
               /// Else use the existing image
               if (image != null) {
+                // await ref.read(profileProvider.notifier).upload(
+                //     fileToUpload: ref.read(editImageProvider)!.path,
+                //     name: '',
+                //     uid: constants.txtAdminUserId);
                 await ref
-                    .read(profileProvider.notifier)
-                    .upload(ref.watch(editImageProvider)!.path);
+                    .read(authenticationProvider.notifier)
+                    .updateProfileImage(ref.watch(editImageProvider)!.path,
+                        constants.txtAdminUserId);
               }
 
-              Future.sync(() => context.pop());
+              Future.sync(
+                () => context.pop(),
+              );
             }),
       ),
     );

@@ -25,26 +25,30 @@ class Profile extends _$Profile {
   }
 
   Future<void> setTime(String openingTime, ProfileEntity profileEntity) async {
-    return SetTimeUsecase(repository: ref.watch(profileRepositoryProvider))(
+    return SetTimeUsecase(repository: ref.read(profileRepositoryProvider))(
         profileEntity);
   }
 
   Stream<ProfileEntity> getTime() {
-    return GetTimeUsecase(repository: ref.watch(profileRepositoryProvider))();
+    return GetTimeUsecase(repository: ref.read(profileRepositoryProvider))();
   }
 
-  Future<void> upload(String fileToUpload) async {
+  Future<void> upload({
+    required String fileToUpload,
+    required String uid,
+  }) {
     return AddImageUsecase(
-      profileRepo: ref.watch(profileRepositoryProvider),
-      authRepo: ref.watch(authRepositeryProvider),
-    )(
-      fileToUpload,
+        profileRepo: ref.read(profileRepositoryProvider),
+        authRepo: ref.read(authRepositeryProvider))(
+      fileToUpload: fileToUpload,
+      uid: uid,
     );
   }
 
-  Future<void> deleteImage() async {
+  Future<void> deleteImage(String userId) async {
     await DeleteImageUsecase(
-        repository: ref.watch(profileRepositoryProvider))();
+        repository: ref.read(profileRepositoryProvider),
+        authRepo: ref.read(authRepositeryProvider))(userId);
   }
 }
 

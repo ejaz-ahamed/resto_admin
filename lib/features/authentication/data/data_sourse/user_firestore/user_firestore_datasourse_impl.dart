@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:resto_admin/features/authentication/data/data_sourse/user_firestore/user_firestore_datasourse.dart';
 import 'package:resto_admin/features/authentication/data/model/user_model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -21,6 +24,19 @@ class UserFirestoreDatasourseImpl implements UserFirestoreDatasourse {
   Future<void> setUser(UserModel userModel) async {
     final userDoc = db.doc(userModel.uid);
     await userDoc.set(userModel);
+  }
+
+  @override
+  Future<void> updateProfileImage(String imagePath, String uid) async {
+    // await db.doc(uid).update({'imgPath': imagePath});
+    await FirebaseStorage.instance
+        .ref()
+        .child("profile/profile_image")
+        .delete();
+    await FirebaseStorage.instance
+        .ref()
+        .child("profile/profile_image")
+        .putFile(File(imagePath));
   }
 }
 

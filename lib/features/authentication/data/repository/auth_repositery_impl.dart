@@ -50,6 +50,11 @@ class AuthRepositoryImpl implements AuthRepository {
 
     await userDataSourse.setUser(model);
   }
+  
+  @override
+  Future<void> updateProfileImage(String imagePath, String uid) async{
+    await userDataSourse.updateProfileImage(imagePath, uid);
+  }
 }
 
 @riverpod
