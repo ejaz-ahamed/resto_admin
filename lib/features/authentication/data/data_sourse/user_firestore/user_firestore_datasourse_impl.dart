@@ -11,10 +11,16 @@ class UserFirestoreDatasourseImpl implements UserFirestoreDatasourse {
       );
   @override
   Stream<UserModel> getUser(String userId) async* {
-    final snapshots = db.doc(userId).snapshots();
+    final snapshots = db.doc(userId).snapshots(includeMetadataChanges: true);
     await for (final snapshot in snapshots) {
       yield snapshot.data()!;
     }
+  }
+
+  @override
+  Future<UserModel> getUserOnce(String userId) async {
+    final userData = await db.doc(userId).get();
+    return userData.data()!;
   }
 
   @override

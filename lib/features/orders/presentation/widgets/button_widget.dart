@@ -6,11 +6,11 @@ class ButtonWidget extends ConsumerWidget {
   final String text;
   final VoidCallback onPressed;
   final bool isSelected;
-  final int foodCount;
+  final int ordersCount;
 
   const ButtonWidget({
     super.key,
-    required this.foodCount,
+    required this.ordersCount,
     required this.isSelected,
     required this.onPressed,
     required this.text,
@@ -28,7 +28,10 @@ class ButtonWidget extends ConsumerWidget {
     final borderColor = isSelected ? colors.primary : colors.textSubtle;
 
     /// Text color to use for the button
-    final textColor = isSelected ? colors.textInverse : colors.text;
+    final textColor = isSelected ? Colors.white : colors.text;
+
+    /// If the count is zero, then do not show the count badge
+    final isCountNeeded = ordersCount > 0;
 
     return Container(
       padding: EdgeInsets.only(right: space.space_200),
@@ -50,24 +53,26 @@ class ButtonWidget extends ConsumerWidget {
             SizedBox(
               width: space.space_50,
             ),
-            Container(
-              height: space.space_300,
-              width: space.space_300,
-              padding: EdgeInsets.all(space.space_25),
-              decoration: BoxDecoration(
-                  border: Border.all(
-                      width: space.space_25,
-                      color: isSelected ? colors.primary : colors.textInverse),
-                  shape: BoxShape.circle,
-                  color: colors.secondary),
-              child: Center(
-                child: Text(
-                  foodCount.toString(),
-                  style: typography.h100
-                      .copyWith(fontSize: space.space_125, color: colors.text),
+            if (isCountNeeded)
+              Container(
+                height: space.space_300,
+                width: space.space_300,
+                padding: EdgeInsets.all(space.space_25),
+                decoration: BoxDecoration(
+                    border: Border.all(
+                        width: space.space_25,
+                        color:
+                            isSelected ? colors.primary : colors.textInverse),
+                    shape: BoxShape.circle,
+                    color: colors.secondary),
+                child: Center(
+                  child: Text(
+                    ordersCount.toString(),
+                    style: typography.h100.copyWith(
+                        fontSize: space.space_125, color: colors.text),
+                  ),
                 ),
-              ),
-            )
+              )
           ],
         ),
       ),

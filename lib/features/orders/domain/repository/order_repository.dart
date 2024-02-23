@@ -4,5 +4,5 @@ import 'package:resto_admin/features/orders/domain/entity/order_entity.dart';
 abstract class OrderRepository {
   Stream<List<OrderEntity>> getOrderByType(OrderStatus orderStatus);
   Future<void> updateOrderType(String orderId, OrderStatus newStatus);
-  Future<List<OrderEntity>> serach(OrderStatus orderStatus);
+  Future<List<OrderEntity>> search(OrderStatus orderStatus);
 }
