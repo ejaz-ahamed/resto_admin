@@ -18,7 +18,6 @@ import 'package:resto_admin/features/products/domain/entities/product_entity.dar
 import 'package:resto_admin/features/products/domain/entities/product_type_entity.dart';
 import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
 import 'package:resto_admin/features/products/presentation/widgets/heading_widget.dart';
-import 'package:resto_admin/features/products/presentation/widgets/image_picker_product_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/product_type_widget.dart';
 
 final _availableFromProvider = StateProvider<TimeOfDay>((ref) {
@@ -54,8 +53,7 @@ class EditProductPage extends HookConsumerWidget {
       Future.delayed(
         Duration.zero,
         () {
-          ref.read(imageProvider.notifier).state =
-              XFile(entity.imagePath);
+          ref.read(imageProvider.notifier).state = XFile(entity.imagePath);
           productController.text = entity.name;
           descreptionController.text = entity.description;
 
@@ -95,7 +93,7 @@ class EditProductPage extends HookConsumerWidget {
       );
 
       /// Dispose function
-    
+
       // return () {
       //   productController.dispose();
       //   descreptionController.dispose();
@@ -110,6 +108,7 @@ class EditProductPage extends HookConsumerWidget {
       //     controller.priceController.dispose();
       //   }
       // };
+      return null;
     }, []);
 
     /// Remove a type from the product
