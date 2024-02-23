@@ -1,5 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
+import 'package:resto_admin/core/constants/app_constants.dart';
 import 'package:resto_admin/core/constants/orders_constants/orders_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/features/orders/domain/entity/order_item_entity.dart';
@@ -44,13 +48,16 @@ class TotalRowWidget extends ConsumerWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Expanded(
+                child: TextWidget(
+                  text: constants.txtTotal,
+                ),
+              ),
               TextWidget(
-                text: constants.txtTotal,
+                text: NumberFormat.currency(
+                        symbol: ref.watch(appConstantsProvider).moneySymbol)
+                    .format(totalAmount),
               ),
-              SizedBox(
-                width: appTheme.spaces.space_500 * 5,
-              ),
-              TextWidget(text: totalAmount.toString()),
             ],
           ),
         ),
