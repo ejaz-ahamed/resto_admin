@@ -60,10 +60,12 @@ final router = GoRouter(
       path: EditPasswordPage.routePath,
       builder: (context, state) => const EditPasswordPage(),
     ),
-    GoRoute(
-      path: AddOfferPage.routePath,
-      builder: (context, state) => const AddOfferPage(),
-    ),
+    // GoRoute(
+    //   path: AddOfferPage.routePath,
+    //   builder: (context, state) => AddOfferPage(
+    //     entity: state.extra as OfferEntity,
+    //   ),
+    // ),
     GoRoute(
       path: EditOfferPage.routePath,
       builder: (context, state) =>
@@ -120,6 +122,7 @@ final router = GoRouter(
     ),
     GoRoute(
       path: EditProductPage.routePath,
+
       builder: (context, state) => EditProductPage(
         entity: state.extra as ProductEntity,
       ),

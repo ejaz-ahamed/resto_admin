@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:resto_admin/core/constants/orders_constants/orders_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/features/authentication/domain/entity/user_entity.dart';
 import 'package:resto_admin/features/orders/domain/entity/order_entity.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/text_regular_widget.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/text_widget.dart';
 
 class CustomerDetailsWidget extends ConsumerWidget {
   final OrderEntity entity;
-  const CustomerDetailsWidget({super.key, required this.entity});
+  final UserEntity userDetails;
+
+  const CustomerDetailsWidget({
+    super.key,
+    required this.userDetails,
+    required this.entity,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -28,29 +36,36 @@ class CustomerDetailsWidget extends ConsumerWidget {
             )),
         child: Padding(
           padding: EdgeInsets.all(appTheme.spaces.space_200),
-          child: Row(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              Row(
                 children: [
-                  TextWidget(text: constants.txtOrderId),
-                  TextWidget(text: constants.txtCustomerName),
-                  TextWidget(text: constants.txtTime),
-                  TextWidget(text: constants.txtLocation),
+                  Expanded(child: TextWidget(text: constants.txtOrderId)),
+                  TextRegularWidget(text: entity.id),
                 ],
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              SizedBox(height: appTheme.spaces.space_100),
+              Row(
                 children: [
-                  TextRegularWidget(text: entity.uid),
-                  TextRegularWidget(text: entity.name),
+                  Expanded(child: TextWidget(text: constants.txtCustomerName)),
+                  TextRegularWidget(text: userDetails.name),
+                ],
+              ),
+              SizedBox(height: appTheme.spaces.space_100),
+              Row(
+                children: [
+                  Expanded(child: TextWidget(text: constants.txtTime)),
                   TextRegularWidget(text: entity.time),
+                ],
+              ),
+              SizedBox(height: appTheme.spaces.space_100),
+              Row(
+                children: [
+                  Expanded(child: TextWidget(text: constants.txtLocation)),
                   TextRegularWidget(text: entity.location),
                 ],
-              )
+              ),
             ],
           ),
         ),

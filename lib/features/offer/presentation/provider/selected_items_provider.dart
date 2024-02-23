@@ -24,17 +24,9 @@ class SelectedItems extends _$SelectedItems {
     state = state.copyWith(selectedItems: newItems);
   }
 
-  void remove(int index) {
-    final updatedItems = state.selectedItems;
-    updatedItems.removeWhere((id) => id == index);
+  void remove(String productId) {
+    final updatedItems = {...state.selectedItems};
+    updatedItems.removeWhere((id) => id == productId);
     state = state.copyWith(selectedItems: updatedItems);
-  }
-
-  String percentage(
-    double percentage,
-    int value,
-  ) {
-    final result = value - ((value * percentage) / 100);
-    return '$percentage - $value = $result';
   }
 }

@@ -4,9 +4,6 @@ import 'package:resto_admin/features/orders/data/datasource/order_datasource_imp
 import 'package:resto_admin/features/orders/domain/entity/order_entity.dart';
 import 'package:resto_admin/features/orders/domain/entity/order_item_entity.dart';
 import 'package:resto_admin/features/orders/domain/repository/order_repository.dart';
-import 'package:resto_admin/features/products/domain/entities/product_addon_entity.dart';
-import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
-import 'package:resto_admin/features/products/domain/entities/product_type_entity.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'order_repository_impl.g.dart';
 
@@ -21,6 +18,7 @@ class OrderRepositoryImpl implements OrderRepository {
       yield [
         for (final data in doc)
           OrderEntity(
+            id: data.id,
             uid: data.uid,
             location: data.location,
             time: data.time,
@@ -33,7 +31,6 @@ class OrderRepositoryImpl implements OrderRepository {
                 ),
             ],
             orderStatus: orderStatus,
-            name: data.name,
           ),
       ];
     }
@@ -45,39 +42,27 @@ class OrderRepositoryImpl implements OrderRepository {
   }
 
   @override
-  Stream<List<ProductEntity>> getProductById(String productId) async* {
-    final products = dataSource.getProductsById(productId);
-    await for (final snapshot in products) {
-      final docs = snapshot;
-      yield [
-        for (final product in docs)
-          ProductEntity(
-            name: product.name,
-            imagePath: product.imagePath,
-            description: product.description,
-            id: product.id,
-            types: [
-              for (final type in product.types)
-                ProductTypeEntity(
-                  name: type.name,
-                  price: type.price,
-                  id: type.id,
-                )
-            ],
-            addOns: [
-              for (final add in product.addOns)
-                ProductAddOnEntity(
-                  name: add.name,
-                  id: add.id,
-                  price: add.price,
-                )
-            ],
-            categoryId: '',
-            availableFrom: '',
-            availableUpTo: '',
-          )
-      ];
-    }
+  Future<List<OrderEntity>> serach(OrderStatus orderStatus) async {
+    final orders = await dataSource.search(orderStatus);
+    final result = [
+      for (final data in orders)
+        OrderEntity(
+          id: data.id,
+          uid: data.uid,
+          location: data.location,
+          time: data.time,
+          items: [
+            for (final orderItem in data.items)
+              OrderItemEntity(
+                productId: orderItem.productId,
+                type: orderItem.type,
+                quantity: orderItem.quantity,
+              ),
+          ],
+          orderStatus: orderStatus,
+        ),
+    ];
+    return result;
   }
 }
 

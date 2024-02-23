@@ -9,13 +9,14 @@ part 'order_model.g.dart';
 class OrderModel with _$OrderModel {
   const OrderModel._();
   factory OrderModel({
+    required String id,
     required String uid,
     required String location,
-    required String name,
     required String time,
     required List<OrderItemModel> items,
     required OrderStatus orderStatus,
   }) = _OrderModel;
+
   factory OrderModel.fromJson(Map<String, dynamic> json) =>
       _$OrderModelFromJson(json);
 
@@ -24,9 +25,11 @@ class OrderModel with _$OrderModel {
     SnapshotOptions? options,
   ) {
     final data = snapshot.data()!;
+    data['id'] = snapshot.id;
     return OrderModel.fromJson(data);
   }
+
   Map<String, dynamic> toFirestore() {
-    return toJson();
+    return toJson()..remove('id');
   }
 }

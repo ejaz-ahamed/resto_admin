@@ -22,7 +22,7 @@ class OfferSelectingPage extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = AppTheme.of(context);
-    final constants = SelectingProductPageConstants();
+    final constants = ref.watch(selectingProductPageConstantsProvider);
     final selectedItems = useState<Set<String>>({});
 
     final productsData = ref
@@ -39,6 +39,22 @@ class OfferSelectingPage extends HookConsumerWidget {
     /// So that when this count is negative, we have to hide the selection UI
     /// (e.g: Select All button)
     final itemCount = productsData == null ? -1 : productsData.value.length;
+
+    /// Action button title to show for the select all and unselect all buttons in the app bar
+    final String appBarActionTitle;
+    if (itemCount <= 0) {
+      /// Page not loaded completely
+      appBarActionTitle = '';
+    } else if (selectedItems.value
+            .where((product) => currentCategoryProductIds.contains(product))
+            .length <
+        itemCount) {
+      /// Currently all items are not selected
+      appBarActionTitle = constants.txtSelectAllText;
+    } else {
+      /// All items are already selected
+      appBarActionTitle = constants.txtUnSelect;
+    }
 
     /// Select all the products
     /// If all of them are already selected then un select all of them
@@ -62,20 +78,15 @@ class OfferSelectingPage extends HookConsumerWidget {
       }
     }
 
-    /// Action button title to show for the select all and unselect all buttons in the app bar
-    final String appBarActionTitle;
-    if (itemCount <= 0) {
-      /// Page not loaded completely
-      appBarActionTitle = '';
-    } else if (selectedItems.value
-            .where((product) => currentCategoryProductIds.contains(product))
-            .length <
-        itemCount) {
-      /// Currently all items are not selected
-      appBarActionTitle = constants.txtSelectAllText;
-    } else {
-      /// All items are already selected
-      appBarActionTitle = constants.txtUnSelect;
+    /// Pass the products saved from the select page to the
+    /// edit offer page
+    void passSelectedProducts() {
+      ref
+          .read(selectedItemsProvider.notifier)
+          .updateSelectedItems(selectedItems.value);
+      context.pop(
+        EditOfferPage.routePath,
+      );
     }
 
     return Scaffold(
@@ -127,16 +138,8 @@ class OfferSelectingPage extends HookConsumerWidget {
       ),
       bottomNavigationBar: ElevatedButtonWidget(
         text: constants.txtSave,
-        onPressed: () {
-          ref
-              .read(selectedItemsProvider.notifier)
-              .updateSelectedItems(selectedItems.value);
-          context.pop(
-            EditOfferPage.routePath,
-          );
-        },
+        onPressed: passSelectedProducts,
       ),
     );
   }
 }
-//  text: constants.txtListtext
