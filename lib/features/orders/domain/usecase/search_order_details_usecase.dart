@@ -31,6 +31,7 @@ class SearchOrderUsecase {
         keyword = keyword.toLowerCase().trim();
         if (order.location.toLowerCase().trim().contains(keyword) ||
             order.user.uid.toLowerCase().trim().contains(keyword) ||
+            order.user.name.toLowerCase().trim().contains(keyword) ||
             order.id.toLowerCase().trim().contains(keyword)) {
           searchResult.add(orderAfterImagePathUpdate);
         }
