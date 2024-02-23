@@ -42,7 +42,9 @@ class EditOfferPage extends HookConsumerWidget {
     final typography = AppTheme.of(context).typography;
 
     /// Selected tab
-    final selectedOfferType = useState<OfferType>(OfferType.percentage);
+    final selectedOfferType = useState<OfferType>(entity.offerType);
+
+    final isLoading = useState<bool>(false);
 
     useEffect(() {
       Future.delayed(Duration.zero, () {
@@ -85,7 +87,7 @@ class EditOfferPage extends HookConsumerWidget {
     /// Save offer updates
     void saveOffer() async {
       double amount = double.parse(percentageController.text);
-
+      isLoading.value = true;
       await ref.read(offerProvider.notifier).updateOffer(
             id: entity.id,
             imagePath: ref.watch(imageProvider)!.path,
@@ -187,7 +189,7 @@ class EditOfferPage extends HookConsumerWidget {
           ),
         ),
         bottomNavigationBar: ElevatedButtonWidget(
-          text: constants.txtSave,
+          text: isLoading.value ? constants.txtSave : "ushbhbsdhh",
           onPressed: saveOffer,
         ),
       ),
