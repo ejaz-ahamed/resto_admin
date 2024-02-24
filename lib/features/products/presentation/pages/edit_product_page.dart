@@ -8,16 +8,16 @@ import 'package:resto_admin/core/constants/products_constants/product_constants.
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
-import 'package:resto_admin/core/widgets/sized_box_16_widget.dart';
+import 'package:resto_admin/core/widgets/image_picker_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
+import 'package:resto_admin/core/widgets/sized_box_8_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
 import 'package:resto_admin/features/products/domain/entities/product_addon_entity.dart';
 import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
 import 'package:resto_admin/features/products/domain/entities/product_type_entity.dart';
 import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
 import 'package:resto_admin/features/products/presentation/widgets/heading_widget.dart';
-import 'package:resto_admin/features/products/presentation/widgets/image_picker_product_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/product_type_widget.dart';
 
 final _availableFromProvider = StateProvider<TimeOfDay>((ref) {
@@ -53,8 +53,7 @@ class EditProductPage extends HookConsumerWidget {
       Future.delayed(
         Duration.zero,
         () {
-          ref.read(imagePickerProvider.notifier).state =
-              XFile(entity.imagePath);
+          ref.read(imageProvider.notifier).state = XFile(entity.imagePath);
           productController.text = entity.name;
           descreptionController.text = entity.description;
 
@@ -94,20 +93,22 @@ class EditProductPage extends HookConsumerWidget {
       );
 
       /// Dispose function
-      return () {
-        productController.dispose();
-        descreptionController.dispose();
 
-        for (final controller in productAddonControllers.value) {
-          controller.nameController.dispose();
-          controller.priceController.dispose();
-        }
+      // return () {
+      //   productController.dispose();
+      //   descreptionController.dispose();
 
-        for (final controller in productTypeControllers.value) {
-          controller.nameController.dispose();
-          controller.priceController.dispose();
-        }
-      };
+      //   for (final controller in productAddonControllers.value) {
+      //     controller.nameController.dispose();
+      //     controller.priceController.dispose();
+      //   }
+
+      //   for (final controller in productTypeControllers.value) {
+      //     controller.nameController.dispose();
+      //     controller.priceController.dispose();
+      //   }
+      // };
+      return null;
     }, []);
 
     /// Remove a type from the product
@@ -154,7 +155,7 @@ class EditProductPage extends HookConsumerWidget {
           id: entity.id,
           name: productController.text,
           description: descreptionController.text,
-          imagePath: ref.watch(imagePickerProvider)!.path,
+          imagePath: ref.watch(imageProvider)!.path,
           categoryId: entity.categoryId,
           availabeFrom: ref.read(_availableFromProvider).format(context),
           availableTo: ref.read(_availableToProvider).format(context));
@@ -195,27 +196,26 @@ class EditProductPage extends HookConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox32Widget(),
-                const ImagePickerProductWidget(),
-                SizedBox(
-                  height: AppTheme.of(context).spaces.space_300,
-                ),
+                const SizedBox24Widget(),
+                const ImagePickerWidget(),
+                const SizedBox24Widget(),
                 TextFieldWidget(
                     enabled: true,
                     textFieldTitle: data.txtProductName,
                     hintText: data.txtHintProduct,
                     controller: productController),
+                const SizedBox24Widget(),
                 TextFieldWidget(
                     enabled: true,
                     maxLines: null,
                     textFieldTitle: data.txtDescription,
                     hintText: data.txtHintDescription,
                     controller: descreptionController),
-                const SizedBox24Widget(),
+                const SizedBox32Widget(),
                 HeadingWidget(
                   text: data.txtType,
                 ),
-                const SizedBox24Widget(),
+                const SizedBox8Widget(),
                 ListView.builder(
                   physics: const ClampingScrollPhysics(),
                   shrinkWrap: true,
@@ -225,8 +225,7 @@ class EditProductPage extends HookConsumerWidget {
                       onTap: removeProductType,
                       btntxt: data.txtType,
                       productTypes: productTypeControllers,
-                      style: apptheme.typography.h400
-                          .copyWith(color: apptheme.colors.textDisabled),
+                      style: apptheme.typography.ui,
                       hint: constants.txtType,
                     );
                   },
@@ -235,7 +234,7 @@ class EditProductPage extends HookConsumerWidget {
                 HeadingWidget(
                   text: data.txtAddOns,
                 ),
-                const SizedBox24Widget(),
+                const SizedBox8Widget(),
                 ListView.builder(
                   physics: const ClampingScrollPhysics(),
                   shrinkWrap: true,
@@ -245,8 +244,7 @@ class EditProductPage extends HookConsumerWidget {
                       onTap: removeAddon,
                       btntxt: data.txtAddOns,
                       productTypes: productAddonControllers,
-                      style: apptheme.typography.h400
-                          .copyWith(color: apptheme.colors.textDisabled),
+                      style: apptheme.typography.ui,
                       hint: constants.txtAddOns,
                     );
                   },
@@ -255,25 +253,24 @@ class EditProductPage extends HookConsumerWidget {
                 HeadingWidget(
                   text: constants.txtAvailablity,
                 ),
-                const SizedBox16Widget(),
+                const SizedBox24Widget(),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
-                      child: InkWell(
-                          onTap: pickAvailableFrom,
-                          child: Text(ref
-                              .watch(_availableFromProvider)
-                              .format(context))),
-                    ),
-                    SizedBox(
-                      width: AppTheme.of(context).spaces.space_400 * 5,
-                    ),
-                    Expanded(
-                      child: InkWell(
-                          onTap: pickAvailableTo,
-                          child: Text(
-                              ref.watch(_availableToProvider).format(context))),
-                    ),
+                    InkWell(
+                        onTap: pickAvailableFrom,
+                        child: Text(
+                          constants.txtFrom +
+                              ref.watch(_availableFromProvider).format(context),
+                          style: apptheme.typography.ui,
+                        )),
+                    InkWell(
+                        onTap: pickAvailableTo,
+                        child: Text(
+                          constants.txtTo +
+                              ref.watch(_availableToProvider).format(context),
+                          style: apptheme.typography.ui,
+                        )),
                   ],
                 ),
                 const SizedBox32Widget(),

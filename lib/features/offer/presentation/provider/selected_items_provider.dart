@@ -29,12 +29,4 @@ class SelectedItems extends _$SelectedItems {
     updatedItems.removeWhere((id) => id == productId);
     state = state.copyWith(selectedItems: updatedItems);
   }
-
-  String percentage(
-    double percentage,
-    int value,
-  ) {
-    final result = value - ((value * percentage) / 100);
-    return '$percentage - $value = $result';
-  }
 }

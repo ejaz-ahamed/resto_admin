@@ -19,11 +19,14 @@ class RowWidget extends ConsumerWidget {
       children: [
         Text(text,
             style: theme.typography.h700.copyWith(fontWeight: FontWeight.w600)),
-        InkWell(
-          onTap: onPressed,
-          child: Text(btnText,
-              style: theme.typography.h700.copyWith(
-                  fontWeight: FontWeight.w600, color: theme.colors.primary)),
+        Ink(
+          child: InkWell(
+            borderRadius: BorderRadius.circular(theme.spaces.space_100),
+            onTap: onPressed,
+            child: Text(btnText,
+                style: theme.typography.h700
+                    .copyWith(color: theme.colors.primary)),
+          ),
         )
       ],
     );

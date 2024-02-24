@@ -29,85 +29,83 @@ class HomePage extends HookConsumerWidget {
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
-      child: SafeArea(
-        child: Scaffold(
+      child: Scaffold(
+        backgroundColor: theme.colors.secondary,
+        appBar: AppBar(
           backgroundColor: theme.colors.secondary,
-          appBar: AppBar(
-            backgroundColor: theme.colors.secondary,
-            scrolledUnderElevation: 0,
-            title: Padding(
-              padding: EdgeInsets.only(left: theme.spaces.space_100),
-              child: Row(
-                children: [
-                  InkWell(
-                      onTap: () => context.push(ProfilePage.routePath),
-                      child: AdminProfileImageWidget(
-                          height: theme.spaces.space_600,
-                          width: theme.spaces.space_600)),
-                  SizedBox(
-                    width: theme.spaces.space_100 * 2,
-                  ),
-                  Text(
-                    data.txtProductTitle,
-                    style: theme.typography.h800,
-                  ),
-                ],
-              ),
+          scrolledUnderElevation: 0,
+          title: Padding(
+            padding: EdgeInsets.only(left: theme.spaces.space_100),
+            child: Row(
+              children: [
+                InkWell(
+                    onTap: () => context.push(ProfilePage.routePath),
+                    child: AdminProfileImageWidget(
+                        height: theme.spaces.space_600,
+                        width: theme.spaces.space_600)),
+                SizedBox(
+                  width: theme.spaces.space_100 * 2,
+                ),
+                Text(
+                  data.txtProductTitle,
+                  style: theme.typography.h800,
+                ),
+              ],
             ),
           ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: theme.spaces.space_300),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: theme.spaces.space_400,
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: theme.spaces.space_300),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: theme.spaces.space_400,
+                ),
+                SearchTextFieldWidget(searchController: searchController),
+                SizedBox(
+                  height: theme.spaces.space_300,
+                ),
+                RowWidget(
+                  btnText: data.txtEditbtn,
+                  text: data.txtCategory,
+                  onPressed: () => context.push(
+                    ViewCategoriesPage.routePath,
                   ),
-                  SearchTextFieldWidget(searchController: searchController),
-                  SizedBox(
-                    height: theme.spaces.space_300,
-                  ),
-                  RowWidget(
-                    btnText: data.txtEditbtn,
-                    text: data.txtCategory,
-                    onPressed: () => context.push(
-                      ViewCategoriesPage.routePath,
-                    ),
-                  ),
-                  SizedBox(
-                    height: theme.spaces.space_250,
-                  ),
-                  SizedBox(
-                      height: theme.spaces.space_100 * 10,
-                      child: switch (ref.watch(getAllCategoryProvider)) {
-                        AsyncData(:final value) => CategoryListViewWidget(
-                            clearController: searchController,
-                            entity: value,
-                          ),
-                        AsyncError() => const Center(
-                            child: Text('Error while getting data'),
-                          ),
-                        _ => const Center(child: LoadingCategoryWidget()),
-                      }),
-                  SizedBox(
-                    height: theme.spaces.space_300,
-                  ),
-                  RowWidget(
-                    text: data.txtItems,
-                    btnText: data.txtAddBtn,
-                    onPressed: () => context.push(ProductPage.routePath,
-                        extra: ref.read(categoryProvider).selectedCategory),
-                  ),
-                  SizedBox(
-                    height: theme.spaces.space_250,
-                  ),
-                  const ProductGridViewWidget(),
-                  SizedBox(
-                    height: theme.spaces.space_250,
-                  ),
-                ],
-              ),
+                ),
+                SizedBox(
+                  height: theme.spaces.space_250,
+                ),
+                SizedBox(
+                    height: theme.spaces.space_100 * 10,
+                    child: switch (ref.watch(getAllCategoryProvider)) {
+                      AsyncData(:final value) => CategoryListViewWidget(
+                          clearController: searchController,
+                          entity: value,
+                        ),
+                      AsyncError() => const Center(
+                          child: Text('Error while getting data'),
+                        ),
+                      _ => const Center(child: LoadingCategoryWidget()),
+                    }),
+                SizedBox(
+                  height: theme.spaces.space_300,
+                ),
+                RowWidget(
+                  text: data.txtItems,
+                  btnText: data.txtAddBtn,
+                  onPressed: () => context.push(ProductPage.routePath,
+                      extra: ref.read(categoryProvider).selectedCategory),
+                ),
+                SizedBox(
+                  height: theme.spaces.space_250,
+                ),
+                const ProductGridViewWidget(),
+                SizedBox(
+                  height: theme.spaces.space_250,
+                ),
+              ],
             ),
           ),
         ),

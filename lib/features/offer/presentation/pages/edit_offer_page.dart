@@ -21,8 +21,6 @@ import 'package:resto_admin/features/offer/presentation/widgets/row_heading_widg
 import 'package:resto_admin/features/offer/presentation/widgets/save_loading_button_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/tab_button_widget.dart.dart';
 
-final currentStateProvider = StateProvider<double>((_) => 100);
-
 class EditOfferPage extends HookConsumerWidget {
   static const routePath = '/EditOfferPage';
   final OfferEntity entity;
@@ -34,8 +32,7 @@ class EditOfferPage extends HookConsumerWidget {
     final nameController = useTextEditingController();
     final descriptionController = useTextEditingController();
     final percentageController = useTextEditingController();
-
-    final constants = EditOfferPageConstants();
+    final constants = ref.watch(editOfferPageConstantsProvider);
 
     /// Theme data
     final spaces = AppTheme.of(context).spaces;
@@ -46,6 +43,12 @@ class EditOfferPage extends HookConsumerWidget {
     final selectedOfferType = useState<OfferType>(entity.offerType);
 
     final isLoading = useState<bool>(false);
+    final amountState = useState<double>(0);
+
+    /// save state offer amount
+    percentageController.addListener(() {
+      amountState.value = double.parse(percentageController.text.trim());
+    });
 
     useEffect(() {
       Future.delayed(Duration.zero, () {
@@ -142,7 +145,7 @@ class EditOfferPage extends HookConsumerWidget {
               const SizedBox16Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
-                child: Text(constants.txtOfferDetails, style: typography.h600),
+                child: Text(constants.txtOfferDetails, style: typography.h400),
               ),
               const SizedBox16Widget(),
               Padding(
@@ -179,10 +182,7 @@ class EditOfferPage extends HookConsumerWidget {
               const RowHeadingWidget(),
               ListViewProductsWidget(
                 offerType: selectedOfferType.value,
-                offerValue: double.parse(
-                    percentageController.text.trim().isNotEmpty
-                        ? percentageController.text
-                        : '0'),
+                offerValue: amountState.value,
               ),
               const SizedBox8Widget(),
               const SizedBox()

@@ -8,19 +8,24 @@ import 'package:resto_admin/features/orders/presentation/providers/order_provide
 import 'package:resto_admin/features/orders/presentation/widgets/food_status.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/orders_list_widget.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/search_textfield_widget.dart';
+import 'package:resto_admin/features/orders/presentation/widgets/shrimmer_widget.dart';
 
-class OrderScreenOne extends HookConsumerWidget {
-  const OrderScreenOne({super.key});
+class OrdersListPage extends HookConsumerWidget {
+  const OrdersListPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final select =
+    final selectedTab =
         ref.watch(orderProvider.select((value) => value.orderStatus));
+
     final searchController = useTextEditingController();
+
     final space = AppTheme.of(context).spaces;
     final typography = AppTheme.of(context).typography;
     final colors = AppTheme.of(context).colors;
+
     final constants = ref.watch(orderpageConstantsProvider);
+
     return Scaffold(
       backgroundColor: AppTheme.of(context).colors.secondary,
       appBar: AppBar(
@@ -46,31 +51,33 @@ class OrderScreenOne extends HookConsumerWidget {
             ),
             Padding(
                 padding: EdgeInsets.symmetric(horizontal: space.space_300),
-                child: ref.watch(getOrdersProvider(select)).when(
+                child: ref.watch(getOrdersProvider(selectedTab)).when(
                   data: (data) {
-                    final datas = ref.watch(orderProvider).searchOrder ?? data;
+                    /// If search is in progress, then show the search result, else
+                    /// show all orders
+                    final ordersToShow =
+                        ref.watch(orderProvider).searchOrder ?? data;
+
                     return Column(
                       children: [
                         FoodStatus(
-                          count: datas,
+                          count: ordersToShow,
                           clearController: searchController,
                         ),
                         SizedBox(
                           height: space.space_300,
                         ),
-                        OrderListView(entity: datas),
+                        OrderListView(entity: ordersToShow),
                       ],
                     );
                   },
                   error: (Object error, StackTrace stackTrace) {
                     return const Center(
-                      child: Text(''),
+                      child: Text('Cannot get orders'),
                     );
                   },
                   loading: () {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return const LoadingOrderWidget();
                   },
                 ))
           ],
