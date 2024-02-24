@@ -37,6 +37,7 @@ class TextFieldSearchWidget extends HookConsumerWidget {
           children: [
             SvgPicture.asset(
               iconsConst.icSearch,
+              width: theme.spaces.space_250,
             ),
           ],
         ),

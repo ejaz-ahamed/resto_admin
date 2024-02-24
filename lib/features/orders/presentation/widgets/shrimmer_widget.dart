@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:shimmer/shimmer.dart';
 
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
+class LoadingOrderWidget extends StatelessWidget {
+  const LoadingOrderWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +18,6 @@ class MyWidget extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemCount: 3,
             shrinkWrap: true,
-            // physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) => Row(
               children: [
                 Padding(
@@ -74,7 +72,6 @@ class MyWidget extends StatelessWidget {
           child: ListView.builder(
             itemCount: 4,
             shrinkWrap: true,
-            // physics: const NeverScrollableScrollPhysics(),
             itemBuilder: (context, index) => Row(
               children: [
                 Padding(
