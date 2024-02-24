@@ -6,5 +6,6 @@ abstract class AuthRepository {
   Future<void> logout();
   Future<void> setUser(UserEntity userEntity);
   Stream<UserEntity> getUser(String userId);
-  Future<void>updateProfileImage(String imagePath,String uid);
+  Future<String> uploadImage(String userId, String imagePath);
+  Future<void> deleteImage(String userId);
 }
