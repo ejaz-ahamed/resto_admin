@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/offer_constants/offer_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/core/widgets/image_picker_widget.dart';
 import 'package:resto_admin/core/widgets/text_button_widget.dart';
 import 'package:resto_admin/features/offer/presentation/pages/add_offer_page.dart';
 import 'package:resto_admin/features/offer/presentation/provider/offer_provider.dart';
@@ -38,6 +39,7 @@ class OfferPage extends ConsumerWidget {
             padding: EdgeInsets.only(right: spaces.space_300),
             child: TextButtonWidget(
                 onTap: () {
+                  ref.read(imageProvider.notifier).state = null;
                   context.push(AddOfferPage.routePath);
                 },
                 buttonText: constants.txtAddOfferText,

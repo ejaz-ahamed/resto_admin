@@ -7,6 +7,7 @@ import 'package:resto_admin/core/enums/offer_type.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
+import 'package:resto_admin/core/widgets/image_picker_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_16_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
@@ -14,7 +15,6 @@ import 'package:resto_admin/core/widgets/sized_box_8_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
 import 'package:resto_admin/features/offer/presentation/provider/offer_provider.dart';
 import 'package:resto_admin/features/offer/presentation/provider/selected_items_provider.dart';
-import 'package:resto_admin/features/offer/presentation/widgets/image_picker_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/listview_products_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/row_heading_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/tab_button_widget.dart.dart';
@@ -31,6 +31,7 @@ class AddOfferPage extends HookConsumerWidget {
     final percentageController = useTextEditingController();
     final constants = ref.watch(addOfferPageConstantsProvider);
 
+    
     //Theme data
     final spaces = AppTheme.of(context).spaces;
     final typography = AppTheme.of(context).typography;
@@ -87,7 +88,7 @@ class AddOfferPage extends HookConsumerWidget {
               const SizedBox24Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
-                child: ImagePickerOfferWidget(imgProvider: imageProvider),
+                child: const ImagePickerWidget(),
               ),
               const SizedBox32Widget(),
               Padding(

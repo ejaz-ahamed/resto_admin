@@ -7,7 +7,7 @@ import 'package:resto_admin/core/constants/offer_constants/edit_offer_page_const
 import 'package:resto_admin/core/enums/offer_type.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
-import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
+import 'package:resto_admin/core/widgets/image_picker_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_16_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
@@ -16,9 +16,9 @@ import 'package:resto_admin/core/widgets/text_field_widget.dart';
 import 'package:resto_admin/features/offer/domain/entity/offer_entity.dart';
 import 'package:resto_admin/features/offer/presentation/provider/offer_provider.dart';
 import 'package:resto_admin/features/offer/presentation/provider/selected_items_provider.dart';
-import 'package:resto_admin/features/offer/presentation/widgets/image_picker_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/listview_products_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/row_heading_widget.dart';
+import 'package:resto_admin/features/offer/presentation/widgets/save_loading_button_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/tab_button_widget.dart.dart';
 
 class EditOfferPage extends HookConsumerWidget {
@@ -37,10 +37,12 @@ class EditOfferPage extends HookConsumerWidget {
     /// Theme data
     final spaces = AppTheme.of(context).spaces;
     final typography = AppTheme.of(context).typography;
+    final color = AppTheme.of(context).colors;
 
     /// Selected tab
     final selectedOfferType = useState<OfferType>(entity.offerType);
 
+    final isLoading = useState<bool>(false);
     final amountState = useState<double>(0);
 
     /// save state offer amount
@@ -89,7 +91,7 @@ class EditOfferPage extends HookConsumerWidget {
     /// Save offer updates
     void saveOffer() async {
       double amount = double.parse(percentageController.text);
-
+      isLoading.value = true;
       await ref.read(offerProvider.notifier).updateOffer(
             id: entity.id,
             imagePath: ref.watch(imageProvider)!.path,
@@ -120,11 +122,8 @@ class EditOfferPage extends HookConsumerWidget {
             children: [
               const SizedBox24Widget(),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
-                child: ImagePickerOfferWidget(
-                  imgProvider: imageProvider,
-                ),
-              ),
+                  padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
+                  child: const ImagePickerWidget()),
               const SizedBox32Widget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: spaces.space_300),
@@ -190,8 +189,17 @@ class EditOfferPage extends HookConsumerWidget {
             ],
           ),
         ),
-        bottomNavigationBar: ElevatedButtonWidget(
-          text: constants.txtSave,
+        bottomNavigationBar: SaveElevatedButtonWidget(
+          widget: !isLoading.value
+              ? Text(
+                  constants.txtSave,
+                  style: typography.uiSemibold.copyWith(color: color.secondary),
+                )
+              : FittedBox(
+                  child: CircularProgressIndicator(
+                    color: color.secondary,
+                  ),
+                ),
           onPressed: saveOffer,
         ),
       ),

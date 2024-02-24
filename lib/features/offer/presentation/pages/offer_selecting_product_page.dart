@@ -7,6 +7,7 @@ import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/category_listview_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
+import 'package:resto_admin/core/widgets/loading_category_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_8_widget.dart';
 import 'package:resto_admin/features/offer/presentation/pages/edit_offer_page.dart';
 import 'package:resto_admin/features/offer/presentation/provider/selected_items_provider.dart';
@@ -126,9 +127,7 @@ class OfferSelectingPage extends HookConsumerWidget {
                   AsyncError() => const Center(
                       child: Text('Error while getting data'),
                     ),
-                  _ => const Center(
-                      child: CircularProgressIndicator(),
-                    ),
+                  _ => const Center(child: LoadingCategoryWidget()),
                 },
               ),
               GridViewOfferPageWidget(selectedItems: selectedItems)

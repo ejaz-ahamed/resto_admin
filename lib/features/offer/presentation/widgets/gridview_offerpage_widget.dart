@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/core/widgets/product_loading_widget.dart';
 import 'package:resto_admin/core/widgets/rounded_check_box_widget.dart';
 
 import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
@@ -95,7 +96,7 @@ class GridViewOfferPageWidget extends HookConsumerWidget {
               child: Text("Error!!!, please retry"),
             ),
         loading: () => const Center(
-              child: CircularProgressIndicator(),
+              child: LoadingProductWidget(),
             ));
   }
 }
