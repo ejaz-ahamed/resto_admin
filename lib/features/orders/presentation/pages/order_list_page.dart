@@ -8,6 +8,7 @@ import 'package:resto_admin/features/orders/presentation/providers/order_provide
 import 'package:resto_admin/features/orders/presentation/widgets/food_status.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/orders_list_widget.dart';
 import 'package:resto_admin/features/orders/presentation/widgets/search_textfield_widget.dart';
+import 'package:resto_admin/features/orders/presentation/widgets/shrimmer_widget.dart';
 
 class OrdersListPage extends HookConsumerWidget {
   const OrdersListPage({super.key});
@@ -76,9 +77,7 @@ class OrdersListPage extends HookConsumerWidget {
                     );
                   },
                   loading: () {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return const LoadingOrderWidget();
                   },
                 ))
           ],
