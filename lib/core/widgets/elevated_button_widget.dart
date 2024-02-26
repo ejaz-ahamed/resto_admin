@@ -4,6 +4,7 @@ import 'package:resto_admin/core/themes/app_theme.dart';
 
 class ElevatedButtonWidget extends ConsumerWidget {
   final String text;
+
   final void Function() onPressed;
   const ElevatedButtonWidget(
       {super.key, required this.text, required this.onPressed});

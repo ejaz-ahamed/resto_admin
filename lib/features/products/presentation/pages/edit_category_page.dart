@@ -75,8 +75,10 @@ class EditCategoryPage extends HookConsumerWidget {
               : Center(
                   child: Padding(
                   padding: EdgeInsets.all(theme.spaces.space_100),
-                  child: CircularProgressIndicator(
-                    color: theme.colors.secondary,
+                  child: FittedBox(
+                    child: CircularProgressIndicator(
+                      color: theme.colors.secondary,
+                    ),
                   ),
                 )),
           onPressed: () async {

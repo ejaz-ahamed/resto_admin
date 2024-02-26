@@ -7,7 +7,6 @@ import 'package:intl/intl.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
-import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/image_picker_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
@@ -19,6 +18,7 @@ import 'package:resto_admin/features/products/domain/entities/product_type_entit
 import 'package:resto_admin/features/products/presentation/providers/product_provider.dart';
 import 'package:resto_admin/features/products/presentation/widgets/heading_widget.dart';
 import 'package:resto_admin/features/products/presentation/widgets/product_type_widget.dart';
+import 'package:resto_admin/features/profile_page/presentation/widgets/loading_button_widget.dart';
 
 final _availableFromProvider = StateProvider<TimeOfDay>((ref) {
   return TimeOfDay.now();
@@ -48,6 +48,7 @@ class EditProductPage extends HookConsumerWidget {
 
     final productTypeControllers = useState<List<ProductTypeControllers>>([]);
     final productAddonControllers = useState<List<ProductTypeControllers>>([]);
+    final isLoading = useState<bool>(false);
 
     useEffect(() {
       Future.delayed(
@@ -135,6 +136,7 @@ class EditProductPage extends HookConsumerWidget {
 
     /// Save the new changes to the product
     void saveProductDetails() async {
+      isLoading.value = true;
       await ref.read(productProvider.notifier).updateProduct(
           addOns: [
             for (final addOnController in productAddonControllers.value)
@@ -278,8 +280,25 @@ class EditProductPage extends HookConsumerWidget {
             ),
           ),
         ),
-        bottomNavigationBar: ElevatedButtonWidget(
-            text: data.txtSaveBtn, onPressed: saveProductDetails),
+        bottomNavigationBar: SaveElevatedButtonWidget(
+            onPressed: saveProductDetails,
+            child: !isLoading.value
+                ? Text(
+                    data.txtSaveBtn,
+                    style: apptheme.typography.uiSemibold
+                        .copyWith(color: apptheme.colors.secondary),
+                  )
+                : Center(
+                    child: Padding(
+                    padding: EdgeInsets.all(apptheme.spaces.space_100),
+                    child: FittedBox(
+                      child: CircularProgressIndicator(
+                        color: apptheme.colors.secondary,
+                      ),
+                    ),
+                  ))),
+        // bottomNavigationBar: ElevatedButtonWidget(
+        //     text: data.txtSaveBtn, onPressed: saveProductDetails),
       ),
     );
   }
