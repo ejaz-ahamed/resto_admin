@@ -7,9 +7,9 @@ import 'package:resto_admin/features/authentication/domain/entity/user_entity.da
 import 'package:resto_admin/features/authentication/domain/usecases/get_user_details_usecases.dart';
 import 'package:resto_admin/features/authentication/domain/usecases/login_usecases.dart';
 import 'package:resto_admin/features/authentication/domain/usecases/logout_usecase.dart';
-import 'package:resto_admin/features/authentication/domain/usecases/remove_image_usecase.dart';
 import 'package:resto_admin/features/authentication/domain/usecases/update_password_usecase.dart';
 import 'package:resto_admin/features/authentication/domain/usecases/set_profile_usecases.dart';
+import 'package:resto_admin/features/authentication/domain/usecases/update_profile_image_usecase.dart';
 import 'package:resto_admin/features/authentication/presentation/pages/login_page.dart';
 import 'package:resto_admin/features/profile_page/data/repository/profile_repository_impl.dart';
 import 'package:resto_admin/main.dart';
@@ -43,11 +43,14 @@ class Authentication extends _$Authentication {
     }
   }
 
-  Future<void> setProfileImage({required String imagePath}) async {
+  Future<void> setProfileData(
+      {required String imagePath,
+      required String name,
+      required String uid}) async {
     await UpdateUserProfileUsecases(
             repositery: ref.watch(authRepositeryProvider),
             profileRepository: ref.watch(profileRepositoryProvider))(
-        imagePath: imagePath);
+        imagePath: imagePath, name: name, uid: uid);
   }
 
   Future<void> updatePassword(String newPassword) async {
@@ -55,8 +58,12 @@ class Authentication extends _$Authentication {
         newPassword);
   }
 
-  Future<void> removeImage() async {
-    await RemoveImageUsecase(repositery: ref.watch(authRepositeryProvider))();
+  
+
+  Future<void> updateProfileImage(String imagePath, String uid) async {
+    await UpdateProfileImageUsecase(
+            repository: ref.watch(authRepositeryProvider))(
+        imagePath: imagePath, uid: uid);
   }
 }
 

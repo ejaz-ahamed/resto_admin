@@ -1,3 +1,4 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:resto_admin/features/authentication/data/data_sourse/user_firestore/user_firestore_datasourse.dart';
 import 'package:resto_admin/features/authentication/data/model/user_model.dart';
@@ -28,6 +29,9 @@ class UserFirestoreDatasourseImpl implements UserFirestoreDatasourse {
     final userDoc = db.doc(userModel.uid);
     await userDoc.set(userModel);
   }
+
+  
+  
 }
 
 @riverpod

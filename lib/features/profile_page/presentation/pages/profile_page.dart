@@ -58,12 +58,10 @@ class ProfilePage extends ConsumerWidget {
                   constatnts.txtDarktheme,
                   style: appTheme.typography.h400,
                 ),
-                const SwitchButton()
+                const SwitchButton(),
               ],
             ),
-            SizedBox(
-              height: appTheme.spaces.space_300,
-            ),
+            const SizedBox32Widget(),
             InkWell(
               onTap: () => context.push(EditPasswordPage.routePath),
               child: Text(
