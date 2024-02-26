@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/constants/app_assets_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+
 class AppBarWidget extends ConsumerWidget {
   final String title;
   final String? actionButtonName;
@@ -61,6 +62,7 @@ class AppBarWidget extends ConsumerWidget {
             child: Ink(
               height: appTheme.spaces.space_500,
               child: InkWell(
+                borderRadius: BorderRadius.circular(appTheme.spaces.space_100),
                 onTap: onPressed,
                 child: Padding(
                   padding: EdgeInsets.symmetric(
@@ -68,7 +70,7 @@ class AppBarWidget extends ConsumerWidget {
                   child: Center(
                     child: Text(
                       actionButtonName ?? '',
-                      style: appTheme.typography.h300.copyWith(
+                      style: appTheme.typography.h600.copyWith(
                         color: appTheme.colors.primary,
                       ),
                     ),

@@ -136,6 +136,7 @@ class ProductRepositoryImpl implements ProductRepository {
           ],
         )
     ];
+
     return result;
   }
 

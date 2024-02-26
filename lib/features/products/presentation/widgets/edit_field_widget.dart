@@ -24,17 +24,17 @@ class EditFieldWidget extends ConsumerWidget {
     final apptheme = AppTheme.of(context);
     return TextField(
       showCursor: cursor,
-      
       controller: controller,
       onChanged: onChanged,
       enabled: enabled,
-      style: apptheme.typography.h500.copyWith(),
+      style: style,
       textAlign: isPrice ? TextAlign.right : TextAlign.left,
       decoration: InputDecoration(
         isDense: true,
         contentPadding: const EdgeInsets.all(0),
         hintText: hintText,
-        hintStyle: style,
+        hintStyle: apptheme.typography.h400
+            .copyWith(color: apptheme.colors.textDisabled),
         hintTextDirection: TextDirection.rtl,
         border: InputBorder.none,
       ),

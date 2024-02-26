@@ -21,6 +21,9 @@ final class OrderpageConstants {
   final String txtAccept = 'Accept';
   final String txtSearch = 'Search';
   final String txtNoOrders = 'No orders';
+  final String txtMarkCompletedBtnLabel = 'Completed';
+  final String txtMoveToPreparing = 'Move To Preparing';
+  final String txtMoveToOrder = 'Move To Orders';
 }
 
 @riverpod

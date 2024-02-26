@@ -64,7 +64,11 @@ class FoodStatus extends HookConsumerWidget {
               isSelected: ref.watch(
                       orderProvider.select((value) => value.orderStatus)) ==
                   tabsText[i]['type'],
-              foodCount: count.length,
+              ordersCount: switch (ref.watch(
+                  getOrdersProvider(tabsText[i]['type'] as OrderStatus))) {
+                AsyncData(:final value) => value.length,
+                _ => 0,
+              },
             )
         ],
       ),

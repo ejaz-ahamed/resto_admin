@@ -6,12 +6,12 @@ import 'package:image_picker/image_picker.dart';
 import 'package:resto_admin/core/constants/products_constants/product_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
-import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/image_picker_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_16_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
 import 'package:resto_admin/features/products/domain/entities/category_entity.dart';
 import 'package:resto_admin/features/products/presentation/providers/category_provider.dart';
+import 'package:resto_admin/features/products/presentation/widgets/save_button_widget.dart';
 
 class EditCategoryPage extends HookConsumerWidget {
   static const routePath = '/editCategory';
@@ -23,6 +23,7 @@ class EditCategoryPage extends HookConsumerWidget {
     final TextEditingController controller = useTextEditingController();
     final data = ref.watch(productConstantsProvider);
     final theme = AppTheme.of(context);
+    final isLoading = useState<bool>(false);
 
     useEffect(() {
       Future.delayed(Duration.zero, () {
@@ -54,7 +55,7 @@ class EditCategoryPage extends HookConsumerWidget {
               SizedBox(
                 height: theme.spaces.space_200,
               ),
-              ImagePickerWidget(imgProvider: imageProvider),
+              const ImagePickerWidget(),
               const SizedBox16Widget(),
               TextFieldWidget(
                   enabled: true,
@@ -64,9 +65,22 @@ class EditCategoryPage extends HookConsumerWidget {
             ],
           ),
         ),
-        bottomNavigationBar: ElevatedButtonWidget(
-          text: data.txtSaveBtn,
+        bottomNavigationBar: SaveElevatedButtonWidget(
+          child: !isLoading.value
+              ? Text(
+                  data.txtSaveBtn,
+                  style: theme.typography.uiSemibold
+                      .copyWith(color: theme.colors.secondary),
+                )
+              : Center(
+                  child: Padding(
+                  padding: EdgeInsets.all(theme.spaces.space_100),
+                  child: CircularProgressIndicator(
+                    color: theme.colors.secondary,
+                  ),
+                )),
           onPressed: () async {
+            isLoading.value = true;
             await ref.read(categoryProvider.notifier).updateCategory(
                 id: entity.id,
                 imagePath: ref.watch(imageProvider)!.path,

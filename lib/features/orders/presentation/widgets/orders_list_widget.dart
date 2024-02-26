@@ -16,9 +16,9 @@ class OrderListView extends ConsumerWidget {
     final space = AppTheme.of(context).spaces;
     final color = AppTheme.of(context).colors;
     final typography = AppTheme.of(context).typography;
-    final appTheme = AppTheme.of(context);
 
     AppAssetsConstants iconsConst = AppAssetsConstants();
+
     return SizedBox(
       height: MediaQuery.sizeOf(context).height * .7,
       width: MediaQuery.sizeOf(context).width,
@@ -29,11 +29,7 @@ class OrderListView extends ConsumerWidget {
         ),
         itemBuilder: (context, index) => InkWell(
           onTap: () {
-            context.push(
-              OrderViewPage.routePath,
-              extra: (entity[index])
-
-            );
+            context.push(OrderViewPage.routePath, extra: (entity[index]));
           },
           child: Container(
             height: space.space_100 * 11,
@@ -50,29 +46,35 @@ class OrderListView extends ConsumerWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: space.space_200),
-                  child: Container(
-                    width: space.space_700,
-                    height: space.space_700,
-                    padding: EdgeInsets.all(appTheme.spaces.space_200),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        space.space_500,
-                      ),
-                      border: Border.all(color: color.textSubtle),
-                    ),
-                    child: SvgPicture.asset(
-                      iconsConst.icUser,
-                      colorFilter: ColorFilter.mode(
-                          appTheme.colors.text, BlendMode.srcATop),
-                    ),
-                  ),
+                  child: entity[index].user.imgPath.trim().isNotEmpty
+                      ? CircleAvatar(
+                          backgroundImage:
+                              NetworkImage(entity[index].user.imgPath),
+                          radius: space.space_100 * 3.5,
+                        )
+                      : Container(
+                          width: space.space_700,
+                          height: space.space_700,
+                          padding: EdgeInsets.all(space.space_200),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(
+                              space.space_500,
+                            ),
+                            border: Border.all(color: color.textSubtle),
+                          ),
+                          child: SvgPicture.asset(
+                            iconsConst.icUser,
+                            colorFilter:
+                                ColorFilter.mode(color.text, BlendMode.srcATop),
+                          ),
+                        ),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      entity[index].uid,
+                      entity[index].id,
                       style: typography.h500,
                     ),
                     Text(

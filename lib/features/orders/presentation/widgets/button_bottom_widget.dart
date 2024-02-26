@@ -8,6 +8,7 @@ class ButtonWidget extends ConsumerWidget {
   final Color color;
   final Color borderColor;
   final Color textColor;
+
   const ButtonWidget(
       {super.key,
       required this.text,
@@ -19,31 +20,27 @@ class ButtonWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appTheme = AppTheme.of(context);
-    return InkWell(
-      onTap: onPressed,
-      child: Container(
-        width: appTheme.spaces.space_500 * 4.3,
-        height: appTheme.spaces.space_500 * 1.25,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(
-            appTheme.spaces.space_100,
-          ),
-          border: Border.all(
-            color: borderColor,
-          ),
-          color: color,
+    return Container(
+      height: appTheme.spaces.space_500 * 1.25,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(
+          appTheme.spaces.space_100,
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              text,
-              textAlign: TextAlign.center,
-              style: appTheme.typography.h300.copyWith(
-                color: textColor,
-              ),
+        border: Border.all(
+          color: borderColor,
+        ),
+        color: color,
+      ),
+      child: InkWell(
+        onTap: onPressed,
+        child: Center(
+          child: Text(
+            text,
+            textAlign: TextAlign.center,
+            style: appTheme.typography.h300.copyWith(
+              color: textColor,
             ),
-          ],
+          ),
         ),
       ),
     );

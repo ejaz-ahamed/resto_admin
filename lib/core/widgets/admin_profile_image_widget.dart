@@ -16,6 +16,7 @@ class AdminProfileImageWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appTheme = AppTheme.of(context);
+
     final constants = ref.watch(profilePageConstantsProvider);
 
     return Align(

@@ -22,6 +22,7 @@ class ProfilePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appTheme = AppTheme.of(context);
+
     final constatnts = ref.watch(profilePageConstantsProvider);
 
     return Scaffold(

@@ -27,24 +27,24 @@ class PreferredAppBarWidget extends ConsumerWidget {
       automaticallyImplyLeading: false,
       scrolledUnderElevation: 0,
       titleSpacing: appTheme.spaces.space_300,
-      title: Row(
-        children: [
-          InkWell(
-            onTap: () => context.pop(),
-            child: SvgPicture.asset(
+      title: InkWell(
+        onTap: () => context.pop(),
+        child: Row(
+          children: [
+            SvgPicture.asset(
               iconConst.icArrowBackward,
               height: appTheme.spaces.space_200,
             ),
-          ),
-          SizedBox(
-            width: appTheme.spaces.space_200,
-          ),
-          Text(
-            title,
-            style:
-                appTheme.typography.h600.copyWith(fontWeight: FontWeight.bold),
-          )
-        ],
+            SizedBox(
+              width: appTheme.spaces.space_200,
+            ),
+            Text(
+              title,
+              style: appTheme.typography.h600
+                  .copyWith(fontWeight: FontWeight.bold),
+            )
+          ],
+        ),
       ),
       actions: [
         Padding(
