@@ -66,7 +66,7 @@ class AddCouponPage extends HookConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox24Widget(),
+                const SizedBox32Widget(),
                 TextFieldWidget(
                     enabled: true,
                     textFieldTitle: constants.txtTitle,
@@ -109,7 +109,7 @@ class AddCouponPage extends HookConsumerWidget {
                     controller: percentageController),
                 const SizedBox32Widget(),
                 HeadingWidget(text: constants.txtCondition),
-                const SizedBox16Widget(),
+                const SizedBox32Widget(),
                 ConditionTypeWidget(
                   hint: 'sss',
                   style: AppTheme.of(context).typography.h300,

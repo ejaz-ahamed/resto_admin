@@ -10,6 +10,12 @@ class TextFieldCouponWidget extends StatelessWidget {
     return TextField(
       controller: TextEditingController(),
       decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(
+            vertical: theme.spaces.space_100,
+            horizontal: theme.spaces.space_200),
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: theme.colors.textSubtle, width: .2),
+        ),
         hintText: 'enter value here...',
         hintStyle: TextStyle(color: theme.colors.textDisabled),
       ),

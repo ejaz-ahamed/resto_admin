@@ -58,36 +58,33 @@ class ConditionTypeWidget extends HookConsumerWidget {
       children: [
         for (var i = 0; i < productTypes.value.length; i++)
           Padding(
-            padding: EdgeInsets.only(top: apptheme.spaces.space_200),
+            padding:
+                EdgeInsets.only(bottom: AppTheme.of(context).spaces.space_200),
             child: Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius:
+                      BorderRadius.circular(apptheme.spaces.space_100),
                   border: Border.all(
-                      color: AppTheme.of(context).colors.textDisabled),
+                      color: AppTheme.of(context).colors.textInverse),
                   color: AppTheme.of(context).colors.secondary,
                   boxShadow: [AppTheme.of(context).boxShadow.primary]),
               child: Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: AppTheme.of(context).spaces.space_200,
-                    vertical: AppTheme.of(context).spaces.space_200),
-                child: Column(
+                    horizontal: AppTheme.of(context).spaces.space_300,
+                    vertical: AppTheme.of(context).spaces.space_400),
+                child: const Column(
                   children: [
-                    const DropDownWidget(
+                    DropDownWidget(
                       items: ["count", "amount"],
                     ),
-                    const SizedBox32Widget(),
-                    const DropDownWidget(
+                    SizedBox32Widget(),
+                    DropDownWidget(
                       items: ["equal to", "greater than"],
                     ),
-                    const SizedBox8Widget(),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: AppTheme.of(context).spaces.space_200,
-                      ),
-                      child: const TextFieldCouponWidget(),
-                    ),
-                    const SizedBox32Widget(),
-                    const DropDownWidget(items: ['and', 'or']),
+                    SizedBox32Widget(),
+                    TextFieldCouponWidget(),
+                    SizedBox32Widget(),
+                    DropDownWidget(items: ['and', 'or']),
                   ],
                 ),
               ),
