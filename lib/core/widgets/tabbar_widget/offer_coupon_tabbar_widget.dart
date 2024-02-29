@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/features/coupons/presentation/pages/coupons_page.dart';
 import 'package:resto_admin/features/offer/presentation/pages/offer_page.dart';
 
 class OfferCouponTabBarWidget extends StatelessWidget {
@@ -7,7 +8,6 @@ class OfferCouponTabBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     /// theme data
     final color = AppTheme.of(context).colors;
     return DefaultTabController(
@@ -15,8 +15,8 @@ class OfferCouponTabBarWidget extends StatelessWidget {
         length: 2,
         child: SafeArea(
           child: Scaffold(
-            appBar: TabBar(
-              
+            appBar: AppBar(
+              title: TabBar(
                 labelColor: color.primary,
                 indicatorColor: color.primary,
                 tabs: const [
@@ -26,8 +26,10 @@ class OfferCouponTabBarWidget extends StatelessWidget {
                   Tab(
                     text: 'Coupons',
                   )
-                ]),
-            body:const TabBarView(children: [OfferPage(), OfferPage()]),
+                ],
+              ),
+            ),
+            body: const TabBarView(children: [OfferPage(), CouponsPage()]),
           ),
         ));
   }
