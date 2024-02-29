@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 
 class DropDownWidget extends StatefulWidget {
@@ -20,9 +21,10 @@ class _DropDownWidgetState extends State<DropDownWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(
-          height: AppTheme.of(context).spaces.space_500,
+        Container(
+          height: AppTheme.of(context).spaces.space_700,
           width: 350,
+          decoration: BoxDecoration(border: Border.all(color: Colors.black)),
           child: Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: AppTheme.of(context).spaces.space_200),
@@ -44,9 +46,6 @@ class _DropDownWidgetState extends State<DropDownWidget> {
               }).toList(),
             ),
           ),
-        ),
-        const SizedBox(
-          height: 32,
         ),
       ],
     );

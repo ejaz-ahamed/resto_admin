@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/elevated_add_button_widget.dart';
+import 'package:resto_admin/core/widgets/sized_box_16_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
+import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
+import 'package:resto_admin/core/widgets/sized_box_8_widget.dart';
+import 'package:resto_admin/core/widgets/text_field_widget.dart';
 import 'package:resto_admin/features/coupons/presentation/widgets/dropdown_list_widget.dart';
+import 'package:resto_admin/features/coupons/presentation/widgets/textfield_coupon_widget.dart';
 
 /// Model class to handle the text editing controller
 final class ProductTypeControllers {
@@ -64,29 +70,24 @@ class ConditionTypeWidget extends HookConsumerWidget {
                 padding: EdgeInsets.symmetric(
                     horizontal: AppTheme.of(context).spaces.space_200,
                     vertical: AppTheme.of(context).spaces.space_200),
-                child:const Column(
+                child: Column(
                   children: [
-                    DropDownWidget(
-                      items: ["One", "Two"],
+                    const DropDownWidget(
+                      items: ["count", "amount"],
                     ),
-                    DropDownWidget(
-                      items: ["Sanju", "Fasil"],
+                    const SizedBox32Widget(),
+                    const DropDownWidget(
+                      items: ["equal to", "greater than"],
                     ),
-                    DropDownWidget(
-                      items: ["Sireen", "Sinan"],
+                    const SizedBox8Widget(),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppTheme.of(context).spaces.space_200,
+                      ),
+                      child: const TextFieldCouponWidget(),
                     ),
-                    // TextFieldWidget(
-                    //   enabled: true,
-                    //   textFieldTitle: 'Conditions',
-                    //   hintText: 'Equal to',
-                    //   controller: productTypes.value[i].conditionController,
-                    // ),
-                    // TextFieldWidget(
-                    //   enabled: true,
-                    //   textFieldTitle: 'Value',
-                    //   hintText: 'number',
-                    //   controller: productTypes.value[i].valueController,
-                    // ),
+                    const SizedBox32Widget(),
+                    const DropDownWidget(items: ['and', 'or']),
                   ],
                 ),
               ),
