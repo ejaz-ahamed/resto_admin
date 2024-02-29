@@ -53,7 +53,11 @@ class BottomNaviWidget extends HookConsumerWidget {
         ],
       ),
       bottomNavigationBar: Card(
-        margin: EdgeInsets.all(space.space_300),
+        margin: EdgeInsets.only(
+            left: space.space_300,
+            right: space.space_300,
+            bottom: space.space_300,
+            top: space.space_100),
         shape: RoundedRectangleBorder(
             side: BorderSide(color: theme.colors.bottomNavBorder),
             borderRadius: BorderRadius.circular(200)),

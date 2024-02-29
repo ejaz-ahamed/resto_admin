@@ -14,7 +14,7 @@ class AddOfferPageConstants {
   final txtHintTextPercentage = 'Enter Offer Percentage';
   final txtHintTextAmount = 'Enter Offer Amount';
   final txtProduct = 'Product';
-  final txtAdd = 'Add';
+  final txtAdd = 'Add new offers';
   final txtSave = 'Save';
   final txtAddImage = 'Add Image';
 }
