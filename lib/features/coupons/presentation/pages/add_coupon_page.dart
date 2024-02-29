@@ -6,8 +6,6 @@ import 'package:resto_admin/core/enums/offer_type.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
-import 'package:resto_admin/core/widgets/sized_box_16_widget.dart';
-import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
 import 'package:resto_admin/features/coupons/presentation/widgets/condition_type_widget.dart';
