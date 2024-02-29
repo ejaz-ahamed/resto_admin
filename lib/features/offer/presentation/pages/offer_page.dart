@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:resto_admin/core/constants/offer_constants/offer_page_constants.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/image_picker_widget.dart';
-import 'package:resto_admin/core/widgets/text_button_widget.dart';
 import 'package:resto_admin/features/offer/presentation/pages/add_offer_page.dart';
 import 'package:resto_admin/features/offer/presentation/provider/offer_provider.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/offer_banner_widget.dart';
@@ -19,34 +17,9 @@ class OfferPage extends ConsumerWidget {
     final color = AppTheme.of(context).colors;
     final spaces = AppTheme.of(context).spaces;
     final theme = AppTheme.of(context);
-    final constants = ref.watch(offerPageConstantsProvider);
 
     return Scaffold(
       backgroundColor: theme.colors.secondary,
-      appBar: AppBar(
-        backgroundColor: theme.colors.secondary,
-        elevation: 0,
-        scrolledUnderElevation: 0,
-        title: Padding(
-          padding: EdgeInsets.only(
-            left: spaces.space_100,
-          ),
-          child: Text(constants.txtAppbarTitle,
-              style: AppTheme.of(context).typography.h800),
-        ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: spaces.space_300),
-            child: TextButtonWidget(
-                onTap: () {
-                  ref.read(imageProvider.notifier).state = null;
-                  context.push(AddOfferPage.routePath);
-                },
-                buttonText: constants.txtAddOfferText,
-                color: color.primary),
-          ),
-        ],
-      ),
       body: switch (ref.watch(getAllOffersProvider)) {
         AsyncData(:final value) => Padding(
             padding: EdgeInsets.only(top: spaces.space_400),
@@ -63,6 +36,17 @@ class OfferPage extends ConsumerWidget {
             child: OfferPageShimmer(),
           )
       },
+      floatingActionButton: FloatingActionButton.small(
+          backgroundColor: color.primary,
+          onPressed: () {
+            ref.read(imageProvider.notifier).state = null;
+            context.push(AddOfferPage.routePath);
+          },
+          child: Icon(
+            Icons.add,
+            color: color.secondary,
+          )),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
 }
