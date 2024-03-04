@@ -18,8 +18,9 @@ class AddCouponPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final nameController = useTextEditingController();
-    final descriptionController = useTextEditingController();
+    final titleController = useTextEditingController();
+    final codeController = useTextEditingController();
+    final valueController = useTextEditingController();
     final percentageController = useTextEditingController();
     final conditionTypeController = useState<List<ProductTypeControllers>>([]);
     final constants = ref.watch(addCouponPageConstantsProvider);
@@ -69,14 +70,14 @@ class AddCouponPage extends HookConsumerWidget {
                     enabled: true,
                     textFieldTitle: constants.txtTitle,
                     hintText: constants.txtHintTextTitle,
-                    controller: nameController),
+                    controller: titleController),
                 const SizedBox32Widget(),
                 TextFieldWidget(
                     maxLines: null,
                     enabled: true,
                     textFieldTitle: constants.txtCode,
                     hintText: constants.txtHintTextCode,
-                    controller: descriptionController),
+                    controller: codeController),
                 const SizedBox32Widget(),
                 Text(
                   constants.txtType,
@@ -96,15 +97,16 @@ class AddCouponPage extends HookConsumerWidget {
                 ),
                 const SizedBox32Widget(),
                 TextFieldWidget(
-                    enabled: true,
-                    textFieldTitle:
-                        selectedOfferType.value == OfferType.percentage
-                            ? 'Coupon Percentage'
-                            : 'Coupon Amount',
-                    hintText: selectedOfferType.value == OfferType.percentage
-                        ? constants.txtHintTextPercentag
-                        : constants.txtHintTextAmount,
-                    controller: percentageController),
+                  enabled: true,
+                  textFieldTitle:
+                      selectedOfferType.value == OfferType.percentage
+                          ? 'Coupon Percentage'  
+                          : 'Coupon Amount',
+                  hintText: selectedOfferType.value == OfferType.percentage
+                      ? constants.txtHintTextPercentag
+                      : constants.txtHintTextAmount,
+                  controller: percentageController,
+                ),
                 const SizedBox32Widget(),
                 HeadingWidget(text: constants.txtCondition),
                 const SizedBox32Widget(),
