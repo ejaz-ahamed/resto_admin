@@ -8,6 +8,7 @@ import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
+import 'package:resto_admin/features/coupons/presentation/providers/coupon_provider.dart';
 import 'package:resto_admin/features/coupons/presentation/widgets/condition_type_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/tab_button_widget.dart.dart';
 import 'package:resto_admin/features/products/presentation/widgets/heading_widget.dart';
@@ -18,16 +19,17 @@ class AddCouponPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final nameController = useTextEditingController();
-    final descriptionController = useTextEditingController();
+    final titleController = useTextEditingController();
+    final codeController = useTextEditingController();
     final percentageController = useTextEditingController();
+    final valueController = useTextEditingController();
     final conditionTypeController = useState<List<ProductTypeControllers>>([]);
     final constants = ref.watch(addCouponPageConstantsProvider);
     //Theme data
     final spaces = AppTheme.of(context).spaces;
     final typography = AppTheme.of(context).typography;
 
-    final selectedOfferType = useState<CouponType>(CouponType.percentage);
+    final selectedCouponType = useState<CouponType>(CouponType.percentage);
 
     //Tabs to Show
     final tabsToShow = useMemoized(
@@ -49,7 +51,7 @@ class AddCouponPage extends HookConsumerWidget {
 
     //Handle tapping on the tab items
     void tabOnPressed(int index) {
-      selectedOfferType.value = tabsToShow[index]['type'] as CouponType;
+      selectedCouponType.value = tabsToShow[index]['type'] as CouponType;
     }
 
     return GestureDetector(
@@ -70,14 +72,14 @@ class AddCouponPage extends HookConsumerWidget {
                     enabled: true,
                     textFieldTitle: constants.txtTitle,
                     hintText: constants.txtHintTextTitle,
-                    controller: nameController),
+                    controller: titleController),
                 const SizedBox32Widget(),
                 TextFieldWidget(
                     maxLines: null,
                     enabled: true,
                     textFieldTitle: constants.txtCode,
                     hintText: constants.txtHintTextCode,
-                    controller: descriptionController),
+                    controller: codeController),
                 const SizedBox32Widget(),
                 Text(
                   constants.txtType,
@@ -90,23 +92,24 @@ class AddCouponPage extends HookConsumerWidget {
                       TabButtonWidget(
                         buttonText: tabsToShow[i]['text'] as String,
                         isSelected:
-                            selectedOfferType.value == tabsToShow[i]['type'],
+                            selectedCouponType.value == tabsToShow[i]['type'],
                         onPressed: () => tabOnPressed(i),
                       ),
                   ],
                 ),
                 const SizedBox32Widget(),
-                if (selectedOfferType.value == CouponType.percentage ||
-                    selectedOfferType.value == CouponType.amount)
+                if (selectedCouponType.value == CouponType.percentage ||
+                    selectedCouponType.value == CouponType.amount)
                   TextFieldWidget(
                       enabled: true,
                       textFieldTitle:
-                          selectedOfferType.value == CouponType.percentage
+                          selectedCouponType.value == CouponType.percentage
                               ? 'Coupon Percentage'
                               : 'Coupon Amount',
-                      hintText: selectedOfferType.value == CouponType.percentage
-                          ? constants.txtHintTextPercentag
-                          : constants.txtHintTextAmount,
+                      hintText:
+                          selectedCouponType.value == CouponType.percentage
+                              ? constants.txtHintTextPercentag
+                              : constants.txtHintTextAmount,
                       controller: percentageController)
                 else
                   HeadingWidget(text: constants.txtFreeDeliveryApply),
@@ -126,7 +129,21 @@ class AddCouponPage extends HookConsumerWidget {
         ),
         bottomNavigationBar: ElevatedButtonWidget(
           text: constants.txtSave,
-          onPressed: () {},
+          onPressed: () {
+            double percentageOrAmount = double.parse(percentageController.text);
+            // double value = double.parse(valueController.text);
+
+            ref.read(couponProvider.notifier).addCoupon(
+                id: '',
+                title: titleController.text,
+                code: codeController.text,
+                couponType: selectedCouponType.value,
+                percentageOrAmount: percentageOrAmount,
+                count: [],
+                equal: [],
+                value: [],
+                andOr: []);
+          },
         ),
       ),
     );
