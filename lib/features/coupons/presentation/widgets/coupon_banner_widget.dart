@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'dart:math' as math;
 import 'package:resto_admin/core/themes/app_theme.dart';
 
 class CouponBannerWidget extends StatelessWidget {
