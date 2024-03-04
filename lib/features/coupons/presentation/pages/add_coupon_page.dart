@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/coupons_page_constants/add_coupon_page_constants.dart';
-import 'package:resto_admin/core/enums/offer_type.dart';
+import 'package:resto_admin/core/enums/coupon_type.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
@@ -27,28 +27,29 @@ class AddCouponPage extends HookConsumerWidget {
     final spaces = AppTheme.of(context).spaces;
     final typography = AppTheme.of(context).typography;
 
-    final selectedOfferType = useState<OfferType>(OfferType.percentage);
+    final selectedOfferType = useState<CouponType>(CouponType.percentage);
 
     //Tabs to Show
     final tabsToShow = useMemoized(
       () => [
         {
           'text': constants.txtPercentageText,
-          'type': OfferType.percentage,
+          'type': CouponType.percentage,
         },
         {
           'text': constants.txtAmountText,
-          'type': OfferType.amount,
+          'type': CouponType.amount,
         },
         {
           'text': constants.txtFreeDelivery,
+          'type': CouponType.freeDelivery,
         },
       ],
     );
 
     //Handle tapping on the tab items
     void tabOnPressed(int index) {
-      selectedOfferType.value = tabsToShow[index]['type'] as OfferType;
+      selectedOfferType.value = tabsToShow[index]['type'] as CouponType;
     }
 
     return GestureDetector(
@@ -95,16 +96,20 @@ class AddCouponPage extends HookConsumerWidget {
                   ],
                 ),
                 const SizedBox32Widget(),
-                TextFieldWidget(
-                    enabled: true,
-                    textFieldTitle:
-                        selectedOfferType.value == OfferType.percentage
-                            ? 'Coupon Percentage'
-                            : 'Coupon Amount',
-                    hintText: selectedOfferType.value == OfferType.percentage
-                        ? constants.txtHintTextPercentag
-                        : constants.txtHintTextAmount,
-                    controller: percentageController),
+                if (selectedOfferType.value == CouponType.percentage ||
+                    selectedOfferType.value == CouponType.amount)
+                  TextFieldWidget(
+                      enabled: true,
+                      textFieldTitle:
+                          selectedOfferType.value == CouponType.percentage
+                              ? 'Coupon Percentage'
+                              : 'Coupon Amount',
+                      hintText: selectedOfferType.value == CouponType.percentage
+                          ? constants.txtHintTextPercentag
+                          : constants.txtHintTextAmount,
+                      controller: percentageController)
+                else
+                  HeadingWidget(text: constants.txtFreeDeliveryApply),
                 const SizedBox32Widget(),
                 HeadingWidget(text: constants.txtCondition),
                 const SizedBox32Widget(),
