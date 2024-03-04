@@ -12,7 +12,7 @@ class OfferCouponTabBarWidget extends ConsumerWidget {
     /// theme data
     final color = AppTheme.of(context).colors;
     return DefaultTabController(
-        initialIndex: 1,
+        initialIndex: 0,
         length: 2,
         child: SafeArea(
           child: Scaffold(

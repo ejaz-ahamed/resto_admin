@@ -3,7 +3,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/elevated_add_button_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_24_widget.dart';
+import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/features/coupons/presentation/widgets/dropdown_list_widget.dart';
+import 'package:resto_admin/features/coupons/presentation/widgets/textfield_coupon_widget.dart';
 
 /// Model class to handle the text editing controller
 final class ProductTypeControllers {
@@ -52,41 +54,33 @@ class ConditionTypeWidget extends HookConsumerWidget {
       children: [
         for (var i = 0; i < productTypes.value.length; i++)
           Padding(
-            padding: EdgeInsets.only(top: apptheme.spaces.space_200),
+            padding:
+                EdgeInsets.only(bottom: AppTheme.of(context).spaces.space_200),
             child: Container(
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius:
+                      BorderRadius.circular(apptheme.spaces.space_100),
                   border: Border.all(
-                      color: AppTheme.of(context).colors.textDisabled),
+                      color: AppTheme.of(context).colors.textInverse),
                   color: AppTheme.of(context).colors.secondary,
                   boxShadow: [AppTheme.of(context).boxShadow.primary]),
               child: Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: AppTheme.of(context).spaces.space_200,
-                    vertical: AppTheme.of(context).spaces.space_200),
-                child:const Column(
+                    horizontal: AppTheme.of(context).spaces.space_300,
+                    vertical: AppTheme.of(context).spaces.space_400),
+                child: const Column(
                   children: [
                     DropDownWidget(
-                      items: ["One", "Two"],
+                      items: ["count", "amount"],
                     ),
+                    SizedBox32Widget(),
                     DropDownWidget(
-                      items: ["Sanju", "Fasil"],
+                      items: ["equal to", "greater than"],
                     ),
-                    DropDownWidget(
-                      items: ["Sireen", "Sinan"],
-                    ),
-                    // TextFieldWidget(
-                    //   enabled: true,
-                    //   textFieldTitle: 'Conditions',
-                    //   hintText: 'Equal to',
-                    //   controller: productTypes.value[i].conditionController,
-                    // ),
-                    // TextFieldWidget(
-                    //   enabled: true,
-                    //   textFieldTitle: 'Value',
-                    //   hintText: 'number',
-                    //   controller: productTypes.value[i].valueController,
-                    // ),
+                    SizedBox32Widget(),
+                    TextFieldCouponWidget(),
+                    SizedBox32Widget(),
+                    DropDownWidget(items: ['and', 'or']),
                   ],
                 ),
               ),
