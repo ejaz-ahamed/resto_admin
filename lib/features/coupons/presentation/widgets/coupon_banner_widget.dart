@@ -24,7 +24,7 @@ class CouponBannerWidget extends StatelessWidget {
               boxShadow: [
                 BoxShadow(
                     blurRadius: theme.spaces.space_50,
-                    color: theme.colors.textSubtle)
+                    color: theme.colors.textInverse)
               ],
               borderRadius: BorderRadius.circular(theme.spaces.space_200),
               color: theme.colors.secondary,

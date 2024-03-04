@@ -17,8 +17,7 @@ class AddCouponPageConstants {
   final txtCondition = 'Conditions';
   final txtAdd = 'Add Coupons';
   final txtSave = 'Save';
-  final txtCouponValue = 'Coupon value';
-  final txtHintValue = 'Enter Coupon value...';
+  final txtFreeDeliveryApply = 'Free Delivery Applied';
 }
 
 @riverpod
