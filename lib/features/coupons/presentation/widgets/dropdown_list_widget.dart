@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 
-class DropDownWidget extends StatefulWidget {
+class DropDownWidget extends HookConsumerWidget {
   final List<String> items;
-  const DropDownWidget({super.key, required this.items});
-  @override
-  State<DropDownWidget> createState() => _DropDownWidgetState();
-}
-
-class _DropDownWidgetState extends State<DropDownWidget> {
-  late String dropdownValue;
-  @override
-  void initState() {
-    super.initState();
-    dropdownValue = widget.items.first;
-  }
+  final void Function(String value)? onChange;
+  const DropDownWidget(
+      {super.key, required this.items, required this.onChange});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final dropdownValue = useState<String>('');
+
+    useEffect(() {
+      dropdownValue.value = items.first;
+      return null;
+    }, []);
+
     return Column(
       children: [
         Container(
@@ -32,20 +32,24 @@ class _DropDownWidgetState extends State<DropDownWidget> {
                 horizontal: AppTheme.of(context).spaces.space_200),
             child: DropdownButtonHideUnderline(
               child: DropdownButton<String>(
-                value: dropdownValue,
+                value: dropdownValue.value,
                 isExpanded: true,
                 icon: const Icon(Icons.arrow_drop_down),
-                style: const TextStyle(color: Colors.black),
+                style: TextStyle(color: AppTheme.of(context).colors.secondary),
                 onChanged: (String? value) {
-                  setState(() {
-                    dropdownValue = value!;
-                  });
+                  onChange;
+                  // dropdownValue.value = value!;
                 },
-                items:
-                    widget.items.map<DropdownMenuItem<String>>((String value) {
+                items: items.map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
-                    child: Text(value),
+                    child: Text(
+                      value,
+                      style: AppTheme.of(context)
+                          .typography
+                          .h300
+                          .copyWith(color: AppTheme.of(context).colors.text),
+                    ),
                   );
                 }).toList(),
               ),

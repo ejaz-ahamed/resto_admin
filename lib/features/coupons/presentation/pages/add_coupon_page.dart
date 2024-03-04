@@ -18,11 +18,13 @@ class AddCouponPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final nameController = useTextEditingController();
-    final descriptionController = useTextEditingController();
+    final titleController = useTextEditingController();
+    final codeController = useTextEditingController();
     final percentageController = useTextEditingController();
-    final conditionTypeController = useState<List<ProductTypeControllers>>([]);
+    final valueController = useTextEditingController();
+    final conditionTypeController = useState<List<ConditionControllers>>([]);
     final constants = ref.watch(addCouponPageConstantsProvider);
+
     //Theme data
     final spaces = AppTheme.of(context).spaces;
     final typography = AppTheme.of(context).typography;
@@ -70,14 +72,14 @@ class AddCouponPage extends HookConsumerWidget {
                     enabled: true,
                     textFieldTitle: constants.txtTitle,
                     hintText: constants.txtHintTextTitle,
-                    controller: nameController),
+                    controller: titleController),
                 const SizedBox32Widget(),
                 TextFieldWidget(
                     maxLines: null,
                     enabled: true,
                     textFieldTitle: constants.txtCode,
                     hintText: constants.txtHintTextCode,
-                    controller: descriptionController),
+                    controller: codeController),
                 const SizedBox32Widget(),
                 Text(
                   constants.txtType,
@@ -114,11 +116,13 @@ class AddCouponPage extends HookConsumerWidget {
                 HeadingWidget(text: constants.txtCondition),
                 const SizedBox32Widget(),
                 ConditionTypeWidget(
-                  hint: 'sss',
+                  controller: valueController,
                   style: AppTheme.of(context).typography.h300,
                   productTypes: conditionTypeController,
                   btntxt: constants.txtCondition,
-                  onTap: (p0) {},
+                  onChange: (value) {
+                    value = value;
+                  },
                 )
               ],
             ),

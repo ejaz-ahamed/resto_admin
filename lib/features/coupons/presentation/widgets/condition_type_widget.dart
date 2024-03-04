@@ -8,31 +8,27 @@ import 'package:resto_admin/features/coupons/presentation/widgets/dropdown_list_
 import 'package:resto_admin/features/coupons/presentation/widgets/textfield_coupon_widget.dart';
 
 /// Model class to handle the text editing controller
-final class ProductTypeControllers {
-  final TextEditingController typeController;
-  final TextEditingController conditionController;
+final class ConditionControllers {
   final TextEditingController valueController;
 
-  ProductTypeControllers(
-      {required this.conditionController,
-      required this.typeController,
-      required this.valueController});
+  ConditionControllers({required this.valueController});
 }
 
 class ConditionTypeWidget extends HookConsumerWidget {
-  final String hint;
   final TextStyle? style;
-  final ValueNotifier<List<ProductTypeControllers>> productTypes;
+  final ValueNotifier<List<ConditionControllers>> productTypes;
   final String btntxt;
-  final void Function(int) onTap;
+
+  final void Function(String)? onChange;
+  final TextEditingController? controller;
 
   const ConditionTypeWidget({
     super.key,
-    required this.hint,
     required this.style,
     required this.productTypes,
     required this.btntxt,
-    required this.onTap,
+    required this.controller,
+    required this.onChange,
   });
 
   @override
@@ -42,9 +38,7 @@ class ConditionTypeWidget extends HookConsumerWidget {
     void addNewTypeEntry() {
       productTypes.value = [
         ...productTypes.value,
-        ProductTypeControllers(
-          conditionController: TextEditingController(),
-          typeController: TextEditingController(),
+        ConditionControllers(
           valueController: TextEditingController(),
         ),
       ];
@@ -68,19 +62,32 @@ class ConditionTypeWidget extends HookConsumerWidget {
                 padding: EdgeInsets.symmetric(
                     horizontal: AppTheme.of(context).spaces.space_300,
                     vertical: AppTheme.of(context).spaces.space_400),
-                child: const Column(
+                child: Column(
                   children: [
                     DropDownWidget(
-                      items: ["count", "amount"],
+                      items: const ["count", "amount"],
+                      onChange: (value) {
+                        value;
+                      },
                     ),
-                    SizedBox32Widget(),
+                    const SizedBox32Widget(),
                     DropDownWidget(
-                      items: ["equal to", "greater than"],
+                      items: const ["equal to", "greater than", "less than"],
+                      onChange: (value) {
+                        value;
+                      },
                     ),
-                    SizedBox32Widget(),
-                    TextFieldCouponWidget(),
-                    SizedBox32Widget(),
-                    DropDownWidget(items: ['and', 'or']),
+                    const SizedBox32Widget(),
+                    TextFieldCouponWidget(
+                      controller: controller,
+                    ),
+                    const SizedBox32Widget(),
+                    DropDownWidget(
+                      items: const ['and', 'or'],
+                      onChange: (value) {
+                        value;
+                      },
+                    ),
                   ],
                 ),
               ),
