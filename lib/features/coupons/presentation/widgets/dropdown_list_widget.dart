@@ -37,8 +37,9 @@ class DropDownWidget extends HookConsumerWidget {
                 icon: const Icon(Icons.arrow_drop_down),
                 style: TextStyle(color: AppTheme.of(context).colors.secondary),
                 onChanged: (String? value) {
-                  onChange;
-                  // dropdownValue.value = value!;
+                  if (value != null) {
+                    onChange?.call(value);
+                  }
                 },
                 items: items.map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(

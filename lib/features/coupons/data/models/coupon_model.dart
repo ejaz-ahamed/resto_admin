@@ -1,34 +1,25 @@
+// ignore_for_file: unused_element, invalid_annotation_target
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:resto_admin/core/enums/coupon_type.dart';
+import 'package:resto_admin/features/coupons/data/models/condition_model.dart';
 
 part 'coupon_model.freezed.dart';
 part 'coupon_model.g.dart';
 
-enum ConditionValue {
-  count,
-  amount;
-}
-enum ConditionType{
-  equalTo,
-  greaterThan
-}
-enum ConditionLogic{
-  and,
-  or
-}
-
 @freezed
 class CouponModel with _$CouponModel {
+  const CouponModel._();
+
+  @JsonSerializable(explicitToJson: true)
   factory CouponModel({
     required String? id,
     required String? title,
+    required String code,
     required CouponType couponType,
     required double percentageOrAmount,
-    required ConditionValue count,
-    required ConditionType equal,
-    required double value,
-    required ConditionLogic andOr,
+    required List<Condition> condition,
   }) = _CouponModel;
 
   factory CouponModel.fromJson(Map<String, dynamic> json) =>
