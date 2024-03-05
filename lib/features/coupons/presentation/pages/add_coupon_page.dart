@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/coupons_page_constants/add_coupon_page_constants.dart';
 import 'package:resto_admin/core/enums/coupon_type.dart';
@@ -59,7 +60,8 @@ class AddCouponPage extends HookConsumerWidget {
 
     /// Save the new coupon to the database
     void addNewCoupon() {
-      double percentageOrAmount = double.parse(percentageController.text);
+      double percentageOrAmount =
+          double.tryParse(percentageController.text) ?? 0;
 
       ref.read(couponProvider.notifier).addCoupon(
           title: titleController.text,
@@ -74,8 +76,9 @@ class AddCouponPage extends HookConsumerWidget {
                 logic: conditionState.andOr,
                 value:
                     double.tryParse(conditionState.valueController.text) ?? 0,
-              )
+              ),
           ]);
+      context.pop();
     }
 
     return GestureDetector(

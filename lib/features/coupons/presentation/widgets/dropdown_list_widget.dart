@@ -11,12 +11,7 @@ class DropDownWidget extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final dropdownValue = useState<String>('');
-
-    useEffect(() {
-      dropdownValue.value = items.first;
-      return null;
-    }, []);
+    final dropdownValue = useState<String>(items.first);
 
     return Column(
       children: [
@@ -38,6 +33,7 @@ class DropDownWidget extends HookConsumerWidget {
                 style: TextStyle(color: AppTheme.of(context).colors.secondary),
                 onChanged: (String? value) {
                   if (value != null) {
+                    dropdownValue.value = value;
                     onChange?.call(value);
                   }
                 },
