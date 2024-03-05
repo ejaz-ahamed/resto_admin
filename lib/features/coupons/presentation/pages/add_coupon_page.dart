@@ -8,8 +8,8 @@ import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
-import 'package:resto_admin/features/coupons/data/models/condition_model.dart';
 import 'package:resto_admin/features/coupons/domain/entities/condition_entity.dart';
+import 'package:resto_admin/features/coupons/presentation/providers/coupon_condition_state.dart';
 import 'package:resto_admin/features/coupons/presentation/providers/coupon_provider.dart';
 import 'package:resto_admin/features/coupons/presentation/widgets/condition_type_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/tab_button_widget.dart.dart';
@@ -24,8 +24,8 @@ class AddCouponPage extends HookConsumerWidget {
     final titleController = useTextEditingController();
     final codeController = useTextEditingController();
     final percentageController = useTextEditingController();
-    // final valueController = useTextEditingController();
-    final conditionTypeController = useState<List<ConditionControllers>>([]);
+
+    final conditionsState = useState<List<CouponConditionState>>([]);
     final constants = ref.watch(addCouponPageConstantsProvider);
 
     //Theme data
@@ -57,9 +57,10 @@ class AddCouponPage extends HookConsumerWidget {
       selectedCouponType.value = tabsToShow[index]['type'] as CouponType;
     }
 
+    /// Save the new coupon to the database
     void addNewCoupon() {
       double percentageOrAmount = double.parse(percentageController.text);
-      // double value = double.parse(valueController.text);
+
       ref.read(couponProvider.notifier).addCoupon(
           id: '',
           title: titleController.text,
@@ -67,12 +68,12 @@ class AddCouponPage extends HookConsumerWidget {
           couponType: selectedCouponType.value,
           percentageOrAmount: percentageOrAmount,
           condition: [
-            for (final controller in conditionTypeController.value)
+            for (final conditionState in conditionsState.value)
               ConditionEntity(
-                count: ConditionType.values.byName(controller.countOrAmount),
-                check: ConditionCheck.values.byName(controller.logic),
-                logic: ConditionLogic.values.byName(controller.andOr),
-                value: double.parse(controller.valueController.text),
+                count: conditionState.countOrAmount,
+                check: conditionState.condition,
+                logic: conditionState.andOr,
+                value: double.parse(conditionState.valueController.text),
               )
           ]);
     }
@@ -139,20 +140,9 @@ class AddCouponPage extends HookConsumerWidget {
                 const SizedBox32Widget(),
                 HeadingWidget(text: constants.txtCondition),
                 const SizedBox32Widget(),
-                ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: 1,
-                  itemBuilder: (context, index) => ConditionTypeWidget(
-                    controller:
-                        conditionTypeController.value[index].valueController,
-                    style: AppTheme.of(context).typography.h300,
-                    productTypes: conditionTypeController,
-                    btntxt: constants.txtCondition,
-                    onChange: (value) {
-                      value = value;
-                    },
-                  ),
-                )
+                ConditionTypeWidget(
+                  conditionsState: conditionsState,
+                ),
               ],
             ),
           ),
