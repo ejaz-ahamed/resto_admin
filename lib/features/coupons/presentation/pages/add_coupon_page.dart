@@ -8,6 +8,8 @@ import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
+import 'package:resto_admin/features/coupons/data/models/condition_model.dart';
+import 'package:resto_admin/features/coupons/domain/entities/condition_entity.dart';
 import 'package:resto_admin/features/coupons/presentation/providers/coupon_provider.dart';
 import 'package:resto_admin/features/coupons/presentation/widgets/condition_type_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/tab_button_widget.dart.dart';
@@ -22,9 +24,10 @@ class AddCouponPage extends HookConsumerWidget {
     final titleController = useTextEditingController();
     final codeController = useTextEditingController();
     final percentageController = useTextEditingController();
-    final valueController = useTextEditingController();
-    final conditionTypeController = useState<List<ProductTypeControllers>>([]);
+    // final valueController = useTextEditingController();
+    final conditionTypeController = useState<List<ConditionControllers>>([]);
     final constants = ref.watch(addCouponPageConstantsProvider);
+
     //Theme data
     final spaces = AppTheme.of(context).spaces;
     final typography = AppTheme.of(context).typography;
@@ -52,6 +55,26 @@ class AddCouponPage extends HookConsumerWidget {
     //Handle tapping on the tab items
     void tabOnPressed(int index) {
       selectedCouponType.value = tabsToShow[index]['type'] as CouponType;
+    }
+
+    void addNewCoupon() {
+      double percentageOrAmount = double.parse(percentageController.text);
+      // double value = double.parse(valueController.text);
+      ref.read(couponProvider.notifier).addCoupon(
+          id: '',
+          title: titleController.text,
+          code: codeController.text,
+          couponType: selectedCouponType.value,
+          percentageOrAmount: percentageOrAmount,
+          condition: [
+            for (final controller in conditionTypeController.value)
+              ConditionEntity(
+                count: ConditionType.values.byName(controller.countOrAmount),
+                check: ConditionCheck.values.byName(controller.logic),
+                logic: ConditionLogic.values.byName(controller.andOr),
+                value: double.parse(controller.valueController.text),
+              )
+          ]);
     }
 
     return GestureDetector(
@@ -116,12 +139,19 @@ class AddCouponPage extends HookConsumerWidget {
                 const SizedBox32Widget(),
                 HeadingWidget(text: constants.txtCondition),
                 const SizedBox32Widget(),
-                ConditionTypeWidget(
-                  hint: 'sss',
-                  style: AppTheme.of(context).typography.h300,
-                  productTypes: conditionTypeController,
-                  btntxt: constants.txtCondition,
-                  onTap: (p0) {},
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: 1,
+                  itemBuilder: (context, index) => ConditionTypeWidget(
+                    controller:
+                        conditionTypeController.value[index].valueController,
+                    style: AppTheme.of(context).typography.h300,
+                    productTypes: conditionTypeController,
+                    btntxt: constants.txtCondition,
+                    onChange: (value) {
+                      value = value;
+                    },
+                  ),
                 )
               ],
             ),
@@ -129,21 +159,7 @@ class AddCouponPage extends HookConsumerWidget {
         ),
         bottomNavigationBar: ElevatedButtonWidget(
           text: constants.txtSave,
-          onPressed: () {
-            double percentageOrAmount = double.parse(percentageController.text);
-            // double value = double.parse(valueController.text);
-
-            ref.read(couponProvider.notifier).addCoupon(
-                id: '',
-                title: titleController.text,
-                code: codeController.text,
-                couponType: selectedCouponType.value,
-                percentageOrAmount: percentageOrAmount,
-                count: [],
-                equal: [],
-                value: [],
-                andOr: []);
-          },
+          onPressed: addNewCoupon,
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:resto_admin/core/enums/coupon_type.dart';
 import 'package:resto_admin/core/exceptions/base_exception/base_exception.dart';
 import 'package:resto_admin/features/coupons/data/models/condition_model.dart';
+import 'package:resto_admin/features/coupons/domain/entities/condition_entity.dart';
 import 'package:resto_admin/features/coupons/domain/entities/coupon_entity.dart';
 import 'package:resto_admin/features/coupons/domain/repository/coupon_repository.dart';
 
@@ -15,10 +16,7 @@ final class AddCouponUsecase {
     required String code,
     required CouponType couponType,
     required double percentageOrAmount,
-    required List<Condition> count,
-    required List<Condition> equal,
-    required List<Condition> value,
-    required List<Condition> andOr,
+    required List<ConditionEntity> condition,
   }) async {
     try {
       return await repository.addCoupon(CouponEntity(
@@ -26,11 +24,8 @@ final class AddCouponUsecase {
         title: title,
         couponType: couponType,
         percentageOrAmount: percentageOrAmount,
-        count: count,
-        equal: equal,
-        value: value,
-        andOr: andOr,
         code: code,
+        condition: condition,
       ));
     } catch (e) {
       throw BaseException(e.toString());

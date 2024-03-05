@@ -1,6 +1,7 @@
 import 'package:resto_admin/core/enums/coupon_type.dart';
 import 'package:resto_admin/features/coupons/data/models/condition_model.dart';
 import 'package:resto_admin/features/coupons/data/repository/coupon_repository_impl.dart';
+import 'package:resto_admin/features/coupons/domain/entities/condition_entity.dart';
 import 'package:resto_admin/features/coupons/domain/usecases/add_coupon_usecase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -17,10 +18,7 @@ class Coupon extends _$Coupon {
     required String code,
     required CouponType couponType,
     required double percentageOrAmount,
-    required List<Condition> count,
-    required List<Condition> equal,
-    required List<Condition> value,
-    required List<Condition> andOr,
+    required List<ConditionEntity> condition,
   }) {
     final repository = ref.watch(couponRepositoryProvider);
     return AddCouponUsecase(repository: repository)(
@@ -29,9 +27,6 @@ class Coupon extends _$Coupon {
         code: code,
         couponType: couponType,
         percentageOrAmount: percentageOrAmount,
-        count: count,
-        equal: equal,
-        value: value,
-        andOr: andOr);
+        condition: []);
   }
 }

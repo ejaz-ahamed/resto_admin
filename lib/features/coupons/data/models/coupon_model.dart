@@ -17,10 +17,7 @@ class CouponModel with _$CouponModel {
     required String code,
     required CouponType couponType,
     required double percentageOrAmount,
-    required List<Condition> count,
-    required List<Condition> check,
-    required List<Condition> value,
-    required List<Condition> logic,
+    required List<Condition> condition,
   }) = _CouponModel;
 
   factory CouponModel.fromJson(Map<String, dynamic> json) =>
