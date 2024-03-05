@@ -62,18 +62,18 @@ class AddCouponPage extends HookConsumerWidget {
       double percentageOrAmount = double.parse(percentageController.text);
 
       ref.read(couponProvider.notifier).addCoupon(
-          id: '',
           title: titleController.text,
           code: codeController.text,
           couponType: selectedCouponType.value,
           percentageOrAmount: percentageOrAmount,
-          condition: [
+          conditions: [
             for (final conditionState in conditionsState.value)
               ConditionEntity(
                 count: conditionState.countOrAmount,
                 check: conditionState.condition,
                 logic: conditionState.andOr,
-                value: double.parse(conditionState.valueController.text),
+                value:
+                    double.tryParse(conditionState.valueController.text) ?? 0,
               )
           ]);
     }

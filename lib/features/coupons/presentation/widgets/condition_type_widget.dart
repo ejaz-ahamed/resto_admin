@@ -42,6 +42,7 @@ class ConditionTypeWidget extends HookConsumerWidget {
       children: [
         ListView.separated(
           shrinkWrap: true,
+          physics: const ClampingScrollPhysics(),
           separatorBuilder: (context, index) => const SizedBox16Widget(),
           itemCount: conditionsState.value.length,
           itemBuilder: (context, index) {

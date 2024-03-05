@@ -12,20 +12,18 @@ class Coupon extends _$Coupon {
   void build() {}
 
   Future<void> addCoupon({
-    required String? id,
     required String? title,
     required String code,
     required CouponType couponType,
     required double percentageOrAmount,
-    required List<ConditionEntity> condition,
+    required List<ConditionEntity> conditions,
   }) {
     final repository = ref.watch(couponRepositoryProvider);
     return AddCouponUsecase(repository: repository)(
-        id: id,
         title: title,
         code: code,
         couponType: couponType,
         percentageOrAmount: percentageOrAmount,
-        condition: []);
+        conditions: conditions);
   }
 }

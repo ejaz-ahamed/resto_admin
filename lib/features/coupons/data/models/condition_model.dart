@@ -43,6 +43,6 @@ class Condition with _$Condition {
     return Condition.fromJson(data);
   }
   Map<String, dynamic> toFirestore() {
-    return toJson()..remove('id');
+    return toJson();
   }
 }

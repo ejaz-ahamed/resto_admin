@@ -10,21 +10,20 @@ final class AddCouponUsecase {
   AddCouponUsecase({required this.repository});
 
   Future<void> call({
-    required String? id,
     required String? title,
     required String code,
     required CouponType couponType,
     required double percentageOrAmount,
-    required List<ConditionEntity> condition,
+    required List<ConditionEntity> conditions,
   }) async {
     try {
       return await repository.addCoupon(CouponEntity(
-        id: id,
+        id: null,
         title: title,
         couponType: couponType,
         percentageOrAmount: percentageOrAmount,
         code: code,
-        condition: condition,
+        condition: conditions,
       ));
     } catch (e) {
       throw BaseException(e.toString());

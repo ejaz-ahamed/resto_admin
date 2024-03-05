@@ -1,4 +1,4 @@
-// ignore_for_file: unused_element
+// ignore_for_file: unused_element, invalid_annotation_target
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -10,7 +10,9 @@ part 'coupon_model.g.dart';
 
 @freezed
 class CouponModel with _$CouponModel {
- const CouponModel._();
+  const CouponModel._();
+
+  @JsonSerializable(explicitToJson: true)
   factory CouponModel({
     required String? id,
     required String? title,
