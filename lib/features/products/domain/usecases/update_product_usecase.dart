@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:resto_admin/core/exception/base_exception.dart';
+import 'package:resto_admin/core/exceptions/base_exception/base_exception.dart';
 import 'package:resto_admin/features/products/domain/entities/product_addon_entity.dart';
 import 'package:resto_admin/features/products/domain/entities/product_entity.dart';
 import 'package:resto_admin/features/products/domain/entities/product_type_entity.dart';
