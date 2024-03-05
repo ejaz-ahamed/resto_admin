@@ -1,5 +1,4 @@
 import 'package:resto_admin/core/enums/coupon_type.dart';
-import 'package:resto_admin/features/coupons/data/models/condition_model.dart';
 import 'package:resto_admin/features/coupons/data/repository/coupon_repository_impl.dart';
 import 'package:resto_admin/features/coupons/domain/entities/condition_entity.dart';
 import 'package:resto_admin/features/coupons/domain/usecases/add_coupon_usecase.dart';

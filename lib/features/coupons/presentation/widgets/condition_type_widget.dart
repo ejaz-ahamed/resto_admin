@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/core/widgets/elevated_add_button_widget.dart';
@@ -15,14 +14,17 @@ final class ConditionControllers {
   final String logic;
   final String andOr;
 
-  ConditionControllers({required this.valueController,required this.countOrAmount,required this.logic,required this.andOr});
+  ConditionControllers(
+      {required this.valueController,
+      required this.countOrAmount,
+      required this.logic,
+      required this.andOr});
 }
 
 class ConditionTypeWidget extends HookConsumerWidget {
   final TextStyle? style;
   final ValueNotifier<List<ConditionControllers>> productTypes;
   final String btntxt;
-  
 
   final void Function(String)? onChange;
   final TextEditingController? controller;
@@ -46,8 +48,8 @@ class ConditionTypeWidget extends HookConsumerWidget {
         ConditionControllers(
           valueController: TextEditingController(),
           andOr: '',
-          countOrAmount:'',
-          logic:'' ,
+          countOrAmount: '',
+          logic: '',
         ),
       ];
     }
@@ -87,7 +89,7 @@ class ConditionTypeWidget extends HookConsumerWidget {
                     ),
                     const SizedBox32Widget(),
                     TextFieldCouponWidget(
-                      controller:controller ,
+                      controller: controller,
                     ),
                     const SizedBox32Widget(),
                     DropDownWidget(
@@ -105,7 +107,7 @@ class ConditionTypeWidget extends HookConsumerWidget {
         ElevatedAddButtonWidget(
             buttonText: btntxt,
             textColor: apptheme.colors.primary,
-            onPressed:  addNewTypeEntry,
+            onPressed: addNewTypeEntry,
             icon: Icons.add),
       ],
     );

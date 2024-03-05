@@ -2,7 +2,6 @@ import 'package:resto_admin/features/coupons/data/datasources/coupon_firestore_d
 import 'package:resto_admin/features/coupons/data/datasources/coupon_firestore_datasource_impl.dart';
 import 'package:resto_admin/features/coupons/data/models/condition_model.dart';
 import 'package:resto_admin/features/coupons/data/models/coupon_model.dart';
-import 'package:resto_admin/features/coupons/domain/entities/condition_entity.dart';
 import 'package:resto_admin/features/coupons/domain/entities/coupon_entity.dart';
 import 'package:resto_admin/features/coupons/domain/repository/coupon_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';

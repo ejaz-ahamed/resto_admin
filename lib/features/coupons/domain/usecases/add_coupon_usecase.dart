@@ -1,6 +1,5 @@
 import 'package:resto_admin/core/enums/coupon_type.dart';
 import 'package:resto_admin/core/exceptions/base_exception/base_exception.dart';
-import 'package:resto_admin/features/coupons/data/models/condition_model.dart';
 import 'package:resto_admin/features/coupons/domain/entities/condition_entity.dart';
 import 'package:resto_admin/features/coupons/domain/entities/coupon_entity.dart';
 import 'package:resto_admin/features/coupons/domain/repository/coupon_repository.dart';
