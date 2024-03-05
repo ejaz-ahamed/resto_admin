@@ -15,6 +15,14 @@ class CouponFirestoreDatasourceImpl extends CouponFirestoreDatasource {
   Future<void> add(CouponModel couponModel) async {
     await collection.doc().set(couponModel);
   }
+
+  @override
+  Stream<List<CouponModel>> getAllCoupons() async* {
+    final couponStream = collection.snapshots();
+    await for (final coupons in couponStream) {
+      yield [for (final coupon in coupons.docs) coupon.data()];
+    }
+  }
 }
 
 @riverpod
