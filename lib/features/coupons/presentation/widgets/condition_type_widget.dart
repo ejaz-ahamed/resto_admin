@@ -46,7 +46,7 @@ class ConditionTypeWidget extends HookConsumerWidget {
           separatorBuilder: (context, index) => const SizedBox16Widget(),
           itemCount: conditionsState.value.length,
           itemBuilder: (context, index) {
-            final currentCondition = conditionsState.value[index];
+            var currentCondition = conditionsState.value[index];
 
             return Padding(
               padding: EdgeInsets.only(
@@ -67,23 +67,24 @@ class ConditionTypeWidget extends HookConsumerWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       DropDownWidget(
+                        initalValue: currentCondition.countOrAmount.name,
                         items: ConditionType.values.map((e) => e.name).toList(),
                         onChange: (value) {
-                          conditionsState.value[index] =
-                              currentCondition.copyWith(
-                                  countOrAmount:
-                                      ConditionType.values.byName(value));
+                          currentCondition = currentCondition.copyWith(
+                              countOrAmount:
+                                  ConditionType.values.byName(value));
+                          conditionsState.value[index] = currentCondition;
                         },
                       ),
                       const SizedBox32Widget(),
                       DropDownWidget(
+                        initalValue: currentCondition.condition.name,
                         items:
                             ConditionCheck.values.map((e) => e.name).toList(),
                         onChange: (value) {
-                          conditionsState.value[index] =
-                              currentCondition.copyWith(
-                                  condition:
-                                      ConditionCheck.values.byName(value));
+                          currentCondition = currentCondition.copyWith(
+                              condition: ConditionCheck.values.byName(value));
+                          conditionsState.value[index] = currentCondition;
                         },
                       ),
                       const SizedBox32Widget(),
@@ -92,12 +93,13 @@ class ConditionTypeWidget extends HookConsumerWidget {
                       ),
                       const SizedBox32Widget(),
                       DropDownWidget(
+                        initalValue: currentCondition.andOr.name,
                         items:
                             ConditionLogic.values.map((e) => e.name).toList(),
                         onChange: (value) {
-                          conditionsState.value[index] =
-                              currentCondition.copyWith(
-                                  andOr: ConditionLogic.values.byName(value));
+                          currentCondition = currentCondition.copyWith(
+                              andOr: ConditionLogic.values.byName(value));
+                          conditionsState.value[index] = currentCondition;
                         },
                       ),
                     ],
