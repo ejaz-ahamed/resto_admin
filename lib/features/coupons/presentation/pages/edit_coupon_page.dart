@@ -61,13 +61,8 @@ class EditCouponPage extends HookConsumerWidget {
           titleController.text = entity.title!;
           codeController.text = entity.code!;
           percentageController.text = entity.percentageOrAmount.toString();
-          selectedCouponType.value = selectedCouponType.value;
 
-          /// Add addon controllers
-          for (final conditions in entity.condition) {
-            final valueController = TextEditingController();
-            valueController.text = conditions.value.toString();
-          }
+          for (final conditions in entity.condition) {}
         },
       );
       return null;
