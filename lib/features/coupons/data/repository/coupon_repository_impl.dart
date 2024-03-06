@@ -83,6 +83,11 @@ class CouponRepositoryImpl extends CouponRepository {
       id,
     );
   }
+
+  @override
+  Future<void> deleteCoupon(String id) async {
+    await datasource.delete(id);
+  }
 }
 
 @riverpod

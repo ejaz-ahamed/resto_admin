@@ -28,6 +28,11 @@ class CouponFirestoreDatasourceImpl extends CouponFirestoreDatasource {
   Future<void> update(CouponModel updatedModel, String id) async {
     await collection.doc(id).set(updatedModel);
   }
+
+  @override
+  Future<void> delete(String couponId) async {
+    await collection.doc(couponId).delete();
+  }
 }
 
 @riverpod

@@ -3,6 +3,7 @@ import 'package:resto_admin/features/coupons/data/repository/coupon_repository_i
 import 'package:resto_admin/features/coupons/domain/entities/condition_entity.dart';
 import 'package:resto_admin/features/coupons/domain/entities/coupon_entity.dart';
 import 'package:resto_admin/features/coupons/domain/usecases/add_coupon_usecase.dart';
+import 'package:resto_admin/features/coupons/domain/usecases/delete_coupon_usecase.dart';
 import 'package:resto_admin/features/coupons/domain/usecases/get_coupon_usecase.dart';
 import 'package:resto_admin/features/coupons/domain/usecases/update_coupon_usecase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -47,6 +48,11 @@ class Coupon extends _$Coupon {
         couponType: couponType,
         percentageOrAmount: percentageOrAmount,
         title: title);
+  }
+
+  Future<void> deleteCoupon({required String id}) {
+    final repository = ref.read(couponRepositoryProvider);
+    return DeleteCouponUseCase(repository: repository)(id);
   }
 }
 

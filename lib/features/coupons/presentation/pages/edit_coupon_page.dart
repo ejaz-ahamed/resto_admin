@@ -99,7 +99,10 @@ class EditCouponPage extends HookConsumerWidget {
             child: AppBarWidget(
               title: constants.txtAppbarTitle,
               actionButtonName: constants.txtDelete,
-              onPressed: () {},
+              onPressed: () {
+                ref.read(couponProvider.notifier).deleteCoupon(id: entity.id!);
+                context.pop();
+              },
             )),
         body: SingleChildScrollView(
           child: Padding(
