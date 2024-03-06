@@ -4,6 +4,7 @@ import 'package:resto_admin/features/coupons/domain/entities/condition_entity.da
 import 'package:resto_admin/features/coupons/domain/entities/coupon_entity.dart';
 import 'package:resto_admin/features/coupons/domain/usecases/add_coupon_usecase.dart';
 import 'package:resto_admin/features/coupons/domain/usecases/get_coupon_usecase.dart';
+import 'package:resto_admin/features/coupons/domain/usecases/update_coupon_usecase.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'coupon_provider.g.dart';
@@ -28,6 +29,24 @@ class Coupon extends _$Coupon {
       percentageOrAmount: percentageOrAmount,
       conditions: conditions,
     );
+  }
+
+  Future<void> updateCoupon({
+    required String id,
+    required String? title,
+    required String code,
+    required CouponType couponType,
+    required double percentageOrAmount,
+    required List<ConditionEntity> conditions,
+  }) {
+    final repository = ref.read(couponRepositoryProvider);
+    return UpdateCouponUsecase(repository: repository)(
+        id: id,
+        code: code,
+        conditions: conditions,
+        couponType: couponType,
+        percentageOrAmount: percentageOrAmount,
+        title: title);
   }
 }
 

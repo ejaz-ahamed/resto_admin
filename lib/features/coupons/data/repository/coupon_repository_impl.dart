@@ -61,6 +61,28 @@ class CouponRepositoryImpl extends CouponRepository {
       ];
     }
   }
+
+  @override
+  Future<void> updateCoupon(CouponEntity entity, String id) async {
+    await datasource.update(
+      CouponModel(
+          id: entity.id,
+          title: entity.title,
+          code: entity.code!,
+          couponType: entity.couponType,
+          percentageOrAmount: entity.percentageOrAmount,
+          condition: [
+            for (final e in entity.condition)
+              Condition(
+                count: e.count,
+                check: e.check,
+                logic: e.logic,
+                value: e.value,
+              )
+          ]),
+      id,
+    );
+  }
 }
 
 @riverpod

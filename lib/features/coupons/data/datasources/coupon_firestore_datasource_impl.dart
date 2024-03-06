@@ -23,6 +23,11 @@ class CouponFirestoreDatasourceImpl extends CouponFirestoreDatasource {
       yield [for (final coupon in coupons.docs) coupon.data()];
     }
   }
+
+  @override
+  Future<void> update(CouponModel updatedModel, String id) async {
+    await collection.doc(id).set(updatedModel);
+  }
 }
 
 @riverpod
