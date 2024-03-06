@@ -34,7 +34,7 @@ class EditCouponPage extends HookConsumerWidget {
     final spaces = AppTheme.of(context).spaces;
     final typography = AppTheme.of(context).typography;
 
-    final selectedCouponType = useState<CouponType>(CouponType.percentage);
+    final selectedCouponType = useState<CouponType>(entity.couponType);
 
     //Tabs to Show
     final tabsToShow = useMemoized(
@@ -61,6 +61,7 @@ class EditCouponPage extends HookConsumerWidget {
           titleController.text = entity.title!;
           codeController.text = entity.code!;
           percentageController.text = entity.percentageOrAmount.toString();
+          selectedCouponType.value = selectedCouponType.value;
 
           /// Add addon controllers
           for (final conditions in entity.condition) {
@@ -69,6 +70,7 @@ class EditCouponPage extends HookConsumerWidget {
           }
         },
       );
+      return null;
     }, []);
 
     //Handle tapping on the tab items
@@ -82,7 +84,7 @@ class EditCouponPage extends HookConsumerWidget {
           id: entity.id!,
           title: titleController.text,
           code: codeController.text,
-          couponType: entity.couponType,
+          couponType: selectedCouponType.value,
           percentageOrAmount: double.parse(percentageController.text),
           conditions: entity.condition);
       context.pop();
