@@ -18,10 +18,20 @@ class CouponFirestoreDatasourceImpl extends CouponFirestoreDatasource {
 
   @override
   Stream<List<CouponModel>> getAllCoupons() async* {
-    final couponStream = collection.snapshots();
+    final couponStream = collection.snapshots(includeMetadataChanges: true);
     await for (final coupons in couponStream) {
       yield [for (final coupon in coupons.docs) coupon.data()];
     }
+  }
+
+  @override
+  Future<void> update(CouponModel updatedModel, String id) async {
+    await collection.doc(id).set(updatedModel);
+  }
+
+  @override
+  Future<void> delete(String couponId) async {
+    await collection.doc(couponId).delete();
   }
 }
 

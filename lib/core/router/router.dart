@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/widgets/bottom_navigation/bottom_nav_widget.dart';
 import 'package:resto_admin/features/authentication/presentation/pages/auth_switcher.dart';
 import 'package:resto_admin/features/authentication/presentation/pages/login_page.dart';
+import 'package:resto_admin/features/coupons/domain/entities/coupon_entity.dart';
 import 'package:resto_admin/features/coupons/presentation/pages/add_coupon_page.dart';
 import 'package:resto_admin/features/coupons/presentation/pages/edit_coupon_page.dart';
 import 'package:resto_admin/features/offer/domain/entity/offer_entity.dart';
@@ -132,7 +133,9 @@ final router = GoRouter(
     ),
     GoRoute(
       path: EditCouponPage.routePath,
-      builder: (context, state) => const EditCouponPage(),
+      builder: (context, state) => EditCouponPage(
+        entity: state.extra as CouponEntity,
+      ),
     ),
   ],
 );
