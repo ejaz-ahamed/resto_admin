@@ -31,13 +31,13 @@ class CouponBannerWidget extends StatelessWidget {
           }
 
           conditionText += switch (condition.count) {
-            ConditionType.count => 'Order number ',
-            ConditionType.amount => 'Total amount ',
+            ConditionType.amount => 'Orders above \u20b9',
+            _ => "Order number ",
           };
 
           conditionText += switch (condition.check) {
-            ConditionCheck.equalTo => ' is ',
-            ConditionCheck.greaterThan => ' is more than ',
+            ConditionCheck.equalTo => '',
+            ConditionCheck.greaterThan => ' is above ',
             ConditionCheck.lessThan => 'is less than'
           };
 
@@ -50,7 +50,7 @@ class CouponBannerWidget extends StatelessWidget {
         var offerText = '';
         if (entity[index].couponType == CouponType.values.byName('amount')) {
           offerText +=
-              "SAVE ${entity[index].percentageOrAmount.toStringAsFixed(0)} RS";
+              "SAVE  \u20b9${entity[index].percentageOrAmount.toStringAsFixed(0)}";
         } else if (entity[index].couponType ==
             CouponType.values.byName('percentage')) {
           offerText +=
@@ -89,13 +89,15 @@ class CouponBannerWidget extends StatelessWidget {
                             bottomLeft:
                                 Radius.circular(theme.spaces.space_200))),
                     child: Center(
-                        child: RotatedBox(
-                            quarterTurns: 3,
-                            child: Text(
-                              offerText,
-                              style: theme.typography.h700
-                                  .copyWith(color: theme.colors.secondary),
-                            ))),
+                      child: RotatedBox(
+                        quarterTurns: 3,
+                        child: Text(
+                          offerText,
+                          style: theme.typography.h700
+                              .copyWith(color: theme.colors.secondary),
+                        ),
+                      ),
+                    ),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(

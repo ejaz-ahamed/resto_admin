@@ -6,6 +6,7 @@ import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/features/coupons/presentation/pages/add_coupon_page.dart';
 import 'package:resto_admin/features/coupons/presentation/providers/coupon_provider.dart';
 import 'package:resto_admin/features/coupons/presentation/widgets/coupon_banner_widget.dart';
+import 'package:resto_admin/features/coupons/presentation/widgets/coupon_page_shimmer.dart';
 
 class CouponsPage extends ConsumerWidget {
   const CouponsPage({super.key});
@@ -32,8 +33,9 @@ class CouponsPage extends ConsumerWidget {
         AsyncError() => const Center(
             child: Text('error'),
           ),
-        _ => const Center(
-            child: CircularProgressIndicator(),
+        _ => const Padding(
+            padding: EdgeInsets.only(top: 24),
+            child: CouponPageShimmer(),
           )
       },
       floatingActionButton: ElevatedButton(
