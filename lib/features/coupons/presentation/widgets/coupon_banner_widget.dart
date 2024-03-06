@@ -50,7 +50,7 @@ class CouponBannerWidget extends StatelessWidget {
         var offerText = '';
         if (entity[index].couponType == CouponType.values.byName('amount')) {
           offerText +=
-              "SAVE ${entity[index].percentageOrAmount.toStringAsFixed(0)} RS";
+              "SAVE  \u20b9${entity[index].percentageOrAmount.toStringAsFixed(0)}";
         } else if (entity[index].couponType ==
             CouponType.values.byName('percentage')) {
           offerText +=
