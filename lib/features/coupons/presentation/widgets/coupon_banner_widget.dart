@@ -1,19 +1,64 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:resto_admin/core/enums/coupon_type.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/features/coupons/data/models/condition_model.dart';
+import 'package:resto_admin/features/coupons/domain/entities/coupon_entity.dart';
 import 'package:resto_admin/features/coupons/presentation/pages/edit_coupon_page.dart';
 
 class CouponBannerWidget extends StatelessWidget {
-  const CouponBannerWidget({super.key});
-
+  final List<CouponEntity> entity;
+  const CouponBannerWidget({super.key, required this.entity});
   @override
   Widget build(BuildContext context) {
     final theme = AppTheme.of(context);
     return ListView.builder(
       physics: const ClampingScrollPhysics(),
       shrinkWrap: true,
-      itemCount: 4,
+      itemCount: entity.length,
       itemBuilder: (context, index) {
+        final couponData = entity[index];
+        var conditionText = '';
+
+        for (var i = 0; i < couponData.condition.length; i++) {
+          final condition = couponData.condition[i];
+
+          if (i > 0) {
+            conditionText += switch (condition.logic) {
+              ConditionLogic.and => 'and ',
+              ConditionLogic.or => 'or ',
+            };
+          }
+
+          conditionText += switch (condition.count) {
+            ConditionType.count => 'Order number ',
+            ConditionType.amount => 'Total amount ',
+          };
+
+          conditionText += switch (condition.check) {
+            ConditionCheck.equalTo => ' is ',
+            ConditionCheck.greaterThan => ' is more than ',
+            ConditionCheck.lessThan => 'is less than'
+          };
+
+          conditionText += condition.value.toStringAsFixed(0);
+
+          if (i != couponData.condition.length - 1) {
+            conditionText += '\n';
+          }
+        }
+        var offerText = '';
+        if (entity[index].couponType == CouponType.values.byName('amount')) {
+          offerText +=
+              "SAVE ${entity[index].percentageOrAmount.toStringAsFixed(0)} RS";
+        } else if (entity[index].couponType ==
+            CouponType.values.byName('percentage')) {
+          offerText +=
+              "GET ${entity[index].percentageOrAmount.toStringAsFixed(0)}% OFF";
+        } else {
+          offerText += "FREE DELIVERY";
+        }
+
         return Padding(
           padding: EdgeInsets.symmetric(
               horizontal: theme.spaces.space_100,
@@ -46,8 +91,8 @@ class CouponBannerWidget extends StatelessWidget {
                         child: RotatedBox(
                             quarterTurns: 3,
                             child: Text(
-                              '50% OFF',
-                              style: theme.typography.h800
+                              offerText,
+                              style: theme.typography.h700
                                   .copyWith(color: theme.colors.secondary),
                             ))),
                   ),
@@ -61,12 +106,12 @@ class CouponBannerWidget extends StatelessWidget {
                         SizedBox(
                           width: MediaQuery.sizeOf(context).width * 0.60,
                           child: Text(
-                            'Gold Offer on 5 - 10 cashback using amazon pay balance',
+                            entity[index].title!,
                             style: theme.typography.h300,
                           ),
                         ),
                         Text(
-                          'Applicable on First order',
+                          conditionText,
                           style: theme.typography.h300
                               .copyWith(color: theme.colors.primary),
                         ),
@@ -80,7 +125,7 @@ class CouponBannerWidget extends StatelessWidget {
                             color: theme.colors.textSubtlest,
                           ),
                           child: Text(
-                            'CODE25',
+                            entity[index].code!,
                             style: theme.typography.h400
                                 .copyWith(color: theme.colors.secondary),
                           ),
