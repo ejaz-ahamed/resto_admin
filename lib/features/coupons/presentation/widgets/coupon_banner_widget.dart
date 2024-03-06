@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/enums/coupon_type.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
+import 'package:resto_admin/core/widgets/sized_box_16_widget.dart';
 import 'package:resto_admin/features/coupons/data/models/condition_model.dart';
 import 'package:resto_admin/features/coupons/domain/entities/coupon_entity.dart';
 import 'package:resto_admin/features/coupons/presentation/pages/edit_coupon_page.dart';
@@ -31,15 +32,19 @@ class CouponBannerWidget extends StatelessWidget {
           }
 
           conditionText += switch (condition.count) {
-            ConditionType.amount => 'Orders above \u20b9',
-            _ => "Order number ",
+            ConditionType.amount => 'Orders amount',
+            _ => "Order number",
           };
 
           conditionText += switch (condition.check) {
-            ConditionCheck.equalTo => '',
-            ConditionCheck.greaterThan => ' is above ',
-            ConditionCheck.lessThan => 'is less than'
+            ConditionCheck.equalTo => ' is ',
+            ConditionCheck.greaterThan => ' is greater than ',
+            ConditionCheck.lessThan => 'is less than '
           };
+
+          if (condition.count == ConditionType.amount) {
+            conditionText += '\u20b9';
+          }
 
           conditionText += condition.value.toStringAsFixed(0);
 
@@ -101,10 +106,12 @@ class CouponBannerWidget extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(
-                        horizontal: theme.spaces.space_200),
+                        horizontal: theme.spaces.space_200,
+                        vertical: theme.spaces.space_300),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         SizedBox(
                           width: MediaQuery.sizeOf(context).width * 0.60,
@@ -113,11 +120,13 @@ class CouponBannerWidget extends StatelessWidget {
                             style: theme.typography.h300,
                           ),
                         ),
+                        const Expanded(child: SizedBox()),
                         Text(
                           conditionText,
                           style: theme.typography.h300
                               .copyWith(color: theme.colors.primary),
                         ),
+                        const SizedBox16Widget(),
                         Container(
                           padding: EdgeInsets.symmetric(
                               vertical: theme.spaces.space_25,
