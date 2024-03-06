@@ -88,13 +88,15 @@ class CouponBannerWidget extends StatelessWidget {
                             bottomLeft:
                                 Radius.circular(theme.spaces.space_200))),
                     child: Center(
-                        child: RotatedBox(
-                            quarterTurns: 3,
-                            child: Text(
-                              offerText,
-                              style: theme.typography.h700
-                                  .copyWith(color: theme.colors.secondary),
-                            ))),
+                      child: RotatedBox(
+                        quarterTurns: 3,
+                        child: Text(
+                          offerText,
+                          style: theme.typography.h700
+                              .copyWith(color: theme.colors.secondary),
+                        ),
+                      ),
+                    ),
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(
