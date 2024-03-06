@@ -1,4 +1,4 @@
-import 'package:resto_admin/core/exception/base_exception.dart';
+import 'package:resto_admin/core/exceptions/base_exception/base_exception.dart';
 import 'package:resto_admin/features/products/domain/repository/product_repository.dart';
 
 final class DeleteTypeUseCase {

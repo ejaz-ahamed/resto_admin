@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:resto_admin/core/enums/coupon_type.dart';
 import 'package:resto_admin/core/themes/app_theme.dart';
 import 'package:resto_admin/features/coupons/data/models/condition_model.dart';
 import 'package:resto_admin/features/coupons/domain/entities/coupon_entity.dart';
+import 'package:resto_admin/features/coupons/presentation/pages/edit_coupon_page.dart';
 
 class CouponBannerWidget extends StatelessWidget {
   final List<CouponEntity> entity;
@@ -36,6 +38,7 @@ class CouponBannerWidget extends StatelessWidget {
           conditionText += switch (condition.check) {
             ConditionCheck.equalTo => ' is ',
             ConditionCheck.greaterThan => ' is more than ',
+            ConditionCheck.lessThan => 'is less than'
           };
 
           conditionText += condition.value.toStringAsFixed(0);
@@ -61,7 +64,7 @@ class CouponBannerWidget extends StatelessWidget {
               horizontal: theme.spaces.space_100,
               vertical: theme.spaces.space_200),
           child: InkWell(
-            onTap: () {},
+            onTap: () => context.push(EditCouponPage.routePath),
             child: Container(
               height: theme.spaces.space_600 * 4,
               decoration: BoxDecoration(

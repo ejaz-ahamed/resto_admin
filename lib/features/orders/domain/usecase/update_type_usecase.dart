@@ -1,5 +1,5 @@
 import 'package:resto_admin/core/enums/order_type.dart';
-import 'package:resto_admin/core/exception/base_exception.dart';
+import 'package:resto_admin/core/exceptions/base_exception/base_exception.dart';
 import 'package:resto_admin/features/orders/domain/repository/order_repository.dart';
 
 class UpdateTypeUsecase {

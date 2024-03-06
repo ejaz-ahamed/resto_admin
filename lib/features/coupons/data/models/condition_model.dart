@@ -14,6 +14,7 @@ enum ConditionType {
 enum ConditionCheck {
   equalTo,
   greaterThan,
+  lessThan,
 }
 
 enum ConditionLogic {
@@ -23,7 +24,7 @@ enum ConditionLogic {
 
 @freezed
 class Condition with _$Condition {
- const Condition._();
+  const Condition._();
 
   factory Condition({
     required ConditionType count,
