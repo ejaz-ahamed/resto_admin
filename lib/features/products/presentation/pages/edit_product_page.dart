@@ -95,21 +95,20 @@ class EditProductPage extends HookConsumerWidget {
 
       /// Dispose function
 
-      // return () {
-      //   productController.dispose();
-      //   descreptionController.dispose();
+      return () {
+        productController.dispose();
+        descreptionController.dispose();
 
-      //   for (final controller in productAddonControllers.value) {
-      //     controller.nameController.dispose();
-      //     controller.priceController.dispose();
-      //   }
+        for (final controller in productAddonControllers.value) {
+          controller.nameController.dispose();
+          controller.priceController.dispose();
+        }
 
-      //   for (final controller in productTypeControllers.value) {
-      //     controller.nameController.dispose();
-      //     controller.priceController.dispose();
-      //   }
-      // };
-      return null;
+        for (final controller in productTypeControllers.value) {
+          controller.nameController.dispose();
+          controller.priceController.dispose();
+        }
+      };
     }, []);
 
     /// Remove a type from the product

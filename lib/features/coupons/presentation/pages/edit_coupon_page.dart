@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:resto_admin/core/constants/coupons_page_constants/edit_coupon_page_constants.dart';
 import 'package:resto_admin/core/enums/coupon_type.dart';
@@ -8,14 +9,17 @@ import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
+import 'package:resto_admin/features/coupons/domain/entities/coupon_entity.dart';
 import 'package:resto_admin/features/coupons/presentation/providers/coupon_condition_state.dart';
+import 'package:resto_admin/features/coupons/presentation/providers/coupon_provider.dart';
 import 'package:resto_admin/features/coupons/presentation/widgets/condition_type_widget.dart';
 import 'package:resto_admin/features/offer/presentation/widgets/tab_button_widget.dart.dart';
 import 'package:resto_admin/features/products/presentation/widgets/heading_widget.dart';
 
 class EditCouponPage extends HookConsumerWidget {
   static const routePath = '/editCouponPage';
-  const EditCouponPage({super.key});
+  final CouponEntity entity;
+  const EditCouponPage({super.key, required this.entity});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -30,7 +34,7 @@ class EditCouponPage extends HookConsumerWidget {
     final spaces = AppTheme.of(context).spaces;
     final typography = AppTheme.of(context).typography;
 
-    final selectedCouponType = useState<CouponType>(CouponType.percentage);
+    final selectedCouponType = useState<CouponType>(entity.couponType);
 
     //Tabs to Show
     final tabsToShow = useMemoized(
@@ -50,9 +54,40 @@ class EditCouponPage extends HookConsumerWidget {
       ],
     );
 
+    useEffect(() {
+      Future.delayed(
+        Duration.zero,
+        () {
+          titleController.text = entity.title!;
+          codeController.text = entity.code!;
+          percentageController.text = entity.percentageOrAmount.toString();
+          selectedCouponType.value = selectedCouponType.value;
+
+          /// Add addon controllers
+          for (final conditions in entity.condition) {
+            final valueController = TextEditingController();
+            valueController.text = conditions.value.toString();
+          }
+        },
+      );
+      return null;
+    }, []);
+
     //Handle tapping on the tab items
     void tabOnPressed(int index) {
       selectedCouponType.value = tabsToShow[index]['type'] as CouponType;
+    }
+
+    //update couponDetails
+    void updateCouponDetails() {
+      ref.read(couponProvider.notifier).updateCoupon(
+          id: entity.id!,
+          title: titleController.text,
+          code: codeController.text,
+          couponType: selectedCouponType.value,
+          percentageOrAmount: double.parse(percentageController.text),
+          conditions: entity.condition);
+      context.pop();
     }
 
     return GestureDetector(
@@ -64,7 +99,10 @@ class EditCouponPage extends HookConsumerWidget {
             child: AppBarWidget(
               title: constants.txtAppbarTitle,
               actionButtonName: constants.txtDelete,
-              onPressed: () {},
+              onPressed: () {
+                ref.read(couponProvider.notifier).deleteCoupon(id: entity.id!);
+                context.pop();
+              },
             )),
         body: SingleChildScrollView(
           child: Padding(
@@ -130,7 +168,7 @@ class EditCouponPage extends HookConsumerWidget {
         ),
         bottomNavigationBar: ElevatedButtonWidget(
           text: constants.txtSave,
-          onPressed: () {},
+          onPressed: updateCouponDetails,
         ),
       ),
     );

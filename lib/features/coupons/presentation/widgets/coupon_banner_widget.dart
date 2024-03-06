@@ -64,7 +64,8 @@ class CouponBannerWidget extends StatelessWidget {
               horizontal: theme.spaces.space_100,
               vertical: theme.spaces.space_200),
           child: InkWell(
-            onTap: () => context.push(EditCouponPage.routePath),
+            onTap: () =>
+                context.push(EditCouponPage.routePath, extra: entity[index]),
             child: Container(
               height: theme.spaces.space_600 * 4,
               decoration: BoxDecoration(
