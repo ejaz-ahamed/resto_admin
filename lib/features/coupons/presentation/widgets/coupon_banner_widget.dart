@@ -31,12 +31,12 @@ class CouponBannerWidget extends StatelessWidget {
           }
 
           conditionText += switch (condition.count) {
-            ConditionType.count => 'Order number ',
-            ConditionType.amount => 'Total amount ',
+            ConditionType.amount => 'Orders above \u20b9',
+            _ => "Order number ",
           };
 
           conditionText += switch (condition.check) {
-            ConditionCheck.equalTo => ' is ',
+            ConditionCheck.equalTo => '',
             ConditionCheck.greaterThan => ' is more than ',
             ConditionCheck.lessThan => 'is less than'
           };
