@@ -37,7 +37,7 @@ class CouponBannerWidget extends StatelessWidget {
 
           conditionText += switch (condition.check) {
             ConditionCheck.equalTo => '',
-            ConditionCheck.greaterThan => ' is more than ',
+            ConditionCheck.greaterThan => ' is above ',
             ConditionCheck.lessThan => 'is less than'
           };
 
