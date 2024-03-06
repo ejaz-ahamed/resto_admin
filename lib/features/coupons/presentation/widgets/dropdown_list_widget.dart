@@ -6,12 +6,18 @@ import 'package:resto_admin/core/themes/app_theme.dart';
 class DropDownWidget extends HookConsumerWidget {
   final List<String> items;
   final void Function(String value)? onChange;
-  const DropDownWidget(
-      {super.key, required this.items, required this.onChange});
+  final String? initalValue;
+
+  const DropDownWidget({
+    super.key,
+    required this.items,
+    required this.onChange,
+    this.initalValue,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final dropdownValue = useState<String>(items.first);
+    final dropdownValue = useState<String>(initalValue ?? items.first);
 
     return Column(
       children: [

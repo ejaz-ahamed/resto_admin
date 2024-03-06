@@ -67,6 +67,7 @@ class ConditionTypeWidget extends HookConsumerWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       DropDownWidget(
+                        initalValue: currentCondition.countOrAmount.name,
                         items: ConditionType.values.map((e) => e.name).toList(),
                         onChange: (value) {
                           conditionsState.value[index] =
@@ -77,6 +78,7 @@ class ConditionTypeWidget extends HookConsumerWidget {
                       ),
                       const SizedBox32Widget(),
                       DropDownWidget(
+                        initalValue: currentCondition.condition.name,
                         items:
                             ConditionCheck.values.map((e) => e.name).toList(),
                         onChange: (value) {
@@ -92,6 +94,7 @@ class ConditionTypeWidget extends HookConsumerWidget {
                       ),
                       const SizedBox32Widget(),
                       DropDownWidget(
+                        initalValue: currentCondition.andOr.name,
                         items:
                             ConditionLogic.values.map((e) => e.name).toList(),
                         onChange: (value) {

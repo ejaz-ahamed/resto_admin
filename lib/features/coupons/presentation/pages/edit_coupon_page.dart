@@ -9,6 +9,7 @@ import 'package:resto_admin/core/widgets/app_bar_widget.dart';
 import 'package:resto_admin/core/widgets/elevated_button_widget.dart';
 import 'package:resto_admin/core/widgets/sized_box_32_widget.dart';
 import 'package:resto_admin/core/widgets/text_field_widget.dart';
+import 'package:resto_admin/features/coupons/domain/entities/condition_entity.dart';
 import 'package:resto_admin/features/coupons/domain/entities/coupon_entity.dart';
 import 'package:resto_admin/features/coupons/presentation/providers/coupon_condition_state.dart';
 import 'package:resto_admin/features/coupons/presentation/providers/coupon_provider.dart';
@@ -27,7 +28,16 @@ class EditCouponPage extends HookConsumerWidget {
     final codeController = useTextEditingController();
     final percentageController = useTextEditingController();
 
-    final conditionsState = useState<List<CouponConditionState>>([]);
+    final conditionsState = useState<List<CouponConditionState>>([
+      for (final condition in entity.condition)
+        CouponConditionState(
+          andOr: condition.logic,
+          condition: condition.check,
+          countOrAmount: condition.count,
+          valueController: TextEditingController()
+            ..text = condition.value.toString(),
+        )
+    ]);
     final constants = ref.watch(editCouponPageConstantsProvider);
 
     //Theme data
@@ -61,8 +71,6 @@ class EditCouponPage extends HookConsumerWidget {
           titleController.text = entity.title!;
           codeController.text = entity.code!;
           percentageController.text = entity.percentageOrAmount.toString();
-
-          for (final conditions in entity.condition) {}
         },
       );
       return null;
@@ -81,7 +89,14 @@ class EditCouponPage extends HookConsumerWidget {
           code: codeController.text,
           couponType: selectedCouponType.value,
           percentageOrAmount: double.parse(percentageController.text),
-          conditions: entity.condition);
+          conditions: [
+            for (final i in conditionsState.value)
+              ConditionEntity(
+                  count: i.countOrAmount,
+                  check: i.condition,
+                  logic: i.andOr,
+                  value: double.parse(i.valueController.text))
+          ]);
       context.pop();
     }
 
